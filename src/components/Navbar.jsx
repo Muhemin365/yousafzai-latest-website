@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { useCMSStore } from '../store/useCMSStore';
-import logo from '../assets/logo.jpg';
+import logo from '../assets/logo.svg';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -40,9 +40,9 @@ export default function Navbar() {
           right: 0,
           zIndex: 500,
           padding: scrolled ? '12px 0' : '22px 0',
-          background: scrolled ? 'rgba(255,255,255,0.86)' : 'transparent',
-          backdropFilter: scrolled ? 'blur(16px) saturate(160%)' : 'none',
-          boxShadow: scrolled ? '0 1px 0 rgba(11,37,69,0.06)' : 'none',
+          background: '#0F2D53',
+          borderBottom: '2px solid',
+          borderImage: 'linear-gradient(to right, #0F2D53, #F6AE00, #0F2D53) 1',
           transition: 'all 0.4s cubic-bezier(.22,1,.36,1)',
         }}
       >
@@ -59,53 +59,22 @@ export default function Navbar() {
           <Link to="/" className="brand" onClick={() => setMobileOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: 12, textDecoration: 'none' }}>
             <div
               style={{
-                background: scrolled ? 'transparent' : 'rgba(255,255,255,0.12)',
-                borderRadius: 10,
-                padding: '4px 6px',
                 display: 'flex',
                 alignItems: 'center',
-                transition: 'background 0.4s',
               }}
             >
               <img
                 src={logo}
                 alt="Yousafzai EGRO"
                 style={{
-                  height: 48,
+                  height: 64,
                   width: 'auto',
                   flexShrink: 0,
                   display: 'block',
                 }}
               />
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.1 }}>
-              <span
-                className="brand-name"
-                style={{
-                  fontFamily: "'Space Grotesk',sans-serif",
-                  fontWeight: 700,
-                  fontSize: 16,
-                  letterSpacing: '0.02em',
-                  color: scrolled ? '#0B2545' : '#FFFFFF',
-                  transition: 'color 0.4s',
-                }}
-              >
-                {company.name}
-              </span>
-              <span
-                className="brand-sub"
-                style={{
-                  fontSize: 10,
-                  letterSpacing: '0.18em',
-                  textTransform: 'uppercase',
-                  color: scrolled ? '#9C7B2E' : '#C8A24A',
-                  fontWeight: 600,
-                  transition: 'color 0.4s',
-                }}
-              >
-                {company.sub}
-              </span>
-            </div>
+
           </Link>
 
           <div
@@ -125,7 +94,7 @@ export default function Navbar() {
                 style={{
                   fontSize: 13.5,
                   fontWeight: 500,
-                  color: scrolled ? '#444C5C' : 'rgba(255,255,255,0.86)',
+                  color: 'rgba(255,255,255,0.86)',
                   position: 'relative',
                   padding: '6px 0',
                   transition: 'opacity 0.25s, color 0.4s',
@@ -190,7 +159,7 @@ export default function Navbar() {
                 width: 38,
                 height: 38,
                 borderRadius: 8,
-                border: `1px solid ${scrolled ? '#DBDFE6' : 'rgba(255,255,255,0.3)'}`,
+                border: `1px solid rgba(255,255,255,0.3)`,
                 background: 'transparent',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -200,12 +169,12 @@ export default function Navbar() {
               }}
             >
               {mobileOpen ? (
-                <X size={18} color={scrolled ? '#0B2545' : '#FFFFFF'} />
+                <X size={18} color="#FFFFFF" />
               ) : (
                 <>
-                  <span style={{ width: 18, height: 1.6, background: scrolled ? '#0B2545' : '#FFFFFF', transition: '0.3s' }} />
-                  <span style={{ width: 18, height: 1.6, background: scrolled ? '#0B2545' : '#FFFFFF', transition: '0.3s' }} />
-                  <span style={{ width: 18, height: 1.6, background: scrolled ? '#0B2545' : '#FFFFFF', transition: '0.3s' }} />
+                  <span style={{ width: 18, height: 1.6, background: '#FFFFFF', transition: '0.3s' }} />
+                  <span style={{ width: 18, height: 1.6, background: '#FFFFFF', transition: '0.3s' }} />
+                  <span style={{ width: 18, height: 1.6, background: '#FFFFFF', transition: '0.3s' }} />
                 </>
               )}
             </button>

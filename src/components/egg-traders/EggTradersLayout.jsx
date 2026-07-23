@@ -30,7 +30,7 @@ export default function EggTradersLayout({ noFooter }) {
   }, [isHome]);
 
   return (
-    <div style={{ fontFamily: "'Inter',sans-serif", background: '#F7F8FA', color: '#1B2230', lineHeight: 1.65, overflowX: 'hidden' }}>
+    <div style={{ fontFamily: "'Inter',sans-serif", background: '#E6EBF2', color: '#1B2230', lineHeight: 1.65, overflowX: 'hidden' }}>
       <EggTradersNavbar scrolled={scrolled} mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
       <main className="et-page-enter"><Outlet /></main>
       {!noFooter && <EggTradersFooter />}

@@ -139,7 +139,7 @@ export default function WhyUsSection() {
         .sb-lbl { font-size: 13px; color: rgba(255,255,255,0.6); margin-top: 10px; }
         .sb-divider { width: 34px; height: 2px; background: #C8A24A; margin: 14px auto 0; }
         .industry-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 18px; }
-        .industry-card { background: #F5F7FA; border-radius: 16px; padding: 28px 18px; text-align: center; transition: background .35s, transform .35s; }
+        .industry-card { background: #FFFFFF; border-radius: 16px; padding: 28px 18px; text-align: center; transition: background .35s, transform .35s; box-shadow: 0 4px 20px rgba(11,37,69,0.04); }
         .industry-card:hover { background: #0B2545; transform: translateY(-5px); }
         .ind-icon { width: 50px; height: 50px; margin: 0 auto 16px; border-radius: 13px; background: #FFFFFF; display: flex; align-items: center; justify-content: center; color: #0B2545; transition: background .35s, color .35s; }
         .industry-card:hover .ind-icon { background: #C8A24A; color: #071A30; }

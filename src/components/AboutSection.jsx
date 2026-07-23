@@ -39,43 +39,45 @@ export default function AboutSection() {
                 <p className="q">{about.quote}</p>
                 <div className="q-foot">{about.quoteFooter}</div>
               </div>
-              <div className="value-list">
-                {about.values.map((v, i) => (
-                  <div key={i} className="value-item">
-                    <div className="v-icon">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" width="21" height="21">
-                        {v.icon === 'Box' ? <path d="M12 3v18M5 8l7-5 7 5M5 8v8l7 5 7-5V8" /> :
-                         v.icon === 'ShieldCheck' ? <><path d="M12 2l8 4v6c0 5-3.6 8-8 10-4.4-2-8-5-8-10V6l8-4z" /></> :
-                          <><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 3" /></>}
-                      </svg>
-                    </div>
-                    <div>
-                      <div className="v-title">{v.title}</div>
-                      <div className="v-body">{v.body}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
             </div>
             <div className="about-text reveal">
-              {about.paragraphs.map((p, i) => (
-                <p key={i}>{p}</p>
-              ))}
-              <div className="team-grid">
-                {about.team.map((member, i) => (
-                  <div key={i} className="team-card">
-                    <div className="team-avatar">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" width="24" height="24">
-                        <circle cx="12" cy="8" r="4" /><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7" />
-                      </svg>
-                    </div>
-                    <div className="team-name">{member.name}</div>
-                    <div className="team-role">{member.role}</div>
-                    <div className="team-bio">{member.bio}</div>
-                  </div>
+              <div className="about-text-box">
+                {about.paragraphs.map((p, i) => (
+                  <p key={i}>{p}</p>
                 ))}
               </div>
             </div>
+          </div>
+
+          <div className="value-grid reveal-stagger">
+            {about.values.map((v, i) => (
+              <div key={i} className="value-card">
+                <div className="v-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" width="21" height="21">
+                    {v.icon === 'Box' ? <path d="M12 3v18M5 8l7-5 7 5M5 8v8l7 5 7-5V8" /> :
+                     v.icon === 'ShieldCheck' ? <><path d="M12 2l8 4v6c0 5-3.6 8-8 10-4.4-2-8-5-8-10V6l8-4z" /></> :
+                      <><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 3" /></>}
+                  </svg>
+                </div>
+                <div className="v-title">{v.title}</div>
+                <div className="v-body">{v.body}</div>
+              </div>
+            ))}
+          </div>
+
+          <div className="team-grid reveal-stagger">
+            {about.team.map((member, i) => (
+              <div key={i} className="team-card">
+                <div className="team-avatar">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" width="24" height="24">
+                    <circle cx="12" cy="8" r="4" /><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7" />
+                  </svg>
+                </div>
+                <div className="team-name">{member.name}</div>
+                <div className="team-role">{member.role}</div>
+                <div className="team-bio">{member.bio}</div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -108,14 +110,18 @@ export default function AboutSection() {
         .quote-block::after { content: '"'; position: absolute; top: -30px; left: 50%; transform: translateX(-50%); font-family: 'Space Grotesk',sans-serif; font-size: 180px; color: rgba(255,255,255,0.06); }
         .quote-block p.q { font-family: 'Space Grotesk',sans-serif; font-size: 23px; font-weight: 500; line-height: 1.5; position: relative; z-index: 2; }
         .quote-block .q-foot { margin-top: 24px; font-size: 13px; color: rgba(255,255,255,0.6); position: relative; z-index: 2; }
-        .value-list { display: flex; flex-direction: column; gap: 0; margin-top: 30px; }
-        .value-item { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px; padding: 22px 0; border-bottom: 1px solid #EEF1F5; }
-        .value-item:first-child { padding-top: 0; }
-        .v-icon { width: 46px; height: 46px; border-radius: 12px; background: #F1E4C3; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: #0B2545; }
-        .v-title { font-weight: 700; font-size: 15px; color: #0B2545; margin-bottom: 5px; }
+        .about-text-box { background: #FFFFFF; border: 1px solid #EEF1F5; border-radius: 24px; padding: 36px 32px; box-shadow: 0 14px 36px rgba(11,37,69,0.06); height: 100%; display: flex; flex-direction: column; justify-content: center; }
+        .about-text-box p { font-size: 15.5px; color: #444C5C; margin-bottom: 20px; text-align: left; line-height: 1.75; }
+        .about-text-box p:last-child { margin-bottom: 0; }
+        
+        .value-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 60px; }
+        .value-card { background: #FFFFFF; border: 1px solid #EEF1F5; border-radius: 24px; padding: 32px; display: flex; flex-direction: column; align-items: flex-start; text-align: left; transition: transform .35s ease, box-shadow .35s ease; }
+        .value-card:hover { transform: translateY(-4px); box-shadow: 0 14px 36px rgba(11,37,69,0.06); }
+        .v-icon { width: 52px; height: 52px; border-radius: 14px; background: #F1E4C3; display: flex; align-items: center; justify-content: center; color: #0B2545; margin-bottom: 20px; }
+        .v-title { font-weight: 700; font-size: 15.5px; color: #0B2545; margin-bottom: 8px; }
         .v-body { font-size: 13.5px; color: #707888; line-height: 1.65; }
-        .about-text p { font-size: 15.5px; color: #444C5C; margin-bottom: 18px; text-align: center; }
-        .team-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-top: 56px; }
+
+        .team-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-top: 24px; }
         .team-card { background: #F5F7FA; border-radius: 24px; padding: 32px 28px; transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s cubic-bezier(.22,1,.36,1); }
         .team-card:hover { transform: translateY(-6px); box-shadow: 0 14px 36px rgba(11,37,69,0.10); background: #FFFFFF; }
         .team-avatar { width: 56px; height: 56px; border-radius: 14px; background: linear-gradient(145deg,#0B2545,#123A6B); display: flex; align-items: center; justify-content: center; color: #F1E4C3; margin-bottom: 18px; }
@@ -138,15 +144,14 @@ export default function AboutSection() {
         .reveal-stagger.in > *:nth-child(5) { transition-delay: .33s; }
         .reveal-stagger.in > *:nth-child(6) { transition-delay: .40s; }
         @media (max-width: 1080px) {
-          .team-grid { grid-template-columns: repeat(2,1fr); }
-          .team-card:nth-child(3) { grid-column: 1 / -1; justify-self: center; width: 50%; text-align: center; }
-          .team-card:nth-child(3) .team-avatar { margin: 0 auto 18px; }
+          .value-grid, .team-grid { grid-template-columns: repeat(2,1fr); }
+          .team-card:nth-child(3), .value-card:nth-child(3) { grid-column: 1 / -1; justify-self: center; width: 50%; }
         }
         @media (max-width: 860px) {
           .about-grid { grid-template-columns: 1fr; }
-          .overview-wrap { grid-template-columns: 1fr; }
+          .overview-wrap, .value-grid, .team-grid { grid-template-columns: 1fr; }
           section { padding: 80px 0; }
-          .team-card:nth-child(3) { width: 100%; }
+          .team-card:nth-child(3), .value-card:nth-child(3) { width: 100%; }
         }
       `}</style>
     </div>

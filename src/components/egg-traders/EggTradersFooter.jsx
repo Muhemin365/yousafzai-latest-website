@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import logo from '../../assets/logo.jpg';
+import logo from '../../assets/logo.svg';
 
 const etTheme = {
   navy: '#0D6B3D',
@@ -16,13 +16,9 @@ export default function EggTradersFooter() {
         <div className="et-footer-grid">
           <div>
             <Link to="/egg-traders" style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 18, textDecoration: 'none' }}>
-            <div style={{ borderRadius: 10, padding: '4px 6px', display: 'flex', alignItems: 'center' }}>
-              <img src={logo} alt="Yousafzai EGRO" style={{ height: 42, width: 'auto', flexShrink: 0, display: 'block' }} />
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <img src={logo} alt="Yousafzai EGRO" style={{ height: 56, width: 'auto', flexShrink: 0, display: 'block' }} />
             </div>
-              <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.1 }}>
-                <span style={{ fontFamily: "'Space Grotesk',sans-serif", fontWeight: 700, fontSize: 16, color: '#FFFFFF' }}>Egg Traders</span>
-                <span style={{ fontSize: 10, letterSpacing: '.18em', textTransform: 'uppercase', color: etTheme['gold-lt'], fontWeight: 600 }}>Poultry Marketplace</span>
-              </div>
             </Link>
             <p style={{ fontSize: 13.5, color: 'rgba(255,255,255,0.5)', lineHeight: 1.7, maxWidth: 320 }}>
               A Yousafzai EGRO company. Connecting verified poultry farms to commercial buyers with transparency and efficiency.

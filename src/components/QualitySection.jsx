@@ -140,8 +140,13 @@ export default function QualitySection() {
         .trace-top-title { font-weight: 700; font-size: 15px; color: #0B2545; }
         .trace-top-sub { font-size: 12px; color: #707888; margin-top: 3px; }
         .trace-id { font-family: monospace; font-size: 12.5px; background: #F5F7FA; padding: 6px 14px; border-radius: 6px; color: #444C5C; }
-        .trace-steps { display: flex; padding: 40px 34px 34px; position: relative; }
-        .trace-steps .flow-line { top: 20px; }
+        .trace-steps { display: flex; justify-content: space-between; padding: 40px 34px 34px; position: relative; }
+        .trace-steps .flow-line { position: absolute; top: 62px; left: 10%; right: 10%; height: 2px; background: #EEF1F5; z-index: 0; }
+        .trace-steps .flow-line .flow-fill { position: absolute; left: 0; top: 0; height: 100%; width: 0%; background: #1F7A3D; transition: width 1.6s cubic-bezier(.22,1,.36,1); }
+        .trace-steps .flow-step { position: relative; z-index: 2; flex: 1; text-align: center; }
+        .trace-steps .flow-dot { width: 44px; height: 44px; border-radius: 50%; background: #FFFFFF; border: 2px solid #1F7A3D; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; color: #1F7A3D; transition: border-color .4s, color .4s; position: relative; }
+        .trace-steps .flow-title { font-weight: 700; font-size: 13.5px; color: #0B2545; margin-bottom: 4px; }
+        .trace-steps .flow-desc { font-size: 11.5px; color: #707888; }
         .cert-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
         .cert-card { background: #FFFFFF; border: 1px solid #EEF1F5; border-radius: 16px; padding: 24px; display: flex; align-items: center; gap: 16px; transition: box-shadow .3s, transform .3s; }
         .cert-card:hover { box-shadow: 0 2px 10px rgba(11,37,69,0.06); transform: translateY(-3px); }
