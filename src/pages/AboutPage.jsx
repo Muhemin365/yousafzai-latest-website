@@ -1,13 +1,28 @@
-import PageBanner from '../components/PageBanner';
-import AboutSection from '../components/AboutSection';
+import React from 'react';
+import StoryEngine from '../story/StoryEngine';
+import SceneAboutHero from '../components/scenes/SceneAboutHero';
+import SceneChairman from '../components/scenes/SceneChairman';
+import SceneOurStory from '../components/scenes/SceneOurStory';
+import SceneVisionMission from '../components/scenes/SceneVisionMission';
 import OurCompaniesSection from '../components/OurCompaniesSection';
 
 export default function AboutPage() {
   return (
-    <>
-      <PageBanner title="About Us" subtitle="Discover the story behind Yousafzai EGRO — our values, our team, and our commitment to quality egg supply." />
-      <AboutSection />
+    <StoryEngine>
+      {/* SCENE 1: About Hero */}
+      <SceneAboutHero />
+
+      {/* SCENE 2: Chairman's Message */}
+      <SceneChairman />
+
+      {/* SCENE 3: Our Story */}
+      <SceneOurStory />
+
+      {/* SCENE 4: Vision & Mission */}
+      <SceneVisionMission />
+
+      {/* SCENE 5: Our Companies (Egg Traders Marketplace Access) */}
       <OurCompaniesSection />
-    </>
+    </StoryEngine>
   );
 }

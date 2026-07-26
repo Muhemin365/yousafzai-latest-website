@@ -1,131 +1,164 @@
 import { useEffect, useRef } from 'react';
 import { useCMSStore } from '../store/useCMSStore';
+import { ShieldCheck, CheckCircle2, Award, ClipboardList, Users, Leaf, Star, Sparkles, Activity } from 'lucide-react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function QualitySection() {
   const quality = useCMSStore((s) => s.quality);
   const testimonials = useCMSStore((s) => s.testimonials);
-  const ref = useRef(null);
+  const sectionRef = useRef(null);
 
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('in');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.15 }
-    );
-    el.querySelectorAll('.reveal, .reveal-stagger').forEach((e) => observer.observe(e));
-    return () => observer.disconnect();
-  }, []);
+    if (!sectionRef.current) return;
 
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const wrap = el.querySelector('#traceWrap');
-    const fill = el.querySelector('#traceFill');
-    if (!wrap || !fill) return;
-    const obs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            fill.style.width = '100%';
-            obs.unobserve(entry.target);
+    let ctx = gsap.context(() => {
+      // Header reveals
+      gsap.fromTo('.q-head',
+        { y: 30, autoAlpha: 0 },
+        {
+          y: 0, autoAlpha: 1, duration: 0.8, ease: 'power3.out',
+          scrollTrigger: { trigger: '.q-head', start: 'top 85%' }
+        }
+      );
+
+      // Traceability progress line animation
+      gsap.fromTo('.trace-fill-line',
+        { scaleX: 0 },
+        {
+          scaleX: 1, duration: 1.8, ease: 'power2.inOut',
+          scrollTrigger: { trigger: '.trace-console', start: 'top 80%' }
+        }
+      );
+
+      // Certifications grid cards reveal
+      gsap.utils.toArray('.q-cert-card').forEach((card, i) => {
+        gsap.fromTo(card,
+          { y: 40, autoAlpha: 0 },
+          {
+            y: 0, autoAlpha: 1, duration: 0.7, delay: i * 0.1, ease: 'power3.out',
+            scrollTrigger: { trigger: card, start: 'top 85%' }
           }
-        });
-      },
-      { threshold: 0.3 }
-    );
-    obs.observe(wrap);
-    return () => obs.disconnect();
+        );
+      });
+
+      // Testimonials reveal
+      gsap.utils.toArray('.q-test-card').forEach((card, i) => {
+        gsap.fromTo(card,
+          { y: 50, autoAlpha: 0 },
+          {
+            y: 0, autoAlpha: 1, duration: 0.8, delay: i * 0.12, ease: 'power3.out',
+            scrollTrigger: { trigger: card, start: 'top 85%' }
+          }
+        );
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (
-    <div ref={ref}>
-      <section className="section-alt" id="quality">
+    <div ref={sectionRef} className="q-page-wrapper">
+      {/* Background Orbs */}
+      <div className="q-bg-grid" />
+      <div className="q-orb q-orb-1" />
+      <div className="q-orb q-orb-2" />
+
+      {/* Main Section */}
+      <section id="quality" className="q-section">
         <div className="container">
-          <div className="sec-head reveal">
-            <div className="tag-eyebrow">{quality.eyebrow}</div>
-            <h2 className="sec-title">{quality.title}</h2>
-            <p className="sec-sub">{quality.subtitle}</p>
+          {/* Header */}
+          <div className="q-head">
+            <span className="q-eyebrow">{quality.eyebrow || 'QUALITY_ASSURANCE // COMPLIANCE'}</span>
+            <h2 className="q-heading">{quality.title || 'Uncompromised Quality & Compliance'}</h2>
+            <p className="q-sub">{quality.subtitle}</p>
           </div>
 
-          <div className="trace-panel reveal">
-            <div className="trace-top">
-              <div>
-                <div className="trace-top-title">{quality.batch.title}</div>
-                <div className="trace-top-sub">{quality.batch.subtitle}</div>
+          {/* Batch Traceability Console */}
+          <div className="trace-console">
+            <div className="trace-header">
+              <div className="trace-title-group">
+                <Activity size={18} className="text-gold" />
+                <div>
+                  <h3 className="trace-main-title">{quality.batch.title}</h3>
+                  <span className="trace-main-sub">{quality.batch.subtitle}</span>
+                </div>
               </div>
-              <div className="trace-id">{quality.batch.id}</div>
+              <div className="trace-batch-badge">
+                <span>BATCH_ID:</span> <strong>{quality.batch.id}</strong>
+              </div>
             </div>
-            <div className="trace-steps" id="traceWrap">
-              <div className="flow-line"><div className="flow-fill" id="traceFill"></div></div>
-              {quality.batch.steps.map((step, i) => (
-                <div key={i} className="flow-step">
-                  <div className="flow-dot">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="26" height="26">
-                      <path d="M5 13l4 4L19 7" />
-                    </svg>
+
+            {/* Traceability Flow Steps */}
+            <div className="trace-steps-container">
+              <div className="trace-bg-line" />
+              <div className="trace-fill-line" />
+
+              <div className="trace-steps-grid">
+                {quality.batch.steps.map((step, i) => (
+                  <div key={i} className="trace-step-item">
+                    <div className="step-dot-wrap">
+                      <CheckCircle2 size={20} className="step-check-icon" />
+                    </div>
+                    <span className="step-title">{step.title}</span>
+                    <span className="step-time">{step.time}</span>
                   </div>
-                  <div className="flow-title">{step.title}</div>
-                  <div className="flow-desc">{step.time}</div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Certifications Grid */}
+          <div className="q-cert-section">
+            <div className="q-head center-head">
+              <span className="q-eyebrow">VERIFIED CERTIFICATIONS</span>
+              <h3 className="q-subheading">National & International Compliance Standards</h3>
+            </div>
+
+            <div className="q-cert-grid">
+              {quality.certs.map((cert, i) => (
+                <div key={i} className="q-cert-card" style={{ visibility: 'hidden' }}>
+                  <div className="cert-card-glow" />
+                  <div className="cert-icon-box">
+                    <ShieldCheck size={22} />
+                  </div>
+                  <div className="cert-details">
+                    <h4 className="cert-title">{cert.name}</h4>
+                    <p className="cert-desc">{cert.body}</p>
+                    <span className="cert-status-tag">{cert.status}</span>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
-
-          <div className="sec-head reveal" style={{ marginBottom: 30 }}>
-            <div className="tag-eyebrow">Active Certifications</div>
-          </div>
-          <div className="cert-grid reveal-stagger">
-            {quality.certs.map((cert, i) => (
-              <div key={i} className="cert-card">
-                <div className="cert-ic">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" width="19" height="19">
-                    {cert.icon === 'ClipboardList' ? <><rect x="4" y="3" width="16" height="18" rx="2" /><path d="M8 8h8M8 12h8M8 16h5" /></> :
-                     cert.icon === 'ShieldCheck' ? <><path d="M12 2l8 4v6c0 5-3.6 8-8 10-4.4-2-8-5-8-10V6l8-4z" /></> :
-                     cert.icon === 'CheckCircle2' ? <><circle cx="12" cy="12" r="9" /><path d="M9 12l2 2 4-4" /></> :
-                     cert.icon === 'Users' ? <><circle cx="12" cy="8" r="4" /><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7" /></> :
-                     cert.icon === 'Leaf' ? <><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8" /></> :
-                     <path d="M9 3h6M10 3v5l-5 9a2 2 0 002 3h10a2 2 0 002-3l-5-9V3" />}
-                  </svg>
-                </div>
-                <div>
-                  <div className="cert-name">{cert.name}</div>
-                  <div className="cert-body">{cert.body}</div>
-                  <span className="cert-status">{cert.status}</span>
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
-      <section id="testimonials">
+      {/* Testimonials Section */}
+      <section id="testimonials" className="q-test-section">
         <div className="container">
-          <div className="sec-head center reveal" style={{ marginLeft: 'auto', marginRight: 'auto' }}>
-            <div className="tag-eyebrow" style={{ justifyContent: 'center' }}>Client Testimonials</div>
-            <h2 className="sec-title">Trusted by Commercial Buyers Across the Region</h2>
+          <div className="q-head center-head">
+            <span className="q-eyebrow">CLIENT TESTIMONIALS</span>
+            <h2 className="q-heading">Trusted by Commercial Buyers</h2>
+            <p className="q-sub">Hear what major egg distributors, hotels, bakeries, and commercial buyers say about our quality.</p>
           </div>
-          <div className="test-grid reveal-stagger">
+
+          <div className="q-test-grid">
             {testimonials.map((t, i) => (
-              <div key={i} className="test-card">
-                <div className="test-quote-icon">
-                  <svg viewBox="0 0 24 24" fill="currentColor" width="30" height="30">
-                    <path d="M7 7h4v4l-3 6H5l2-6H4V7zm9 0h4v4l-3 6h-3l2-6h-3V7z" />
-                  </svg>
+              <div key={i} className="q-test-card" style={{ visibility: 'hidden' }}>
+                <div className="test-stars-row">
+                  {[...Array(5)].map((_, s) => (
+                    <Star key={s} size={14} className="star-filled" />
+                  ))}
                 </div>
-                <div className="test-text">{t.text}</div>
-                <div className="test-person">
+                <p className="test-quote-text">"{t.text}"</p>
+                <div className="test-user-row">
                   <div className="test-avatar">{t.initials}</div>
-                  <div>
-                    <div className="test-name">{t.name}</div>
-                    <div className="test-role">{t.role}</div>
+                  <div className="test-user-info">
+                    <span className="test-name">{t.name}</span>
+                    <span className="test-role">{t.role}</span>
                   </div>
                 </div>
               </div>
@@ -135,35 +168,403 @@ export default function QualitySection() {
       </section>
 
       <style>{`
-        .trace-panel { background: #FFFFFF; border: 1px solid #EEF1F5; border-radius: 32px; overflow: hidden; box-shadow: 0 14px 36px rgba(11,37,69,0.10); margin-bottom: 60px; }
-        .trace-top { padding: 24px 34px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #EEF1F5; }
-        .trace-top-title { font-weight: 700; font-size: 15px; color: #0B2545; }
-        .trace-top-sub { font-size: 12px; color: #707888; margin-top: 3px; }
-        .trace-id { font-family: monospace; font-size: 12.5px; background: #F5F7FA; padding: 6px 14px; border-radius: 6px; color: #444C5C; }
-        .trace-steps { display: flex; justify-content: space-between; padding: 40px 34px 34px; position: relative; }
-        .trace-steps .flow-line { position: absolute; top: 62px; left: 10%; right: 10%; height: 2px; background: #EEF1F5; z-index: 0; }
-        .trace-steps .flow-line .flow-fill { position: absolute; left: 0; top: 0; height: 100%; width: 0%; background: #1F7A3D; transition: width 1.6s cubic-bezier(.22,1,.36,1); }
-        .trace-steps .flow-step { position: relative; z-index: 2; flex: 1; text-align: center; }
-        .trace-steps .flow-dot { width: 44px; height: 44px; border-radius: 50%; background: #FFFFFF; border: 2px solid #1F7A3D; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; color: #1F7A3D; transition: border-color .4s, color .4s; position: relative; }
-        .trace-steps .flow-title { font-weight: 700; font-size: 13.5px; color: #0B2545; margin-bottom: 4px; }
-        .trace-steps .flow-desc { font-size: 11.5px; color: #707888; }
-        .cert-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
-        .cert-card { background: #FFFFFF; border: 1px solid #EEF1F5; border-radius: 16px; padding: 24px; display: flex; align-items: center; gap: 16px; transition: box-shadow .3s, transform .3s; }
-        .cert-card:hover { box-shadow: 0 2px 10px rgba(11,37,69,0.06); transform: translateY(-3px); }
-        .cert-ic { width: 44px; height: 44px; border-radius: 11px; background: #F5F7FA; display: flex; align-items: center; justify-content: center; color: #0B2545; flex-shrink: 0; }
-        .cert-name { font-weight: 700; font-size: 13.5px; color: #0B2545; }
-        .cert-body { font-size: 11.5px; color: #707888; margin-top: 3px; }
-        .cert-status { font-size: 9.5px; font-weight: 700; color: #1F7A3D; background: #E6F4EA; padding: 2px 8px; border-radius: 20px; margin-top: 6px; display: inline-block; }
-        .test-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
-        .test-card { background: #FFFFFF; border: 1px solid #EEF1F5; border-radius: 24px; padding: 32px; position: relative; }
-        .test-quote-icon { color: #F1E4C3; margin-bottom: 18px; }
-        .test-text { font-size: 14.5px; color: #444C5C; line-height: 1.75; margin-bottom: 24px; min-height: 120px; }
-        .test-person { display: flex; align-items: center; gap: 14px; border-top: 1px solid #EEF1F5; padding-top: 18px; }
-        .test-avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(145deg,#0B2545,#123A6B); color: #F1E4C3; display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk',sans-serif; font-weight: 700; font-size: 14px; }
-        .test-name { font-weight: 700; font-size: 13.5px; color: #0B2545; }
-        .test-role { font-size: 11.5px; color: #707888; }
-        @media (max-width: 1080px) { .cert-grid { grid-template-columns: repeat(2,1fr); } .test-grid { grid-template-columns: repeat(2,1fr); } .test-card:nth-child(3) { grid-column: 1 / -1; justify-self: center; width: 50%; } }
-        @media (max-width: 860px) { .test-card:nth-child(3) { width: 100%; } }
+        /* ═══════════════════════════════════════
+           QUALITY PAGE ROOT
+           ═══════════════════════════════════════ */
+        .q-page-wrapper {
+          background: #060e1a;
+          color: #fff;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .q-bg-grid {
+          position: absolute;
+          inset: 0;
+          background-image:
+            linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+          background-size: 50px 50px;
+          pointer-events: none;
+        }
+
+        .q-orb {
+          position: absolute;
+          border-radius: 50%;
+          filter: blur(120px);
+          pointer-events: none;
+        }
+
+        .q-orb-1 {
+          width: 550px; height: 550px;
+          background: radial-gradient(circle, rgba(200,162,74,0.12), transparent 70%);
+          top: 10%; right: -150px;
+        }
+
+        .q-orb-2 {
+          width: 450px; height: 450px;
+          background: radial-gradient(circle, rgba(255,230,160,0.08), transparent 70%);
+          bottom: 20%; left: -150px;
+        }
+
+        .q-section {
+          padding: 100px 24px 80px;
+          position: relative;
+          z-index: 2;
+        }
+
+        .q-head {
+          text-align: left;
+          max-width: 750px;
+          margin-bottom: 50px;
+        }
+
+        .q-head.center-head {
+          text-align: center;
+          margin: 0 auto 50px;
+        }
+
+        .q-eyebrow {
+          font-family: monospace;
+          font-size: 11px;
+          letter-spacing: 0.18em;
+          color: #c8a24a;
+          display: block;
+          margin-bottom: 12px;
+        }
+
+        .q-heading {
+          font-family: 'Space Grotesk', sans-serif;
+          font-size: clamp(32px, 4.2vw, 48px);
+          font-weight: 700;
+          margin: 0 0 16px;
+          background: linear-gradient(135deg, #ffffff 0%, #c8a24a 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+
+        .q-subheading {
+          font-family: 'Space Grotesk', sans-serif;
+          font-size: 24px;
+          font-weight: 700;
+          color: #fff;
+          margin: 0;
+        }
+
+        .q-sub {
+          font-size: 16px;
+          color: rgba(255,255,255,0.6);
+          line-height: 1.7;
+          margin: 0;
+        }
+
+        /* ═══════════════════════════════════════
+           TRACEABILITY CONSOLE (GOLDEN THEME)
+           ═══════════════════════════════════════ */
+        .trace-console {
+          background: rgba(255,255,255,0.025);
+          border: 1px solid rgba(200,162,74,0.3);
+          border-radius: 24px;
+          padding: 36px;
+          backdrop-filter: blur(20px);
+          margin-bottom: 80px;
+          box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+
+        .trace-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding-bottom: 24px;
+          border-bottom: 1px solid rgba(255,255,255,0.08);
+          margin-bottom: 40px;
+        }
+
+        .trace-title-group {
+          display: flex;
+          align-items: center;
+          gap: 14px;
+        }
+
+        .text-gold { color: #c8a24a; }
+
+        .trace-main-title {
+          font-family: 'Space Grotesk', sans-serif;
+          font-size: 18px;
+          font-weight: 700;
+          margin: 0 0 4px;
+          color: #fff;
+        }
+
+        .trace-main-sub {
+          font-size: 13px;
+          color: rgba(255,255,255,0.5);
+        }
+
+        .trace-batch-badge {
+          font-family: monospace;
+          font-size: 12px;
+          color: #ffe6a0;
+          background: rgba(200,162,74,0.15);
+          border: 1px solid rgba(200,162,74,0.35);
+          padding: 8px 16px;
+          border-radius: 8px;
+        }
+
+        .trace-steps-container {
+          position: relative;
+          padding: 20px 0;
+        }
+
+        .trace-bg-line {
+          position: absolute;
+          top: 42px;
+          left: 8%; right: 8%;
+          height: 3px;
+          background: rgba(255,255,255,0.08);
+          z-index: 1;
+        }
+
+        .trace-fill-line {
+          position: absolute;
+          top: 42px;
+          left: 8%; right: 8%;
+          height: 3px;
+          background: linear-gradient(90deg, #c8a24a, #ffe6a0);
+          z-index: 1;
+          transform-origin: left;
+          box-shadow: 0 0 12px rgba(200,162,74,0.6);
+        }
+
+        .trace-steps-grid {
+          display: grid;
+          grid-template-columns: repeat(5, 1fr);
+          gap: 16px;
+          position: relative;
+          z-index: 2;
+        }
+
+        .trace-step-item {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+        }
+
+        .step-dot-wrap {
+          width: 46px;
+          height: 46px;
+          border-radius: 50%;
+          background: #0a1628;
+          border: 2px solid #c8a24a;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 14px;
+          box-shadow: 0 0 16px rgba(200,162,74,0.4);
+        }
+
+        .step-check-icon {
+          color: #c8a24a;
+        }
+
+        .step-title {
+          font-family: 'Space Grotesk', sans-serif;
+          font-size: 13.5px;
+          font-weight: 700;
+          color: #fff;
+          margin-bottom: 4px;
+        }
+
+        .step-time {
+          font-family: monospace;
+          font-size: 11px;
+          color: rgba(255,255,255,0.5);
+        }
+
+        /* ═══════════════════════════════════════
+           CERTIFICATIONS GRID
+           ═══════════════════════════════════════ */
+        .q-cert-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 24px;
+        }
+
+        .q-cert-card {
+          position: relative;
+          background: rgba(255,255,255,0.025);
+          border: 1px solid rgba(255,255,255,0.08);
+          border-radius: 20px;
+          padding: 28px 24px;
+          display: flex;
+          gap: 18px;
+          align-items: flex-start;
+          backdrop-filter: blur(16px);
+          transition: border-color 0.4s, transform 0.4s;
+        }
+
+        .q-cert-card:hover {
+          border-color: rgba(200,162,74,0.5);
+          transform: translateY(-4px);
+        }
+
+        .cert-icon-box {
+          width: 46px;
+          height: 46px;
+          border-radius: 12px;
+          background: rgba(200,162,74,0.12);
+          border: 1px solid rgba(200,162,74,0.3);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #c8a24a;
+          flex-shrink: 0;
+        }
+
+        .cert-details {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .cert-title {
+          font-family: 'Space Grotesk', sans-serif;
+          font-size: 16px;
+          font-weight: 700;
+          margin: 0 0 6px;
+          color: #fff;
+        }
+
+        .cert-desc {
+          font-size: 13px;
+          color: rgba(255,255,255,0.6);
+          line-height: 1.6;
+          margin: 0 0 12px;
+        }
+
+        .cert-status-tag {
+          font-family: monospace;
+          font-size: 10px;
+          font-weight: 700;
+          color: #ffe6a0;
+          background: rgba(200,162,74,0.15);
+          border: 1px solid rgba(200,162,74,0.3);
+          padding: 3px 10px;
+          border-radius: 6px;
+          align-self: flex-start;
+        }
+
+        /* ═══════════════════════════════════════
+           TESTIMONIALS SECTION
+           ═══════════════════════════════════════ */
+        .q-test-section {
+          padding: 100px 24px 140px;
+          background: rgba(10,18,34,0.5);
+          border-top: 1px solid rgba(255,255,255,0.06);
+          position: relative;
+          z-index: 2;
+        }
+
+        .q-test-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 28px;
+        }
+
+        .q-test-card {
+          background: rgba(255,255,255,0.025);
+          border: 1px solid rgba(255,255,255,0.08);
+          border-radius: 24px;
+          padding: 36px 28px;
+          display: flex;
+          flex-direction: column;
+          backdrop-filter: blur(16px);
+          transition: border-color 0.4s, transform 0.4s;
+        }
+
+        .q-test-card:hover {
+          border-color: rgba(200,162,74,0.4);
+          transform: translateY(-6px);
+        }
+
+        .test-stars-row {
+          display: flex;
+          gap: 4px;
+          margin-bottom: 20px;
+        }
+
+        .star-filled {
+          color: #f59e0b;
+          fill: #f59e0b;
+        }
+
+        .test-quote-text {
+          font-size: 15px;
+          color: rgba(255,255,255,0.75);
+          line-height: 1.7;
+          margin: 0 0 28px;
+          flex-grow: 1;
+          font-style: italic;
+        }
+
+        .test-user-row {
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          padding-top: 20px;
+          border-top: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .test-avatar {
+          width: 44px;
+          height: 44px;
+          border-radius: 50%;
+          background: rgba(200,162,74,0.15);
+          border: 1px solid rgba(200,162,74,0.3);
+          color: #ffe6a0;
+          font-family: 'Space Grotesk', sans-serif;
+          font-weight: 700;
+          font-size: 14px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+        }
+
+        .test-user-info {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .test-name {
+          font-family: 'Space Grotesk', sans-serif;
+          font-size: 14.5px;
+          font-weight: 700;
+          color: #fff;
+        }
+
+        .test-role {
+          font-size: 12px;
+          color: rgba(255,255,255,0.5);
+        }
+
+        /* ═══════════════════════════════════════
+           RESPONSIVE
+           ═══════════════════════════════════════ */
+        @media (max-width: 1080px) {
+          .q-cert-grid { grid-template-columns: repeat(2, 1fr); }
+          .q-test-grid { grid-template-columns: repeat(2, 1fr); }
+          .trace-steps-grid { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+          .trace-bg-line, .trace-fill-line { display: none; }
+        }
+
+        @media (max-width: 700px) {
+          .q-cert-grid { grid-template-columns: 1fr; }
+          .q-test-grid { grid-template-columns: 1fr; }
+          .trace-steps-grid { grid-template-columns: 1fr; gap: 20px; }
+          .trace-header { flex-direction: column; align-items: flex-start; gap: 14px; }
+        }
       `}</style>
     </div>
   );

@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --primary: #071A30;
+    --text: rgba(255, 255, 255, 0.9);
+  }
+
   * {
     box-sizing: border-box;
   }
@@ -10,12 +15,61 @@
     scroll-behavior: smooth;
   }
   body {
-    font-family: 'Inter', sans-serif;
-    background: #E6EBF2;
-    color: #1B2230;
-    line-height: 1.65;
-    overflow-x: hidden;
-  }
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background-color: var(--primary); /* Deep Navy */
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* ==========================================================================
+   SYSTEM 02: VISUAL ENVIRONMENT
+   ========================================================================== */
+.global-environment {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.bg-base {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: var(--primary);
+  z-index: -3;
+}
+
+.blueprint-grid {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.05) 1px, transparent 0);
+  background-size: 40px 40px;
+  z-index: -2;
+  pointer-events: none;
+}
+
+.ambient-glow {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80vw;
+  height: 60vh;
+  background: radial-gradient(ellipse at center, rgba(30, 80, 150, 0.15) 0%, transparent 70%);
+  filter: blur(80px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.story-content {
+  position: relative;
+  z-index: 1;
+}
   img {
     max-width: 100%;
     display: block;

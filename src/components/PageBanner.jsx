@@ -1,6 +1,58 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useMemo, useState } from 'react';
 
-export default function PageBanner({ title, subtitle }) {
+function Particles() {
+  const particles = useMemo(() => Array.from({ length: 30 }), []);
+  return (
+    <div className="particles-container">
+      {particles.map((_, i) => {
+        const left = Math.random() * 100;
+        const delay = Math.random() * 8;
+        const duration = 12 + Math.random() * 10;
+        const size = 2 + Math.random() * 3;
+        return (
+          <div
+            key={i}
+            className="particle"
+            style={{
+              left: `${left}%`,
+              animationDelay: `${delay}s`,
+              animationDuration: `${duration}s`,
+              width: `${size}px`,
+              height: `${size}px`,
+            }}
+          />
+        );
+      })}
+    </div>
+  );
+}
+
+function BannerSlideshow({ images }) {
+  const [current, setCurrent] = useState(0);
+  useEffect(() => {
+    if (!images || images.length <= 1) return;
+    const timer = setInterval(() => {
+      setCurrent((c) => (c + 1) % images.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, [images]);
+
+  if (!images || images.length === 0) return null;
+
+  return (
+    <div className="banner-slideshow">
+      {images.map((src, idx) => (
+        <div 
+          key={idx} 
+          className={`slide-img ${idx === current ? 'active' : ''}`} 
+          style={{ backgroundImage: `url(${src})` }} 
+        />
+      ))}
+    </div>
+  );
+}
+
+export default function PageBanner({ title, subtitle, fullScreen = false, slideshowImages = null, children }) {
   const ref = useRef(null);
 
   useEffect(() => {
@@ -23,8 +75,15 @@ export default function PageBanner({ title, subtitle }) {
 
   return (
     <div ref={ref}>
-      <header className="page-hero">
+      <header className={`page-hero ${fullScreen ? 'fullscreen' : ''}`}>
+        
+        <BannerSlideshow images={slideshowImages} />
         <div className="page-hero-bg" />
+        
+        <Particles />
+        <div className="banner-glow" />
+        <div className="banner-glow b" />
+        
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <div className="page-hero-content reveal-up">
             <div className="breadcrumb">
@@ -32,74 +91,151 @@ export default function PageBanner({ title, subtitle }) {
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="12" height="12">
                 <path d="M9 18l6-6-6-6" />
               </svg>
-              <span>{title}</span>
+              <span className="current">{title}</span>
             </div>
             <h1 className="page-hero-title">{title}</h1>
             {subtitle && <p className="page-hero-sub">{subtitle}</p>}
+            {children && <div className="page-hero-extra">{children}</div>}
           </div>
         </div>
+        
+        {/* Bottom fade into the next section */}
+        <div className="banner-bottom-fade"></div>
       </header>
       <style>{`
         .page-hero {
           position: relative;
-          min-height: 280px;
+          min-height: 380px;
           display: flex;
           align-items: center;
-          padding: 140px 0 60px;
+          justify-content: center;
+          text-align: center;
+          padding: 160px 0 100px;
           overflow: hidden;
+          background-color: #060e1a;
         }
+        .page-hero.fullscreen {
+          min-height: 100vh;
+        }
+        
+        /* Slideshow */
+        .banner-slideshow { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+        .banner-slideshow .slide-img { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 2s, transform 8s; transform: scale(1.05); filter: grayscale(15%); }
+        .banner-slideshow .slide-img.active { opacity: 0.6; transform: scale(1); }
+
         .page-hero-bg {
           position: absolute;
           inset: 0;
-          background: radial-gradient(120% 100% at 80% 0%, #173E72 0%, #0B2545 45%, #071A30 100%);
+          background: radial-gradient(120% 100% at 50% 0%, rgba(23,62,114,0.4) 0%, rgba(10,18,34,0.85) 55%, rgba(6,14,26,1) 100%);
+          z-index: 1;
         }
         .page-hero-bg::before {
           content: '';
           position: absolute;
           inset: 0;
-          background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.07) 1px, transparent 0);
+          background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0);
           background-size: 34px 34px;
-          opacity: .5;
         }
+        
+        .banner-bottom-fade { position: absolute; bottom: 0; left: 0; width: 100%; height: 120px; background: linear-gradient(to bottom, transparent, #060e1a); z-index: 1; }
+
+        /* Particles */
+        .particles-container { position: absolute; inset: 0; pointer-events: none; z-index: 2; overflow: hidden; opacity: 0.15; }
+        .particle { position: absolute; bottom: -10px; background: #C8A24A; border-radius: 50%; box-shadow: 0 0 8px #C8A24A; animation: driftUp linear infinite; }
+        @keyframes driftUp {
+          0% { transform: translateY(0) translateX(0); opacity: 0; }
+          10% { opacity: 1; }
+          90% { opacity: 1; }
+          100% { transform: translateY(-380px) translateX(20px); opacity: 0; }
+        }
+
+        /* Glows */
+        .banner-glow {
+          position: absolute; width: 500px; height: 500px; border-radius: 50%;
+          background: radial-gradient(circle, rgba(200,162,74,0.12), transparent 70%);
+          top: -150px; left: -100px; filter: blur(10px); z-index: 1;
+          animation: float1 12s ease-in-out infinite;
+        }
+        .banner-glow.b {
+          width: 400px; height: 400px; background: radial-gradient(circle, rgba(60,120,210,0.15), transparent 70%);
+          bottom: -100px; right: -100px; top: auto; left: auto;
+          animation: float2 14s ease-in-out infinite;
+        }
+        @keyframes float1 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(-20px,20px); } }
+        @keyframes float2 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(20px,-15px); } }
+
+        .page-hero-content {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
         .page-hero-title {
           font-family: 'Space Grotesk',sans-serif;
-          font-weight: 600;
-          font-size: clamp(2.2rem, 3.6vw, 3.2rem);
-          color: #FFFFFF;
+          font-weight: 700;
+          font-size: clamp(3rem, 5vw, 4.5rem);
+          background: linear-gradient(135deg, #ffffff 0%, #c8a24a 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
           line-height: 1.1;
-          letter-spacing: -0.01em;
-          margin-bottom: 16px;
+          letter-spacing: -0.02em;
+          margin-bottom: 24px;
+          filter: drop-shadow(0 10px 30px rgba(0,0,0,0.5));
         }
         .page-hero-sub {
-          font-size: 16px;
-          color: rgba(255,255,255,0.7);
-          max-width: 560px;
+          font-size: 18px;
+          color: rgba(255,255,255,0.8);
+          max-width: 640px;
+          margin: 0 auto;
+          line-height: 1.6;
         }
-        .breadcrumb {
+        .page-hero-extra {
+          margin-top: 32px;
           display: flex;
           align-items: center;
-          gap: 8px;
-          font-size: 12px;
+          justify-content: center;
+          gap: 16px;
+        }
+        
+        .breadcrumb {
+          display: inline-flex;
+          align-items: center;
+          gap: 12px;
+          font-family: monospace;
+          font-size: 11px;
           font-weight: 600;
-          letter-spacing: 0.06em;
+          letter-spacing: 0.1em;
           text-transform: uppercase;
-          color: rgba(255,255,255,0.45);
-          margin-bottom: 20px;
+          color: rgba(255,255,255,0.5);
+          margin-bottom: 32px;
+          background: rgba(255,255,255,0.03);
+          border: 1px solid rgba(255,255,255,0.1);
+          padding: 8px 24px;
+          border-radius: 100px;
+          backdrop-filter: blur(4px);
         }
-        .breadcrumb svg {
-          opacity: 0.5;
-        }
+        .breadcrumb span.current { color: #C8A24A; }
+        .breadcrumb svg { opacity: 0.4; }
+
         .reveal-up {
           opacity: 0;
-          transform: translateY(28px);
-          transition: opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1);
+          transform: translateY(30px);
+          transition: opacity 1s cubic-bezier(.22,1,.36,1), transform 1s cubic-bezier(.22,1,.36,1);
         }
         .reveal-up.in {
           opacity: 1;
           transform: translateY(0);
         }
+        
+        @media (prefers-reduced-motion: reduce) {
+          .banner-glow, .particle { animation: none !important; }
+        }
+
         @media (max-width: 860px) {
-          .page-hero { min-height: 200px; padding: 120px 0 40px; }
+          .page-hero { min-height: 280px; padding: 120px 0 60px; }
+          .page-hero-title { font-size: 3rem; }
+          .page-hero-sub { font-size: 16px; }
         }
       `}</style>
     </div>

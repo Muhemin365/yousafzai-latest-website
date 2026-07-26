@@ -17,11 +17,11 @@ export default function EggTradersFooter() {
           <div>
             <Link to="/egg-traders" style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 18, textDecoration: 'none' }}>
             <div style={{ display: 'flex', alignItems: 'center' }}>
-              <img src={logo} alt="Yousafzai EGRO" style={{ height: 56, width: 'auto', flexShrink: 0, display: 'block' }} />
+              <img src={logo} alt="Yousafzai Eggs Traders" style={{ height: 56, width: 'auto', flexShrink: 0, display: 'block' }} />
             </div>
             </Link>
             <p style={{ fontSize: 13.5, color: 'rgba(255,255,255,0.5)', lineHeight: 1.7, maxWidth: 320 }}>
-              A Yousafzai EGRO company. Connecting verified poultry farms to commercial buyers with transparency and efficiency.
+              A Yousafzai Eggs Traders company. Connecting verified poultry farms to commercial buyers with transparency and efficiency.
             </p>
           </div>
           <div>
@@ -38,12 +38,12 @@ export default function EggTradersFooter() {
           </div>
           <div>
             <div className="et-f-col-title">Our Group</div>
-            <Link to="/" style={{ display: 'block', fontSize: 13.5, color: 'rgba(255,255,255,0.55)', marginBottom: 12, textDecoration: 'none' }}>Yousafzai EGRO</Link>
+            <Link to="/" style={{ display: 'block', fontSize: 13.5, color: 'rgba(255,255,255,0.55)', marginBottom: 12, textDecoration: 'none' }}>Yousafzai Eggs Traders</Link>
             <Link to="/egg-traders" style={{ display: 'block', fontSize: 13.5, color: 'rgba(255,255,255,0.55)', marginBottom: 12, textDecoration: 'none' }}>Egg Traders</Link>
           </div>
         </div>
         <div className="et-footer-bottom">
-          <span>© 2026 Egg Traders — A Yousafzai EGRO Company. All rights reserved.</span>
+          <span>© 2026 Egg Traders — A Yousafzai Eggs Traders Company. All rights reserved.</span>
         </div>
       </div>
 

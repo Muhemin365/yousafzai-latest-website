@@ -1,20 +1,24 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { FileText, Package, Clock, CheckCircle2 } from 'lucide-react';
+import Lenis from 'lenis';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useAuthStore } from './store/useAuthStore';
+import { StoryProvider } from './motion/StoryEngine';
+import GlobalEnvironment from './motion/GlobalEnvironment';
 import Layout from './components/Layout';
 import EggTradersLayout from './components/egg-traders/EggTradersLayout';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import ProductsPage from './pages/ProductsPage';
-import SolutionsPage from './pages/SolutionsPage';
+import TeamPage from './pages/TeamPage';
 import ProcessPage from './pages/ProcessPage';
 import QualityPage from './pages/QualityPage';
 import ContactPage from './pages/ContactPage';
 import EggTradersPage from './pages/EggTradersPage';
 import EggTradersAbout from './pages/egg-traders/EggTradersAbout';
 import EggTradersProducts from './pages/egg-traders/EggTradersProducts';
-import EggTradersSolutions from './pages/egg-traders/EggTradersSolutions';
 import EggTradersProcess from './pages/egg-traders/EggTradersProcess';
 import EggTradersQuality from './pages/egg-traders/EggTradersQuality';
 import EggTradersContact from './pages/egg-traders/EggTradersContact';
@@ -387,32 +391,64 @@ const inputStyle = {
   background: '#FFFFFF',
 };
 
+gsap.registerPlugin(ScrollTrigger);
+
 export default function App() {
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // https://www.desmos.com/calculator/brs54l4xou
+      direction: 'vertical',
+      gestureDirection: 'vertical',
+      smooth: true,
+      mouseMultiplier: 1,
+      smoothTouch: false,
+      touchMultiplier: 2,
+      infinite: false,
+    });
+
+    lenis.on('scroll', ScrollTrigger.update);
+
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+
+    gsap.ticker.lagSmoothing(0);
+
+    return () => {
+      lenis.destroy();
+      gsap.ticker.remove(lenis.raf);
+    };
+  }, []);
+
   return (
     <BrowserRouter>
-      <Routes>
-        <Route element={<Layout />}>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/products" element={<ProductsPage />} />
-          <Route path="/solutions" element={<SolutionsPage />} />
-          <Route path="/process" element={<ProcessPage />} />
-          <Route path="/quality" element={<QualityPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-        </Route>
-        <Route element={<EggTradersLayout />}>
-          <Route path="/egg-traders" element={<EggTradersPage />} />
-          <Route path="/egg-traders/about" element={<EggTradersAbout />} />
-          <Route path="/egg-traders/products" element={<EggTradersProducts />} />
-          <Route path="/egg-traders/solutions" element={<EggTradersSolutions />} />
-          <Route path="/egg-traders/process" element={<EggTradersProcess />} />
-          <Route path="/egg-traders/quality" element={<EggTradersQuality />} />
-          <Route path="/egg-traders/contact" element={<EggTradersContact />} />
-        </Route>
-        <Route path="/admin/login" element={<AdminLogin />} />
-        <Route path="/admin" element={<AdminApp />} />
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
+      <StoryProvider>
+        <GlobalEnvironment>
+          <Routes>
+            <Route element={<Layout />}>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/products" element={<ProductsPage />} />
+              <Route path="/team" element={<TeamPage />} />
+              <Route path="/process" element={<ProcessPage />} />
+              <Route path="/quality" element={<QualityPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+            </Route>
+            <Route element={<EggTradersLayout />}>
+              <Route path="/egg-traders" element={<EggTradersPage />} />
+              <Route path="/egg-traders/about" element={<EggTradersAbout />} />
+              <Route path="/egg-traders/products" element={<EggTradersProducts />} />
+              <Route path="/egg-traders/process" element={<EggTradersProcess />} />
+              <Route path="/egg-traders/quality" element={<EggTradersQuality />} />
+              <Route path="/egg-traders/contact" element={<EggTradersContact />} />
+            </Route>
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin" element={<AdminApp />} />
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
+        </GlobalEnvironment>
+      </StoryProvider>
     </BrowserRouter>
   );
 }

@@ -1,6 +1,6 @@
 import HeroSection from '../components/HeroSection';
-import SupplyChainSection from '../components/SupplyChainSection';
-import WhyUsSection from '../components/WhyUsSection';
+import SupplyChainSection from '../components/SupplyChainJourney/SupplyChainSection';
+import SupplyChainControlCenter from '../components/SupplyChainControlCenter';
 import FAQSection from '../components/FAQSection';
 import CTASection from '../components/CTASection';
 
@@ -9,7 +9,7 @@ export default function HomePage() {
     <>
       <HeroSection />
       <SupplyChainSection />
-      <WhyUsSection />
+      <SupplyChainControlCenter />
       <FAQSection />
       <CTASection />
     </>

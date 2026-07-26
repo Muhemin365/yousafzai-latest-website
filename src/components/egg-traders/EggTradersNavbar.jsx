@@ -1,220 +1,322 @@
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { Menu, X, ArrowRight, ExternalLink } from 'lucide-react';
 import logo from '../../assets/logo.svg';
-
-const etTheme = {
-  navy: '#0D6B3D',
-  'navy-2': '#059669',
-  'navy-deep': '#064E3B',
-  'navy-glow': 'rgba(5,150,105,0.35)',
-  gold: '#F59E0B',
-  'gold-lt': '#FDE68A',
-  'gold-dk': '#D97706',
-};
 
 const navLinks = [
   { path: '/egg-traders/about', label: 'About Us' },
-  { path: '/egg-traders/products', label: 'Products' },
-  { path: '/egg-traders/solutions', label: 'Solutions' },
-  { path: '/egg-traders/process', label: 'Process' },
-  { path: '/egg-traders/quality', label: 'Quality' },
-  { path: '/egg-traders/contact', label: 'Contact Us' },
+  { path: '/egg-traders/products', label: 'Egg Products & Grades' },
+  { path: '/egg-traders/process', label: 'Quality & Process' },
+  { path: '/egg-traders/contact', label: 'Order Bulk Eggs' },
 ];
 
-export default function EggTradersNavbar({ scrolled, mobileOpen, setMobileOpen }) {
+export default function EggTradersNavbar() {
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const { pathname } = useLocation();
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 30);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   const isActive = (path) => pathname === path;
 
   return (
     <>
-      <nav
-        style={{
-          position: 'fixed', top: 0, left: 0, right: 0, zIndex: 500,
-          padding: scrolled ? '12px 0' : '22px 0',
-          background: '#0F2D53',
-          borderBottom: '2px solid',
-          borderImage: 'linear-gradient(to right, #0F2D53, #F6AE00, #0F2D53) 1',
-          transition: 'all 0.4s cubic-bezier(.22,1,.36,1)',
-        }}
-      >
-        <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '24px 0' }}>
-          <Link to="/egg-traders" style={{ display: 'flex', alignItems: 'center', gap: 12, textDecoration: 'none' }}>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-              <img src={logo} alt="Yousafzai EGRO" style={{ height: 56, width: 'auto', flexShrink: 0, display: 'block' }} />
+      <nav className={`et-nav-glass ${scrolled ? 'is-scrolled' : ''}`}>
+        <div className="et-nav-container">
+          {/* Logo */}
+          <Link to="/egg-traders" className="et-nav-brand" onClick={() => setMobileOpen(false)}>
+            <img src={logo} alt="Egg Traders" className="et-nav-logo" />
+            <div className="et-brand-tag">
+              <span className="et-tag-title">Egg Traders</span>
+              <span className="et-tag-sub">POULTRY MARKETPLACE</span>
             </div>
-
           </Link>
 
-          <div className="et-nav-links" style={{ display: 'flex', alignItems: 'center', gap: 36 }}>
+          {/* Nav Links */}
+          <div className="et-nav-links-desktop">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`et-nav-link ${isActive(link.path) ? 'active' : ''}`}
-                style={{
-                  fontSize: 13.5, fontWeight: 500,
-                  color: 'rgba(255,255,255,0.86)',
-                  position: 'relative', padding: '6px 0',
-                  transition: 'opacity 0.25s, color 0.4s', textDecoration: 'none',
-                }}
+                className={`et-nav-link-item ${isActive(link.path) ? 'active' : ''}`}
+                onClick={() => setMobileOpen(false)}
               >
-                {link.label}
-                <span style={{
-                  position: 'absolute', left: 0, bottom: 0,
-                  width: isActive(link.path) ? '100%' : 0, height: 2,
-                  background: etTheme.gold,
-                  transition: 'width 0.3s cubic-bezier(.22,1,.36,1)',
-                }} />
+                <span>{link.label}</span>
+                <span className={`et-nav-underline ${isActive(link.path) ? 'is-active' : ''}`} />
               </Link>
             ))}
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: 18 }}>
-            <Link to="/egg-traders/contact" className="et-btn et-btn-primary et-btn-sm" style={{
-              display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-              fontFamily: "'Inter',sans-serif", fontWeight: 600, fontSize: 13,
-              padding: '10px 20px', borderRadius: 9, border: 'none', cursor: 'pointer',
-              position: 'relative', overflow: 'hidden', whiteSpace: 'nowrap',
-              background: 'linear-gradient(120deg,#D97706,#F59E0B 55%,#FDE68A)',
-              color: '#064E3B', boxShadow: '0 10px 24px rgba(245,158,11,0.35)',
-              textDecoration: 'none',
-            }}>
-              <span style={{ position: 'relative', zIndex: 2, display: 'flex', alignItems: 'center', gap: 8 }}>
-                Start Trading
-              </span>
+          {/* Right Action */}
+          <div className="et-nav-actions">
+            <Link to="/egg-traders/contact" className="et-cta-gold">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14">
+                <path d="M12 2C8 7 5 11.5 5 15a7 7 0 0014 0c0-3.5-3-8-7-13z" />
+              </svg>
+              <span>Order Bulk Eggs</span>
+              <ArrowRight size={14} className="cta-arrow" />
             </Link>
-            <Link to="/" className="et-mainsite-link" style={{
-              display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-              fontFamily: "'Inter',sans-serif", fontWeight: 600, fontSize: 12.5,
-              padding: '9px 16px', borderRadius: 8,
-              border: `1.5px solid rgba(255,255,255,0.4)`,
-              background: 'transparent', color: '#FFFFFF',
-              cursor: 'pointer', textDecoration: 'none', whiteSpace: 'nowrap',
-            }}>
-              Main Site
+
+            <Link to="/" className="et-main-site-btn">
+              <ExternalLink size={13} />
+              <span>Main Site</span>
             </Link>
+
             <button
-              className={`et-menu-toggle ${mobileOpen ? 'open' : ''}`}
+              className="et-mobile-toggle"
+              aria-label="Toggle Menu"
               onClick={() => setMobileOpen(!mobileOpen)}
-              aria-label="Toggle menu"
             >
-              <span /><span /><span />
+              {mobileOpen ? <X size={20} color="#FFFFFF" /> : <Menu size={20} color="#FFFFFF" />}
             </button>
           </div>
         </div>
       </nav>
 
-      <div
-        className={`et-mobile-overlay ${mobileOpen ? 'open' : ''}`}
-        onClick={() => setMobileOpen(false)}
-      />
-      <div className={`et-mobile-panel ${mobileOpen ? 'open' : ''}`}>
-        <div style={{ marginBottom: 40 }}>
-          <span style={{ fontFamily: "'Space Grotesk',sans-serif", fontWeight: 700, fontSize: 18, color: '#FFFFFF' }}>Egg Traders</span>
-          <span style={{ display: 'block', fontSize: 10, letterSpacing: '0.18em', textTransform: 'uppercase', color: etTheme['gold-lt'], fontWeight: 600, marginTop: 4 }}>Poultry Marketplace</span>
+      {/* Mobile Drawer */}
+      {mobileOpen && (
+        <div className="et-mobile-drawer">
+          <div className="et-mobile-nav-list">
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                className="et-mobile-link"
+                onClick={() => setMobileOpen(false)}
+              >
+                {link.label}
+              </Link>
+            ))}
+            <Link
+              to="/egg-traders/contact"
+              className="et-mobile-cta"
+              onClick={() => setMobileOpen(false)}
+            >
+              <span>Order Bulk Eggs</span>
+              <ArrowRight size={16} />
+            </Link>
+          </div>
         </div>
-        {navLinks.map((link) => (
-          <Link key={link.path} to={link.path} onClick={() => setMobileOpen(false)}
-            style={{
-              color: 'rgba(255,255,255,0.8)', fontSize: 17, fontFamily: "'Space Grotesk',sans-serif",
-              textDecoration: 'none', padding: '12px 0', borderBottom: '1px solid rgba(255,255,255,0.06)',
-              transition: 'color 0.25s',
-            }}
-            onMouseEnter={e => e.target.style.color = etTheme['gold-lt']}
-            onMouseLeave={e => e.target.style.color = 'rgba(255,255,255,0.8)'}
-          >{link.label}</Link>
-        ))}
-        <Link to="/egg-traders/contact" onClick={() => setMobileOpen(false)}
-          style={{
-            marginTop: 24, color: etTheme['gold-lt'], fontSize: 17, fontFamily: "'Space Grotesk',sans-serif",
-            textDecoration: 'none', padding: '14px 0', fontWeight: 600,
-            borderTop: '1px solid rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', gap: 8,
-          }}>
-          Start Trading
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M5 12h14M13 6l6 6-6 6"/>
-          </svg>
-        </Link>
-      </div>
+      )}
 
       <style>{`
-        .et-nav-links { display: flex !important; }
-        .et-mainsite-link { display: inline-flex !important; }
-        .et-menu-toggle {
-          display: none !important;
-          width: 36px; height: 36px;
-          background: transparent; border: none;
-          cursor: pointer;
-          flex-direction: column; align-items: center; justify-content: center;
-          gap: 5px;
-          position: relative; z-index: 510;
-          padding: 0;
+        .et-nav-glass {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          z-index: 500;
+          padding: 20px 0;
+          background: rgba(7, 26, 48, 0.85);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          border-bottom: 1px solid rgba(245, 158, 11, 0.35);
+          transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-        .et-menu-toggle span {
+
+        .et-nav-glass.is-scrolled {
+          padding: 12px 0;
+          background: rgba(7, 26, 48, 0.95);
+          border-bottom-color: rgba(245, 158, 11, 0.5);
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .et-nav-container {
+          max-width: 1240px;
+          margin: 0 auto;
+          padding: 0 32px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+
+        .et-nav-brand {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          text-decoration: none;
+        }
+
+        .et-nav-logo {
+          height: 48px;
+          width: auto;
           display: block;
-          width: 22px; height: 2px;
-          background: #FFFFFF;
+        }
+
+        .et-brand-tag {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .et-tag-title {
+          font-family: 'Space Grotesk', sans-serif;
+          font-weight: 700;
+          font-size: 15px;
+          color: #fff;
+        }
+
+        .et-tag-sub {
+          font-family: monospace;
+          font-size: 9px;
+          color: #f59e0b;
+          letter-spacing: 0.12em;
+        }
+
+        .et-nav-links-desktop {
+          display: flex;
+          align-items: center;
+          gap: 32px;
+        }
+
+        .et-nav-link-item {
+          position: relative;
+          font-family: 'Space Grotesk', sans-serif;
+          font-size: 14px;
+          font-weight: 500;
+          color: rgba(255, 255, 255, 0.8);
+          padding: 6px 0;
+          text-decoration: none;
+          transition: color 0.3s;
+        }
+
+        .et-nav-link-item:hover, .et-nav-link-item.active {
+          color: #fef08a;
+        }
+
+        .et-nav-underline {
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          width: 0;
+          height: 2px;
+          background: linear-gradient(90deg, #f59e0b, #4ade80);
           border-radius: 2px;
-          transition: all .3s cubic-bezier(.22,1,.36,1);
-          transform-origin: center;
-        }
-        .nav.scrolled .et-menu-toggle span,
-        .et-menu-toggle.scrolled span {
-          background: ${etTheme.navy};
-        }
-        .et-menu-toggle.open span:nth-child(1) {
-          transform: translateY(7px) rotate(45deg);
-        }
-        .et-menu-toggle.open span:nth-child(2) {
-          opacity: 0;
-          transform: scaleX(0);
-        }
-        .et-menu-toggle.open span:nth-child(3) {
-          transform: translateY(-7px) rotate(-45deg);
+          transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
-        .et-mobile-overlay {
-          position: fixed; inset: 0;
-          background: rgba(0,0,0,0.45);
-          z-index: 490;
-          opacity: 0; visibility: hidden;
-          transition: opacity .35s ease, visibility .35s ease;
-        }
-        .et-mobile-overlay.open {
-          opacity: 1; visibility: visible;
+        .et-nav-link-item:hover .et-nav-underline,
+        .et-nav-underline.is-active {
+          width: 100%;
         }
 
-        .et-mobile-panel {
-          position: fixed; top: 0; right: 0; bottom: 0;
-          width: 300px; max-width: 85vw;
-          background: ${etTheme['navy-deep']};
-          z-index: 495;
-          transform: translateX(100%);
-          transition: transform .4s cubic-bezier(.22,1,.36,1);
-          display: flex; flex-direction: column;
-          padding: 80px 32px 32px;
-          overflow-y: auto;
+        .et-nav-actions {
+          display: flex;
+          align-items: center;
+          gap: 14px;
         }
-        .et-mobile-panel.open {
-          transform: translateX(0);
+
+        .et-cta-gold {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          font-family: 'Space Grotesk', sans-serif;
+          font-weight: 700;
+          font-size: 13.5px;
+          padding: 10px 22px;
+          border-radius: 10px;
+          background: linear-gradient(135deg, #f59e0b 0%, #fef08a 100%);
+          color: #071a30;
+          text-decoration: none;
+          transition: transform 0.3s, box-shadow 0.3s;
+          box-shadow: 0 8px 24px rgba(245, 158, 11, 0.35);
+        }
+
+        .et-cta-gold:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 12px 30px rgba(245, 158, 11, 0.5);
+        }
+
+        .et-main-site-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          font-family: monospace;
+          font-size: 12px;
+          color: rgba(255,255,255,0.7);
+          background: rgba(255,255,255,0.04);
+          border: 1px solid rgba(255,255,255,0.12);
+          padding: 9px 16px;
+          border-radius: 8px;
+          text-decoration: none;
+          transition: all 0.3s;
+        }
+
+        .et-main-site-btn:hover {
+          color: #fff;
+          border-color: rgba(245, 158, 11, 0.4);
+        }
+
+        .et-mobile-toggle {
+          display: none;
+          width: 40px;
+          height: 40px;
+          border-radius: 10px;
+          background: rgba(255,255,255,0.05);
+          border: 1px solid rgba(255,255,255,0.12);
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+        }
+
+        .et-mobile-drawer {
+          position: fixed;
+          inset: 0;
+          background: rgba(7, 26, 48, 0.96);
+          backdrop-filter: blur(24px);
+          z-index: 480;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 40px;
+        }
+
+        .et-mobile-nav-list {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 24px;
+          width: 100%;
+          max-width: 320px;
+        }
+
+        .et-mobile-link {
+          font-family: 'Space Grotesk', sans-serif;
+          font-size: 20px;
+          font-weight: 600;
+          color: rgba(255, 255, 255, 0.85);
+          text-decoration: none;
+        }
+
+        .et-mobile-cta {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          width: 100%;
+          font-family: 'Space Grotesk', sans-serif;
+          font-size: 15px;
+          font-weight: 700;
+          padding: 14px 0;
+          border-radius: 12px;
+          background: linear-gradient(135deg, #f59e0b 0%, #fef08a 100%);
+          color: #071a30;
+          text-decoration: none;
+          margin-top: 16px;
         }
 
         @media (max-width: 860px) {
-          .et-nav-links { display: none !important; }
-          .et-menu-toggle { display: flex !important; }
+          .et-nav-links-desktop { display: none; }
+          .et-mobile-toggle { display: flex; }
         }
-        @media (max-width: 640px) {
-          nav > div > a:nth-child(1) span:first-child { font-size: 13px !important; }
-          nav > div > a:nth-child(1) span:last-child { display: none !important; }
-          nav > div > a:nth-child(1) { gap: 8px !important; }
-          .et-mainsite-link { display: none !important; }
-          .et-mobile-panel { padding: 72px 24px 24px; }
-        }
-        @media (max-width: 420px) {
-          nav > div { padding-left: 16px !important; padding-right: 16px !important; }
-          nav > div > a:nth-child(1) img { height: 36px !important; }
-          .et-btn-sm { padding: 8px 14px !important; font-size: 11.5px !important; }
-          .et-btn-sm span { gap: 4px !important; }
-          .et-mobile-panel { padding: 64px 20px 20px; width: 100%; max-width: 100%; }
+
+        @media (max-width: 480px) {
+          .et-nav-container { padding: 0 16px; }
+          .et-nav-logo { height: 38px; }
+          .et-main-site-btn { display: none; }
         }
       `}</style>
     </>

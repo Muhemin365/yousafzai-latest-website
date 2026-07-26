@@ -45,7 +45,7 @@ export default function Layout() {
       <div id="loader">
         <div className="loader-mark">
           <div className="loader-ring" />
-          YOUSAFZAI EGRO
+          YOUSAFZAI
         </div>
         <style>{`
           #loader { position: fixed; inset: 0; background: #071A30; z-index: 9999; display: flex; align-items: center; justify-content: center; }

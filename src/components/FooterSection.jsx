@@ -1,15 +1,39 @@
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useCMSStore } from '../store/useCMSStore';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function FooterSection() {
   const company = useCMSStore((s) => s.company);
   const footer = useCMSStore((s) => s.footer);
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    let ctx = gsap.context(() => {
+      gsap.fromTo('.footer-animate', 
+        { y: 30, opacity: 0 },
+        { 
+          y: 0, opacity: 1, duration: 0.8, ease: "power3.out", stagger: 0.1,
+          scrollTrigger: { trigger: 'footer', start: 'top 95%', once: true }
+        }
+      );
+    }, containerRef);
+    
+    return () => ctx.revert();
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
-    <footer>
+    <footer ref={containerRef}>
       <div className="container">
         <div className="footer-grid">
-          <div className="footer-brand">
+          <div className="footer-brand footer-animate">
             <Link to="/" className="brand" style={{ textDecoration: 'none' }}>
               <div className="brand-mark">
                 <svg viewBox="0 0 24 24" fill="none" stroke="#F1E4C3" strokeWidth="1.6" width="22" height="22">
@@ -40,50 +64,91 @@ export default function FooterSection() {
               </a>
             </div>
           </div>
-          <div className="footer-col">
+          <div className="footer-col footer-animate">
             <div className="footer-col-title">Company</div>
             {footer.quickLinks.map((link, i) => (
               <Link key={i} to={link.href}>{link.label}</Link>
             ))}
           </div>
-          <div className="footer-col">
-            <div className="footer-col-title">Solutions</div>
-            {footer.solutionsLinks.map((link, i) => (
-              <Link key={i} to={link.href}>{link.label}</Link>
-            ))}
-          </div>
-          <div className="footer-col">
+          <div className="footer-col footer-animate">
             <div className="footer-col-title">Resources</div>
             {footer.resourcesLinks.map((link, i) => (
               <Link key={i} to={link.href}>{link.label}</Link>
             ))}
           </div>
         </div>
-        <div className="footer-bottom">
+        <div className="footer-bottom footer-animate">
           <span>{footer.copyright}</span>
-          <span>{footer.locations}</span>
+          <div className="footer-bottom-right">
+            <span>{footer.locations}</span>
+            <button onClick={scrollToTop} className="back-to-top" aria-label="Scroll to top">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" width="16" height="16">
+                <path d="M5 15l7-7 7 7" />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
 
       <style>{`
-        footer { background: #071A30; color: rgba(255,255,255,0.7); padding: 80px 0 0; }
+        footer { background: #071A30; color: rgba(255,255,255,0.7); padding: 80px 0 0; position: relative; }
         .footer-grid { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 50px; padding-bottom: 60px; border-bottom: 1px solid rgba(255,255,255,0.08); }
         .footer-brand { display: flex; flex-direction: column; align-items: center; text-align: center; }
         .footer-brand .brand-name { color: #FFFFFF; }
         .brand { display: flex; align-items: center; justify-content: center; gap: 12px; }
-        .brand-mark { width: 42px; height: 42px; border-radius: 11px; background: linear-gradient(145deg,#0B2545,#123A6B); display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 6px 16px rgba(11,37,69,0.28); }
-        .brand-text { display: flex; flex-direction: column; line-height: 1.1; text-align: left; }
+        
+        .brand-mark { 
+          width: 42px; height: 42px; border-radius: 11px; 
+          background: linear-gradient(145deg,#0B2545,#123A6B); 
+          display: flex; align-items: center; justify-content: center; flex-shrink: 0; 
+          box-shadow: 0 6px 16px rgba(11,37,69,0.28); 
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .brand:hover .brand-mark {
+          transform: scale(1.05);
+          box-shadow: 0 8px 24px rgba(200,162,74,0.3);
+        }
+        
+        .brand-text { display: flex; flex-direction: column; line-height: 1.1; text-align: left; transition: transform 0.3s ease; }
+        .brand:hover .brand-text { transform: translateX(2px); }
         .brand-name { font-family: 'Space Grotesk',sans-serif; font-weight: 700; font-size: 16px; letter-spacing: .02em; color: #FFFFFF; }
         .brand-sub { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: #9C7B2E; font-weight: 600; }
         .footer-desc { font-size: 13.5px; color: rgba(255,255,255,0.5); margin-top: 18px; line-height: 1.7; max-width: 300px; text-align: center; }
+        
         .footer-col { display: flex; flex-direction: column; align-items: center; }
         .footer-col-title { font-size: 12.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #FFFFFF; margin-bottom: 20px; text-align: center; }
-        .footer-col a { display: block; font-size: 13.5px; color: rgba(255,255,255,0.55); margin-bottom: 12px; transition: color .25s; text-align: center; }
-        .footer-col a:hover { color: #C8A24A; }
+        .footer-col a { display: block; font-size: 13.5px; color: rgba(255,255,255,0.55); margin-bottom: 12px; transition: color .25s, transform .25s; text-align: center; }
+        .footer-col a:hover { color: #C8A24A; transform: translateX(4px); }
+        
         .social-row { display: flex; justify-content: center; gap: 10px; margin-top: 22px; }
-        .social-row a { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center; }
-        .social-row a:hover { background: #C8A24A; color: #071A30; }
-        .footer-bottom { padding: 26px 0; display: flex; justify-content: space-between; font-size: 12.5px; color: rgba(255,255,255,0.45); }
+        .social-row a { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
+        .social-row a:hover { background: #C8A24A; color: #071A30; transform: translateY(-3px); box-shadow: 0 4px 12px rgba(200,162,74,0.25); }
+        
+        .footer-bottom { padding: 26px 0; display: flex; justify-content: space-between; align-items: center; font-size: 12.5px; color: rgba(255,255,255,0.45); }
+        .footer-bottom-right { display: flex; align-items: center; gap: 20px; }
+        
+        .back-to-top {
+          background: rgba(255,255,255,0.06);
+          border: none;
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: rgba(255,255,255,0.7);
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+        .back-to-top:hover {
+          background: #C8A24A;
+          color: #071A30;
+          transform: translateY(-2px);
+        }
+        .back-to-top:active {
+          transform: translateY(0);
+        }
+        
         @media (min-width: 860px) {
           .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; align-items: start; text-align: left; }
           .footer-brand { align-items: flex-start; text-align: left; }

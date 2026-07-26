@@ -1,157 +1,355 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState, useImperativeHandle, forwardRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { CustomEase } from 'gsap/CustomEase';
 import { useCMSStore } from '../store/useCMSStore';
+
+gsap.registerPlugin(ScrollTrigger, CustomEase);
+
+// Register Animation Bible Curves
+CustomEase.create("industrial", "M0,0 C0.1,0.8 0.2,1 1,1");
+CustomEase.create("gauge", "M0,0 C0.2,0 0.4,1 0.9,1 1,1 1,1 1,1");
+
+const LiveStatistic = ({ labelSteps, finalNumber, suffix }) => {
+  const [currentLabel, setCurrentLabel] = useState(labelSteps[0]);
+  const [num, setNum] = useState(0);
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    let ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top 80%',
+          once: true
+        }
+      });
+
+      // Sequence the boot labels
+      labelSteps.forEach((step, idx) => {
+        tl.call(() => setCurrentLabel(step), null, idx * 0.6);
+      });
+
+      // Spin the number at the end
+      tl.to({ val: 0 }, {
+        val: finalNumber,
+        duration: 2.5,
+        ease: "gauge",
+        onUpdate: function() {
+          setNum(Math.floor(this.targets()[0].val));
+        }
+      }, "+=0.2");
+
+    }, containerRef);
+    return () => ctx.revert();
+  }, [labelSteps, finalNumber]);
+
+  return (
+    <div className="live-stat-box" ref={containerRef}>
+      <div className="stat-status-led"></div>
+      <div className="stat-label-sequence">{currentLabel}</div>
+      <div className="stat-number">{num.toLocaleString()}{suffix}</div>
+      <div className="stat-crosshair top-left"></div>
+      <div className="stat-crosshair bottom-right"></div>
+    </div>
+  );
+};
+
+
 
 export default function AboutSection() {
   const about = useCMSStore((s) => s.about);
-  const overview = useCMSStore((s) => s.overview);
   const sectionRef = useRef(null);
+  const infraRef = useRef(null);
+  const [activeInfra, setActiveInfra] = useState(0);
 
   useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('in');
-            observer.unobserve(entry.target);
+    let ctx = gsap.context(() => {
+      let mm = gsap.matchMedia();
+      
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        // P0 Brand Motion: Central Blueprint Axis
+        gsap.fromTo('.blueprint-axis', 
+          { scaleY: 0 },
+          { 
+            scaleY: 1, 
+            ease: "none",
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: 1
+            }
           }
+        );
+
+        // Assembly Timeline for Hero Text
+        const textBlocks = gsap.utils.toArray('.assemble-block');
+        textBlocks.forEach(block => {
+          gsap.fromTo(block,
+            { clipPath: 'inset(0 100% 0 0)', x: -20 },
+            {
+              clipPath: 'inset(0 0% 0 0)', x: 0,
+              duration: 0.8,
+              ease: "industrial",
+              scrollTrigger: {
+                trigger: block,
+                start: 'top 85%',
+                scrub: 0.5
+              }
+            }
+          );
         });
-      },
-      { threshold: 0.15 }
-    );
-    el.querySelectorAll('.reveal, .reveal-stagger').forEach((e) => observer.observe(e));
-    return () => observer.disconnect();
+
+        // Sticky Scroll for Infrastructure Layers
+        const paras = gsap.utils.toArray('.infra-paragraph');
+        paras.forEach((para, index) => {
+          ScrollTrigger.create({
+            trigger: para,
+            start: 'top center+=100',
+            end: 'bottom center-=100',
+            onToggle: (self) => {
+              if (self.isActive) setActiveInfra(index);
+            }
+          });
+        });
+
+        // Expansion Map
+        const mapNodes = gsap.utils.toArray('.map-node');
+        gsap.fromTo(mapNodes,
+          { scale: 0, opacity: 0 },
+          {
+            scale: 1, opacity: 1,
+            duration: 0.6,
+            stagger: 0.4,
+            ease: "back.out(1.7)",
+            scrollTrigger: {
+              trigger: '.expansion-map',
+              start: 'top center',
+              end: 'bottom center',
+              scrub: 1,
+              pin: true
+            }
+          }
+        );
+      });
+      
+      mm.add("(prefers-reduced-motion: reduce)", () => {
+        gsap.set(['.blueprint-axis', '.assemble-block', '.map-node'], { clearProps: "all" });
+      });
+
+    }, sectionRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (
-    <div ref={sectionRef}>
-      <section id="about">
-        <div className="container">
-          <div className="sec-head reveal">
-            <div className="tag-eyebrow">{about.eyebrow}</div>
-            <h2 className="sec-title">{about.title}</h2>
-            <p className="sec-sub">{about.subtitle}</p>
-          </div>
-          <div className="about-grid">
-            <div className="reveal">
-              <div className="quote-block">
-                <p className="q">{about.quote}</p>
-                <div className="q-foot">{about.quoteFooter}</div>
+    <div ref={sectionRef} className="about-engineering-container">
+      {/* Central Blueprint Axis Line */}
+      <div className="blueprint-axis"></div>
+
+      <section className="about-foundation" id="about">
+        
+        {/* Mission Statement Glass Panel */}
+        <div className="container hero-content-wrapper" style={{ marginTop: '60px', marginBottom: '80px' }}>
+            <div className="hero-content">
+               <div className="hero-mission-box assemble-block" style={{ width: '100%', maxWidth: '800px', margin: '0 auto' }}>
+                 <div className="mission-glass-panel">
+                   <p className="mission-statement">{about.quote}</p>
+                   <div className="mission-footer">{about.quoteFooter}</div>
+                 </div>
+               </div>
+            </div>
+        </div>
+        
+        {/* Infrastructure Sticky Layout */}
+        <div className="infrastructure-sticky-layout" ref={infraRef}>
+          <div className="infra-visual-sticky">
+            <div className="sticky-container">
+              <div className={`visual-slide ${activeInfra === 0 ? 'active' : ''}`}>
+                 <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80" alt="Corporate Foundation" />
+                 <div className="visual-overlay"></div>
+                 <div className="eng-scan-line"></div>
+              </div>
+              <div className={`visual-slide ${activeInfra === 1 ? 'active' : ''}`}>
+                 <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1920&q=80" alt="Supply Chain Efficiency" />
+                 <div className="visual-overlay"></div>
+                 <div className="eng-scan-line"></div>
+              </div>
+              <div className={`visual-slide ${activeInfra === 2 ? 'active' : ''}`}>
+                 <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=1920&q=80" alt="Operations Data Center" />
+                 <div className="visual-overlay"></div>
+                 <div className="eng-scan-line"></div>
               </div>
             </div>
-            <div className="about-text reveal">
-              <div className="about-text-box">
-                {about.paragraphs.map((p, i) => (
-                  <p key={i}>{p}</p>
-                ))}
-              </div>
+          </div>
+          
+          <div className="infra-content-scroll">
+            <div className="infra-header assemble-block">
+              <span className="infra-dot"></span>
+              <span>SYSTEM ARCHITECTURE</span>
             </div>
-          </div>
-
-          <div className="value-grid reveal-stagger">
-            {about.values.map((v, i) => (
-              <div key={i} className="value-card">
-                <div className="v-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" width="21" height="21">
-                    {v.icon === 'Box' ? <path d="M12 3v18M5 8l7-5 7 5M5 8v8l7 5 7-5V8" /> :
-                     v.icon === 'ShieldCheck' ? <><path d="M12 2l8 4v6c0 5-3.6 8-8 10-4.4-2-8-5-8-10V6l8-4z" /></> :
-                      <><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 3" /></>}
-                  </svg>
+            <div className="infra-paragraphs-list">
+              {about.paragraphs.map((p, i) => (
+                <div key={i} className={`infra-paragraph ${i === activeInfra ? 'active' : ''}`}>
+                  <span className="para-index">0{i+1}</span>
+                  <p>{p}</p>
                 </div>
-                <div className="v-title">{v.title}</div>
-                <div className="v-body">{v.body}</div>
-              </div>
-            ))}
-          </div>
-
-          <div className="team-grid reveal-stagger">
-            {about.team.map((member, i) => (
-              <div key={i} className="team-card">
-                <div className="team-avatar">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" width="24" height="24">
-                    <circle cx="12" cy="8" r="4" /><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7" />
-                  </svg>
-                </div>
-                <div className="team-name">{member.name}</div>
-                <div className="team-role">{member.role}</div>
-                <div className="team-bio">{member.bio}</div>
-              </div>
-            ))}
+              ))}
+            </div>
+            <div style={{ height: '30vh' }}></div>
           </div>
         </div>
       </section>
 
-      <section className="section-alt" id="overview">
+      {/* Activation Phase: Live Operations Statistics */}
+      <section className="about-activation" id="overview">
         <div className="container">
-          <div className="sec-head center reveal">
-            <div className="tag-eyebrow" style={{ justifyContent: 'center' }}>Company Overview</div>
-            <h2 className="sec-title">The Numbers Behind Our Business</h2>
-            <p className="sec-sub">A consolidated profile of Yousafzai EGRO's trading and B2B supply operation.</p>
+          <div className="sec-head center assemble-block">
+            <div className="tag-eyebrow" style={{ justifyContent: 'center' }}>LIVE OPERATIONS</div>
+            <h2 className="sec-title">Operational Telemetry</h2>
           </div>
-          <div className="overview-wrap reveal">
-            {overview.rows.map((row, i) => (
-              <div key={i} className="overview-row">
-                <span className="ov-label">{row.label}</span>
-                <span className="ov-val">{row.value}</span>
+          
+          <div className="live-stats-grid">
+            <LiveStatistic 
+              labelSteps={['Checking Farm Network...', 'Farm Network Verified', 'Loading Weekly Prod...', 'Production Confirmed']}
+              finalNumber={1000} 
+              suffix="+" 
+            />
+            <LiveStatistic 
+              labelSteps={['Querying Distribution...', 'Routing Synchronized', 'Verifying Capacity...', 'Distribution Active']}
+              finalNumber={50000} 
+              suffix="+" 
+            />
+          </div>
+          
+          {/* Enterprise Expansion Map */}
+          <div className="expansion-map">
+            <h3 className="section-heading assemble-block" style={{ marginTop: '80px', marginBottom: '40px' }}>Geographical Infrastructure</h3>
+            <div className="map-grid">
+              <div className="map-route-line"></div>
+              <div className="map-node">
+                <div className="node-marker"></div>
+                <div className="node-data">
+                  <div className="node-year">2012</div>
+                  <div className="node-desc">Headquarters Founded</div>
+                  <div className="hover-metadata">Cap: 10k Units</div>
+                </div>
               </div>
-            ))}
+              <div className="map-node">
+                <div className="node-marker"></div>
+                <div className="node-data">
+                  <div className="node-year">2016</div>
+                  <div className="node-desc">Cold Chain Network</div>
+                  <div className="hover-metadata">Role: Temp Control</div>
+                </div>
+              </div>
+              <div className="map-node">
+                <div className="node-marker"></div>
+                <div className="node-data">
+                  <div className="node-year">2020</div>
+                  <div className="node-desc">National Hubs</div>
+                  <div className="hover-metadata">Coverage: 100% Domestic</div>
+                </div>
+              </div>
+              <div className="map-node">
+                <div className="node-marker"></div>
+                <div className="node-data">
+                  <div className="node-year">2023</div>
+                  <div className="node-desc">Quality Labs</div>
+                  <div className="hover-metadata">Verification: Active</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       <style>{`
-        section { padding: 120px 0; position: relative; }
-        .section-alt { background: #FFFFFF; }
-        .sec-head { max-width: 680px; }
-        .sec-head.center { margin-left: auto; margin-right: auto; text-align: center; }
-        .about-grid { display: grid; grid-template-columns: .95fr 1.05fr; gap: 72px; align-items: start; }
-        .quote-block { background: linear-gradient(155deg,#0B2545,#123A6B); border-radius: 32px; padding: 48px 44px; color: #FFFFFF; position: relative; overflow: hidden; text-align: center; }
-        .quote-block::after { content: '"'; position: absolute; top: -30px; left: 50%; transform: translateX(-50%); font-family: 'Space Grotesk',sans-serif; font-size: 180px; color: rgba(255,255,255,0.06); }
-        .quote-block p.q { font-family: 'Space Grotesk',sans-serif; font-size: 23px; font-weight: 500; line-height: 1.5; position: relative; z-index: 2; }
-        .quote-block .q-foot { margin-top: 24px; font-size: 13px; color: rgba(255,255,255,0.6); position: relative; z-index: 2; }
-        .about-text-box { background: #FFFFFF; border: 1px solid #EEF1F5; border-radius: 24px; padding: 36px 32px; box-shadow: 0 14px 36px rgba(11,37,69,0.06); height: 100%; display: flex; flex-direction: column; justify-content: center; }
-        .about-text-box p { font-size: 15.5px; color: #444C5C; margin-bottom: 20px; text-align: left; line-height: 1.75; }
-        .about-text-box p:last-child { margin-bottom: 0; }
+        .about-engineering-container { position: relative; padding: 120px 0; overflow: hidden; }
         
-        .value-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 60px; }
-        .value-card { background: #FFFFFF; border: 1px solid #EEF1F5; border-radius: 24px; padding: 32px; display: flex; flex-direction: column; align-items: flex-start; text-align: left; transition: transform .35s ease, box-shadow .35s ease; }
-        .value-card:hover { transform: translateY(-4px); box-shadow: 0 14px 36px rgba(11,37,69,0.06); }
-        .v-icon { width: 52px; height: 52px; border-radius: 14px; background: #F1E4C3; display: flex; align-items: center; justify-content: center; color: #0B2545; margin-bottom: 20px; }
-        .v-title { font-weight: 700; font-size: 15.5px; color: #0B2545; margin-bottom: 8px; }
-        .v-body { font-size: 13.5px; color: #707888; line-height: 1.65; }
+        /* Central Axis */
+        .blueprint-axis { position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: rgba(200,162,74,0.3); transform-origin: top center; z-index: 0; }
+        .blueprint-axis::before { content: ''; position: absolute; left: -3px; top: 0; width: 7px; height: 100%; background: repeating-linear-gradient(to bottom, transparent, transparent 10px, rgba(200,162,74,0.1) 10px, rgba(200,162,74,0.1) 20px); }
 
-        .team-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-top: 24px; }
-        .team-card { background: #F5F7FA; border-radius: 24px; padding: 32px 28px; transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s cubic-bezier(.22,1,.36,1); }
-        .team-card:hover { transform: translateY(-6px); box-shadow: 0 14px 36px rgba(11,37,69,0.10); background: #FFFFFF; }
-        .team-avatar { width: 56px; height: 56px; border-radius: 14px; background: linear-gradient(145deg,#0B2545,#123A6B); display: flex; align-items: center; justify-content: center; color: #F1E4C3; margin-bottom: 18px; }
-        .team-name { font-weight: 700; font-size: 15px; color: #0B2545; }
-        .team-role { font-size: 12px; color: #9C7B2E; font-weight: 600; margin: 4px 0 12px; text-transform: uppercase; letter-spacing: .04em; }
-        .team-bio { font-size: 13px; color: #707888; line-height: 1.6; }
-        .overview-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-radius: 24px; overflow: hidden; box-shadow: 0 14px 36px rgba(11,37,69,0.10); }
-        .overview-row { display: flex; justify-content: space-between; align-items: center; padding: 20px 30px; background: #FFFFFF; border-bottom: 1px solid #EEF1F5; }
-        .overview-row:nth-child(odd) { background: #F5F7FA; }
-        .ov-label { font-size: 13px; color: #707888; font-weight: 600; text-transform: uppercase; letter-spacing: .03em; }
-        .ov-val { font-size: 14.5px; color: #0B2545; font-weight: 700; text-align: right; }
-        .reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1); }
-        .reveal.in { opacity: 1; transform: translateY(0); }
-        .reveal-stagger > * { opacity: 0; transform: translateY(24px); transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1); }
-        .reveal-stagger.in > * { opacity: 1; transform: translateY(0); }
-        .reveal-stagger.in > *:nth-child(1) { transition-delay: .05s; }
-        .reveal-stagger.in > *:nth-child(2) { transition-delay: .12s; }
-        .reveal-stagger.in > *:nth-child(3) { transition-delay: .19s; }
-        .reveal-stagger.in > *:nth-child(4) { transition-delay: .26s; }
-        .reveal-stagger.in > *:nth-child(5) { transition-delay: .33s; }
-        .reveal-stagger.in > *:nth-child(6) { transition-delay: .40s; }
-        @media (max-width: 1080px) {
-          .value-grid, .team-grid { grid-template-columns: repeat(2,1fr); }
-          .team-card:nth-child(3), .value-card:nth-child(3) { grid-column: 1 / -1; justify-self: center; width: 50%; }
+        .container { position: relative; z-index: 2; }
+        
+        /* About Hero Slideshow */
+        .about-hero-slideshow { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+        .about-hero-slideshow .slide-img { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 2s, transform 8s; transform: scale(1.05); filter: grayscale(20%); }
+        .about-hero-slideshow .slide-img.active { opacity: 0.5; transform: scale(1); }
+        .about-hero-slideshow .slide-overlay { position: absolute; inset: 0; background: radial-gradient(120% 100% at 80% 0%, rgba(23,62,114,0.7) 0%, rgba(11,37,69,0.8) 45%, rgba(7,26,48,0.95) 100%); }
+        .about-hero-slideshow .slide-overlay::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 40%, #071A30 100%); }
+        .hero-content-wrapper { position: relative; z-index: 2; }
+        
+        /* Cinematic Hero Styles */
+        .about-hero-cinematic { position: relative; width: 100%; margin: 0; padding: 160px 0 100px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .hero-grid-lines { position: absolute; inset: 0; pointer-events: none; }
+        .hero-grid-lines .h-line { position: absolute; left: 0; right: 0; height: 1px; background: rgba(255,255,255,0.05); }
+        .hero-grid-lines .h-line.top { top: 0; }
+        .hero-grid-lines .h-line.bottom { bottom: 0; }
+        .hero-grid-lines .h-line::before, .hero-grid-lines .h-line::after { content: ''; position: absolute; top: -3px; width: 7px; height: 7px; border: 1px solid rgba(255,255,255,0.2); border-radius: 50%; background: #071A30; }
+        .hero-grid-lines .h-line::before { left: -4px; }
+        .hero-grid-lines .h-line::after { right: -4px; }
+
+        .hero-meta { display: flex; gap: 32px; justify-content: center; margin-bottom: 24px; font-family: monospace; font-size: 11px; letter-spacing: 0.1em; color: rgba(200,162,74,0.8); border: 1px solid rgba(200,162,74,0.2); padding: 8px 24px; border-radius: 100px; background: rgba(200,162,74,0.05); }
+        .meta-item { display: flex; align-items: center; gap: 8px; }
+        .meta-dot { width: 6px; height: 6px; background: #C8A24A; border-radius: 50%; box-shadow: 0 0 8px #C8A24A; animation: pulse 2s infinite; }
+        
+        .hero-massive-title { font-family: 'Space Grotesk',sans-serif; font-size: 72px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 40px; }
+        
+        .hero-mission-box { max-width: 700px; margin: 0 auto; }
+        .mission-glass-panel { background: rgba(11,37,69,0.3); border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1); padding: 40px; position: relative; backdrop-filter: blur(12px); box-shadow: 0 10px 40px rgba(0,0,0,0.2); }
+        .mission-glass-panel::before, .mission-glass-panel::after { content: ''; position: absolute; width: 1px; height: 30px; background: rgba(255,255,255,0.2); }
+        .mission-glass-panel::before { left: 0; top: 50%; transform: translateY(-50%); }
+        .mission-glass-panel::after { right: 0; top: 50%; transform: translateY(-50%); }
+        .mission-statement { font-family: 'Space Grotesk',sans-serif; font-size: 22px; font-weight: 400; line-height: 1.6; color: rgba(255,255,255,0.9); }
+        .mission-footer { margin-top: 24px; font-size: 13px; color: rgba(255,255,255,0.5); font-family: monospace; letter-spacing: 0.05em; text-transform: uppercase; }
+        
+        @media (max-width: 768px) {
+          .hero-massive-title { font-size: 48px; }
+          .hero-meta { flex-direction: column; gap: 12px; border-radius: 12px; }
+          .mission-statement { font-size: 18px; }
         }
-        @media (max-width: 860px) {
-          .about-grid { grid-template-columns: 1fr; }
-          .overview-wrap, .value-grid, .team-grid { grid-template-columns: 1fr; }
-          section { padding: 80px 0; }
-          .team-card:nth-child(3), .value-card:nth-child(3) { width: 100%; }
+        
+        .eng-img { width: 100%; height: 300px; object-fit: cover; filter: grayscale(100%) contrast(1.2) brightness(0.8); opacity: 0.8; }
+        .eng-overlay { position: absolute; inset: 16px; background: linear-gradient(rgba(11,37,69,0.3), rgba(11,37,69,0.7)); mix-blend-mode: multiply; }
+        .eng-scan-line { position: absolute; left: 16px; right: 16px; top: 16px; height: 2px; background: #C8A24A; box-shadow: 0 0 10px #C8A24A; opacity: 0.5; animation: scan 4s linear infinite; }
+        @keyframes scan { 0% { top: 16px; } 100% { top: calc(100% - 16px); } }
+
+        /* Live Operations Statistics */
+        .about-activation { padding-top: 120px; }
+        .live-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 40px; }
+        .live-stat-box { position: relative; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 40px; }
+        .stat-status-led { position: absolute; top: 20px; right: 20px; width: 6px; height: 6px; border-radius: 50%; background: #C8A24A; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { opacity: 0.4; } 50% { opacity: 1; box-shadow: 0 0 8px #C8A24A; } 100% { opacity: 0.4; } }
+        .stat-label-sequence { font-family: monospace; font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 16px; min-height: 20px; }
+        .stat-number { font-family: 'Space Grotesk',sans-serif; font-size: 64px; font-weight: 700; color: #FFFFFF; line-height: 1; }
+        .stat-crosshair { position: absolute; width: 10px; height: 10px; border: 1px solid rgba(255,255,255,0.2); }
+        .stat-crosshair.top-left { top: -1px; left: -1px; border-right: none; border-bottom: none; }
+        .stat-crosshair.bottom-right { bottom: -1px; right: -1px; border-left: none; border-top: none; }
+
+        /* Expansion Map */
+        .expansion-map { margin-top: 120px; position: relative; }
+        .map-grid { display: flex; justify-content: space-between; position: relative; padding: 40px 0; }
+        .map-route-line { position: absolute; top: 50%; left: 0; right: 0; height: 2px; background: rgba(255,255,255,0.1); transform: translateY(-50%); z-index: 0; }
+        .map-node { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 20px; cursor: pointer; }
+        .node-marker { width: 16px; height: 16px; border-radius: 50%; border: 2px solid #C8A24A; background: #071A30; transition: background 0.3s, transform 0.3s; }
+        .map-node:hover .node-marker { background: #C8A24A; transform: scale(1.2); }
+        .node-data { text-align: center; position: relative; }
+        .node-year { font-family: monospace; font-size: 16px; color: #C8A24A; font-weight: 700; margin-bottom: 8px; }
+        .node-desc { font-size: 13px; color: rgba(255,255,255,0.8); max-width: 120px; }
+        
+        .hover-metadata { position: absolute; top: 100%; left: 50%; transform: translateX(-50%); margin-top: 12px; background: rgba(11,37,69,0.9); border: 1px solid rgba(200,162,74,0.4); padding: 8px 12px; font-family: monospace; font-size: 11px; color: #C8A24A; white-space: nowrap; opacity: 0; visibility: hidden; transition: opacity 0.2s; pointer-events: none; }
+        .map-node:hover .hover-metadata { opacity: 1; visibility: visible; }
+
+        @media (max-width: 960px) {
+          .infrastructure-layers, .live-stats-grid { grid-template-columns: 1fr; }
+          .map-grid { flex-direction: column; align-items: flex-start; gap: 40px; }
+          .map-route-line { width: 2px; height: 100%; left: 7px; top: 0; right: auto; transform: none; }
+          .map-node { flex-direction: row; text-align: left; }
+          .node-data { text-align: left; }
+          .hover-metadata { top: 50%; left: 100%; transform: translateY(-50%); margin-top: 0; margin-left: 12px; }
         }
       `}</style>
     </div>

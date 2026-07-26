@@ -1,21 +1,33 @@
 import { useEffect, useRef, useState } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useCMSStore } from '../store/useCMSStore';
+import { Plus, Minus, HelpCircle } from 'lucide-react';
 
-function FAQItem({ item }) {
-  const [open, setOpen] = useState(false);
+gsap.registerPlugin(ScrollTrigger);
+
+function FAQItem({ item, isOpen, onClick }) {
   const answerRef = useRef(null);
+
   return (
-    <div className={`faq-item ${open ? 'open' : ''}`}>
-      <div className="faq-q" onClick={() => setOpen(!open)}>
-        {item.q}
-        <div className="plus">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" width="12" height="12">
-            <path d="M12 5v14M5 12h14" />
-          </svg>
+    <div className={`faq-card ${isOpen ? 'is-open' : ''}`}>
+      <div className="faq-question" onClick={onClick}>
+        <div className="faq-q-left">
+          <HelpCircle className="faq-q-icon" size={18} />
+          <span className="faq-q-text">{item.q}</span>
+        </div>
+        <div className="faq-toggle-btn">
+          {isOpen ? <Minus size={14} /> : <Plus size={14} />}
         </div>
       </div>
-      <div className="faq-a" ref={answerRef} style={{ maxHeight: open ? answerRef.current?.scrollHeight : 0 }}>
-        <div className="faq-a-inner">{item.a}</div>
+      <div
+        className="faq-answer"
+        ref={answerRef}
+        style={{ maxHeight: isOpen ? `${answerRef.current?.scrollHeight || 200}px` : '0px' }}
+      >
+        <div className="faq-answer-content">
+          <p>{item.a}</p>
+        </div>
       </div>
     </div>
   );
@@ -23,49 +35,290 @@ function FAQItem({ item }) {
 
 export default function FAQSection() {
   const faq = useCMSStore((s) => s.faq);
-  const ref = useRef(null);
+  const containerRef = useRef(null);
+  const [openIndex, setOpenIndex] = useState(0); // First FAQ open by default
 
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('in');
-            observer.unobserve(entry.target);
+    if (!containerRef.current) return;
+
+    let ctx = gsap.context(() => {
+      // Header Animation
+      gsap.fromTo('.faq-eyebrow',
+        { y: 20, autoAlpha: 0 },
+        {
+          y: 0, autoAlpha: 1, duration: 0.5,
+          scrollTrigger: { trigger: '#faq', start: 'top 80%' }
+        }
+      );
+      gsap.fromTo('.faq-heading',
+        { y: 30, autoAlpha: 0 },
+        {
+          y: 0, autoAlpha: 1, duration: 0.7, delay: 0.1,
+          scrollTrigger: { trigger: '#faq', start: 'top 80%' }
+        }
+      );
+      gsap.fromTo('.faq-divider-line',
+        { scaleX: 0 },
+        {
+          scaleX: 1, duration: 1, ease: 'power2.inOut', delay: 0.3,
+          scrollTrigger: { trigger: '#faq', start: 'top 80%' }
+        }
+      );
+
+      // Stagger FAQ Cards
+      gsap.utils.toArray('.faq-card-wrap').forEach((card, i) => {
+        gsap.fromTo(card,
+          { y: 40, autoAlpha: 0 },
+          {
+            y: 0, autoAlpha: 1, duration: 0.7, delay: i * 0.1, ease: 'power3.out',
+            scrollTrigger: { trigger: card, start: 'top 85%' }
           }
-        });
-      },
-      { threshold: 0.15 }
-    );
-    el.querySelectorAll('.reveal').forEach((e) => observer.observe(e));
-    return () => observer.disconnect();
+        );
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
   }, []);
 
+  const handleToggle = (idx) => {
+    setOpenIndex(openIndex === idx ? -1 : idx);
+  };
+
   return (
-    <section className="section-alt" id="faq" ref={ref}>
-      <div className="container">
-        <div className="sec-head center reveal" style={{ marginLeft: 'auto', marginRight: 'auto' }}>
-          <div className="tag-eyebrow" style={{ justifyContent: 'center' }}>FAQ</div>
-          <h2 className="sec-title">Frequently Asked Questions</h2>
+    <section id="faq" ref={containerRef} className="faq-section">
+      {/* Background Grid & Orbs */}
+      <div className="faq-bg-grid" />
+      <div className="faq-orb faq-orb-1" />
+      <div className="faq-orb faq-orb-2" />
+
+      <div className="faq-container">
+        {/* Header */}
+        <div className="faq-header">
+          <span className="faq-eyebrow">COMMON_QUESTIONS // SUPPORT</span>
+          <h2 className="faq-heading">Frequently Asked Questions</h2>
+          <div className="faq-divider-line" />
         </div>
-        <div className="faq-list reveal">
+
+        {/* FAQ Accordion List */}
+        <div className="faq-list">
           {faq.map((item, i) => (
-            <FAQItem key={i} item={item} />
+            <div key={i} className="faq-card-wrap" style={{ visibility: 'hidden' }}>
+              <FAQItem
+                item={item}
+                isOpen={openIndex === i}
+                onClick={() => handleToggle(i)}
+              />
+            </div>
           ))}
         </div>
       </div>
 
       <style>{`
-        .faq-list { max-width: 780px; margin: 0 auto; text-align: center; }
-        .faq-item { border-bottom: 1px solid #EEF1F5; display: flex; flex-direction: column; align-items: center; }
-        .faq-q { display: flex; justify-content: center; align-items: center; gap: 16px; padding: 26px 4px; cursor: pointer; font-weight: 600; font-size: 15px; color: #0B2545; }
-        .faq-q .plus { width: 26px; height: 26px; border-radius: 50%; background: #F5F7FA; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: transform .35s cubic-bezier(.22,1,.36,1), background .3s; }
-        .faq-item.open .plus { background: #C8A24A; }
-        .faq-item.open .plus svg { transform: rotate(45deg); color: #071A30; }
-        .faq-a { max-height: 0; overflow: hidden; transition: max-height .4s cubic-bezier(.22,1,.36,1); }
-        .faq-a-inner { padding: 0 4px 26px; font-size: 13.5px; color: #707888; line-height: 1.75; max-width: 680px; text-align: center; }
+        /* ═══════════════════════════════════════
+           SECTION BASE
+           ═══════════════════════════════════════ */
+        .faq-section {
+          background: #060e1a;
+          color: #fff;
+          padding: 120px 24px 140px;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .faq-bg-grid {
+          position: absolute;
+          inset: 0;
+          background-image:
+            linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+          background-size: 50px 50px;
+          pointer-events: none;
+        }
+
+        .faq-orb {
+          position: absolute;
+          border-radius: 50%;
+          filter: blur(120px);
+          pointer-events: none;
+        }
+
+        .faq-orb-1 {
+          width: 500px; height: 500px;
+          background: radial-gradient(circle, rgba(200,162,74,0.07), transparent 70%);
+          top: 20%; left: -150px;
+        }
+
+        .faq-orb-2 {
+          width: 400px; height: 400px;
+          background: radial-gradient(circle, rgba(74,140,220,0.05), transparent 70%);
+          bottom: 10%; right: -150px;
+        }
+
+        .faq-container {
+          max-width: 860px;
+          margin: 0 auto;
+          position: relative;
+          z-index: 2;
+        }
+
+        /* ═══════════════════════════════════════
+           HEADER
+           ═══════════════════════════════════════ */
+        .faq-header {
+          text-align: center;
+          max-width: 700px;
+          margin: 0 auto 70px;
+        }
+
+        .faq-eyebrow {
+          font-family: monospace;
+          font-size: 12px;
+          letter-spacing: 0.2em;
+          color: #c8a24a;
+          display: block;
+          margin-bottom: 14px;
+          visibility: hidden;
+        }
+
+        .faq-heading {
+          font-family: 'Space Grotesk', sans-serif;
+          font-size: clamp(32px, 4.5vw, 48px);
+          font-weight: 700;
+          margin: 0 0 18px;
+          background: linear-gradient(135deg, #ffffff 0%, #c8a24a 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          visibility: hidden;
+        }
+
+        .faq-divider-line {
+          width: 70px;
+          height: 3px;
+          background: linear-gradient(90deg, #c8a24a, #ffe6a0);
+          margin: 0 auto;
+          transform-origin: center;
+          transform: scaleX(0);
+          border-radius: 2px;
+        }
+
+        /* ═══════════════════════════════════════
+           FAQ CARDS
+           ═══════════════════════════════════════ */
+        .faq-list {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+        }
+
+        .faq-card {
+          border-radius: 18px;
+          background: rgba(255,255,255,0.025);
+          border: 1px solid rgba(255,255,255,0.06);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          transition: border-color 0.4s, background 0.4s, box-shadow 0.4s;
+          overflow: hidden;
+        }
+
+        .faq-card:hover {
+          border-color: rgba(200,162,74,0.25);
+          background: rgba(255,255,255,0.035);
+        }
+
+        .faq-card.is-open {
+          border-color: rgba(200,162,74,0.4);
+          background: rgba(200,162,74,0.04);
+          box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+
+        .faq-question {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 24px 28px;
+          cursor: pointer;
+          user-select: none;
+          gap: 20px;
+        }
+
+        .faq-q-left {
+          display: flex;
+          align-items: center;
+          gap: 14px;
+        }
+
+        .faq-q-icon {
+          color: rgba(200,162,74,0.5);
+          flex-shrink: 0;
+          transition: color 0.3s;
+        }
+
+        .faq-card.is-open .faq-q-icon,
+        .faq-card:hover .faq-q-icon {
+          color: #c8a24a;
+        }
+
+        .faq-q-text {
+          font-family: 'Space Grotesk', sans-serif;
+          font-size: 16.5px;
+          font-weight: 600;
+          color: rgba(255,255,255,0.9);
+          line-height: 1.4;
+          transition: color 0.3s;
+        }
+
+        .faq-card.is-open .faq-q-text,
+        .faq-card:hover .faq-q-text {
+          color: #fff;
+        }
+
+        .faq-toggle-btn {
+          width: 34px;
+          height: 34px;
+          border-radius: 10px;
+          background: rgba(200,162,74,0.1);
+          border: 1px solid rgba(200,162,74,0.25);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #c8a24a;
+          flex-shrink: 0;
+          transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .faq-card.is-open .faq-toggle-btn {
+          background: #c8a24a;
+          color: #060e1a;
+          box-shadow: 0 0 16px rgba(200,162,74,0.4);
+          transform: rotate(180deg);
+        }
+
+        .faq-answer {
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .faq-answer-content {
+          padding: 0 28px 24px 60px;
+          font-size: 14.5px;
+          color: rgba(255,255,255,0.6);
+          line-height: 1.7;
+          border-top: 1px solid rgba(255,255,255,0.04);
+          margin-top: 4px;
+          padding-top: 18px;
+        }
+
+        /* ═══════════════════════════════════════
+           MOBILE
+           ═══════════════════════════════════════ */
+        @media (max-width: 700px) {
+          .faq-section { padding: 80px 16px; }
+          .faq-question { padding: 20px 20px; }
+          .faq-answer-content { padding: 14px 20px 20px 20px; }
+          .faq-q-text { font-size: 15px; }
+        }
       `}</style>
     </section>
   );

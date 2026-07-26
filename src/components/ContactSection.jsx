@@ -1,11 +1,18 @@
 import { useEffect, useRef, useState } from 'react';
-import { Clock, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Clock, CheckCircle2, AlertCircle, Send, Phone, Mail, MapPin, Building2, User, Briefcase, Package, ShieldCheck } from 'lucide-react';
 import { useCMSStore } from '../store/useCMSStore';
 import { api } from '../lib/api';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function ContactSection() {
   const contact = useCMSStore((s) => s.contact);
-  const ref = useRef(null);
+  const sectionRef = useRef(null);
+  const formRef = useRef(null);
+  const infoRef = useRef(null);
+
   const [form, setForm] = useState({
     companyName: '', industry: 'Hotel / Restaurant / Café',
     contactName: '', jobTitle: '', email: '', phone: '',
@@ -21,13 +28,13 @@ export default function ContactSection() {
     e.preventDefault();
     setSubmitResult(null);
     if (!form.companyName || !form.contactName || !form.email || !form.phone || !form.deliveryLocation) {
-      setSubmitResult({ ok: false, msg: 'Please fill in all required fields.' });
+      setSubmitResult({ ok: false, msg: 'Please fill in all required fields marked with *.' });
       return;
     }
     setSubmitting(true);
     try {
       const res = await api.submitQuote(form);
-      setSubmitResult({ ok: true, msg: res.message || 'Quote request submitted successfully!' });
+      setSubmitResult({ ok: true, msg: res.message || 'Quote request submitted successfully! We will get back to you within 4 business hours.' });
       setForm({
         companyName: '', industry: 'Hotel / Restaurant / Café',
         contactName: '', jobTitle: '', email: '', phone: '',
@@ -42,70 +49,141 @@ export default function ContactSection() {
   };
 
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('in');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.15 }
-    );
-    el.querySelectorAll('.reveal').forEach((e) => observer.observe(e));
-    return () => observer.disconnect();
+    if (!sectionRef.current) return;
+
+    let ctx = gsap.context(() => {
+      // Header Animation
+      const hTl = gsap.timeline({
+        scrollTrigger: { trigger: '.cnt-header', start: 'top 80%' }
+      });
+      hTl
+        .fromTo('.cnt-eyebrow', { y: 20, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.5 })
+        .fromTo('.cnt-heading', { y: 30, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.7 }, '-=0.2')
+        .fromTo('.cnt-sub', { y: 15, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.5 }, '-=0.3')
+        .fromTo('.cnt-divider-line', { scaleX: 0 }, { scaleX: 1, duration: 1, ease: 'power2.inOut' }, '-=0.2');
+
+      // Contact info items stagger
+      gsap.fromTo('.cnt-info-card',
+        { x: -50, autoAlpha: 0 },
+        {
+          x: 0, autoAlpha: 1, duration: 0.8, stagger: 0.12, ease: 'power3.out',
+          scrollTrigger: { trigger: infoRef.current, start: 'top 80%' }
+        }
+      );
+
+      // Form card slide in
+      gsap.fromTo(formRef.current,
+        { x: 50, autoAlpha: 0, rotationY: 4 },
+        {
+          x: 0, autoAlpha: 1, rotationY: 0, duration: 1, ease: 'power3.out',
+          scrollTrigger: { trigger: formRef.current, start: 'top 80%' }
+        }
+      );
+
+    }, sectionRef);
+
+    return () => ctx.revert();
   }, []);
 
-  const icons = {
-    Phone: <path d="M3 5a2 2 0 012-2h3l2 5-2 1a11 11 0 005 5l1-2 5 2v3a2 2 0 01-2 2A16 16 0 013 7V5z" />,
-    Mail: <><rect x="3" y="5" width="18" height="14" rx="2" /><path d="M3 7l9 6 9-6" /></>,
-    MapPin: <><path d="M12 21s7-7.5 7-12a7 7 0 10-14 0c0 4.5 7 12 7 12z" /><circle cx="12" cy="9" r="2.4" /></>,
-    Clock: <><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 3" /></>,
+  const contactIcons = {
+    Phone: <Phone className="cnt-ic" />,
+    Mail: <Mail className="cnt-ic" />,
+    MapPin: <MapPin className="cnt-ic" />,
+    Clock: <Clock className="cnt-ic" />,
   };
 
   return (
-    <section className="section-alt" id="contact" ref={ref}>
-      <div className="container">
-        <div className="sec-head reveal">
-          <div className="tag-eyebrow">{contact.eyebrow}</div>
-          <h2 className="sec-title">{contact.title}</h2>
-          <p className="sec-sub">{contact.subtitle}</p>
+    <section id="contact" ref={sectionRef} className="cnt-section">
+      {/* Ambient background */}
+      <div className="cnt-bg-grid" />
+      <div className="cnt-orb cnt-orb-1" />
+      <div className="cnt-orb cnt-orb-2" />
+
+      <div className="cnt-container">
+        {/* Header */}
+        <div className="cnt-header">
+          <span className="cnt-eyebrow">COMMERCIAL_INQUIRIES // B2B_PORTAL</span>
+          <h2 className="cnt-heading">{contact.title}</h2>
+          <p className="cnt-sub">{contact.subtitle}</p>
+          <div className="cnt-divider-line" />
         </div>
-        <div className="contact-grid">
-          <div className="contact-info reveal">
-            {contact.info.map((item, i) => (
-              <div key={i} className="ci-item">
-                <div className="ci-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" width="19" height="19">
-                    {icons[item.icon]}
-                  </svg>
+
+        <div className="cnt-layout">
+          {/* LEFT: Info Cards & Guarantee */}
+          <div ref={infoRef} className="cnt-info-column">
+            <div className="cnt-info-list">
+              {contact.info.map((item, i) => (
+                <div key={i} className="cnt-info-card">
+                  <div className="cnt-icon-wrap">
+                    {contactIcons[item.icon] || <Phone className="cnt-ic" />}
+                  </div>
+                  <div className="cnt-info-text">
+                    <span className="cnt-info-label">{item.label}</span>
+                    <span className="cnt-info-value">{item.value}</span>
+                  </div>
                 </div>
-                <div>
-                  <div className="ci-label">{item.label}</div>
-                  <div className="ci-value">{item.value}</div>
-                </div>
+              ))}
+            </div>
+
+            {/* SLA Guarantee Box */}
+            <div className="cnt-sla-box">
+              <div className="sla-badge">
+                <ShieldCheck size={16} />
+                <span>4-HOUR B2B SLA</span>
               </div>
-            ))}
+              <h4 className="sla-title">Rapid Commercial Response</h4>
+              <p className="sla-desc">
+                Submit a quote request and our commercial partnerships team will issue an official B2B quotation within 4 business hours.
+              </p>
+              <div className="sla-footer">
+                <span className="sla-dot" />
+                <span>ACTIVE_COMMERCIAL_DESK</span>
+              </div>
+            </div>
           </div>
-          <div className="form-card reveal">
+
+          {/* RIGHT: High-Tech Glassmorphism Form */}
+          <div ref={formRef} className="cnt-form-card" style={{ visibility: 'hidden' }}>
+            <div className="form-card-glow" />
+
+            <div className="form-header-bar">
+              <div className="form-title-group">
+                <span className="form-eyebrow">REQUEST_B2B_QUOTATION</span>
+                <h3 className="form-heading">Commercial Order Quote</h3>
+              </div>
+              <span className="form-badge">CONFIDENTIAL</span>
+            </div>
+
+            {submitResult && (
+              <div className={`form-alert ${submitResult.ok ? 'alert-success' : 'alert-error'}`}>
+                {submitResult.ok ? <CheckCircle2 size={18} /> : <AlertCircle size={18} />}
+                <span>{submitResult.msg}</span>
+              </div>
+            )}
+
             <form onSubmit={handleSubmit}>
-              {submitResult && (
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 14px', borderRadius: 9, fontSize: 13, marginBottom: 16, background: submitResult.ok ? '#F0FDF4' : '#FEF2F2', color: submitResult.ok ? '#166534' : '#B91C1C' }}>
-                  {submitResult.ok ? <CheckCircle2 size={16} /> : <AlertCircle size={16} />}
-                  {submitResult.msg}
+              <div className="form-grid">
+                {/* Company Name */}
+                <div className="form-group">
+                  <label className="form-label">
+                    <Building2 size={13} /> Company Name *
+                  </label>
+                  <input
+                    className="form-input"
+                    type="text"
+                    placeholder="e.g. Grand Palace Hotel"
+                    value={form.companyName}
+                    onChange={set('companyName')}
+                    disabled={submitting}
+                  />
                 </div>
-              )}
-              <div className="form-row">
-                <div className="f-group">
-                  <label className="f-label">Company Name *</label>
-                  <input className="f-input" type="text" placeholder="Your company name" value={form.companyName} onChange={set('companyName')} disabled={submitting} />
-                </div>
-                <div className="f-group">
-                  <label className="f-label">Industry *</label>
-                  <select className="f-input" value={form.industry} onChange={set('industry')} disabled={submitting}>
+
+                {/* Industry */}
+                <div className="form-group">
+                  <label className="form-label">
+                    <Briefcase size={13} /> Industry *
+                  </label>
+                  <select className="form-input" value={form.industry} onChange={set('industry')} disabled={submitting}>
                     <option>Hotel / Restaurant / Café</option>
                     <option>Bakery / Confectionery</option>
                     <option>Retail / Supermarket</option>
@@ -114,41 +192,83 @@ export default function ContactSection() {
                     <option>Other</option>
                   </select>
                 </div>
-              </div>
-              <div className="form-row">
-                <div className="f-group">
-                  <label className="f-label">Contact Name *</label>
-                  <input className="f-input" type="text" placeholder="Full name" value={form.contactName} onChange={set('contactName')} disabled={submitting} />
+
+                {/* Contact Name */}
+                <div className="form-group">
+                  <label className="form-label">
+                    <User size={13} /> Contact Name *
+                  </label>
+                  <input
+                    className="form-input"
+                    type="text"
+                    placeholder="Full name"
+                    value={form.contactName}
+                    onChange={set('contactName')}
+                    disabled={submitting}
+                  />
                 </div>
-                <div className="f-group">
-                  <label className="f-label">Job Title</label>
-                  <input className="f-input" type="text" placeholder="e.g. Procurement Manager" value={form.jobTitle} onChange={set('jobTitle')} disabled={submitting} />
+
+                {/* Job Title */}
+                <div className="form-group">
+                  <label className="form-label">Job Title</label>
+                  <input
+                    className="form-input"
+                    type="text"
+                    placeholder="e.g. Procurement Manager"
+                    value={form.jobTitle}
+                    onChange={set('jobTitle')}
+                    disabled={submitting}
+                  />
                 </div>
-              </div>
-              <div className="form-row">
-                <div className="f-group">
-                  <label className="f-label">Email *</label>
-                  <input className="f-input" type="email" placeholder="you@company.com" value={form.email} onChange={set('email')} disabled={submitting} />
+
+                {/* Email */}
+                <div className="form-group">
+                  <label className="form-label">
+                    <Mail size={13} /> Corporate Email *
+                  </label>
+                  <input
+                    className="form-input"
+                    type="email"
+                    placeholder="name@company.com"
+                    value={form.email}
+                    onChange={set('email')}
+                    disabled={submitting}
+                  />
                 </div>
-                <div className="f-group">
-                  <label className="f-label">Phone *</label>
-                  <input className="f-input" type="tel" placeholder="+92 XXX XXXXXXX" value={form.phone} onChange={set('phone')} disabled={submitting} />
+
+                {/* Phone */}
+                <div className="form-group">
+                  <label className="form-label">
+                    <Phone size={13} /> Phone Number *
+                  </label>
+                  <input
+                    className="form-input"
+                    type="tel"
+                    placeholder="+92 300 1234567"
+                    value={form.phone}
+                    onChange={set('phone')}
+                    disabled={submitting}
+                  />
                 </div>
-              </div>
-              <div className="form-row">
-                <div className="f-group">
-                  <label className="f-label">Product Type *</label>
-                  <select className="f-input" value={form.productType} onChange={set('productType')} disabled={submitting}>
+
+                {/* Product Type */}
+                <div className="form-group">
+                  <label className="form-label">
+                    <Package size={13} /> Product Category *
+                  </label>
+                  <select className="form-input" value={form.productType} onChange={set('productType')} disabled={submitting}>
                     <option>Commercial Grade A White</option>
                     <option>Free-Range Brown</option>
                     <option>Certified Organic</option>
-                    <option>Processing Grade</option>
-                    <option>Mixed / Multiple</option>
+                    <option>Processing Grade / Liquid Whole Egg</option>
+                    <option>Mixed / Multiple Categories</option>
                   </select>
                 </div>
-                <div className="f-group">
-                  <label className="f-label">Weekly Volume (trays) *</label>
-                  <select className="f-input" value={form.weeklyVolume} onChange={set('weeklyVolume')} disabled={submitting}>
+
+                {/* Weekly Volume */}
+                <div className="form-group">
+                  <label className="form-label">Weekly Volume (Trays) *</label>
+                  <select className="form-input" value={form.weeklyVolume} onChange={set('weeklyVolume')} disabled={submitting}>
                     <option>Under 50</option>
                     <option>50–199</option>
                     <option>200–499</option>
@@ -157,42 +277,503 @@ export default function ContactSection() {
                   </select>
                 </div>
               </div>
-              <div className="f-group">
-                <label className="f-label">Delivery Location *</label>
-                <input className="f-input" type="text" placeholder="City / address for delivery" value={form.deliveryLocation} onChange={set('deliveryLocation')} disabled={submitting} />
+
+              {/* Delivery Location */}
+              <div className="form-group">
+                <label className="form-label">
+                  <MapPin size={13} /> Delivery City / Address *
+                </label>
+                <input
+                  className="form-input"
+                  type="text"
+                  placeholder="e.g. Mardan, Attock, Peshawar, Lahore"
+                  value={form.deliveryLocation}
+                  onChange={set('deliveryLocation')}
+                  disabled={submitting}
+                />
               </div>
-              <div className="f-group">
-                <label className="f-label">Additional Notes</label>
-                <textarea className="f-input" placeholder="Special requirements, certifications needed, start date, etc." value={form.notes} onChange={set('notes')} disabled={submitting} />
+
+              {/* Additional Notes */}
+              <div className="form-group">
+                <label className="form-label">Special Specifications / Notes</label>
+                <textarea
+                  className="form-input form-textarea"
+                  placeholder="Specify grading requirements, packaging preference, target delivery dates, or custom terms..."
+                  value={form.notes}
+                  onChange={set('notes')}
+                  disabled={submitting}
+                />
               </div>
-              <button className="btn btn-navy btn-block" data-ripple type="submit" disabled={submitting} style={{ opacity: submitting ? 0.7 : 1, cursor: submitting ? 'not-allowed' : 'pointer' }}>
-                <span>{submitting ? 'Submitting...' : 'Submit Quote Request →'}</span>
+
+              {/* Submit Button */}
+              <button
+                type="submit"
+                disabled={submitting}
+                className={`form-submit-btn ${submitting ? 'btn-submitting' : ''}`}
+              >
+                <span>{submitting ? 'Transmitting Request...' : 'Submit Commercial Quote Request'}</span>
+                <Send size={16} />
               </button>
             </form>
-            <div className="form-note"><Clock size={14} style={{ display: 'inline', verticalAlign: 'middle', marginRight: 4 }} /> You'll receive a formal quotation within 4 business hours. No commitment required.</div>
+
+            <div className="form-note">
+              <Clock size={13} />
+              <span>Response SLA: 4 business hours. Fully confidential B2B processing.</span>
+            </div>
           </div>
         </div>
       </div>
 
       <style>{`
-        .contact-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 48px; }
-        .contact-info { display: flex; flex-direction: column; gap: 26px; }
-        .ci-item { display: flex; gap: 16px; align-items: flex-start; }
-        .ci-icon { width: 44px; height: 44px; border-radius: 12px; background: #F5F7FA; display: flex; align-items: center; justify-content: center; color: #0B2545; flex-shrink: 0; }
-        .ci-label { font-size: 11px; color: #707888; text-transform: uppercase; letter-spacing: .06em; font-weight: 600; margin-bottom: 4px; }
-        .ci-value { font-size: 14.5px; color: #0B2545; font-weight: 600; }
-        .form-card { background: #FFFFFF; border: 1px solid #EEF1F5; border-radius: 32px; padding: 42px; box-shadow: 0 14px 36px rgba(11,37,69,0.10); }
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-        .f-group { margin-bottom: 20px; }
-        .f-label { display: block; font-size: 12.5px; font-weight: 600; color: #0B2545; margin-bottom: 8px; }
-        .f-input { width: 100%; padding: 13px 16px; border: 1.4px solid #DBDFE6; border-radius: 9px; font-size: 13.5px; font-family: 'Inter',sans-serif; color: #1B2230; background: #FFFFFF; transition: border-color .25s, box-shadow .25s; }
-        .f-input:focus { outline: none; border-color: #123A6B; box-shadow: 0 0 0 3px rgba(18,58,107,0.1); }
-        select.f-input { appearance: none; background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23707888' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 38px; }
-        textarea.f-input { resize: vertical; min-height: 90px; }
-        .form-note { font-size: 12px; color: #707888; text-align: center; margin-top: 14px; }
-        .btn-block { width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: 'Inter',sans-serif; font-weight: 600; font-size: 13.5px; padding: 13px 26px; border-radius: 9px; border: none; cursor: pointer; background: #0B2545; color: #FFFFFF; transition: transform .25s cubic-bezier(.22,1,.36,1), box-shadow .25s cubic-bezier(.22,1,.36,1); }
-        .btn-block:hover { transform: translateY(-2px); box-shadow: 0 14px 28px rgba(11,37,69,0.35); }
-        @media (max-width: 860px) { .contact-grid { grid-template-columns: 1fr; } .form-row { grid-template-columns: 1fr; } }
+        /* ═══════════════════════════════════════
+           SECTION BASE
+           ═══════════════════════════════════════ */
+        .cnt-section {
+          background: #060e1a;
+          color: #fff;
+          padding: 120px 24px 140px;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .cnt-bg-grid {
+          position: absolute;
+          inset: 0;
+          background-image:
+            linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+          background-size: 50px 50px;
+          pointer-events: none;
+        }
+
+        .cnt-orb {
+          position: absolute;
+          border-radius: 50%;
+          filter: blur(120px);
+          pointer-events: none;
+        }
+
+        .cnt-orb-1 {
+          width: 550px; height: 550px;
+          background: radial-gradient(circle, rgba(200,162,74,0.08), transparent 70%);
+          top: 15%; left: -150px;
+          animation: cntFloat1 15s ease-in-out infinite alternate;
+        }
+
+        .cnt-orb-2 {
+          width: 450px; height: 450px;
+          background: radial-gradient(circle, rgba(74,140,220,0.06), transparent 70%);
+          bottom: 10%; right: -150px;
+          animation: cntFloat2 18s ease-in-out infinite alternate;
+        }
+
+        @keyframes cntFloat1 {
+          0% { transform: translate(0, 0); }
+          100% { transform: translate(60px, 40px); }
+        }
+
+        @keyframes cntFloat2 {
+          0% { transform: translate(0, 0); }
+          100% { transform: translate(-50px, -60px); }
+        }
+
+        .cnt-container {
+          max-width: 1200px;
+          margin: 0 auto;
+          position: relative;
+          z-index: 2;
+        }
+
+        /* ═══════════════════════════════════════
+           HEADER
+           ═══════════════════════════════════════ */
+        .cnt-header {
+          text-align: center;
+          max-width: 750px;
+          margin: 0 auto 80px;
+        }
+
+        .cnt-eyebrow {
+          font-family: monospace;
+          font-size: 12px;
+          letter-spacing: 0.2em;
+          color: #c8a24a;
+          display: block;
+          margin-bottom: 16px;
+          visibility: hidden;
+        }
+
+        .cnt-heading {
+          font-family: 'Space Grotesk', sans-serif;
+          font-size: clamp(32px, 4.5vw, 52px);
+          font-weight: 700;
+          margin: 0 0 18px;
+          background: linear-gradient(135deg, #ffffff 0%, #c8a24a 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          visibility: hidden;
+        }
+
+        .cnt-sub {
+          font-size: 16px;
+          color: rgba(255,255,255,0.5);
+          line-height: 1.7;
+          margin: 0 0 28px;
+          visibility: hidden;
+        }
+
+        .cnt-divider-line {
+          width: 70px;
+          height: 3px;
+          background: linear-gradient(90deg, #c8a24a, #ffe6a0);
+          margin: 0 auto;
+          transform-origin: center;
+          transform: scaleX(0);
+          border-radius: 2px;
+        }
+
+        /* ═══════════════════════════════════════
+           LAYOUT
+           ═══════════════════════════════════════ */
+        .cnt-layout {
+          display: grid;
+          grid-template-columns: 0.85fr 1.15fr;
+          gap: 40px;
+          align-items: start;
+        }
+
+        /* ═══════════════════════════════════════
+           LEFT: INFO COLUMN
+           ═══════════════════════════════════════ */
+        .cnt-info-column {
+          display: flex;
+          flex-direction: column;
+          gap: 28px;
+        }
+
+        .cnt-info-list {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+        }
+
+        .cnt-info-card {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+          padding: 22px;
+          border-radius: 16px;
+          background: rgba(255,255,255,0.025);
+          border: 1px solid rgba(255,255,255,0.06);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          transition: border-color 0.4s, transform 0.4s;
+          visibility: hidden;
+        }
+
+        .cnt-info-card:hover {
+          border-color: rgba(200,162,74,0.3);
+          transform: translateX(6px);
+        }
+
+        .cnt-icon-wrap {
+          width: 48px;
+          height: 48px;
+          border-radius: 12px;
+          background: rgba(200,162,74,0.1);
+          border: 1px solid rgba(200,162,74,0.25);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #c8a24a;
+          flex-shrink: 0;
+        }
+
+        .cnt-ic {
+          width: 20px;
+          height: 20px;
+        }
+
+        .cnt-info-text {
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+        }
+
+        .cnt-info-label {
+          font-family: monospace;
+          font-size: 10px;
+          color: rgba(255,255,255,0.35);
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+        }
+
+        .cnt-info-value {
+          font-family: 'Space Grotesk', sans-serif;
+          font-size: 15px;
+          font-weight: 600;
+          color: #fff;
+          line-height: 1.4;
+        }
+
+        /* SLA Box */
+        .cnt-sla-box {
+          border-radius: 20px;
+          padding: 30px;
+          background: linear-gradient(135deg, rgba(200,162,74,0.08) 0%, rgba(10,18,34,0.6) 100%);
+          border: 1px solid rgba(200,162,74,0.25);
+          backdrop-filter: blur(16px);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .sla-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          font-family: monospace;
+          font-size: 10px;
+          font-weight: 700;
+          color: #ffe6a0;
+          background: rgba(200,162,74,0.15);
+          border: 1px solid rgba(200,162,74,0.3);
+          padding: 5px 12px;
+          border-radius: 6px;
+          margin-bottom: 16px;
+        }
+
+        .sla-title {
+          font-family: 'Space Grotesk', sans-serif;
+          font-size: 20px;
+          font-weight: 700;
+          margin: 0 0 10px;
+          color: #fff;
+        }
+
+        .sla-desc {
+          font-size: 14px;
+          color: rgba(255,255,255,0.6);
+          line-height: 1.65;
+          margin: 0 0 20px;
+        }
+
+        .sla-footer {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-family: monospace;
+          font-size: 10px;
+          color: #4ade80;
+          letter-spacing: 0.08em;
+        }
+
+        .sla-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: #4ade80;
+          box-shadow: 0 0 8px rgba(74,222,128,0.6);
+        }
+
+        /* ═══════════════════════════════════════
+           RIGHT: FORM CARD
+           ═══════════════════════════════════════ */
+        .cnt-form-card {
+          position: relative;
+          border-radius: 24px;
+          padding: 44px;
+          background: rgba(255,255,255,0.025);
+          border: 1px solid rgba(255,255,255,0.07);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+        }
+
+        .form-header-bar {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          margin-bottom: 32px;
+          border-bottom: 1px solid rgba(255,255,255,0.06);
+          padding-bottom: 20px;
+        }
+
+        .form-eyebrow {
+          font-family: monospace;
+          font-size: 10px;
+          color: #c8a24a;
+          letter-spacing: 0.15em;
+          display: block;
+          margin-bottom: 6px;
+        }
+
+        .form-heading {
+          font-family: 'Space Grotesk', sans-serif;
+          font-size: 24px;
+          font-weight: 700;
+          margin: 0;
+          color: #fff;
+        }
+
+        .form-badge {
+          font-family: monospace;
+          font-size: 9px;
+          font-weight: 700;
+          color: rgba(255,255,255,0.4);
+          background: rgba(255,255,255,0.04);
+          border: 1px solid rgba(255,255,255,0.08);
+          padding: 4px 10px;
+          border-radius: 4px;
+          letter-spacing: 0.1em;
+        }
+
+        .form-alert {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 14px 18px;
+          border-radius: 10px;
+          font-size: 13.5px;
+          margin-bottom: 24px;
+        }
+
+        .alert-success {
+          background: rgba(74,222,128,0.1);
+          border: 1px solid rgba(74,222,128,0.25);
+          color: #4ade80;
+        }
+
+        .alert-error {
+          background: rgba(248,113,113,0.1);
+          border: 1px solid rgba(248,113,113,0.25);
+          color: #f87171;
+        }
+
+        .form-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 18px;
+        }
+
+        .form-group {
+          margin-bottom: 20px;
+        }
+
+        .form-label {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          font-family: 'Space Grotesk', sans-serif;
+          font-size: 12.5px;
+          font-weight: 600;
+          color: rgba(255,255,255,0.7);
+          margin-bottom: 8px;
+        }
+
+        .form-input {
+          width: 100%;
+          padding: 14px 18px;
+          border-radius: 10px;
+          font-size: 14px;
+          font-family: 'Inter', sans-serif;
+          color: #fff;
+          background: rgba(255,255,255,0.03);
+          border: 1px solid rgba(255,255,255,0.08);
+          transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
+          box-sizing: border-box;
+        }
+
+        .form-input::placeholder {
+          color: rgba(255,255,255,0.25);
+        }
+
+        .form-input:focus {
+          outline: none;
+          background: rgba(255,255,255,0.05);
+          border-color: rgba(200,162,74,0.5);
+          box-shadow: 0 0 0 3px rgba(200,162,74,0.12);
+        }
+
+        select.form-input {
+          appearance: none;
+          background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23C8A24A' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+          background-repeat: no-repeat;
+          background-position: right 18px center;
+          padding-right: 42px;
+        }
+
+        select.form-input option {
+          background: #0a1628;
+          color: #fff;
+        }
+
+        .form-textarea {
+          resize: vertical;
+          min-height: 100px;
+          line-height: 1.6;
+        }
+
+        .form-submit-btn {
+          width: 100%;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          font-family: 'Space Grotesk', sans-serif;
+          font-weight: 700;
+          font-size: 15px;
+          padding: 16px 32px;
+          border-radius: 12px;
+          border: none;
+          cursor: pointer;
+          background: linear-gradient(135deg, #c8a24a 0%, #ffe6a0 100%);
+          color: #060e1a;
+          transition: transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.3s ease;
+          box-shadow: 0 10px 30px rgba(200,162,74,0.25);
+          margin-top: 10px;
+        }
+
+        .form-submit-btn:hover:not(:disabled) {
+          transform: translateY(-2px);
+          box-shadow: 0 15px 40px rgba(200,162,74,0.4);
+        }
+
+        .btn-submitting {
+          opacity: 0.7;
+          cursor: not-allowed;
+        }
+
+        .form-note {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          font-family: monospace;
+          font-size: 11px;
+          color: rgba(255,255,255,0.4);
+          margin-top: 20px;
+          text-align: center;
+        }
+
+        /* ═══════════════════════════════════════
+           MOBILE
+           ═══════════════════════════════════════ */
+        @media (max-width: 900px) {
+          .cnt-section {
+            padding: 80px 16px;
+          }
+          .cnt-layout {
+            grid-template-columns: 1fr;
+            gap: 40px;
+          }
+          .form-grid {
+            grid-template-columns: 1fr;
+          }
+          .cnt-form-card {
+            padding: 28px 20px;
+          }
+        }
       `}</style>
     </section>
   );

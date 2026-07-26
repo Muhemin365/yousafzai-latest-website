@@ -1,68 +1,490 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useCMSStore } from '../store/useCMSStore';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function ProcessSection() {
   const process = useCMSStore((s) => s.process);
-  const ref = useRef(null);
+  const sectionRef = useRef(null);
+  const [activeStep, setActiveStep] = useState(null);
 
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('in');
-            observer.unobserve(entry.target);
+    if (!sectionRef.current) return;
+
+    let ctx = gsap.context(() => {
+      // Header animation
+      const hTl = gsap.timeline({
+        scrollTrigger: { trigger: '.proc-header', start: 'top 80%' }
+      });
+      hTl
+        .fromTo('.proc-eyebrow', { y: 20, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.5 })
+        .fromTo('.proc-heading', { y: 30, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.7 }, '-=0.2')
+        .fromTo('.proc-sub', { y: 15, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.5 }, '-=0.3')
+        .fromTo('.proc-divider-line', { scaleX: 0 }, { scaleX: 1, duration: 1, ease: 'power2.inOut' }, '-=0.2');
+
+      // Cards staggered reveal
+      gsap.utils.toArray('.proc-card').forEach((card, i) => {
+        gsap.fromTo(card,
+          { y: 80, autoAlpha: 0, rotationX: 6 },
+          {
+            y: 0, autoAlpha: 1, rotationX: 0,
+            duration: 0.9,
+            delay: (i % 3) * 0.15,
+            ease: 'power3.out',
+            scrollTrigger: { trigger: card, start: 'top 85%' }
           }
-        });
-      },
-      { threshold: 0.15 }
-    );
-    el.querySelectorAll('.reveal, .reveal-stagger').forEach((e) => observer.observe(e));
-    return () => observer.disconnect();
+        );
+      });
+
+    }, sectionRef);
+
+    return () => ctx.revert();
   }, []);
 
-  const icons = {
-    Feather: <path d="M12 2C8 7 5 11.5 5 15a7 7 0 0014 0c0-3.5-3-8-7-13z" />,
-    FlaskConical: <path d="M9 3h6M10 3v5l-5 9a2 2 0 002 3h10a2 2 0 002-3l-5-9V3" />,
-    ScanLine: <><path d="M12 3v2m0 14v2m9-9h-2M5 12H3m14.5-6.5l-1.4 1.4M7 17.5l-1.4 1.4m11.9 0L16 17.5M7 6.5L5.6 5.1" /><circle cx="12" cy="12" r="4" /></>,
-    Printer: <><rect x="3" y="6" width="18" height="13" rx="2" /><path d="M3 10h18M7 14h2" /></>,
-    Package: <><rect x="4" y="8" width="16" height="11" rx="1.5" /><path d="M8 8V6a4 4 0 018 0v2" /></>,
-    Truck: <path d="M3 16V8a1 1 0 011-1h9v9M3 16h11M16 16h2l2-3v-3h-4M6 18a2 2 0 100-4 2 2 0 000 4zM17 18a2 2 0 100-4 2 2 0 000 4z" />,
+  const handleMouseMove = (e, idx) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    gsap.to(card, {
+      rotationY: x * 8,
+      rotationX: y * -5,
+      transformPerspective: 1000,
+      ease: 'power2.out',
+      duration: 0.4,
+    });
+    card.style.setProperty('--glow-x', `${(x + 0.5) * 100}%`);
+    card.style.setProperty('--glow-y', `${(y + 0.5) * 100}%`);
+    setActiveStep(idx);
   };
 
+  const handleMouseLeave = (e) => {
+    gsap.to(e.currentTarget, { rotationY: 0, rotationX: 0, ease: 'power3.out', duration: 0.6 });
+    setActiveStep(null);
+  };
+
+  const stepIcons = {
+    Feather: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <path d="M12 2C8 7 5 11.5 5 15a7 7 0 0014 0c0-3.5-3-8-7-13z" />
+      </svg>
+    ),
+    FlaskConical: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <path d="M9 3h6M10 3v5l-5 9a2 2 0 002 3h10a2 2 0 002-3l-5-9V3" />
+      </svg>
+    ),
+    ScanLine: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <path d="M12 3v2m0 14v2m9-9h-2M5 12H3m14.5-6.5l-1.4 1.4M7 17.5l-1.4 1.4m11.9 0L16 17.5M7 6.5L5.6 5.1" />
+        <circle cx="12" cy="12" r="4" />
+      </svg>
+    ),
+    Printer: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <rect x="3" y="6" width="18" height="13" rx="2" />
+        <path d="M3 10h18M7 14h2" />
+      </svg>
+    ),
+    Package: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <rect x="4" y="8" width="16" height="11" rx="1.5" />
+        <path d="M8 8V6a4 4 0 018 0v2" />
+      </svg>
+    ),
+    Truck: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <path d="M3 16V8a1 1 0 011-1h9v9M3 16h11M16 16h2l2-3v-3h-4M6 18a2 2 0 100-4 2 2 0 000 4zM17 18a2 2 0 100-4 2 2 0 000 4z" />
+      </svg>
+    ),
+  };
+
+  const statusTags = [
+    'COLLECTION // VERIFIED',
+    'LAB_TEST // PASSED',
+    'CANDLE_GRADE // CLEARED',
+    'MARKING // STAMPED',
+    'HYGIENIC_PACK // SEALED',
+    'COLD_CHAIN // EN ROUTE',
+  ];
+
   return (
-    <section id="process" ref={ref}>
-      <div className="container">
-        <div className="sec-head reveal">
-          <div className="tag-eyebrow">Our Process</div>
-          <h2 className="sec-title">A Documented, Auditable Process at Every Stage</h2>
+    <section id="process" ref={sectionRef} className="proc-section">
+      {/* Background Orbs & Grid */}
+      <div className="proc-bg-grid" />
+      <div className="proc-orb proc-orb-1" />
+      <div className="proc-orb proc-orb-2" />
+
+      <div className="proc-container">
+        {/* Header */}
+        <div className="proc-header">
+          <span className="proc-eyebrow">QUALITY_ASSURANCE // WORKFLOW</span>
+          <h2 className="proc-heading">A Documented, Auditable Process at Every Stage</h2>
+          <p className="proc-sub">
+            From certified farm collection to refrigerated last-mile deployment — six precision steps ensuring unmatched egg quality and traceability.
+          </p>
+          <div className="proc-divider-line" />
         </div>
-        <div className="process-grid reveal-stagger">
+
+        {/* Process Cards Grid */}
+        <div className="proc-grid">
           {process.map((item, i) => (
-            <div key={i} className="proc-card">
-              <div className="proc-num">{item.num}</div>
-              <div className="proc-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" width="21" height="21">
-                  {icons[item.icon]}
-                </svg>
+            <div
+              key={i}
+              className={`proc-card ${activeStep === i ? 'card-hover' : ''}`}
+              onMouseMove={(e) => handleMouseMove(e, i)}
+              onMouseLeave={handleMouseLeave}
+              style={{ visibility: 'hidden' }}
+            >
+              {/* Radial glow */}
+              <div className="proc-card-glow" />
+
+              {/* Card Header Row */}
+              <div className="proc-card-top">
+                <div className="proc-icon-box">
+                  {stepIcons[item.icon] || stepIcons.Feather}
+                </div>
+                <div className="proc-num">{item.num}</div>
               </div>
-              <div className="proc-title">{item.title}</div>
-              <div className="proc-body">{item.body}</div>
+
+              {/* Status Tag */}
+              <div className="proc-status-badge">
+                <span className="badge-dot" />
+                <span>{statusTags[i] || 'STAGE_VERIFIED'}</span>
+              </div>
+
+              {/* Title & Body */}
+              <h3 className="proc-card-title">{item.title}</h3>
+              <p className="proc-card-body">{item.body}</p>
+
+              {/* Bottom Step Indicator */}
+              <div className="proc-card-footer">
+                <span className="footer-label">STAGE 0{i + 1} / 06</span>
+                <div className="footer-line">
+                  <div className="footer-line-fill" style={{ width: `${((i + 1) / 6) * 100}%` }} />
+                </div>
+              </div>
             </div>
           ))}
         </div>
       </div>
 
       <style>{`
-        .process-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
-        .proc-card { background: #FFFFFF; border: 1px solid #EEF1F5; border-radius: 24px; padding: 30px; position: relative; }
-        .proc-num { position: absolute; top: 24px; right: 26px; font-family: 'Space Grotesk',sans-serif; font-size: 32px; font-weight: 700; color: #F1E4C3; -webkit-text-stroke: 1px #C8A24A; }
-        .proc-icon { width: 48px; height: 48px; border-radius: 13px; background: #F1E4C3; display: flex; align-items: center; justify-content: center; color: #0B2545; margin-bottom: 20px; }
-        .proc-title { font-weight: 700; font-size: 15px; color: #0B2545; margin-bottom: 10px; }
-        .proc-body { font-size: 13px; color: #707888; line-height: 1.65; }
-        @media (max-width: 1080px) { .process-grid { grid-template-columns: 1fr 1fr; } }
+        /* ═══════════════════════════════════════
+           SECTION BASE
+           ═══════════════════════════════════════ */
+        .proc-section {
+          background: #060e1a;
+          color: #fff;
+          padding: 120px 24px 140px;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .proc-bg-grid {
+          position: absolute;
+          inset: 0;
+          background-image:
+            linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+          background-size: 50px 50px;
+          pointer-events: none;
+        }
+
+        .proc-orb {
+          position: absolute;
+          border-radius: 50%;
+          filter: blur(120px);
+          pointer-events: none;
+        }
+
+        .proc-orb-1 {
+          width: 550px; height: 550px;
+          background: radial-gradient(circle, rgba(200,162,74,0.08), transparent 70%);
+          top: 15%; left: -150px;
+          animation: procFloat1 15s ease-in-out infinite alternate;
+        }
+
+        .proc-orb-2 {
+          width: 450px; height: 450px;
+          background: radial-gradient(circle, rgba(74,140,220,0.06), transparent 70%);
+          bottom: 10%; right: -150px;
+          animation: procFloat2 18s ease-in-out infinite alternate;
+        }
+
+        @keyframes procFloat1 {
+          0% { transform: translate(0, 0); }
+          100% { transform: translate(60px, 40px); }
+        }
+
+        @keyframes procFloat2 {
+          0% { transform: translate(0, 0); }
+          100% { transform: translate(-50px, -60px); }
+        }
+
+        .proc-container {
+          max-width: 1200px;
+          margin: 0 auto;
+          position: relative;
+          z-index: 2;
+        }
+
+        /* ═══════════════════════════════════════
+           HEADER
+           ═══════════════════════════════════════ */
+        .proc-header {
+          text-align: center;
+          max-width: 750px;
+          margin: 0 auto 80px;
+        }
+
+        .proc-eyebrow {
+          font-family: monospace;
+          font-size: 12px;
+          letter-spacing: 0.2em;
+          color: #c8a24a;
+          display: block;
+          margin-bottom: 16px;
+          visibility: hidden;
+        }
+
+        .proc-heading {
+          font-family: 'Space Grotesk', sans-serif;
+          font-size: clamp(32px, 4.5vw, 52px);
+          font-weight: 700;
+          margin: 0 0 18px;
+          background: linear-gradient(135deg, #ffffff 0%, #c8a24a 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          visibility: hidden;
+        }
+
+        .proc-sub {
+          font-size: 16px;
+          color: rgba(255,255,255,0.5);
+          line-height: 1.7;
+          margin: 0 0 28px;
+          visibility: hidden;
+        }
+
+        .proc-divider-line {
+          width: 70px;
+          height: 3px;
+          background: linear-gradient(90deg, #c8a24a, #ffe6a0);
+          margin: 0 auto;
+          transform-origin: center;
+          transform: scaleX(0);
+          border-radius: 2px;
+        }
+
+        /* ═══════════════════════════════════════
+           GRID & CARDS
+           ═══════════════════════════════════════ */
+        .proc-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 28px;
+        }
+
+        .proc-card {
+          position: relative;
+          border-radius: 20px;
+          padding: 36px 30px 28px;
+          background: rgba(255,255,255,0.025);
+          border: 1px solid rgba(255,255,255,0.06);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          transition: border-color 0.5s, box-shadow 0.5s;
+          transform-style: preserve-3d;
+          cursor: pointer;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .proc-card.card-hover {
+          border-color: rgba(200,162,74,0.35);
+          box-shadow:
+            0 30px 70px rgba(0,0,0,0.5),
+            0 0 40px rgba(200,162,74,0.05);
+        }
+
+        /* Hover Glow */
+        .proc-card-glow {
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(
+            500px circle at var(--glow-x, 50%) var(--glow-y, 50%),
+            rgba(200,162,74,0.08), transparent 40%
+          );
+          opacity: 0;
+          transition: opacity 0.4s;
+          pointer-events: none;
+          z-index: 0;
+          border-radius: 20px;
+        }
+
+        .proc-card.card-hover .proc-card-glow {
+          opacity: 1;
+        }
+
+        /* Top Row: Icon + Metallic Number */
+        .proc-card-top {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 22px;
+          position: relative;
+          z-index: 1;
+        }
+
+        .proc-icon-box {
+          width: 52px;
+          height: 52px;
+          border-radius: 14px;
+          background: rgba(200,162,74,0.1);
+          border: 1px solid rgba(200,162,74,0.25);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #c8a24a;
+          transition: all 0.4s ease;
+        }
+
+        .proc-icon-box svg {
+          width: 24px;
+          height: 24px;
+        }
+
+        .proc-card.card-hover .proc-icon-box {
+          background: #c8a24a;
+          color: #060e1a;
+          box-shadow: 0 0 20px rgba(200,162,74,0.4);
+        }
+
+        .proc-num {
+          font-family: 'Space Grotesk', sans-serif;
+          font-size: 38px;
+          font-weight: 800;
+          background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(200,162,74,0.5) 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          line-height: 1;
+          letter-spacing: -0.03em;
+        }
+
+        /* Status Badge */
+        .proc-status-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          font-family: monospace;
+          font-size: 10px;
+          font-weight: 600;
+          letter-spacing: 0.1em;
+          color: #c8a24a;
+          background: rgba(200,162,74,0.06);
+          border: 1px solid rgba(200,162,74,0.15);
+          padding: 5px 12px;
+          border-radius: 6px;
+          margin-bottom: 18px;
+          align-self: flex-start;
+          position: relative;
+          z-index: 1;
+        }
+
+        .badge-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: #4ade80;
+          box-shadow: 0 0 8px rgba(74,222,128,0.6);
+        }
+
+        /* Title & Body */
+        .proc-card-title {
+          font-family: 'Space Grotesk', sans-serif;
+          font-size: 22px;
+          font-weight: 700;
+          margin: 0 0 12px;
+          color: #fff;
+          position: relative;
+          z-index: 1;
+        }
+
+        .proc-card-body {
+          font-size: 14.5px;
+          color: rgba(255,255,255,0.55);
+          line-height: 1.65;
+          margin: 0 0 24px;
+          flex-grow: 1;
+          position: relative;
+          z-index: 1;
+        }
+
+        /* Footer Line & Stage Indicator */
+        .proc-card-footer {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          margin-top: auto;
+          position: relative;
+          z-index: 1;
+        }
+
+        .footer-label {
+          font-family: monospace;
+          font-size: 10px;
+          color: rgba(255,255,255,0.3);
+          letter-spacing: 0.1em;
+        }
+
+        .footer-line {
+          width: 100%;
+          height: 3px;
+          background: rgba(255,255,255,0.06);
+          border-radius: 2px;
+          overflow: hidden;
+        }
+
+        .footer-line-fill {
+          height: 100%;
+          background: linear-gradient(90deg, #c8a24a, #ffe6a0);
+          border-radius: 2px;
+          transition: transform 0.4s ease;
+        }
+
+        .proc-card.card-hover .footer-line-fill {
+          box-shadow: 0 0 10px rgba(200,162,74,0.5);
+        }
+
+        /* ═══════════════════════════════════════
+           RESPONSIVE
+           ═══════════════════════════════════════ */
+        @media (max-width: 1080px) {
+          .proc-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+
+        @media (max-width: 700px) {
+          .proc-section {
+            padding: 80px 16px;
+          }
+          .proc-grid {
+            grid-template-columns: 1fr;
+            gap: 20px;
+          }
+          .proc-card {
+            padding: 28px 22px 22px;
+          }
+          .proc-card-title {
+            font-size: 20px;
+          }
+        }
       `}</style>
     </section>
   );
