@@ -316,7 +316,7 @@ function EggTradersHero({ data }) {
 
         .et-orb-green {
           width: 500px; height: 500px;
-          background: radial-gradient(circle, rgba(22, 163, 74, 0.18), transparent 70%);
+          background: radial-gradient(circle, rgba(59, 130, 246, 0.2), transparent 70%);
           bottom: -100px; left: -150px;
         }
 
@@ -443,15 +443,15 @@ function EggTradersHero({ data }) {
           font-size: 15px;
           padding: 15px 28px;
           border-radius: 12px;
-          background: rgba(22, 163, 74, 0.15);
-          border: 1px solid rgba(22, 163, 74, 0.4);
-          color: #4ade80;
+          background: rgba(59, 130, 246, 0.12);
+          border: 1px solid rgba(59, 130, 246, 0.4);
+          color: #7FB6F2;
           text-decoration: none;
           transition: background 0.3s, transform 0.3s;
         }
 
         .et-btn-farm:hover {
-          background: rgba(22, 163, 74, 0.28);
+          background: rgba(59, 130, 246, 0.24);
           transform: translateY(-3px);
         }
 
@@ -475,7 +475,7 @@ function EggTradersHero({ data }) {
         }
 
         .chip-icon-gold { color: #f59e0b; }
-        .chip-icon-green { color: #4ade80; }
+        .chip-icon-green { color: #7FB6F2; }
 
         /* Metrics Cards */
         .et-metrics-grid {
@@ -525,7 +525,7 @@ function EggTradersHero({ data }) {
         .stat-accent-bar {
           width: 30px;
           height: 3px;
-          background: linear-gradient(90deg, #f59e0b, #4ade80);
+          background: linear-gradient(90deg, #f59e0b, #7FB6F2);
           border-radius: 2px;
           margin-top: 6px;
         }
@@ -987,7 +987,7 @@ function EggTradersHomeAbout({ data }) {
         .quote-footer {
           font-family: monospace;
           font-size: 12px;
-          color: #4ade80;
+          color: #7FB6F2;
           letter-spacing: 0.08em;
         }
 

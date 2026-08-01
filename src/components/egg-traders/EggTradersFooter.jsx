@@ -1,17 +1,9 @@
 import { Link } from 'react-router-dom';
 import logo from '../../assets/logo.svg';
 
-const etTheme = {
-  navy: '#0D6B3D',
-  'navy-2': '#059669',
-  'navy-deep': '#064E3B',
-  gold: '#F59E0B',
-  'gold-lt': '#FDE68A',
-};
-
 export default function EggTradersFooter() {
   return (
-    <footer style={{ background: etTheme['navy-deep'], color: 'rgba(255,255,255,0.7)', padding: '60px 0 0' }}>
+    <footer style={{ background: 'linear-gradient(180deg, #071A30 0%, #060e1a 100%)', color: 'rgba(255,255,255,0.7)', padding: '60px 0 0', borderTop: '1px solid rgba(200,162,74,0.18)' }}>
       <div className="container">
         <div className="et-footer-grid">
           <div>

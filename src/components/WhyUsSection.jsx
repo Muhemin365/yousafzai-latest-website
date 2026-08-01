@@ -141,7 +141,7 @@ export default function WhyUsSection() {
       <section className="stats-band" id="stats">
         <div className="container">
           <div className="sec-head center stat-head-animate" style={{ marginLeft: 'auto', marginRight: 'auto' }}>
-            <div className="tag-eyebrow" style={{ justifyContent: 'center', color: '#F1E4C3' }}>Company Statistics</div>
+            <div className="tag-eyebrow" style={{ justifyContent: 'center', color: '#F2E7C9' }}>Company Statistics</div>
             <h2 className="sec-title" style={{ color: '#fff' }}>Performance That Speaks for Itself</h2>
           </div>
           <div className="stats-band-grid">

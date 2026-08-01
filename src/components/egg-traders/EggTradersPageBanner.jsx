@@ -40,12 +40,13 @@ export default function EggTradersPageBanner({ title, subtitle }) {
         </div>
       </header>
       <style>{`
-        .et-page-hero { position: relative; min-height: 280px; display: flex; align-items: center; padding: 140px 0 60px; overflow: hidden; }
-        .et-page-hero-bg { position: absolute; inset: 0; background: radial-gradient(120% 100% at 80% 0%, #059669 0%, #0D6B3D 45%, #064E3B 100%); }
-        .et-page-hero-bg::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.07) 1px, transparent 0); background-size: 34px 34px; opacity: .5; }
-        .et-page-hero-title { font-family: 'Space Grotesk',sans-serif; font-weight: 600; font-size: clamp(2.2rem,3.6vw,3.2rem); color: #FFFFFF; line-height: 1.1; letter-spacing: -0.01em; margin-bottom: 16px; }
-        .et-page-hero-sub { font-size: 16px; color: rgba(255,255,255,0.7); max-width: 560px; }
-        .et-breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 20px; }
+        .et-page-hero { position: relative; min-height: 280px; display: flex; align-items: center; padding: 140px 0 60px; overflow: hidden; background-color: #060e1a; }
+        .et-page-hero-bg { position: absolute; inset: 0; background: radial-gradient(120% 120% at 70% 0%, rgba(59,130,246,0.22) 0%, rgba(11,37,69,0.9) 45%, rgba(6,14,26,1) 100%); }
+        .et-page-hero-bg::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle at 1px 1px, rgba(200,162,74,0.35) 1px, transparent 0); background-size: 34px 34px; opacity: .5; }
+        .et-page-hero-bg::after { content: ''; position: absolute; width: 420px; height: 420px; border-radius: 50%; top: -160px; right: -120px; background: radial-gradient(circle, rgba(200,162,74,0.16), transparent 70%); filter: blur(10px); }
+        .et-page-hero-title { font-family: 'Space Grotesk',sans-serif; font-weight: 700; font-size: clamp(2.2rem,3.6vw,3.2rem); background: linear-gradient(135deg, #ffffff 0%, #E5C87A 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1.1; letter-spacing: -0.01em; margin-bottom: 16px; }
+        .et-page-hero-sub { font-size: 16px; color: rgba(255,255,255,0.75); max-width: 560px; }
+        .et-breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 20px; }
         .et-breadcrumb svg { opacity: 0.5; }
         .et-banner-reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1); }
         .et-banner-reveal.in { opacity: 1; transform: translateY(0); }

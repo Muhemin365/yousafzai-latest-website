@@ -77,24 +77,24 @@ export default function Layout() {
         @keyframes pageFadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
         .ripple { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.55); transform: scale(0); animation: rippleAnim .6s ease-out; pointer-events: none; }
         @keyframes rippleAnim { to { transform: scale(3.2); opacity: 0; } }
-        .back-top { position: fixed; bottom: 28px; right: 28px; width: 48px; height: 48px; border-radius: 50%; background: #0B2545; color: #FFFFFF; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 14px 36px rgba(11,37,69,0.10); opacity: 0; transform: translateY(10px); transition: opacity .3s, transform .3s; z-index: 300; }
+        .back-top { position: fixed; bottom: 28px; right: 28px; width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); backdrop-filter: blur(12px); color: #FFFFFF; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 14px 36px rgba(0,0,0,0.35); opacity: 0; transform: translateY(10px); transition: opacity .3s, transform .3s, background .3s; z-index: 300; }
         .back-top.show { opacity: 1; transform: translateY(0); }
-        .back-top:hover { background: #C8A24A; color: #071A30; }
-        .tag-eyebrow { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-size: 11.5px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: #C8A24A; margin-bottom: 18px; }
+        .back-top:hover { background: #C8A24A; color: #060E1A; }
+        .tag-eyebrow { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-size: 11.5px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #C8A24A; margin-bottom: 16px; }
         .tag-eyebrow::before { content: ''; width: 22px; height: 1.6px; background: #C8A24A; }
-        .sec-head { text-align: center; margin-left: auto; margin-right: auto; margin-bottom: 56px; background: linear-gradient(135deg,#071A30,#0B2545); border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; padding: 32px 36px; box-shadow: 0 14px 36px rgba(11,37,69,0.15); }
+        .sec-head { text-align: center; margin-left: auto; margin-right: auto; margin-bottom: 56px; background: linear-gradient(150deg, rgba(11,37,69,0.55) 0%, rgba(7,26,48,0.4) 100%); border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; padding: 36px 40px; backdrop-filter: blur(8px); box-shadow: 0 20px 50px rgba(0,0,0,0.25); }
         .sec-head.center { margin-left: auto; margin-right: auto; text-align: center; }
         .sec-title { font-family: 'Space Grotesk',sans-serif; font-weight: 600; font-size: clamp(1.9rem,3vw,2.7rem); color: #FFFFFF; line-height: 1.18; letter-spacing: -0.01em; }
-        .sec-sub { font-size: 15.5px; color: rgba(255,255,255,0.7); margin-top: 16px; line-height: 1.75; }
+        .sec-sub { font-size: 15.5px; color: rgba(255,255,255,0.66); margin-top: 16px; line-height: 1.75; max-width: 720px; margin-left: auto; margin-right: auto; }
         @media (max-width: 640px) {
-          .sec-head { padding: 24px 20px; margin-bottom: 40px; border-radius: 16px; }
-          .sec-sub { font-size: 14px; }
-          section { padding: 80px 0 !important; scroll-margin-top: 80px; }
+          .sec-head { padding: 28px 20px; margin-bottom: 40px; border-radius: 16px; }
+          .sec-sub { font-size: 14.5px; }
+          section { padding: 84px 0 !important; scroll-margin-top: 80px; }
         }
         @media (max-width: 420px) {
-          .sec-head { padding: 20px 16px; border-radius: 12px; }
-          .sec-sub { font-size: 13px; }
-          section { padding: 60px 0 !important; }
+          .sec-head { padding: 24px 16px; border-radius: 14px; }
+          .sec-sub { font-size: 13.5px; }
+          section { padding: 64px 0 !important; }
         }
       `}</style>
     </>

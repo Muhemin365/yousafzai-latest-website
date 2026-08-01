@@ -426,7 +426,7 @@ export default function ContactSection() {
         .cnt-divider-line {
           width: 70px;
           height: 3px;
-          background: linear-gradient(90deg, #c8a24a, #ffe6a0);
+          background: linear-gradient(90deg, #c8a24a, #F2E7C9);
           margin: 0 auto;
           transform-origin: center;
           transform: scaleX(0);
@@ -535,7 +535,7 @@ export default function ContactSection() {
           font-family: monospace;
           font-size: 10px;
           font-weight: 700;
-          color: #ffe6a0;
+          color: #F2E7C9;
           background: rgba(200,162,74,0.15);
           border: 1px solid rgba(200,162,74,0.3);
           padding: 5px 12px;
@@ -727,7 +727,7 @@ export default function ContactSection() {
           border-radius: 12px;
           border: none;
           cursor: pointer;
-          background: linear-gradient(135deg, #c8a24a 0%, #ffe6a0 100%);
+          background: linear-gradient(135deg, #c8a24a 0%, #F2E7C9 100%);
           color: #060e1a;
           transition: transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.3s ease;
           box-shadow: 0 10px 30px rgba(200,162,74,0.25);

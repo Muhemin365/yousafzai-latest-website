@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ArrowRight } from 'lucide-react';
-import { useCMSStore } from '../store/useCMSStore';
 import logo from '../assets/logo.svg';
 
 export default function Navbar() {
@@ -115,17 +114,17 @@ export default function Navbar() {
           right: 0;
           z-index: 500;
           padding: 20px 0;
-          background: rgba(6, 14, 26, 0.75);
+          background: rgba(6, 14, 26, 0.72);
           backdrop-filter: blur(20px);
           -webkit-backdrop-filter: blur(20px);
-          border-bottom: 1px solid rgba(200, 162, 74, 0.2);
+          border-bottom: 1px solid rgba(255,255,255,0.06);
           transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         .nav-glass.is-scrolled {
           padding: 12px 0;
-          background: rgba(6, 14, 26, 0.92);
-          border-bottom-color: rgba(200, 162, 74, 0.35);
+          background: rgba(6, 14, 26, 0.88);
+          border-bottom-color: rgba(200, 162, 74, 0.22);
           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
         }
 
@@ -136,6 +135,7 @@ export default function Navbar() {
           display: flex;
           align-items: center;
           justify-content: space-between;
+          gap: 24px;
         }
 
         .nav-brand {
@@ -145,7 +145,7 @@ export default function Navbar() {
         }
 
         .nav-logo {
-          height: 52px;
+          height: 50px;
           width: auto;
           display: block;
           transition: transform 0.3s;
@@ -159,7 +159,7 @@ export default function Navbar() {
         .nav-links-desktop {
           display: flex;
           align-items: center;
-          gap: 32px;
+          gap: 30px;
         }
 
         .nav-link-item {
@@ -171,14 +171,15 @@ export default function Navbar() {
           padding: 6px 0;
           text-decoration: none;
           transition: color 0.3s;
+          white-space: nowrap;
         }
 
         .nav-link-item:hover {
-          color: #ffe6a0;
+          color: #F2E7C9;
         }
 
         .nav-link-item.active {
-          color: #ffe6a0;
+          color: #F2E7C9;
           font-weight: 600;
         }
 
@@ -188,7 +189,7 @@ export default function Navbar() {
           bottom: 0;
           width: 0;
           height: 2px;
-          background: linear-gradient(90deg, #c8a24a, #ffe6a0);
+          background: linear-gradient(90deg, #c8a24a, #F2E7C9);
           border-radius: 2px;
           transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
@@ -213,17 +214,17 @@ export default function Navbar() {
           font-weight: 700;
           font-size: 13.5px;
           padding: 10px 22px;
-          border-radius: 10px;
-          background: linear-gradient(135deg, #c8a24a 0%, #ffe6a0 100%);
+          border-radius: 12px;
+          background: linear-gradient(135deg, #c8a24a 0%, #F2E7C9 100%);
           color: #060e1a;
           text-decoration: none;
           transition: transform 0.3s, box-shadow 0.3s;
-          box-shadow: 0 8px 24px rgba(200, 162, 74, 0.25);
+          box-shadow: 0 8px 24px rgba(200, 162, 74, 0.22);
         }
 
         .nav-cta-btn:hover {
           transform: translateY(-2px);
-          box-shadow: 0 12px 30px rgba(200, 162, 74, 0.4);
+          box-shadow: 0 12px 30px rgba(200, 162, 74, 0.35);
         }
 
         .cta-arrow {
@@ -238,7 +239,7 @@ export default function Navbar() {
           display: none;
           width: 40px;
           height: 40px;
-          border-radius: 10px;
+          border-radius: 12px;
           background: rgba(255,255,255,0.05);
           border: 1px solid rgba(255,255,255,0.12);
           align-items: center;
@@ -250,20 +251,21 @@ export default function Navbar() {
         .mobile-drawer {
           position: fixed;
           inset: 0;
-          background: rgba(6, 14, 26, 0.96);
+          background: rgba(6, 14, 26, 0.97);
           backdrop-filter: blur(24px);
+          -webkit-backdrop-filter: blur(24px);
           z-index: 480;
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 40px;
+          padding: 40px 24px;
         }
 
         .mobile-nav-list {
           display: flex;
           flex-direction: column;
           align-items: center;
-          gap: 24px;
+          gap: 22px;
           width: 100%;
           max-width: 320px;
         }
@@ -292,16 +294,17 @@ export default function Navbar() {
           font-weight: 700;
           padding: 14px 0;
           border-radius: 12px;
-          background: linear-gradient(135deg, #c8a24a 0%, #ffe6a0 100%);
+          background: linear-gradient(135deg, #c8a24a 0%, #F2E7C9 100%);
           color: #060e1a;
           text-decoration: none;
           margin-top: 16px;
         }
 
         /* Responsive */
-        @media (max-width: 860px) {
+        @media (max-width: 960px) {
           .nav-links-desktop { display: none; }
           .nav-mobile-toggle { display: flex; }
+          .nav-actions { gap: 10px; }
         }
 
         @media (max-width: 480px) {

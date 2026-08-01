@@ -297,7 +297,7 @@ export default function TeamPage() {
         .team-divider {
           width: 70px;
           height: 3px;
-          background: linear-gradient(90deg, #c8a24a, #ffe6a0);
+          background: linear-gradient(90deg, #c8a24a, #F2E7C9);
           margin: 0 auto;
           border-radius: 2px;
         }
@@ -386,7 +386,7 @@ export default function TeamPage() {
           font-size: 10px;
           font-weight: 700;
           letter-spacing: 0.1em;
-          color: #ffe6a0;
+          color: #F2E7C9;
           background: rgba(200,162,74,0.15);
           border: 1px solid rgba(200,162,74,0.3);
           padding: 5px 12px;

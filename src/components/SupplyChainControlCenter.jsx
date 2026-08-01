@@ -678,7 +678,7 @@ export default function SupplyChainControlCenter() {
         .sb-divider {
           width: 40px;
           height: 2px;
-          background: linear-gradient(90deg, #c8a24a, #ffe6a0);
+          background: linear-gradient(90deg, #c8a24a, #F2E7C9);
           margin: 16px auto 0;
           border-radius: 2px;
         }

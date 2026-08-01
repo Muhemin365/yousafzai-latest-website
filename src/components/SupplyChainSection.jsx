@@ -125,17 +125,17 @@ export default function SupplyChainSection() {
       <style>{`
         .flow-wrap { position: relative; display: flex; justify-content: space-between; margin-top: 50px; }
         .flow-line { position: absolute; top: 34px; left: 5%; right: 5%; height: 2px; background: #DBDFE6; z-index: 0; }
-        .flow-line .flow-fill { position: absolute; left: 0; top: 0; height: 100%; width: 0%; background: linear-gradient(90deg,#9C7B2E,#C8A24A); transition: width 1.6s cubic-bezier(.22,1,.36,1); }
+        .flow-line .flow-fill { position: absolute; left: 0; top: 0; height: 100%; width: 0%; background: linear-gradient(90deg,#A8862F,#C8A24A); transition: width 1.6s cubic-bezier(.22,1,.36,1); }
         .flow-step { position: relative; z-index: 2; flex: 1; text-align: center; padding: 0 10px; }
         .flow-dot { width: 68px; height: 68px; border-radius: 50%; background: #FFFFFF; border: 2px solid #DBDFE6; display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; color: #0B2545; transition: border-color .4s, color .4s, transform .4s; position: relative; }
-        .flow-wrap.lit .flow-dot { border-color: #C8A24A; color: #9C7B2E; }
+        .flow-wrap.lit .flow-dot { border-color: #C8A24A; color: #A8862F; }
         .flow-title { font-weight: 700; font-size: 13.5px; color: #0B2545; margin-bottom: 6px; }
         .flow-desc { font-size: 11.5px; color: #707888; line-height: 1.5; max-width: 160px; margin: 0 auto; }
         .card-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; width: 100%; }
         .card-grid.cols-3 { grid-template-columns: repeat(3,1fr); }
         .feature-card { background: #F5F7FA; border-radius: 24px; padding: 32px 28px; transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s cubic-bezier(.22,1,.36,1); }
         .feature-card:hover { transform: translateY(-6px); box-shadow: 0 14px 36px rgba(11,37,69,0.10); background: #FFFFFF; }
-        .f-icon { width: 56px; height: 56px; border-radius: 14px; background: linear-gradient(145deg,#0B2545,#123A6B); display: flex; align-items: center; justify-content: center; color: #F1E4C3; margin-bottom: 18px; }
+        .f-icon { width: 56px; height: 56px; border-radius: 14px; background: linear-gradient(145deg,#0B2545,#123A6B); display: flex; align-items: center; justify-content: center; color: #F2E7C9; margin-bottom: 18px; }
         .f-title { font-weight: 700; font-size: 15px; color: #0B2545; }
         .f-body { font-size: 13px; color: #707888; line-height: 1.6; margin-top: 12px; }
         @media (max-width: 1080px) {

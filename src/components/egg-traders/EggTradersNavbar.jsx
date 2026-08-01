@@ -193,7 +193,7 @@ export default function EggTradersNavbar() {
           bottom: 0;
           width: 0;
           height: 2px;
-          background: linear-gradient(90deg, #f59e0b, #4ade80);
+          background: linear-gradient(90deg, #f59e0b, #7FB6F2);
           border-radius: 2px;
           transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }

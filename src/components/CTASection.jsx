@@ -156,7 +156,7 @@ export default function CTASection() {
           font-size: 15px;
           padding: 16px 32px;
           border-radius: 12px;
-          background: linear-gradient(135deg, #c8a24a 0%, #ffe6a0 100%);
+          background: linear-gradient(135deg, #c8a24a 0%, #F2E7C9 100%);
           color: #060e1a;
           text-decoration: none;
           transition: transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.3s ease;

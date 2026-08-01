@@ -58,12 +58,12 @@ export default function EggTradersProcess() {
 
         <style>{`
           .et-proc-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; }
-           .et-proc-card { background: #FFFFFF; border: 1px solid #EEF1F5; border-radius: 24px; padding: 30px; position: relative; transition: transform .4s cubic-bezier(.22,1,.36,1), box-shadow .4s cubic-bezier(.22,1,.36,1); }
-           .et-proc-card:hover { transform: translateY(-6px); box-shadow: 0 14px 36px rgba(13,107,61,0.10); }
-          .et-proc-num { position: absolute; top: 24px; right: 26px; font-family: 'Space Grotesk',sans-serif; font-size: 32px; font-weight: 700; color: #ECFDF5; -webkit-text-stroke: 1px #0D6B3D; }
-          .et-proc-icon { width: 48px; height: 48px; border-radius: 13px; background: #ECFDF5; display: flex; align-items: center; justify-content: center; color: #0D6B3D; margin-bottom: 20px; }
-          .et-proc-title { font-weight: 700; font-size: 15px; color: #0D6B3D; margin-bottom: 10px; }
-          .et-proc-body { font-size: 13px; color: #707888; line-height: 1.65; }
+           .et-proc-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; padding: 30px; position: relative; backdrop-filter: blur(12px); transition: transform .4s cubic-bezier(.22,1,.36,1), box-shadow .4s cubic-bezier(.22,1,.36,1), border-color .4s; }
+           .et-proc-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.4); border-color: rgba(200,162,74,0.35); }
+          .et-proc-num { position: absolute; top: 24px; right: 26px; font-family: 'Space Grotesk',sans-serif; font-size: 32px; font-weight: 700; color: rgba(200,162,74,0.15); -webkit-text-stroke: 1px #C8A24A; }
+          .et-proc-icon { width: 48px; height: 48px; border-radius: 13px; background: rgba(200,162,74,0.12); border: 1px solid rgba(200,162,74,0.25); display: flex; align-items: center; justify-content: center; color: #C8A24A; margin-bottom: 20px; }
+          .et-proc-title { font-weight: 700; font-size: 15px; color: #FFFFFF; margin-bottom: 10px; }
+          .et-proc-body { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.65; }
           @media (max-width: 1080px) { .et-proc-grid { grid-template-columns: repeat(2,1fr); } }
           @media (max-width: 640px) { .et-proc-grid { grid-template-columns: 1fr; } }
         `}</style>

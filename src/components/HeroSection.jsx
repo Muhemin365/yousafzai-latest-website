@@ -227,7 +227,7 @@ export default function HeroSection() {
           display: flex;
           align-items: center;
           padding: 140px 0 90px;
-          background-color: #071A30;
+          background-color: #060E1A;
         }
 
         /* Background Slideshow */
@@ -249,26 +249,25 @@ export default function HeroSection() {
           filter: grayscale(10%);
         }
         .slide-img.active {
-          opacity: 0.6;
+          opacity: 0.55;
           transform: scale(1);
         }
         .slide-overlay {
           position: absolute;
           inset: 0;
-          /* Add a glass/mirror reflection effect overlay with lower opacity to reveal the image */
           background-image: 
-            radial-gradient(120% 100% at 80% 0%, rgba(23,62,114,0.6) 0%, rgba(11,37,69,0.7) 45%, rgba(7,26,48,0.85) 100%),
-            linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 25%);
+            radial-gradient(120% 100% at 80% 0%, rgba(18,58,107,0.55) 0%, rgba(11,37,69,0.68) 45%, rgba(6,14,26,0.88) 100%),
+            linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0) 25%);
         }
         .slide-overlay::after {
           content: '';
           position: absolute;
           inset: 0;
-          background: linear-gradient(to bottom, transparent 60%, #071A30 100%);
+          background: linear-gradient(to bottom, transparent 60%, #060E1A 100%);
         }
 
         /* Particle Background */
-        .particles-container { position: absolute; inset: 0; pointer-events: none; z-index: 1; overflow: hidden; opacity: 0.1; }
+        .particles-container { position: absolute; inset: 0; pointer-events: none; z-index: 1; overflow: hidden; opacity: 0.12; }
         .particle { position: absolute; bottom: -10px; background: #C8A24A; border-radius: 50%; box-shadow: 0 0 6px #C8A24A; animation: driftUp linear infinite; }
         @keyframes driftUp {
           0% { transform: translateY(0) translateX(0); opacity: 0; }
@@ -279,12 +278,12 @@ export default function HeroSection() {
 
         .hero-glow {
           position: absolute; width: 680px; height: 680px; border-radius: 50%;
-          background: radial-gradient(circle, rgba(200,162,74,0.18), transparent 70%);
+          background: radial-gradient(circle, rgba(200,162,74,0.16), transparent 70%);
           top: -220px; right: -180px; filter: blur(10px); z-index: 1;
           animation: float1 12s ease-in-out infinite;
         }
         .hero-glow.b {
-          width: 420px; height: 420px; background: radial-gradient(circle, rgba(60,120,210,0.22), transparent 70%);
+          width: 420px; height: 420px; background: radial-gradient(circle, rgba(60,120,210,0.2), transparent 70%);
           bottom: -160px; left: -120px; top: auto; right: auto;
           animation: float2 14s ease-in-out infinite;
         }
@@ -296,8 +295,8 @@ export default function HeroSection() {
         .eyebrow {
           display: inline-flex; align-items: center; gap: 9px;
           font-size: 11.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
-          color: #F1E4C3; background: rgba(200,162,74,0.12);
-          border: 1px solid rgba(200,162,74,0.32); padding: 8px 16px; border-radius: 30px;
+          color: #F2E7C9; background: rgba(200,162,74,0.1);
+          border: 1px solid rgba(200,162,74,0.3); padding: 8px 16px; border-radius: 30px;
           margin-bottom: 28px;
         }
         .eyebrow .dot {
@@ -313,11 +312,11 @@ export default function HeroSection() {
         .hero h1 {
           font-family: 'Space Grotesk',sans-serif; font-weight: 700;
           font-size: clamp(2.6rem, 4.6vw, 4.3rem); line-height: 1.06;
-          color: #FFFFFF; letter-spacing: -0.01em; margin-bottom: 24px;
+          color: #FFFFFF; letter-spacing: -0.02em; margin-bottom: 24px;
         }
         .hero h1 em {
           font-style: normal;
-          background: linear-gradient(135deg, #ffffff 0%, #c8a24a 100%);
+          background: linear-gradient(135deg, #ffffff 0%, #E5C87A 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
@@ -330,9 +329,9 @@ export default function HeroSection() {
         .btn {
           display: inline-flex; align-items: center; justify-content: center; gap: 8px;
           font-family: 'Inter',sans-serif; font-weight: 600; font-size: 13.5px;
-          padding: 13px 26px; border-radius: 9px; border: none; cursor: pointer;
+          padding: 13px 26px; border-radius: 12px; border: none; cursor: pointer;
           position: relative; overflow: hidden;
-          transition: transform .25s cubic-bezier(.22,1,.36,1), box-shadow .25s cubic-bezier(.22,1,.36,1), background .25s, box-shadow .3s;
+          transition: transform .25s cubic-bezier(.22,1,.36,1), box-shadow .25s cubic-bezier(.22,1,.36,1), background .25s;
           white-space: nowrap; text-decoration: none;
         }
         .btn span { position: relative; z-index: 2; display: flex; align-items: center; gap: 8px; }
@@ -340,10 +339,10 @@ export default function HeroSection() {
         .btn:hover .btn-arrow { transform: translateX(5px); }
 
         .btn-gold {
-          background: linear-gradient(120deg,#9C7B2E,#C8A24A 55%,#F1E4C3);
-          color: #071A30; box-shadow: 0 10px 24px rgba(200,162,74,0.35);
+          background: linear-gradient(120deg,#A8862F,#C8A24A 55%,#F2E7C9);
+          color: #060E1A; box-shadow: 0 10px 24px rgba(200,162,74,0.3);
         }
-        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 16px 32px rgba(200,162,74,0.5), 0 0 20px rgba(200,162,74,0.4); }
+        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 16px 32px rgba(200,162,74,0.45), 0 0 20px rgba(200,162,74,0.35); }
         
         /* Shine Animation */
         .shine-element {
@@ -395,8 +394,9 @@ export default function HeroSection() {
 
         /* Floating Cards */
         .hv-card {
-          position: absolute; background: rgba(255,255,255,0.08);
-          border: 1px solid rgba(255,255,255,0.16); backdrop-filter: blur(14px);
+          position: absolute; background: rgba(255,255,255,0.07);
+          border: 1px solid rgba(255,255,255,0.14); backdrop-filter: blur(14px);
+          -webkit-backdrop-filter: blur(14px);
           border-radius: 18px; padding: 18px 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.25);
           transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
@@ -416,7 +416,7 @@ export default function HeroSection() {
           .hv-card, .hv-orbit-ring, .egg-icon, .hero-glow, .particle, .shine-element, .eyebrow .dot { animation: none !important; }
         }
 
-        .stat-strip { background: linear-gradient(135deg,#071A30,#0B2545); border-top: 1px solid rgba(255,255,255,0.06); position: relative; z-index: 3; margin-top: -1px; }
+        .stat-strip { background: linear-gradient(135deg,#060E1A,#0B2545); border-top: 1px solid rgba(255,255,255,0.06); position: relative; z-index: 3; margin-top: -1px; }
         .stat-strip .container { display: grid; grid-template-columns: repeat(4,1fr); padding: 46px 32px; }
         .stat-strip .stat { text-align: center; border-right: 1px solid rgba(255,255,255,0.1); padding: 0 18px; }
         .stat-strip .stat:last-child { border-right: none; }
@@ -433,7 +433,14 @@ export default function HeroSection() {
           .hero-grid { grid-template-columns: 1fr; }
           .hero-visual { display: none; }
           .stat-strip .container { grid-template-columns: repeat(2,1fr); gap: 24px; }
-          .stat-strip .stat { border-right: none; border-bottom: 1px solid #EEF1F5; padding-bottom: 20px; }
+          .stat-strip .stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px; }
+        }
+        @media (max-width: 480px) {
+          .hero { padding: 120px 0 60px; }
+          .hero p.lead { font-size: 16px; }
+          .btn { padding: 12px 22px; font-size: 13px; }
+          .trust-row { gap: 18px; }
+          .stat-strip .container { padding: 32px 20px; }
         }
       `}</style>
     </>

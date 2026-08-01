@@ -188,7 +188,7 @@ export default function OurCompaniesSection() {
         .oc-divider-line {
           width: 70px;
           height: 3px;
-          background: linear-gradient(90deg, #c8a24a, #ffe6a0);
+          background: linear-gradient(90deg, #c8a24a, #F2E7C9);
           margin: 0 auto;
           transform-origin: center;
           transform: scaleX(0);
@@ -288,7 +288,7 @@ export default function OurCompaniesSection() {
 
         .card-parent .oc-badge {
           background: rgba(200, 162, 74, 0.15);
-          color: #ffe6a0;
+          color: #F2E7C9;
           border: 1px solid rgba(200, 162, 74, 0.3);
         }
 
@@ -348,7 +348,7 @@ export default function OurCompaniesSection() {
         .card-parent .oc-visit-btn {
           background: rgba(200, 162, 74, 0.15);
           border: 1px solid rgba(200, 162, 74, 0.4);
-          color: #ffe6a0;
+          color: #F2E7C9;
         }
 
         .card-parent .oc-visit-btn:hover {

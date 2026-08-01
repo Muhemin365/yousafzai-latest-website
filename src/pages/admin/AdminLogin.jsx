@@ -276,7 +276,7 @@ export default function AdminLogin() {
           border-radius: 12px;
           border: none;
           cursor: pointer;
-          background: linear-gradient(135deg, #c8a24a 0%, #ffe6a0 100%);
+          background: linear-gradient(135deg, #c8a24a 0%, #F2E7C9 100%);
           color: #060e1a;
           margin-top: 10px;
           transition: transform 0.3s, box-shadow 0.3s;

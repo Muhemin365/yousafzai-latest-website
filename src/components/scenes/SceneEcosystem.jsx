@@ -443,7 +443,7 @@ export default function SceneEcosystem() {
           left: 0;
           right: 0;
           height: 3px;
-          background: linear-gradient(90deg, #c8a24a, #ffe6a0, #c8a24a);
+          background: linear-gradient(90deg, #c8a24a, #F2E7C9, #c8a24a);
           opacity: 0.6;
         }
 

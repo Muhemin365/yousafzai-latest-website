@@ -273,7 +273,7 @@ export default function ProcessSection() {
         .proc-divider-line {
           width: 70px;
           height: 3px;
-          background: linear-gradient(90deg, #c8a24a, #ffe6a0);
+          background: linear-gradient(90deg, #c8a24a, #F2E7C9);
           margin: 0 auto;
           transform-origin: center;
           transform: scaleX(0);
@@ -452,7 +452,7 @@ export default function ProcessSection() {
 
         .footer-line-fill {
           height: 100%;
-          background: linear-gradient(90deg, #c8a24a, #ffe6a0);
+          background: linear-gradient(90deg, #c8a24a, #F2E7C9);
           border-radius: 2px;
           transition: transform 0.4s ease;
         }

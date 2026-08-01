@@ -305,7 +305,7 @@ export default function QualitySection() {
         .trace-batch-badge {
           font-family: monospace;
           font-size: 12px;
-          color: #ffe6a0;
+          color: #F2E7C9;
           background: rgba(200,162,74,0.15);
           border: 1px solid rgba(200,162,74,0.35);
           padding: 8px 16px;
@@ -331,7 +331,7 @@ export default function QualitySection() {
           top: 42px;
           left: 8%; right: 8%;
           height: 3px;
-          background: linear-gradient(90deg, #c8a24a, #ffe6a0);
+          background: linear-gradient(90deg, #c8a24a, #F2E7C9);
           z-index: 1;
           transform-origin: left;
           box-shadow: 0 0 12px rgba(200,162,74,0.6);
@@ -447,7 +447,7 @@ export default function QualitySection() {
           font-family: monospace;
           font-size: 10px;
           font-weight: 700;
-          color: #ffe6a0;
+          color: #F2E7C9;
           background: rgba(200,162,74,0.15);
           border: 1px solid rgba(200,162,74,0.3);
           padding: 3px 10px;
@@ -522,7 +522,7 @@ export default function QualitySection() {
           border-radius: 50%;
           background: rgba(200,162,74,0.15);
           border: 1px solid rgba(200,162,74,0.3);
-          color: #ffe6a0;
+          color: #F2E7C9;
           font-family: 'Space Grotesk', sans-serif;
           font-weight: 700;
           font-size: 14px;

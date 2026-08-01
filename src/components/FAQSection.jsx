@@ -195,7 +195,7 @@ export default function FAQSection() {
         .faq-divider-line {
           width: 70px;
           height: 3px;
-          background: linear-gradient(90deg, #c8a24a, #ffe6a0);
+          background: linear-gradient(90deg, #c8a24a, #F2E7C9);
           margin: 0 auto;
           transform-origin: center;
           transform: scaleX(0);

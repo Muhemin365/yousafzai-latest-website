@@ -355,7 +355,7 @@ export default function SceneOurStory() {
         .leg-divider-line {
           width: 80px;
           height: 3px;
-          background: linear-gradient(90deg, #c8a24a, #ffe6a0);
+          background: linear-gradient(90deg, #c8a24a, #F2E7C9);
           margin: 0 auto;
           transform-origin: center;
           transform: scaleX(0);
@@ -390,7 +390,7 @@ export default function SceneOurStory() {
           left: 0;
           width: 100%;
           height: 100%;
-          background: linear-gradient(180deg, #c8a24a 0%, #ffe6a0 50%, #c8a24a 100%);
+          background: linear-gradient(180deg, #c8a24a 0%, #F2E7C9 50%, #c8a24a 100%);
           transform-origin: top center;
           transform: scaleY(0);
           box-shadow: 0 0 16px rgba(200,162,74,0.25);

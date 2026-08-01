@@ -299,7 +299,7 @@ export default function ProductsSection() {
         .prod-divider {
           width: 70px;
           height: 3px;
-          background: linear-gradient(90deg, #c8a24a, #ffe6a0);
+          background: linear-gradient(90deg, #c8a24a, #F2E7C9);
           margin: 0 auto;
           transform-origin: center;
           transform: scaleX(0);
@@ -397,7 +397,7 @@ export default function ProductsSection() {
           letter-spacing: 0.08em;
           text-transform: uppercase;
           background: rgba(200,162,74,0.15);
-          color: #ffe6a0;
+          color: #F2E7C9;
           padding: 5px 14px;
           border-radius: 8px;
           border: 1px solid rgba(200,162,74,0.25);

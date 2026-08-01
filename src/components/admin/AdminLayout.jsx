@@ -310,7 +310,7 @@ export default function AdminLayout({ activeSection, setActiveSection, children 
         }
 
         .nav-item.is-active {
-          color: #ffe6a0;
+          color: #F2E7C9;
           background: rgba(200,162,74,0.12);
           border: 1px solid rgba(200,162,74,0.25);
           font-weight: 600;

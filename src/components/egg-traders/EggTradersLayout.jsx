@@ -30,7 +30,7 @@ export default function EggTradersLayout({ noFooter }) {
   }, [isHome]);
 
   return (
-    <div style={{ fontFamily: "'Inter',sans-serif", background: '#E6EBF2', color: '#1B2230', lineHeight: 1.65, overflowX: 'hidden' }}>
+    <div style={{ fontFamily: "'Inter',sans-serif", background: '#060e1a', color: '#FFFFFF', lineHeight: 1.65, overflowX: 'hidden' }}>
       <EggTradersNavbar scrolled={scrolled} mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
       <main className="et-page-enter"><Outlet /></main>
       {!noFooter && <EggTradersFooter />}
@@ -38,8 +38,8 @@ export default function EggTradersLayout({ noFooter }) {
       <div onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         style={{
           position: 'fixed', bottom: 28, right: 28, width: 48, height: 48, borderRadius: '50%',
-          background: '#0D6B3D', color: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center',
-          cursor: 'pointer', boxShadow: '0 14px 36px rgba(5,150,105,0.35)',
+          background: 'linear-gradient(135deg,#C8A24A 0%,#F2E7C9 100%)', color: '#060e1a', display: 'flex', alignItems: 'center', justifyContent: 'center',
+          cursor: 'pointer', boxShadow: '0 14px 36px rgba(200,162,74,0.35)',
           opacity: showTop ? 1 : 0, transform: showTop ? 'translateY(0)' : 'translateY(10px)',
           transition: 'opacity .3s, transform .3s', zIndex: 300,
         }}>
@@ -51,16 +51,16 @@ export default function EggTradersLayout({ noFooter }) {
       <style>{`
         .et-page-enter { animation: etFadeIn .6s cubic-bezier(.22,1,.36,1) both; }
         @keyframes etFadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-        ::selection { background: #FDE68A; color: #064E3B; }
+        ::selection { background: #C8A24A; color: #060e1a; }
         section { padding: 120px 0; position: relative; scroll-margin-top: 80px; }
-        .section-alt { background: #FFFFFF; }
+        .section-alt { background: linear-gradient(180deg, #071A30 0%, #0B2545 100%); }
         .container { padding-left: 48px !important; padding-right: 32px; }
-        .tag-eyebrow { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-size: 11.5px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: #A7F3D0; margin-bottom: 18px; }
-        .tag-eyebrow::before { content: ''; width: 22px; height: 1.6px; background: #A7F3D0; }
-        .sec-head { text-align: center; margin-left: auto; margin-right: auto; max-width: 680px; margin-bottom: 56px; background: radial-gradient(120% 100% at 80% 0%, #059669 0%, #0D6B3D 45%, #064E3B 100%); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; padding: 32px 36px; box-shadow: 0 14px 36px rgba(0,0,0,0.15); }
+        .tag-eyebrow { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-size: 11.5px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: #E5C87A; margin-bottom: 18px; }
+        .tag-eyebrow::before { content: ''; width: 22px; height: 1.6px; background: #E5C87A; }
+        .sec-head { text-align: center; margin-left: auto; margin-right: auto; max-width: 680px; margin-bottom: 56px; background: radial-gradient(120% 120% at 80% 0%, rgba(59,130,246,0.18) 0%, rgba(200,162,74,0.1) 40%, rgba(11,37,69,0.9) 100%), linear-gradient(180deg, rgba(11,37,69,0.55), rgba(7,26,48,0.4)); border: 1px solid rgba(200,162,74,0.28); border-radius: 24px; padding: 32px 36px; box-shadow: 0 20px 50px rgba(0,0,0,0.25); backdrop-filter: blur(12px); }
         .sec-head.center { margin-left: auto; margin-right: auto; text-align: center; }
         .sec-title { font-family: 'Space Grotesk',sans-serif; font-weight: 600; font-size: clamp(1.9rem,3vw,2.7rem); color: #FFFFFF; line-height: 1.18; letter-spacing: -0.01em; }
-        .sec-sub { font-size: 15.5px; color: rgba(255,255,255,0.8); margin-top: 16px; line-height: 1.75; }
+        .sec-sub { font-size: 15.5px; color: rgba(255,255,255,0.72); margin-top: 16px; line-height: 1.75; }
         .reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1); }
         .reveal.in { opacity: 1; transform: translateY(0); }
         .reveal-stagger > * { opacity: 0; transform: translateY(24px); transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1); }
@@ -71,12 +71,12 @@ export default function EggTradersLayout({ noFooter }) {
         .reveal-stagger.in > *:nth-child(4) { transition-delay: .26s; }
         .reveal-stagger.in > *:nth-child(5) { transition-delay: .33s; }
         .reveal-stagger.in > *:nth-child(6) { transition-delay: .40s; }
-        .btn-navy { background: #0D6B3D; color: #FFFFFF; padding: 13px 26px; border-radius: 9px; border: none; cursor: pointer; font-family: 'Inter',sans-serif; font-weight: 600; font-size: 13.5px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; transition: transform .25s cubic-bezier(.22,1,.36,1), box-shadow .25s cubic-bezier(.22,1,.36,1); }
-        .btn-navy:hover { transform: translateY(-2px); box-shadow: 0 14px 28px rgba(13,107,61,0.35); }
-        .btn-gold { background: linear-gradient(120deg,#D97706,#F59E0B 55%,#FDE68A); color: #064E3B; padding: 13px 26px; border-radius: 9px; border: none; cursor: pointer; font-family: 'Inter',sans-serif; font-weight: 600; font-size: 13.5px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; box-shadow: 0 10px 24px rgba(245,158,11,0.35); transition: transform .25s cubic-bezier(.22,1,.36,1), box-shadow .25s; }
-        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(245,158,11,0.45); }
-        .btn-outline { border: 1.5px solid rgba(255,255,255,0.4); color: #FFFFFF; background: rgba(255,255,255,0.08); backdrop-filter: blur(4px); padding: 13px 26px; border-radius: 9px; cursor: pointer; font-family: 'Inter',sans-serif; font-weight: 600; font-size: 13.5px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; }
-        .btn-outline:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.6); }
+        .btn-navy { background: linear-gradient(135deg,#0B2545,#173E72); color: #FFFFFF; padding: 13px 26px; border-radius: 9px; border: 1px solid rgba(59,130,246,0.35); cursor: pointer; font-family: 'Inter',sans-serif; font-weight: 600; font-size: 13.5px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; transition: transform .25s cubic-bezier(.22,1,.36,1), box-shadow .25s cubic-bezier(.22,1,.36,1); }
+        .btn-navy:hover { transform: translateY(-2px); box-shadow: 0 14px 28px rgba(59,130,246,0.3); }
+        .btn-gold { background: linear-gradient(135deg,#A8862F 0%,#C8A24A 50%,#F2E7C9 100%); color: #060e1a; padding: 13px 26px; border-radius: 9px; border: none; cursor: pointer; font-family: 'Inter',sans-serif; font-weight: 600; font-size: 13.5px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; box-shadow: 0 10px 24px rgba(200,162,74,0.35); transition: transform .25s cubic-bezier(.22,1,.36,1), box-shadow .25s; }
+        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(200,162,74,0.45); }
+        .btn-outline { border: 1.5px solid rgba(255,255,255,0.35); color: #FFFFFF; background: rgba(255,255,255,0.06); backdrop-filter: blur(4px); padding: 13px 26px; border-radius: 9px; cursor: pointer; font-family: 'Inter',sans-serif; font-weight: 600; font-size: 13.5px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; }
+        .btn-outline:hover { background: rgba(255,255,255,0.12); border-color: rgba(200,162,74,0.5); }
         @media (max-width: 860px) { section { padding: 80px 0 !important; } .sec-head { margin-bottom: 40px; } }
         @media (max-width: 640px) { .container { padding-left: 20px !important; padding-right: 20px; } section { padding: 60px 0 !important; } }
         @media (max-width: 420px) { .container { padding-left: 14px !important; padding-right: 14px; } section { padding: 48px 0 !important; } .sec-head { padding: 20px 16px !important; margin-bottom: 28px !important; } .sec-title { font-size: clamp(1.4rem,4.5vw,1.7rem) !important; } .sec-sub { font-size: 13px !important; } }
