@@ -464,16 +464,18 @@ export default function ContactSection() {
           gap: 20px;
           padding: 22px;
           border-radius: 16px;
-          background: #DE510A;
-          border: 1px solid rgba(20,20,20,0.06);
+          background: #FFFFFF;
+          border: 1px solid #eef1f6;
           backdrop-filter: blur(12px);
           -webkit-backdrop-filter: blur(12px);
-          transition: border-color 0.4s, transform 0.4s;
+          transition: border-color 0.4s, transform 0.4s, box-shadow 0.4s;
+          box-shadow: 0 12px 30px rgba(63,98,49,0.08);
           visibility: hidden;
         }
 
         .cnt-info-card:hover {
           border-color: rgba(222,81,10,0.3);
+          box-shadow: 0 16px 40px rgba(222,81,10,0.12);
           transform: translateX(6px);
         }
 
@@ -504,7 +506,7 @@ export default function ContactSection() {
         .cnt-info-label {
           font-family: monospace;
           font-size: 10px;
-          color: rgba(20,20,20,0.35);
+          color: rgba(20,20,20,0.5);
           letter-spacing: 0.1em;
           text-transform: uppercase;
         }
@@ -521,9 +523,10 @@ export default function ContactSection() {
         .cnt-sla-box {
           border-radius: 20px;
           padding: 30px;
-          background: linear-gradient(135deg, #DE510A 0%, #DE510A 100%);
-          border: 1px solid rgba(222,81,10,0.25);
+          background: #FFFFFF;
+          border: 1px solid #eef1f6;
           backdrop-filter: blur(16px);
+          box-shadow: 0 16px 40px rgba(63,98,49,0.1);
           position: relative;
           overflow: hidden;
         }
@@ -535,9 +538,9 @@ export default function ContactSection() {
           font-family: monospace;
           font-size: 10px;
           font-weight: 700;
-          color: #B9320D;
-          background: rgba(222,81,10,0.15);
-          border: 1px solid rgba(222,81,10,0.3);
+          color: #DE510A;
+          background: rgba(222,81,10,0.08);
+          border: 1px solid rgba(222,81,10,0.25);
           padding: 5px 12px;
           border-radius: 6px;
           margin-bottom: 16px;
@@ -564,7 +567,7 @@ export default function ContactSection() {
           gap: 8px;
           font-family: monospace;
           font-size: 10px;
-          color: #4ade80;
+          color: #3F6231;
           letter-spacing: 0.08em;
         }
 
@@ -572,8 +575,8 @@ export default function ContactSection() {
           width: 6px;
           height: 6px;
           border-radius: 50%;
-          background: #4ade80;
-          box-shadow: 0 0 8px rgba(74,222,128,0.6);
+          background: #3F6231;
+          box-shadow: 0 0 8px rgba(63,98,49,0.5);
         }
 
         /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -583,11 +586,11 @@ export default function ContactSection() {
           position: relative;
           border-radius: 24px;
           padding: 44px;
-          background: #DE510A;
-          border: 1px solid rgba(20,20,20,0.07);
+          background: #FFFFFF;
+          border: 1px solid #eef1f6;
           backdrop-filter: blur(20px);
           -webkit-backdrop-filter: blur(20px);
-          box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+          box-shadow: 0 30px 60px rgba(63,98,49,0.14);
         }
 
         .form-header-bar {
@@ -595,7 +598,7 @@ export default function ContactSection() {
           justify-content: space-between;
           align-items: flex-start;
           margin-bottom: 32px;
-          border-bottom: 1px solid rgba(20,20,20,0.06);
+          border-bottom: 1px solid rgba(20,20,20,0.08);
           padding-bottom: 20px;
         }
 
@@ -620,9 +623,9 @@ export default function ContactSection() {
           font-family: monospace;
           font-size: 9px;
           font-weight: 700;
-          color: rgba(20,20,20,0.4);
-          background: #DE510A;
-          border: 1px solid rgba(20,20,20,0.08);
+          color: #DE510A;
+          background: rgba(222,81,10,0.08);
+          border: 1px solid rgba(222,81,10,0.25);
           padding: 4px 10px;
           border-radius: 4px;
           letter-spacing: 0.1em;
@@ -639,15 +642,15 @@ export default function ContactSection() {
         }
 
         .alert-success {
-          background: rgba(74,222,128,0.1);
-          border: 1px solid rgba(74,222,128,0.25);
-          color: #4ade80;
+          background: rgba(34,197,94,0.1);
+          border: 1px solid rgba(34,197,94,0.3);
+          color: #16a34a;
         }
 
         .alert-error {
-          background: rgba(248,113,113,0.1);
-          border: 1px solid rgba(248,113,113,0.25);
-          color: #f87171;
+          background: rgba(220,38,38,0.08);
+          border: 1px solid rgba(220,38,38,0.3);
+          color: #dc2626;
         }
 
         .form-grid {
@@ -667,7 +670,7 @@ export default function ContactSection() {
           font-family: 'Space Grotesk', sans-serif;
           font-size: 12.5px;
           font-weight: 600;
-          color: rgba(20,20,20,0.7);
+          color: #3F6231;
           margin-bottom: 8px;
         }
 
@@ -678,33 +681,33 @@ export default function ContactSection() {
           font-size: 14px;
           font-family: 'Inter', sans-serif;
           color: #111111;
-          background: #DE510A;
-          border: 1px solid rgba(20,20,20,0.08);
+          background: #FFFFFF;
+          border: 1.4px solid #d5dce8;
           transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
           box-sizing: border-box;
         }
 
         .form-input::placeholder {
-          color: rgba(20,20,20,0.25);
+          color: rgba(20,20,20,0.4);
         }
 
         .form-input:focus {
           outline: none;
-          background: #DE510A;
-          border-color: rgba(222,81,10,0.5);
-          box-shadow: 0 0 0 3px rgba(222,81,10,0.12);
+          background: #FFFFFF;
+          border-color: #DE510A;
+          box-shadow: 0 0 0 3px rgba(222,81,10,0.15);
         }
 
         select.form-input {
           appearance: none;
-          background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23C8A24A' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+          background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%233F6231' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
           background-repeat: no-repeat;
           background-position: right 18px center;
           padding-right: 42px;
         }
 
         select.form-input option {
-          background: #DE510A;
+          background: #3F6231;
           color: #ffffff;
         }
 
