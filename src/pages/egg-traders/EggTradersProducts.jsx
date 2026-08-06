@@ -98,13 +98,13 @@ export default function EggTradersProducts() {
           .et-p-badge { position: absolute; top: 12px; right: 12px; font-size: 10px; font-weight: 700; letter-spacing: .04em; background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.5); color: #FFFFFF; padding: 4px 10px; border-radius: 20px; text-transform: uppercase; z-index: 1; }
           .et-product-body { padding: 22px 20px; }
           .et-p-name { font-weight: 700; font-size: 14.5px; color: #001B4D; margin-bottom: 8px; }
-          .et-p-desc { font-size: 12.5px; color: rgba(20,20,20,0.62); line-height: 1.6; margin-bottom: 14px; min-height: 62px; }
+          .et-p-desc { font-size: 12.5px; color: rgba(0,27,77,0.68); line-height: 1.6; margin-bottom: 14px; min-height: 62px; }
           .et-p-tags { display: flex; gap: 6px; flex-wrap: wrap; }
           .et-p-tag { font-size: 10.5px; font-weight: 600; padding: 4px 10px; border-radius: 20px; background: rgba(247,107,13,0.1); border: 1px solid rgba(247,107,13,0.25); color: #E2580A; }
           .et-spec-wrap { margin-top: 56px; border-radius: 24px; overflow: hidden; border: 1px solid rgba(0,71,187,0.14); box-shadow: 0 2px 10px rgba(0,0,0,0.06); }
           table { width: 100%; border-collapse: collapse; background: #FFFFFF; }
           thead th { background: #0047BB; color: #FFFFFF; font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; padding: 16px 20px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.2); }
-          tbody td { padding: 16px 20px; font-size: 13.5px; color: rgba(20,20,20,0.75); border-bottom: 1px solid rgba(0,71,187,0.08); }
+          tbody td { padding: 16px 20px; font-size: 13.5px; color: rgba(0,27,77,0.78); border-bottom: 1px solid rgba(0,71,187,0.08); }
           tbody tr:last-child td { border-bottom: none; }
           tbody tr:hover td { background: #F0F5FF; }
           .et-status-pill { font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; display: inline-block; }

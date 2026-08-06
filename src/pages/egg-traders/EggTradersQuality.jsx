@@ -101,7 +101,7 @@ export default function EggTradersQuality() {
           </div>
         </section>
 
-        <section style={{ background: 'linear-gradient(180deg, #F76B0D 0%, #FFFFFF 100%)' }}>
+        <section style={{ background: '#FFFFFF' }}>
           <div className="container">
             <div className="sec-head center reveal" style={{ marginLeft: 'auto', marginRight: 'auto' }}>
               <div className="tag-eyebrow" style={{ justifyContent: 'center' }}>What Our Users Say</div>
@@ -130,34 +130,34 @@ export default function EggTradersQuality() {
         </section>
 
         <style>{`
-          .et-trace-panel { background: #F76B0D; border: 1px solid rgba(20,20,20,0.1); border-radius: 32px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.35); backdrop-filter: blur(12px); margin-bottom: 60px; }
-          .et-trace-top { padding: 24px 34px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(20,20,20,0.08); }
-          .et-trace-top-title { font-weight: 700; font-size: 15px; color: #111111; }
-          .et-trace-top-sub { font-size: 12px; color: rgba(20,20,20,0.55); margin-top: 3px; }
-          .et-trace-id { font-family: monospace; font-size: 12.5px; background: rgba(247,107,13,0.12); border: 1px solid rgba(247,107,13,0.25); padding: 6px 14px; border-radius: 6px; color: #F76B0D; }
+          .et-trace-panel { background: #FFFFFF; border: 1px solid #001B4D; border-radius: 32px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,27,77,0.08); backdrop-filter: blur(12px); margin-bottom: 60px; }
+          .et-trace-top { padding: 24px 34px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,27,77,0.1); }
+          .et-trace-top-title { font-weight: 700; font-size: 15px; color: #001B4D; }
+          .et-trace-top-sub { font-size: 12px; color: rgba(0,27,77,0.6); margin-top: 3px; }
+          .et-trace-id { font-family: monospace; font-size: 12.5px; background: rgba(0,27,77,0.06); border: 1px solid rgba(0,27,77,0.25); padding: 6px 14px; border-radius: 6px; color: #001B4D; }
           .et-trace-steps { display: flex; padding: 40px 34px 34px; position: relative; gap: 0; justify-content: space-between; }
-          .et-flow-line { position: absolute; top: 56px; left: 60px; right: 60px; height: 3px; background: rgba(20,20,20,0.1); border-radius: 4px; }
+          .et-flow-line { position: absolute; top: 56px; left: 60px; right: 60px; height: 3px; background: rgba(0,27,77,0.12); border-radius: 4px; }
           .et-flow-fill { height: 100%; width: 0; background: linear-gradient(90deg,#F76B0D,#F76B0D); border-radius: 4px; transition: width 1.2s cubic-bezier(.22,1,.36,1); }
           .et-flow-step { display: flex; flex-direction: column; align-items: center; position: relative; z-index: 2; flex: 1; }
-          .et-flow-dot { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(145deg,#F76B0D,#F76B0D); border: 1px solid rgba(247,107,13,0.4); color: #F76B0D; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 6px rgba(20,20,20,0.04); }
-          .et-flow-title { font-weight: 700; font-size: 12px; color: #111111; margin-top: 18px; text-align: center; }
-          .et-flow-time { font-size: 11px; color: rgba(20,20,20,0.5); margin-top: 4px; text-align: center; }
+          .et-flow-dot { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(145deg,#F76B0D,#F76B0D); border: 1px solid rgba(247,107,13,0.4); color: #F76B0D; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 6px rgba(0,27,77,0.04); }
+          .et-flow-title { font-weight: 700; font-size: 12px; color: #001B4D; margin-top: 18px; text-align: center; }
+          .et-flow-time { font-size: 11px; color: rgba(0,27,77,0.55); margin-top: 4px; text-align: center; }
           .et-cert-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; }
-          .et-cert-card { background: #F76B0D; border: 1px solid rgba(20,20,20,0.08); border-radius: 16px; padding: 24px; display: flex; align-items: center; gap: 16px; backdrop-filter: blur(10px); transition: box-shadow .3s, transform .3s, border-color .3s; }
-          .et-cert-card:hover { box-shadow: 0 2px 10px rgba(0,0,0,0.4); transform: translateY(-3px); border-color: rgba(247,107,13,0.3); }
-          .et-cert-ic { width: 44px; height: 44px; border-radius: 11px; background: rgba(247,107,13,0.12); border: 1px solid rgba(247,107,13,0.25); display: flex; align-items: center; justify-content: center; color: #F76B0D; flex-shrink: 0; }
-          .et-cert-name { font-weight: 700; font-size: 13.5px; color: #111111; }
-          .et-cert-body { font-size: 11.5px; color: rgba(20,20,20,0.55); margin-top: 3px; }
-          .et-cert-status { font-size: 9.5px; font-weight: 700; color: #F76B0D; background: rgba(247,107,13,0.12); padding: 2px 8px; border-radius: 20px; margin-top: 6px; display: inline-block; }
+          .et-cert-card { background: #FFFFFF; border: 1px solid #001B4D; border-radius: 16px; padding: 24px; display: flex; align-items: center; gap: 16px; backdrop-filter: blur(10px); transition: box-shadow .3s, transform .3s, border-color .3s; }
+          .et-cert-card:hover { box-shadow: 0 2px 10px rgba(0,27,77,0.1); transform: translateY(-3px); border-color: #F76B0D; }
+          .et-cert-ic { width: 44px; height: 44px; border-radius: 11px; background: rgba(0,27,77,0.06); border: 1px solid rgba(0,27,77,0.22); display: flex; align-items: center; justify-content: center; color: #001B4D; flex-shrink: 0; }
+          .et-cert-name { font-weight: 700; font-size: 13.5px; color: #001B4D; }
+          .et-cert-body { font-size: 11.5px; color: rgba(0,27,77,0.6); margin-top: 3px; }
+          .et-cert-status { font-size: 9.5px; font-weight: 700; color: #001B4D; background: rgba(0,27,77,0.08); padding: 2px 8px; border-radius: 20px; margin-top: 6px; display: inline-block; }
           .et-test-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
-           .et-test-card { background: #F76B0D; border: 1px solid rgba(20,20,20,0.08); border-radius: 24px; padding: 32px; backdrop-filter: blur(12px); transition: transform .4s cubic-bezier(.22,1,.36,1), box-shadow .4s cubic-bezier(.22,1,.36,1), border-color .4s; }
-           .et-test-card:hover { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,0,0,0.4); border-color: rgba(247,107,13,0.3); }
+           .et-test-card { background: #FFFFFF; border: 1px solid #001B4D; border-radius: 24px; padding: 32px; backdrop-filter: blur(12px); transition: transform .4s cubic-bezier(.22,1,.36,1), box-shadow .4s cubic-bezier(.22,1,.36,1), border-color .4s; }
+           .et-test-card:hover { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,27,77,0.12); border-color: #F76B0D; }
           .et-test-quote-icon { margin-bottom: 18px; }
-          .et-test-text { font-size: 14.5px; color: rgba(20,20,20,0.72); line-height: 1.75; margin-bottom: 24px; }
-          .et-test-person { display: flex; align-items: center; gap: 14px; border-top: 1px solid rgba(20,20,20,0.08); padding-top: 18px; }
+          .et-test-text { font-size: 14.5px; color: rgba(0,27,77,0.74); line-height: 1.75; margin-bottom: 24px; }
+          .et-test-person { display: flex; align-items: center; gap: 14px; border-top: 1px solid rgba(0,27,77,0.1); padding-top: 18px; }
           .et-test-avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(145deg,#F76B0D,#F76B0D); border: 1px solid rgba(247,107,13,0.35); color: #F76B0D; display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk',sans-serif; font-weight: 700; font-size: 14px; }
-          .et-test-name { font-weight: 700; font-size: 13.5px; color: #111111; }
-          .et-test-role { font-size: 11.5px; color: rgba(20,20,20,0.5); }
+          .et-test-name { font-weight: 700; font-size: 13.5px; color: #001B4D; }
+          .et-test-role { font-size: 11.5px; color: rgba(0,27,77,0.55); }
           @media (max-width: 1080px) { .et-cert-grid { grid-template-columns: repeat(2,1fr); } .et-test-grid { grid-template-columns: repeat(2,1fr); } }
           @media (max-width: 860px) { .et-trace-steps { flex-direction: column; gap: 24px; align-items: flex-start; padding-left: 40px; } .et-flow-line { display: none; } .et-flow-step { flex-direction: row; gap: 16px; width: 100%; } .et-flow-title { margin-top: 0; } }
           @media (max-width: 640px) { .et-test-grid { grid-template-columns: 1fr; } .et-cert-grid { grid-template-columns: 1fr; } }

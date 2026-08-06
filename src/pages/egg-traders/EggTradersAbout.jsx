@@ -88,19 +88,19 @@ export default function EggTradersAbout() {
           .et-quote-text { font-family: 'Space Grotesk',sans-serif; font-size: 23px; font-weight: 500; line-height: 1.5; position: relative; z-index: 2; }
           .et-quote-foot { margin-top: 24px; font-size: 13px; color: #F76B0D; position: relative; z-index: 2; }
           .et-value-list { display: flex; flex-direction: column; gap: 0; margin-top: 30px; }
-          .et-value-item { display: flex; gap: 18px; padding: 22px 0; border-bottom: 1px solid rgba(20,20,20,0.08); }
+          .et-value-item { display: flex; gap: 18px; padding: 22px 0; border-bottom: 1px solid rgba(0,27,77,0.1); }
           .et-value-item:first-child { padding-top: 0; }
           .et-value-icon { width: 46px; height: 46px; border-radius: 12px; background: rgba(247,107,13,0.12); border: 1px solid rgba(247,107,13,0.25); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: #F76B0D; }
-          .et-value-title { font-weight: 700; font-size: 15px; color: #111111; margin-bottom: 5px; }
-          .et-value-body { font-size: 13.5px; color: rgba(20,20,20,0.6); line-height: 1.65; }
-          .et-about-text p { font-size: 15.5px; color: rgba(20,20,20,0.7); margin-bottom: 18px; }
+          .et-value-title { font-weight: 700; font-size: 15px; color: #001B4D; margin-bottom: 5px; }
+          .et-value-body { font-size: 13.5px; color: rgba(0,27,77,0.7); line-height: 1.65; }
+          .et-about-text p { font-size: 15.5px; color: rgba(0,27,77,0.72); margin-bottom: 18px; }
           .et-team-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-top: 56px; }
-          .et-team-card { background: #F76B0D; border: 1px solid rgba(20,20,20,0.08); border-radius: 24px; padding: 32px 28px; backdrop-filter: blur(12px); transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s, border-color .35s; }
-          .et-team-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.4); border-color: rgba(247,107,13,0.35); background: #F76B0D; }
+          .et-team-card { background: #FFFFFF; border: 1px solid #001B4D; border-radius: 24px; padding: 32px 28px; backdrop-filter: blur(12px); transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s, border-color .35s; }
+          .et-team-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,27,77,0.12); border-color: #F76B0D; background: #FFFFFF; }
           .et-team-avatar { width: 56px; height: 56px; border-radius: 14px; background: linear-gradient(145deg,#F76B0D,#E2580A); border: 1px solid rgba(247,107,13,0.35); display: flex; align-items: center; justify-content: center; color: #F76B0D; margin-bottom: 18px; }
-          .et-team-name { font-weight: 700; font-size: 15px; color: #111111; }
-          .et-team-role { font-size: 12px; color: #F76B0D; font-weight: 600; margin: 4px 0 12px; text-transform: uppercase; letter-spacing: .04em; }
-          .et-team-bio { font-size: 13px; color: rgba(20,20,20,0.6); line-height: 1.6; }
+          .et-team-name { font-weight: 700; font-size: 15px; color: #001B4D; }
+          .et-team-role { font-size: 12px; color: #001B4D; font-weight: 600; margin: 4px 0 12px; text-transform: uppercase; letter-spacing: .04em; }
+          .et-team-bio { font-size: 13px; color: rgba(0,27,77,0.6); line-height: 1.6; }
           @media (max-width: 1080px) { .et-team-grid { grid-template-columns: repeat(2,1fr); } }
           @media (max-width: 860px) { .et-about-grid { grid-template-columns: 1fr; gap: 40px; } .et-team-grid { grid-template-columns: repeat(2,1fr); } .et-quote-block { padding: 36px 28px; } .et-quote-text { font-size: 19px; } }
           @media (max-width: 640px) { .et-team-grid { grid-template-columns: 1fr; } }

@@ -65,20 +65,20 @@ export default function EggTradersSolutions() {
 
         <style>{`
           .et-tier-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
-          .et-tier-card { background: #FFFFFF; border: 1px solid rgba(20,20,20,0.08); border-radius: 24px; overflow: hidden; backdrop-filter: blur(12px); transition: transform .4s, box-shadow .4s, border-color .4s; display: flex; flex-direction: column; }
-          .et-tier-card:hover { transform: translateY(-8px); box-shadow: 0 28px 70px rgba(0,0,0,0.15); border-color: rgba(247,107,13,0.35); }
+          .et-tier-card { background: #FFFFFF; border: 1px solid rgba(0,27,77,0.2); border-radius: 24px; overflow: hidden; backdrop-filter: blur(12px); transition: transform .4s, box-shadow .4s, border-color .4s; display: flex; flex-direction: column; }
+          .et-tier-card:hover { transform: translateY(-8px); box-shadow: 0 28px 70px rgba(0,27,77,0.12); border-color: rgba(247,107,13,0.35); }
           .et-tier-card.featured { border: 2px solid #F76B0D; position: relative; }
           .et-tier-card.featured::before { content: 'Most Popular'; position: absolute; top: 18px; right: -34px; background: #F76B0D; color: #ffffff; font-size: 10.5px; font-weight: 700; padding: 5px 38px; transform: rotate(40deg); letter-spacing: .04em; z-index: 2; }
-          .et-tier-head { padding: 30px 28px; background: #F5F7FA; border-bottom: 1px solid rgba(20,20,20,0.06); }
+          .et-tier-head { padding: 30px 28px; background: #F5F7FA; border-bottom: 1px solid rgba(0,27,77,0.08); }
           .et-tier-card.featured .et-tier-head { background: linear-gradient(155deg, #0047BB, #003399); border-bottom: 1px solid rgba(0,71,187,0.3); color: #ffffff; }
           .et-tier-badge { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #F76B0D; margin-bottom: 10px; display: block; }
           .et-tier-card.featured .et-tier-badge { color: #6EE7B7; }
-          .et-tier-name { font-family: 'Space Grotesk',sans-serif; font-size: 22px; font-weight: 600; color: #111111; }
+          .et-tier-name { font-family: 'Space Grotesk',sans-serif; font-size: 22px; font-weight: 600; color: #001B4D; }
           .et-tier-card.featured .et-tier-name { color: #FFFFFF; }
-          .et-tier-desc { font-size: 13px; color: rgba(20,20,20,0.6); margin-top: 6px; }
+          .et-tier-desc { font-size: 13px; color: rgba(0,27,77,0.66); margin-top: 6px; }
           .et-tier-card.featured .et-tier-desc { color: rgba(255,255,255,0.85); }
           .et-tier-feats { padding: 26px 28px 30px; flex: 1; display: flex; flex-direction: column; gap: 14px; }
-          .et-tf-item { display: flex; align-items: flex-start; gap: 10px; font-size: 13.5px; color: rgba(20,20,20,0.72); }
+          .et-tf-item { display: flex; align-items: flex-start; gap: 10px; font-size: 13.5px; color: rgba(0,27,77,0.74); }
           .et-tf-item svg { color: #F76B0D; flex-shrink: 0; margin-top: 2px; }
           @media (max-width: 1080px) { .et-tier-grid { grid-template-columns: repeat(2,1fr); } .et-tier-card:nth-child(3) { grid-column: 1 / -1; justify-self: center; width: 50%; } }
           @media (max-width: 640px) { .et-tier-card:nth-child(3) { width: 100%; } .et-tier-grid { grid-template-columns: 1fr; } .et-tier-head { padding: 24px 22px; } .et-tier-feats { padding: 22px 22px 26px; } }

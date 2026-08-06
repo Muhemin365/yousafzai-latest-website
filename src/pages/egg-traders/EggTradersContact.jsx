@@ -179,7 +179,7 @@ export default function EggTradersContact() {
           .et-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
           .et-f-group { margin-bottom: 20px; }
           .et-f-label { display: block; font-size: 12.5px; font-weight: 600; color: #001B4D; margin-bottom: 8px; }
-          .et-f-input { width: 100%; padding: 13px 16px; border: 1.4px solid #d5dce8; border-radius: 9px; font-size: 13.5px; font-family: 'Inter',sans-serif; color: #111111; background: #FFFFFF; transition: border-color .25s, box-shadow .25s; }
+          .et-f-input { width: 100%; padding: 13px 16px; border: 1.4px solid #d5dce8; border-radius: 9px; font-size: 13.5px; font-family: 'Inter',sans-serif; color: #001B4D; background: #FFFFFF; transition: border-color .25s, box-shadow .25s; }
           .et-f-input::placeholder { color: rgba(20,20,20,0.38); }
           .et-f-input:focus { outline: none; border-color: #F76B0D; box-shadow: 0 0 0 3px rgba(247,107,13,0.18); }
           select.et-f-input { appearance: none; background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23001B4D' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 38px; }
