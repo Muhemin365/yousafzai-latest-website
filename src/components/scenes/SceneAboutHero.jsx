@@ -67,14 +67,14 @@ export default function SceneAboutHero() {
     <section
       ref={containerRef}
       style={{
-        height: '100vh',
+        minHeight: '100vh',
         position: 'relative',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         overflow: 'hidden',
-        padding: '96px 0 40px',
+        padding: '160px 0 80px',
       }}
     >
       {/* === CONTINUOUS BG SLIDESHOW (2 layers for crossfade) === */}
