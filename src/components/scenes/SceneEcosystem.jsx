@@ -329,9 +329,9 @@ export default function SceneEcosystem() {
           position: relative;
           z-index: 10;
           padding: 24px 36px;
-          border: 2px solid rgba(222,81,10,0.3);
+          border: 1px solid #eef1f6;
           border-radius: 16px;
-          background: #DE510A;
+          background: #FFFFFF;
           backdrop-filter: blur(12px);
           cursor: pointer;
           text-align: center;
@@ -379,9 +379,9 @@ export default function SceneEcosystem() {
         .eco-child-node {
           z-index: 10;
           padding: 14px 22px;
-          border: 1px solid rgba(63,98,49,0.12);
+          border: 1px solid #eef1f6;
           border-radius: 12px;
-          background: #DE510A;
+          background: #FFFFFF;
           backdrop-filter: blur(8px);
           cursor: pointer;
           display: flex;
@@ -395,8 +395,8 @@ export default function SceneEcosystem() {
         .eco-child-node:hover,
         .eco-child-node.child-active {
           border-color: #B9320D;
-          background: #DE510A;
-          box-shadow: 0 0 30px rgba(185,50,13,0.2);
+          background: #FFFFFF;
+          box-shadow: 0 0 30px rgba(185,50,13,0.12);
           transform: translate(var(--tx, 0), var(--ty, 0)) scale(1.08) !important;
         }
 
@@ -425,10 +425,10 @@ export default function SceneEcosystem() {
            INFO PANEL (RIGHT)
            â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .eco-panel {
-          border: 1px solid rgba(185,50,13,0.3);
+          border: 1px solid #eef1f6;
           border-radius: 20px;
           padding: 44px;
-          background: #DE510A;
+          background: #FFFFFF;
           backdrop-filter: blur(20px);
           -webkit-backdrop-filter: blur(20px);
           position: relative;

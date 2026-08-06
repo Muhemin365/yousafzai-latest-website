@@ -318,8 +318,8 @@ export default function TeamPage() {
           position: relative;
           border-radius: 24px;
           overflow: hidden;
-          background: #DE510A;
-          border: 1px solid rgba(20,20,20,0.07);
+          background: #FFFFFF;
+          border: 1px solid #eef1f6;
           backdrop-filter: blur(16px);
           -webkit-backdrop-filter: blur(16px);
           transition: border-color 0.5s, box-shadow 0.5s;
@@ -331,8 +331,8 @@ export default function TeamPage() {
         .leader-card.card-hover {
           border-color: #B9320D;
           box-shadow:
-            0 30px 80px rgba(63,98,49,0.35),
-            0 0 40px rgba(185,50,13,0.12);
+            0 30px 80px rgba(63,98,49,0.12),
+            0 0 40px rgba(185,50,13,0.08);
         }
 
         .card-glow {
@@ -440,8 +440,8 @@ export default function TeamPage() {
           font-family: monospace;
           font-size: 11px;
           color: rgba(20,20,20,0.7);
-          background: #DE510A;
-          border: 1px solid rgba(20,20,20,0.08);
+          background: #FFFFFF;
+          border: 1px solid #eef1f6;
           padding: 5px 12px;
           border-radius: 6px;
         }
@@ -498,8 +498,8 @@ export default function TeamPage() {
           position: relative;
           border-radius: 20px;
           padding: 30px;
-          background: #DE510A;
-          border: 1px solid rgba(20,20,20,0.06);
+          background: #FFFFFF;
+          border: 1px solid #eef1f6;
           backdrop-filter: blur(12px);
           -webkit-backdrop-filter: blur(12px);
           transition: border-color 0.4s, box-shadow 0.4s;
@@ -510,7 +510,7 @@ export default function TeamPage() {
 
         .ops-card.card-hover {
           border-color: #B9320D;
-          box-shadow: 0 20px 50px rgba(63,98,49,0.3);
+          box-shadow: 0 20px 50px rgba(63,98,49,0.12);
         }
 
         .ops-avatar {

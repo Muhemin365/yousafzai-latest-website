@@ -263,13 +263,13 @@ export default function QualitySection() {
            TRACEABILITY CONSOLE (GOLDEN THEME)
            â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .trace-console {
-          background: #DE510A;
-          border: 1px solid rgba(222,81,10,0.3);
+          background: #FFFFFF;
+          border: 1px solid #eef1f6;
           border-radius: 24px;
           padding: 36px;
           backdrop-filter: blur(20px);
           margin-bottom: 80px;
-          box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+          box-shadow: 0 20px 60px rgba(0,0,0,0.08);
         }
 
         .trace-header {
@@ -394,8 +394,8 @@ export default function QualitySection() {
 
         .q-cert-card {
           position: relative;
-          background: #DE510A;
-          border: 1px solid rgba(20,20,20,0.08);
+          background: #FFFFFF;
+          border: 1px solid #eef1f6;
           border-radius: 20px;
           padding: 28px 24px;
           display: flex;
@@ -473,8 +473,8 @@ export default function QualitySection() {
         }
 
         .q-test-card {
-          background: #DE510A;
-          border: 1px solid rgba(20,20,20,0.08);
+          background: #FFFFFF;
+          border: 1px solid #eef1f6;
           border-radius: 24px;
           padding: 36px 28px;
           display: flex;

@@ -293,8 +293,8 @@ export default function ProcessSection() {
           position: relative;
           border-radius: 20px;
           padding: 36px 30px 28px;
-          background: #DE510A;
-          border: 1px solid rgba(20,20,20,0.06);
+          background: #FFFFFF;
+          border: 1px solid #eef1f6;
           backdrop-filter: blur(16px);
           -webkit-backdrop-filter: blur(16px);
           transition: border-color 0.5s, box-shadow 0.5s;
@@ -307,8 +307,8 @@ export default function ProcessSection() {
         .proc-card.card-hover {
           border-color: rgba(222,81,10,0.35);
           box-shadow:
-            0 30px 70px rgba(0,0,0,0.5),
-            0 0 40px rgba(222,81,10,0.05);
+            0 30px 70px rgba(0,0,0,0.12),
+            0 0 40px rgba(222,81,10,0.08);
         }
 
         /* Hover Glow */

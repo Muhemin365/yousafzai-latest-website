@@ -505,8 +505,8 @@ export default function SceneOurStory() {
           position: relative;
           border-radius: 20px;
           overflow: hidden;
-          background: #DE510A;
-          border: 1px solid rgba(20,20,20,0.06);
+          background: #FFFFFF;
+          border: 1px solid #eef1f6;
           backdrop-filter: blur(16px);
           -webkit-backdrop-filter: blur(16px);
           transition: border-color 0.5s, box-shadow 0.5s;
@@ -517,7 +517,7 @@ export default function SceneOurStory() {
         .leg-milestone:hover .leg-card-body {
           border-color: rgba(222,81,10,0.3);
           box-shadow:
-            0 30px 80px rgba(63,98,49,0.28),
+            0 30px 80px rgba(63,98,49,0.12),
             0 0 40px rgba(222,81,10,0.08),
             inset 0 1px 0 rgba(20,20,20,0.05);
         }
