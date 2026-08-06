@@ -150,7 +150,7 @@ export default function EggTradersContact() {
                   </div>
                   <button type="submit" disabled={submitting} style={{
                     width: '100%', padding: '13px 26px', borderRadius: 9, border: 'none', cursor: submitting ? 'not-allowed' : 'pointer',
-                    background: 'linear-gradient(120deg,#F76B0D,#F76B0D 55%,#F76B0D)', color: '#111111',
+                    background: 'linear-gradient(120deg,#F76B0D,#F76B0D 55%,#E2580A)', color: '#ffffff',
                     fontFamily: "'Inter',sans-serif", fontWeight: 600, fontSize: 13.5,
                     display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8,
                     boxShadow: '0 10px 24px rgba(247,107,13,0.35)',
@@ -175,17 +175,17 @@ export default function EggTradersContact() {
           .et-ci-icon { width: 44px; height: 44px; border-radius: 12px; background: rgba(247,107,13,0.12); border: 1px solid rgba(247,107,13,0.25); display: flex; align-items: center; justify-content: center; color: #F76B0D; flex-shrink: 0; }
           .et-ci-label { font-size: 11px; color: rgba(20,20,20,0.5); text-transform: uppercase; letter-spacing: .06em; font-weight: 600; margin-bottom: 4px; }
           .et-ci-value { font-size: 14.5px; color: #111111; font-weight: 600; }
-          .et-form-card { background: #F76B0D; border: 1px solid rgba(20,20,20,0.1); border-radius: 32px; padding: 42px; box-shadow: 0 20px 50px rgba(0,0,0,0.35); backdrop-filter: blur(12px); }
+          .et-form-card { background: #FFFFFF; border: 1px solid #e3e9f2; border-radius: 24px; padding: 42px; box-shadow: 0 20px 50px rgba(0,27,77,0.12); }
           .et-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
           .et-f-group { margin-bottom: 20px; }
-          .et-f-label { display: block; font-size: 12.5px; font-weight: 600; color: #F76B0D; margin-bottom: 8px; }
-          .et-f-input { width: 100%; padding: 13px 16px; border: 1.4px solid rgba(20,20,20,0.14); border-radius: 9px; font-size: 13.5px; font-family: 'Inter',sans-serif; color: #111111; background: #F76B0D; transition: border-color .25s, box-shadow .25s; }
-          .et-f-input::placeholder { color: rgba(20,20,20,0.35); }
-          .et-f-input:focus { outline: none; border-color: #F76B0D; box-shadow: 0 0 0 3px rgba(247,107,13,0.22); }
-          select.et-f-input { appearance: none; background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23C8A24A' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 38px; }
-          select.et-f-input option { background: #0047BB; color: #ffffff; }
+          .et-f-label { display: block; font-size: 12.5px; font-weight: 600; color: #001B4D; margin-bottom: 8px; }
+          .et-f-input { width: 100%; padding: 13px 16px; border: 1.4px solid #d5dce8; border-radius: 9px; font-size: 13.5px; font-family: 'Inter',sans-serif; color: #111111; background: #FFFFFF; transition: border-color .25s, box-shadow .25s; }
+          .et-f-input::placeholder { color: rgba(20,20,20,0.38); }
+          .et-f-input:focus { outline: none; border-color: #F76B0D; box-shadow: 0 0 0 3px rgba(247,107,13,0.18); }
+          select.et-f-input { appearance: none; background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23001B4D' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 38px; }
+          select.et-f-input option { background: #001B4D; color: #ffffff; }
           textarea.et-f-input { resize: vertical; min-height: 90px; }
-          .et-form-note { font-size: 12px; color: rgba(20,20,20,0.5); text-align: center; margin-top: 14px; }
+          .et-form-note { font-size: 12px; color: rgba(20,20,20,0.6); text-align: center; margin-top: 14px; }
           @media (max-width: 860px) { .et-contact-grid { grid-template-columns: 1fr; gap: 32px; } .et-form-row { grid-template-columns: 1fr; } .et-form-card { padding: 32px 24px; } }
           @media (max-width: 420px) { .et-form-card { padding: 20px 16px; border-radius: 20px; } .et-f-label { font-size: 12px; } .et-f-input { padding: 11px 14px; font-size: 13px; } }
         `}</style>
