@@ -14,7 +14,7 @@ export default function TextEditor({ data, onUpdate, fields }) {
       setTimeout(() => setSaved(false), 2000);
     }, 800);
     return () => clearTimeout(timer);
-  }, [form]);
+  }, [form, data, onUpdate]);
 
   const update = (key, val) => setForm((f) => ({ ...f, [key]: val }));
 
@@ -25,7 +25,7 @@ export default function TextEditor({ data, onUpdate, fields }) {
       </div>
       {fields.map((field) => (
         <div key={field.key} style={{ marginBottom: 16 }}>
-          <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: '#0B2545', marginBottom: 4 }}>{field.label}</label>
+          <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: '#B8860B', marginBottom: 4 }}>{field.label}</label>
           {field.type === 'textarea' ? (
             <textarea value={form[field.key] || ''} onChange={(e) => update(field.key, e.target.value)} rows={field.rows || 3} style={{ ...inputStyle, resize: 'vertical' }} />
           ) : (
@@ -44,6 +44,6 @@ const inputStyle = {
   borderRadius: 8,
   fontSize: 13,
   fontFamily: "'Inter',sans-serif",
-  color: '#1B2230',
+  color: '#111111',
   background: '#FFFFFF',
 };

@@ -6,16 +6,25 @@ import { api } from '../lib/api';
 const SECTION_ENDPOINT = {
   hero: 'hero',
   about: 'about',
+  overview: 'overview',
   products: 'products',
   solutions: 'solutions',
   supplyChain: 'supply-chain',
+  distribution: 'distribution',
   whyUs: 'why-us',
+  statsBand: 'stats-band',
+  industries: 'industries',
+  process: 'process',
   quality: 'quality',
   contact: 'contact',
   company: 'company',
   testimonials: 'testimonials',
   faq: 'faq',
   ourCompanies: 'our-companies',
+  footer: 'footer',
+  banners: 'banners',
+  cta: 'cta',
+  aboutScenes: 'about-scenes',
   eggTraders: 'egg-traders',
 };
 
@@ -107,10 +116,27 @@ export const useCMSStore = create(
       },
       updateDistribution: (data) => {
         set((s) => ({ distribution: { ...s.distribution, ...data } }));
+        saveSection('distribution');
       },
       updateWhyUs: (data) => {
         set((s) => ({ whyUs: { ...s.whyUs, ...data } }));
         saveSection('whyUs');
+      },
+      updateStatsBand: (data) => {
+        set((s) => ({ statsBand: { ...s.statsBand, ...data } }));
+        saveSection('statsBand');
+      },
+      updateIndustries: (industries) => {
+        set({ industries });
+        saveSection('industries');
+      },
+      updateProcess: (process) => {
+        set({ process });
+        saveSection('process');
+      },
+      updateOverview: (data) => {
+        set((s) => ({ overview: { ...s.overview, ...data } }));
+        saveSection('overview');
       },
       updateQuality: (data) => {
         set((s) => ({ quality: { ...s.quality, ...data } }));
@@ -122,6 +148,19 @@ export const useCMSStore = create(
       },
       updateFooter: (data) => {
         set((s) => ({ footer: { ...s.footer, ...data } }));
+        saveSection('footer');
+      },
+      updateBanners: (data) => {
+        set((s) => ({ banners: { ...s.banners, ...data } }));
+        saveSection('banners');
+      },
+      updateCta: (data) => {
+        set((s) => ({ cta: { ...s.cta, ...data } }));
+        saveSection('cta');
+      },
+      updateAboutScenes: (data) => {
+        set((s) => ({ aboutScenes: { ...s.aboutScenes, ...data } }));
+        saveSection('aboutScenes');
       },
       updateCompany: (data) => {
         set((s) => ({ company: { ...s.company, ...data } }));
@@ -165,7 +204,7 @@ export const useCMSStore = create(
       storage: createJSONStorage(() => localStorage),
       merge: (persisted, current) => deepMerge(current, persisted),
       partialize: (state) => {
-        const { apiInitialized, ...rest } = state;
+        const { _apiInitialized, ...rest } = state;
         return rest;
       },
     }

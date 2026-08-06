@@ -2,11 +2,13 @@ import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useCMSStore } from '../store/useCMSStore';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function CTASection() {
   const containerRef = useRef(null);
+  const cta = useCMSStore((s) => s.cta);
 
   useEffect(() => {
     let ctx = gsap.context(() => {
@@ -30,20 +32,20 @@ export default function CTASection() {
           <div className="cta-glow-orb" />
 
           <div className="cta-left cta-animate">
-            <span className="cta-eyebrow">READY_TO_PARTNER // B2B_SUPPLY</span>
-            <h2 className="cta-title">Ready for predictable, certified egg supply?</h2>
-            <p className="cta-sub">Get a formal B2B quotation in 4 business hours, or speak with our commercial partnerships team about dedicated supply contracts.</p>
+            <span className="cta-eyebrow">{cta?.eyebrow || 'READY_TO_PARTNER // B2B_SUPPLY'}</span>
+            <h2 className="cta-title">{cta?.title || 'Ready for predictable, certified egg supply?'}</h2>
+            <p className="cta-sub">{cta?.sub || 'Get a formal B2B quotation in 4 business hours, or speak with our commercial partnerships team about dedicated supply contracts.'}</p>
           </div>
 
           <div className="cta-actions cta-animate">
-            <Link to="/contact" className="btn-cta-primary">
-              <span>Request a Quote</span>
+            <Link to={cta?.primaryCta?.action || '/contact'} className="btn-cta-primary">
+              <span>{cta?.primaryCta?.label || 'Request a Quote'}</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" width="18" height="18" className="btn-arrow">
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </Link>
-            <Link to="/contact" className="btn-cta-secondary">
-              <span>Talk to Us</span>
+            <Link to={cta?.secondaryCta?.action || '/contact'} className="btn-cta-secondary">
+              <span>{cta?.secondaryCta?.label || 'Talk to Us'}</span>
             </Link>
           </div>
         </div>
@@ -52,12 +54,12 @@ export default function CTASection() {
       <style>{`
         .cta-section-wrapper {
           padding: 40px 0 100px;
-          background: #060e1a;
+          background: #FBF7F0;
         }
 
         .cta-band {
-          background: rgba(255,255,255,0.025);
-          border: 1px solid rgba(255,255,255,0.08);
+          background: #3F6231;
+          border: 1px solid rgba(255,255,255,0.2);
           backdrop-filter: blur(20px);
           -webkit-backdrop-filter: blur(20px);
           border-radius: 28px;
@@ -70,15 +72,15 @@ export default function CTASection() {
           gap: 32px;
           position: relative;
           overflow: hidden;
-          box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+          box-shadow: 0 30px 80px rgba(63,98,49,0.4);
         }
 
         .cta-bg-grid {
           position: absolute;
           inset: 0;
           background-image:
-            linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+            linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
           background-size: 40px 40px;
           pointer-events: none;
         }
@@ -88,7 +90,7 @@ export default function CTASection() {
           width: 550px;
           height: 550px;
           border-radius: 50%;
-          background: radial-gradient(circle, rgba(200,162,74,0.15), transparent 70%);
+          background: radial-gradient(circle, rgba(85,129,63,0.45), transparent 70%);
           top: -220px;
           right: -150px;
           pointer-events: none;
@@ -112,7 +114,7 @@ export default function CTASection() {
           font-family: monospace;
           font-size: 11px;
           letter-spacing: 0.2em;
-          color: #c8a24a;
+          color: #FBF7F0;
           margin-bottom: 14px;
         }
 
@@ -120,7 +122,7 @@ export default function CTASection() {
           font-family: 'Space Grotesk', sans-serif;
           font-size: clamp(2rem, 3.5vw, 3rem);
           font-weight: 700;
-          background: linear-gradient(135deg, #ffffff 0%, #c8a24a 100%);
+          background: linear-gradient(135deg, #ffffff 0%, #FBF7F0 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
@@ -132,7 +134,7 @@ export default function CTASection() {
 
         .cta-sub {
           font-size: 16px;
-          color: rgba(255,255,255,0.6);
+          color: rgba(255,255,255,0.88);
           max-width: 560px;
           margin: 0 auto;
           text-align: center;
@@ -156,16 +158,16 @@ export default function CTASection() {
           font-size: 15px;
           padding: 16px 32px;
           border-radius: 12px;
-          background: linear-gradient(135deg, #c8a24a 0%, #F2E7C9 100%);
-          color: #060e1a;
+          background: linear-gradient(135deg, #B9320D 0%, #B9320D 100%);
+          color: #ffffff;
           text-decoration: none;
           transition: transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.3s ease;
-          box-shadow: 0 10px 30px rgba(200,162,74,0.25);
+          box-shadow: 0 10px 30px rgba(63,98,49,0.35);
         }
 
         .btn-cta-primary:hover {
           transform: translateY(-3px);
-          box-shadow: 0 16px 40px rgba(200,162,74,0.4);
+          box-shadow: 0 16px 40px rgba(63,98,49,0.45);
         }
 
         .btn-cta-secondary {
@@ -176,16 +178,16 @@ export default function CTASection() {
           font-size: 15px;
           padding: 16px 30px;
           border-radius: 12px;
-          background: rgba(255,255,255,0.04);
-          border: 1px solid rgba(255,255,255,0.12);
+          background: rgba(255,255,255,0.12);
+          border: 1.5px solid rgba(255,255,255,0.45);
           color: #ffffff;
           text-decoration: none;
           transition: background 0.3s, border-color 0.3s, transform 0.3s;
         }
 
         .btn-cta-secondary:hover {
-          background: rgba(255,255,255,0.08);
-          border-color: rgba(200,162,74,0.4);
+          background: rgba(255,255,255,0.2);
+          border-color: #FBF7F0;
           transform: translateY(-3px);
         }
 

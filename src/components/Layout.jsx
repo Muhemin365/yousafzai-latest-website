@@ -48,9 +48,9 @@ export default function Layout() {
           YOUSAFZAI
         </div>
         <style>{`
-          #loader { position: fixed; inset: 0; background: #071A30; z-index: 9999; display: flex; align-items: center; justify-content: center; }
-          .loader-mark { font-family: 'Space Grotesk',sans-serif; color: #FFFFFF; font-size: 15px; letter-spacing: .18em; display: flex; flex-direction: column; align-items: center; gap: 18px; }
-          .loader-ring { width: 46px; height: 46px; border-radius: 50%; border: 2px solid rgba(255,255,255,.18); border-top-color: #C8A24A; animation: loaderSpin 0.9s linear infinite; }
+          #loader { position: fixed; inset: 0; background: #FBF7F0; z-index: 9999; display: flex; align-items: center; justify-content: center; }
+          .loader-mark { font-family: 'Space Grotesk',sans-serif; color: #111111; font-size: 15px; letter-spacing: .18em; display: flex; flex-direction: column; align-items: center; gap: 18px; }
+          .loader-ring { width: 46px; height: 46px; border-radius: 50%; border: 2px solid rgba(20,20,20,.18); border-top-color: #B9320D; animation: loaderSpin 0.9s linear infinite; }
           @keyframes loaderSpin { to { transform: rotate(360deg); } }
         `}</style>
       </div>
@@ -75,17 +75,17 @@ export default function Layout() {
         section { padding: 120px 0; position: relative; scroll-margin-top: 100px; }
         .page-enter { animation: pageFadeIn .6s cubic-bezier(.22,1,.36,1) both; }
         @keyframes pageFadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-        .ripple { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.55); transform: scale(0); animation: rippleAnim .6s ease-out; pointer-events: none; }
+        .ripple { position: absolute; border-radius: 50%; background: rgba(20,20,20,0.35); transform: scale(0); animation: rippleAnim .6s ease-out; pointer-events: none; }
         @keyframes rippleAnim { to { transform: scale(3.2); opacity: 0; } }
-        .back-top { position: fixed; bottom: 28px; right: 28px; width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); backdrop-filter: blur(12px); color: #FFFFFF; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 14px 36px rgba(0,0,0,0.35); opacity: 0; transform: translateY(10px); transition: opacity .3s, transform .3s, background .3s; z-index: 300; }
+        .back-top { position: fixed; bottom: 28px; right: 28px; width: 48px; height: 48px; border-radius: 50%; background: #DE510A; border: 1px solid rgba(185,50,13,0.5); backdrop-filter: blur(12px); color: #ffffff; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 14px 36px rgba(63,98,49,0.25); opacity: 0; transform: translateY(10px); transition: opacity .3s, transform .3s, background .3s; z-index: 300; }
         .back-top.show { opacity: 1; transform: translateY(0); }
-        .back-top:hover { background: #C8A24A; color: #060E1A; }
-        .tag-eyebrow { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-size: 11.5px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #C8A24A; margin-bottom: 16px; }
-        .tag-eyebrow::before { content: ''; width: 22px; height: 1.6px; background: #C8A24A; }
-        .sec-head { text-align: center; margin-left: auto; margin-right: auto; margin-bottom: 56px; background: linear-gradient(150deg, rgba(11,37,69,0.55) 0%, rgba(7,26,48,0.4) 100%); border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; padding: 36px 40px; backdrop-filter: blur(8px); box-shadow: 0 20px 50px rgba(0,0,0,0.25); }
+        .back-top:hover { background: #B9320D; color: #ffffff; }
+        .tag-eyebrow { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-size: 11.5px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #B9320D; margin-bottom: 16px; }
+        .tag-eyebrow::before { content: ''; width: 22px; height: 1.6px; background: #B9320D; }
+        .sec-head { text-align: center; margin-left: auto; margin-right: auto; margin-bottom: 56px; background: #ffffff; border: 1px solid rgba(63,98,49,0.18); border-top: 4px solid #3F6231; border-radius: 24px; padding: 36px 40px; box-shadow: 0 20px 50px rgba(63,98,49,0.12); }
         .sec-head.center { margin-left: auto; margin-right: auto; text-align: center; }
-        .sec-title { font-family: 'Space Grotesk',sans-serif; font-weight: 600; font-size: clamp(1.9rem,3vw,2.7rem); color: #FFFFFF; line-height: 1.18; letter-spacing: -0.01em; }
-        .sec-sub { font-size: 15.5px; color: rgba(255,255,255,0.66); margin-top: 16px; line-height: 1.75; max-width: 720px; margin-left: auto; margin-right: auto; }
+        .sec-title { font-family: 'Space Grotesk',sans-serif; font-weight: 600; font-size: clamp(1.9rem,3vw,2.7rem); color: #3F6231; line-height: 1.18; letter-spacing: -0.01em; }
+        .sec-sub { font-size: 15.5px; color: rgba(20,20,20,0.68); margin-top: 16px; line-height: 1.75; max-width: 720px; margin-left: auto; margin-right: auto; }
         @media (max-width: 640px) {
           .sec-head { padding: 28px 20px; margin-bottom: 40px; border-radius: 16px; }
           .sec-sub { font-size: 14.5px; }

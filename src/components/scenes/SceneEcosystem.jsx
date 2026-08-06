@@ -16,7 +16,7 @@ const ecosystemData = {
     { name: 'Egg Production', role: 'Poultry Farming Operations', capacity: 'China Chowk & Phalai Farms', markets: 'KPK, Punjab', ops: 'ISO Sourced / Traceable', icon: '🥚' },
     { name: 'Processing', role: 'Agri Foods Liquid Plant', capacity: '45,000 Eggs / Hour', markets: 'Industrial B2B', ops: 'Value-Added Liquid Egg', icon: '⚙️' },
     { name: 'Packaging', role: 'Hygienic Sizing & Sorting', capacity: '6 to 360 Pack Cartons', markets: 'Retailers & Wholesalers', ops: 'Custom Branded Trays', icon: '📦' },
-    { name: 'Distribution', role: 'Cold Chain Logistics', capacity: '35 Refrigerated Vehicles', markets: 'Pan-Pakistan Delivery', ops: 'Continuous 2-5°C Tracking', icon: '🚚' },
+    { name: 'Distribution', role: 'Cold Chain Logistics', capacity: '35 Refrigerated Vehicles', markets: 'Pan-Pakistan Delivery', ops: 'Continuous 2–5°C Tracking', icon: '🚚' },
   ],
 };
 
@@ -137,8 +137,8 @@ export default function SceneEcosystem() {
                 transformOrigin: '0 50%',
                 transform: `rotate(${angle}deg)`,
                 background: activeIdx === i
-                  ? 'linear-gradient(90deg, #c8a24a, rgba(200,162,74,0.1))'
-                  : 'linear-gradient(90deg, rgba(255,255,255,0.1), transparent)',
+                  ? 'linear-gradient(90deg, #DE510A, rgba(222,81,10,0.1))'
+                  : 'linear-gradient(90deg, rgba(20,20,20,0.1), transparent)',
                 transition: 'background 0.4s',
               }}
             />
@@ -221,12 +221,12 @@ export default function SceneEcosystem() {
       </div>
 
       <style>{`
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            SECTION
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .eco-section {
           background: #0a1222;
-          color: #fff;
+          color: #111111;
           padding: 140px 40px 120px;
           position: relative;
           overflow: hidden;
@@ -238,8 +238,8 @@ export default function SceneEcosystem() {
           position: absolute;
           inset: 0;
           background-image:
-            linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+            linear-gradient(rgba(20,20,20,0.015) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(20,20,20,0.015) 1px, transparent 1px);
           background-size: 60px 60px;
           pointer-events: none;
           z-index: 0;
@@ -251,15 +251,15 @@ export default function SceneEcosystem() {
           left: 30%;
           width: 600px;
           height: 600px;
-          background: radial-gradient(circle, rgba(200,162,74,0.06) 0%, transparent 70%);
+          background: radial-gradient(circle, rgba(222,81,10,0.06) 0%, transparent 70%);
           transform: translate(-50%, -50%);
           pointer-events: none;
           z-index: 0;
         }
 
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            HEADER
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .eco-header {
           text-align: center;
           max-width: 650px;
@@ -272,7 +272,7 @@ export default function SceneEcosystem() {
           font-family: monospace;
           font-size: 12px;
           letter-spacing: 0.2em;
-          color: #c8a24a;
+          color: #DE510A;
           display: block;
           margin-bottom: 16px;
           visibility: hidden;
@@ -283,7 +283,7 @@ export default function SceneEcosystem() {
           font-size: clamp(36px, 5vw, 52px);
           font-weight: 700;
           margin: 0 0 16px;
-          background: linear-gradient(135deg, #ffffff 0%, #c8a24a 100%);
+          background: linear-gradient(135deg, #111111 0%, #B9320D 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
@@ -292,15 +292,15 @@ export default function SceneEcosystem() {
 
         .eco-sub {
           font-size: 16px;
-          color: rgba(255,255,255,0.45);
+          color: rgba(20,20,20,0.45);
           line-height: 1.6;
           margin: 0;
           visibility: hidden;
         }
 
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            LAYOUT
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .eco-layout {
           display: grid;
           grid-template-columns: 1fr 1fr;
@@ -312,9 +312,9 @@ export default function SceneEcosystem() {
           z-index: 2;
         }
 
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            NETWORK (LEFT)
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .eco-network {
           position: relative;
           width: 100%;
@@ -324,14 +324,14 @@ export default function SceneEcosystem() {
           justify-content: center;
         }
 
-        /* ── Hub (Center) ── */
+        /* â”€â”€ Hub (Center) â”€â”€ */
         .eco-hub {
           position: relative;
           z-index: 10;
           padding: 24px 36px;
-          border: 2px solid rgba(200,162,74,0.3);
+          border: 2px solid rgba(222,81,10,0.3);
           border-radius: 16px;
-          background: rgba(10,18,34,0.9);
+          background: #DE510A;
           backdrop-filter: blur(12px);
           cursor: pointer;
           text-align: center;
@@ -341,15 +341,15 @@ export default function SceneEcosystem() {
 
         .eco-hub:hover,
         .eco-hub.hub-active {
-          border-color: #c8a24a;
-          box-shadow: 0 0 40px rgba(200,162,74,0.15), 0 0 80px rgba(200,162,74,0.05);
+          border-color: #B9320D;
+          box-shadow: 0 0 40px rgba(185,50,13,0.25), 0 0 80px rgba(185,50,13,0.1);
         }
 
         .hub-glow {
           position: absolute;
           inset: -20px;
           border-radius: 30px;
-          background: radial-gradient(circle, rgba(200,162,74,0.08) 0%, transparent 70%);
+          background: radial-gradient(circle, rgba(222,81,10,0.08) 0%, transparent 70%);
           pointer-events: none;
           opacity: 0;
           transition: opacity 0.4s;
@@ -363,7 +363,7 @@ export default function SceneEcosystem() {
         .hub-label {
           font-family: monospace;
           font-size: 10px;
-          color: #c8a24a;
+          color: #DE510A;
           letter-spacing: 0.15em;
         }
 
@@ -372,16 +372,16 @@ export default function SceneEcosystem() {
           font-size: 18px;
           font-weight: 700;
           margin: 8px 0 0;
-          color: #fff;
+          color: #111111;
         }
 
-        /* ── Child Nodes ── */
+        /* â”€â”€ Child Nodes â”€â”€ */
         .eco-child-node {
           z-index: 10;
           padding: 14px 22px;
-          border: 1px solid rgba(255,255,255,0.08);
+          border: 1px solid rgba(63,98,49,0.12);
           border-radius: 12px;
-          background: rgba(10,18,34,0.85);
+          background: #DE510A;
           backdrop-filter: blur(8px);
           cursor: pointer;
           display: flex;
@@ -394,9 +394,9 @@ export default function SceneEcosystem() {
 
         .eco-child-node:hover,
         .eco-child-node.child-active {
-          border-color: rgba(200,162,74,0.5);
-          background: rgba(200,162,74,0.08);
-          box-shadow: 0 0 30px rgba(200,162,74,0.1);
+          border-color: #B9320D;
+          background: #DE510A;
+          box-shadow: 0 0 30px rgba(185,50,13,0.2);
           transform: translate(var(--tx, 0), var(--ty, 0)) scale(1.08) !important;
         }
 
@@ -408,27 +408,27 @@ export default function SceneEcosystem() {
           font-family: 'Space Grotesk', sans-serif;
           font-size: 14px;
           font-weight: 600;
-          color: rgba(255,255,255,0.8);
+          color: rgba(20,20,20,0.8);
         }
 
         .child-active .child-name {
-          color: #fff;
+          color: #111111;
         }
 
-        /* ── Branches ── */
+        /* â”€â”€ Branches â”€â”€ */
         .eco-branch {
           visibility: hidden;
           z-index: 1;
         }
 
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            INFO PANEL (RIGHT)
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .eco-panel {
-          border: 1px solid rgba(200,162,74,0.15);
+          border: 1px solid rgba(185,50,13,0.3);
           border-radius: 20px;
           padding: 44px;
-          background: rgba(10,18,34,0.6);
+          background: #DE510A;
           backdrop-filter: blur(20px);
           -webkit-backdrop-filter: blur(20px);
           position: relative;
@@ -443,7 +443,7 @@ export default function SceneEcosystem() {
           left: 0;
           right: 0;
           height: 3px;
-          background: linear-gradient(90deg, #c8a24a, #F2E7C9, #c8a24a);
+          background: linear-gradient(90deg, #DE510A, #F2E7C9, #DE510A);
           opacity: 0.6;
         }
 
@@ -457,7 +457,7 @@ export default function SceneEcosystem() {
         .panel-tag {
           font-family: monospace;
           font-size: 11px;
-          color: #c8a24a;
+          color: #DE510A;
           letter-spacing: 0.12em;
         }
 
@@ -488,12 +488,12 @@ export default function SceneEcosystem() {
           font-size: 30px;
           font-weight: 700;
           margin: 0 0 20px;
-          color: #fff;
+          color: #111111;
         }
 
         .panel-divider {
           height: 1px;
-          background: linear-gradient(90deg, rgba(200,162,74,0.3), transparent);
+          background: linear-gradient(90deg, rgba(222,81,10,0.3), transparent);
           margin-bottom: 28px;
         }
 
@@ -508,7 +508,7 @@ export default function SceneEcosystem() {
         .cell-label {
           font-family: monospace;
           font-size: 10px;
-          color: rgba(255,255,255,0.3);
+          color: rgba(20,20,20,0.3);
           letter-spacing: 0.1em;
           margin-bottom: 8px;
         }
@@ -516,7 +516,7 @@ export default function SceneEcosystem() {
         .cell-value {
           font-family: 'Space Grotesk', sans-serif;
           font-size: 15px;
-          color: rgba(255,255,255,0.85);
+          color: rgba(20,20,20,0.85);
           line-height: 1.5;
         }
 
@@ -535,9 +535,9 @@ export default function SceneEcosystem() {
           flex-shrink: 0;
         }
 
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            MOBILE
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         @media (max-width: 900px) {
           .eco-section {
             padding: 100px 20px 80px;

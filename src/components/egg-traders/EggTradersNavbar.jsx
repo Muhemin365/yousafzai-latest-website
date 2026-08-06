@@ -111,18 +111,18 @@ export default function EggTradersNavbar() {
           right: 0;
           z-index: 500;
           padding: 20px 0;
-          background: rgba(7, 26, 48, 0.85);
+          background: rgba(0, 27, 77, 0.9);
           backdrop-filter: blur(20px);
           -webkit-backdrop-filter: blur(20px);
-          border-bottom: 1px solid rgba(245, 158, 11, 0.35);
+          border-bottom: 1px solid rgba(247, 107, 13, 0.3);
           transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         .et-nav-glass.is-scrolled {
           padding: 12px 0;
-          background: rgba(7, 26, 48, 0.95);
-          border-bottom-color: rgba(245, 158, 11, 0.5);
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+          background: rgba(0, 27, 77, 0.96);
+          border-bottom-color: rgba(247, 107, 13, 0.5);
+          box-shadow: 0 10px 30px rgba(0, 27, 77, 0.35);
         }
 
         .et-nav-container {
@@ -156,13 +156,13 @@ export default function EggTradersNavbar() {
           font-family: 'Space Grotesk', sans-serif;
           font-weight: 700;
           font-size: 15px;
-          color: #fff;
+          color: #FFFFFF;
         }
 
         .et-tag-sub {
           font-family: monospace;
           font-size: 9px;
-          color: #f59e0b;
+          color: #F76B0D;
           letter-spacing: 0.12em;
         }
 
@@ -177,14 +177,14 @@ export default function EggTradersNavbar() {
           font-family: 'Space Grotesk', sans-serif;
           font-size: 14px;
           font-weight: 500;
-          color: rgba(255, 255, 255, 0.8);
+          color: rgba(255, 255, 255, 0.78);
           padding: 6px 0;
           text-decoration: none;
           transition: color 0.3s;
         }
 
         .et-nav-link-item:hover, .et-nav-link-item.active {
-          color: #fef08a;
+          color: #F76B0D;
         }
 
         .et-nav-underline {
@@ -193,7 +193,7 @@ export default function EggTradersNavbar() {
           bottom: 0;
           width: 0;
           height: 2px;
-          background: linear-gradient(90deg, #f59e0b, #7FB6F2);
+          background: linear-gradient(90deg, #F76B0D, #F76B0D);
           border-radius: 2px;
           transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
@@ -218,16 +218,16 @@ export default function EggTradersNavbar() {
           font-size: 13.5px;
           padding: 10px 22px;
           border-radius: 10px;
-          background: linear-gradient(135deg, #f59e0b 0%, #fef08a 100%);
-          color: #071a30;
+          background: linear-gradient(135deg, #F76B0D 0%, #E2580A 100%);
+          color: #ffffff;
           text-decoration: none;
           transition: transform 0.3s, box-shadow 0.3s;
-          box-shadow: 0 8px 24px rgba(245, 158, 11, 0.35);
+          box-shadow: 0 8px 24px rgba(247, 107, 13, 0.35);
         }
 
         .et-cta-gold:hover {
           transform: translateY(-2px);
-          box-shadow: 0 12px 30px rgba(245, 158, 11, 0.5);
+          box-shadow: 0 12px 30px rgba(247, 107, 13, 0.45);
         }
 
         .et-main-site-btn {
@@ -236,9 +236,9 @@ export default function EggTradersNavbar() {
           gap: 6px;
           font-family: monospace;
           font-size: 12px;
-          color: rgba(255,255,255,0.7);
-          background: rgba(255,255,255,0.04);
-          border: 1px solid rgba(255,255,255,0.12);
+          color: rgba(255,255,255,0.75);
+          background: rgba(255,255,255,0.08);
+          border: 1px solid rgba(255,255,255,0.2);
           padding: 9px 16px;
           border-radius: 8px;
           text-decoration: none;
@@ -246,8 +246,8 @@ export default function EggTradersNavbar() {
         }
 
         .et-main-site-btn:hover {
-          color: #fff;
-          border-color: rgba(245, 158, 11, 0.4);
+          color: #F76B0D;
+          border-color: #F76B0D;
         }
 
         .et-mobile-toggle {
@@ -255,8 +255,8 @@ export default function EggTradersNavbar() {
           width: 40px;
           height: 40px;
           border-radius: 10px;
-          background: rgba(255,255,255,0.05);
-          border: 1px solid rgba(255,255,255,0.12);
+          background: rgba(255,255,255,0.08);
+          border: 1px solid rgba(255,255,255,0.2);
           align-items: center;
           justify-content: center;
           cursor: pointer;
@@ -265,7 +265,7 @@ export default function EggTradersNavbar() {
         .et-mobile-drawer {
           position: fixed;
           inset: 0;
-          background: rgba(7, 26, 48, 0.96);
+          background: rgba(0, 27, 77, 0.98);
           backdrop-filter: blur(24px);
           z-index: 480;
           display: flex;
@@ -302,8 +302,8 @@ export default function EggTradersNavbar() {
           font-weight: 700;
           padding: 14px 0;
           border-radius: 12px;
-          background: linear-gradient(135deg, #f59e0b 0%, #fef08a 100%);
-          color: #071a30;
+          background: linear-gradient(135deg, #F76B0D 0%, #E2580A 100%);
+          color: #ffffff;
           text-decoration: none;
           margin-top: 16px;
         }

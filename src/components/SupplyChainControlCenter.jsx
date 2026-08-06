@@ -127,16 +127,16 @@ export default function SupplyChainControlCenter() {
         const cardStartTime = i * (10 / (whyUs.reasons.length - 1));
         
         tl.to(`#sccc-card-${i}`, {
-          borderColor: 'rgba(200,162,74,0.4)',
-          boxShadow: '0 20px 50px rgba(0,0,0,0.4), 0 0 30px rgba(200,162,74,0.1)',
-          background: 'rgba(200,162,74,0.06)',
+          borderColor: 'rgba(255,255,255,0.3)',
+          boxShadow: '0 20px 50px rgba(0,0,0,0.4), 0 0 30px rgba(63,98,49,0.2)',
+          background: 'rgba(63,98,49,0.75)',
           duration: 0.5,
           ease: "power2.out"
         }, cardStartTime);
         
         tl.to(`#sccc-card-${i} .sccc-status-badge`, { autoAlpha: 1, duration: 0.3 }, cardStartTime);
         tl.to(`#sccc-card-${i} .sccc-kpi`, { autoAlpha: 1, duration: 0.3 }, cardStartTime);
-        tl.to(`#scc-ind-${i}`, { color: '#C8A24A', scale: 1.2, duration: 0.3 }, cardStartTime);
+        tl.to(`#scc-ind-${i}`, { color: '#DE510A', scale: 1.2, duration: 0.3 }, cardStartTime);
       });
       
       tl.to('.sccc-truck-overlay', {
@@ -219,7 +219,7 @@ export default function SupplyChainControlCenter() {
               <path 
                 ref={pathRef} 
                 d={pathData} 
-                stroke="rgba(255,255,255,0.06)" 
+                stroke="rgba(20,20,20,0.06)" 
                 strokeWidth="3" 
                 fill="none" 
                 strokeDasharray={pathLength} 
@@ -228,7 +228,7 @@ export default function SupplyChainControlCenter() {
               />
               <path 
                 d={pathData} 
-                stroke="#C8A24A" 
+                stroke="#DE510A" 
                 strokeWidth="4" 
                 fill="none" 
                 strokeDasharray="4 24" 
@@ -237,7 +237,7 @@ export default function SupplyChainControlCenter() {
             </svg>
             
             <div className="sccc-truck-overlay">
-              {getIcon('Truck', { size: 24, color: '#C8A24A' })}
+              {getIcon('Truck', { size: 24, color: '#DE510A' })}
             </div>
 
             <div className="sccc-grid">
@@ -333,12 +333,12 @@ export default function SupplyChainControlCenter() {
       </section>
 
       <style>{`
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            WRAPPER & SECTIONS
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .sccc-wrapper {
-          background: #060e1a;
-          color: #fff;
+          background: #FBF7F0;
+          color: #111111;
           position: relative;
           overflow: hidden;
         }
@@ -353,8 +353,8 @@ export default function SupplyChainControlCenter() {
           position: absolute;
           inset: 0;
           background-image:
-            linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+            linear-gradient(rgba(20,20,20,0.012) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(20,20,20,0.012) 1px, transparent 1px);
           background-size: 50px 50px;
           pointer-events: none;
         }
@@ -368,7 +368,7 @@ export default function SupplyChainControlCenter() {
 
         .sccc-orb-1 {
           width: 550px; height: 550px;
-          background: radial-gradient(circle, rgba(200,162,74,0.08), transparent 70%);
+          background: radial-gradient(circle, rgba(222,81,10,0.08), transparent 70%);
           top: 10%; left: -150px;
         }
 
@@ -382,7 +382,7 @@ export default function SupplyChainControlCenter() {
           font-family: monospace;
           font-size: 12px;
           letter-spacing: 0.2em;
-          color: #c8a24a;
+          color: #DE510A;
           display: block;
           margin-bottom: 14px;
         }
@@ -392,7 +392,7 @@ export default function SupplyChainControlCenter() {
           font-size: clamp(32px, 4.5vw, 48px);
           font-weight: 700;
           margin: 0 0 18px;
-          background: linear-gradient(135deg, #ffffff 0%, #c8a24a 100%);
+          background: linear-gradient(135deg, #111111 0%, #B9320D 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
@@ -412,14 +412,14 @@ export default function SupplyChainControlCenter() {
         }
 
         .sccc-ind-icon {
-          color: rgba(255,255,255,0.25);
+          color: rgba(20,20,20,0.25);
           transition: color 0.3s, transform 0.3s;
         }
 
         .sccc-ind-line {
           width: 40px;
           height: 1px;
-          background: rgba(255,255,255,0.08);
+          background: #DE510A;
           margin: 0 10px;
         }
 
@@ -458,13 +458,13 @@ export default function SupplyChainControlCenter() {
           z-index: 5;
           margin-top: -12px;
           margin-left: -12px;
-          filter: drop-shadow(0 0 12px rgba(200,162,74,0.8));
+          filter: drop-shadow(0 0 12px rgba(222,81,10,0.8));
           visibility: hidden;
         }
 
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            CARDS GRID
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .sccc-grid {
           display: grid;
           grid-template-columns: repeat(6, 1fr);
@@ -475,8 +475,8 @@ export default function SupplyChainControlCenter() {
 
         .sccc-card {
           position: relative;
-          background: rgba(255,255,255,0.025);
-          border: 1px solid rgba(255,255,255,0.06);
+          background: #3F6231;
+          border: 1px solid rgba(255,255,255,0.18);
           border-radius: 20px;
           padding: 28px 18px;
           display: flex;
@@ -495,7 +495,7 @@ export default function SupplyChainControlCenter() {
           inset: 0;
           background: radial-gradient(
             400px circle at var(--glow-x, 50%) var(--glow-y, 50%),
-            rgba(200,162,74,0.08), transparent 40%
+            rgba(222,81,10,0.08), transparent 40%
           );
           opacity: 0;
           transition: opacity 0.4s;
@@ -513,10 +513,10 @@ export default function SupplyChainControlCenter() {
           font-family: monospace;
           font-size: 9px;
           font-weight: 700;
-          color: #c8a24a;
+          color: #FBF7F0;
           letter-spacing: 0.12em;
-          background: rgba(200,162,74,0.08);
-          border: 1px solid rgba(200,162,74,0.2);
+          background: rgba(255,255,255,0.1);
+          border: 1px solid rgba(255,255,255,0.25);
           padding: 4px 10px;
           border-radius: 6px;
           display: flex;
@@ -545,22 +545,22 @@ export default function SupplyChainControlCenter() {
         .sccc-card-icon {
           width: 56px;
           height: 56px;
-          background: rgba(200,162,74,0.1);
-          border: 1px solid rgba(200,162,74,0.25);
+          background: rgba(255,255,255,0.12);
+          border: 1px solid rgba(255,255,255,0.3);
           border-radius: 14px;
           display: flex;
           align-items: center;
           justify-content: center;
-          color: #c8a24a;
+          color: #FBF7F0;
           margin-bottom: 20px;
           z-index: 2;
           transition: all 0.4s;
         }
 
         .sccc-card:hover .sccc-card-icon {
-          background: #c8a24a;
-          color: #060e1a;
-          box-shadow: 0 0 20px rgba(200,162,74,0.4);
+          background: #FBF7F0;
+          color: #3F6231;
+          box-shadow: 0 0 20px rgba(255,255,255,0.4);
         }
 
         .sccc-kpi {
@@ -568,7 +568,7 @@ export default function SupplyChainControlCenter() {
           font-family: 'Space Grotesk', sans-serif;
           font-size: 15px;
           font-weight: 700;
-          color: #c8a24a;
+          color: #FBF7F0;
           margin-bottom: 12px;
           min-height: 24px;
           display: flex;
@@ -591,7 +591,7 @@ export default function SupplyChainControlCenter() {
 
         .sccc-body {
           font-size: 12.5px;
-          color: rgba(255,255,255,0.55);
+          color: rgba(255,255,255,0.85);
           line-height: 1.6;
           margin: 0;
           position: relative;
@@ -610,7 +610,7 @@ export default function SupplyChainControlCenter() {
 
         .celeb-title {
           font-family: 'Space Grotesk', sans-serif;
-          color: #c8a24a;
+          color: #DE510A;
           font-size: 26px;
           font-weight: 700;
           margin: 0 0 14px;
@@ -622,16 +622,16 @@ export default function SupplyChainControlCenter() {
           justify-content: center;
           font-family: monospace;
           font-size: 13px;
-          color: rgba(255,255,255,0.8);
+          color: rgba(20,20,20,0.8);
         }
 
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            STATS BAND
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .stats-band {
-          background: rgba(255,255,255,0.015);
-          border-top: 1px solid rgba(255,255,255,0.06);
-          border-bottom: 1px solid rgba(255,255,255,0.06);
+          background: rgba(20,20,20,0.015);
+          border-top: 1px solid rgba(20,20,20,0.06);
+          border-bottom: 1px solid rgba(20,20,20,0.06);
           padding: 100px 0;
           position: relative;
           overflow: hidden;
@@ -647,22 +647,22 @@ export default function SupplyChainControlCenter() {
           text-align: center;
           padding: 32px 20px;
           border-radius: 20px;
-          background: rgba(255,255,255,0.02);
-          border: 1px solid rgba(255,255,255,0.06);
+          background: rgba(20,20,20,0.02);
+          border: 1px solid rgba(20,20,20,0.06);
           backdrop-filter: blur(12px);
           transition: transform 0.4s, border-color 0.4s;
         }
 
         .sb-card:hover {
           transform: translateY(-6px);
-          border-color: rgba(200,162,74,0.3);
+          border-color: rgba(222,81,10,0.3);
         }
 
         .sb-num {
           font-family: 'Space Grotesk', sans-serif;
           font-size: clamp(2.5rem, 4vw, 3.5rem);
           font-weight: 700;
-          background: linear-gradient(135deg, #ffffff 0%, #c8a24a 100%);
+          background: linear-gradient(135deg, #111111 0%, #B9320D 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
@@ -671,21 +671,21 @@ export default function SupplyChainControlCenter() {
 
         .sb-lbl {
           font-size: 14px;
-          color: rgba(255,255,255,0.55);
+          color: rgba(20,20,20,0.55);
           margin-top: 12px;
         }
 
         .sb-divider {
           width: 40px;
           height: 2px;
-          background: linear-gradient(90deg, #c8a24a, #F2E7C9);
+          background: linear-gradient(90deg, #DE510A, #F2E7C9);
           margin: 16px auto 0;
           border-radius: 2px;
         }
 
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            INDUSTRIES SERVED
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .ind-section {
           padding: 120px 0 140px;
           position: relative;
@@ -699,8 +699,8 @@ export default function SupplyChainControlCenter() {
 
         .industry-card {
           position: relative;
-          background: rgba(255,255,255,0.025);
-          border: 1px solid rgba(255,255,255,0.06);
+          background: #3F6231;
+          border: 1px solid rgba(255,255,255,0.18);
           border-radius: 20px;
           padding: 36px 20px;
           text-align: center;
@@ -710,7 +710,7 @@ export default function SupplyChainControlCenter() {
         }
 
         .industry-card:hover {
-          border-color: rgba(200,162,74,0.35);
+          border-color: rgba(255,255,255,0.4);
           transform: translateY(-8px);
           box-shadow: 0 20px 50px rgba(0,0,0,0.4);
         }
@@ -720,19 +720,19 @@ export default function SupplyChainControlCenter() {
           height: 56px;
           margin: 0 auto 20px;
           border-radius: 14px;
-          background: rgba(200,162,74,0.1);
-          border: 1px solid rgba(200,162,74,0.25);
+          background: rgba(255,255,255,0.12);
+          border: 1px solid rgba(255,255,255,0.3);
           display: flex;
           align-items: center;
           justify-content: center;
-          color: #c8a24a;
+          color: #FBF7F0;
           transition: all 0.4s;
         }
 
         .industry-card:hover .ind-icon {
-          background: #c8a24a;
-          color: #060e1a;
-          box-shadow: 0 0 20px rgba(200,162,74,0.4);
+          background: #FBF7F0;
+          color: #3F6231;
+          box-shadow: 0 0 20px rgba(255,255,255,0.4);
           transform: translateY(-4px);
         }
 
@@ -740,17 +740,17 @@ export default function SupplyChainControlCenter() {
           font-family: 'Space Grotesk', sans-serif;
           font-size: 14.5px;
           font-weight: 600;
-          color: rgba(255,255,255,0.9);
+          color: rgba(255,255,255,0.95);
           transition: color 0.3s;
         }
 
         .industry-card:hover .ind-name {
-          color: #c8a24a;
+          color: #ffffff;
         }
 
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            RESPONSIVE
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         @media (max-width: 1200px) {
           .sccc-grid { grid-template-columns: repeat(3, 1fr); gap: 28px; }
         }

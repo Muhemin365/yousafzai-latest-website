@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+﻿import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useCMSStore } from '../store/useCMSStore';
@@ -114,12 +114,12 @@ export default function FAQSection() {
       </div>
 
       <style>{`
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            SECTION BASE
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .faq-section {
-          background: #060e1a;
-          color: #fff;
+          background: #FBF7F0;
+          color: #111111;
           padding: 120px 24px 140px;
           position: relative;
           overflow: hidden;
@@ -129,8 +129,8 @@ export default function FAQSection() {
           position: absolute;
           inset: 0;
           background-image:
-            linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+            linear-gradient(rgba(20,20,20,0.012) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(20,20,20,0.012) 1px, transparent 1px);
           background-size: 50px 50px;
           pointer-events: none;
         }
@@ -144,7 +144,7 @@ export default function FAQSection() {
 
         .faq-orb-1 {
           width: 500px; height: 500px;
-          background: radial-gradient(circle, rgba(200,162,74,0.07), transparent 70%);
+          background: radial-gradient(circle, rgba(222,81,10,0.07), transparent 70%);
           top: 20%; left: -150px;
         }
 
@@ -161,9 +161,9 @@ export default function FAQSection() {
           z-index: 2;
         }
 
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            HEADER
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .faq-header {
           text-align: center;
           max-width: 700px;
@@ -174,7 +174,7 @@ export default function FAQSection() {
           font-family: monospace;
           font-size: 12px;
           letter-spacing: 0.2em;
-          color: #c8a24a;
+          color: #DE510A;
           display: block;
           margin-bottom: 14px;
           visibility: hidden;
@@ -185,7 +185,7 @@ export default function FAQSection() {
           font-size: clamp(32px, 4.5vw, 48px);
           font-weight: 700;
           margin: 0 0 18px;
-          background: linear-gradient(135deg, #ffffff 0%, #c8a24a 100%);
+          background: linear-gradient(135deg, #111111 0%, #B9320D 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
@@ -195,16 +195,16 @@ export default function FAQSection() {
         .faq-divider-line {
           width: 70px;
           height: 3px;
-          background: linear-gradient(90deg, #c8a24a, #F2E7C9);
+          background: linear-gradient(90deg, #DE510A, #F2E7C9);
           margin: 0 auto;
           transform-origin: center;
           transform: scaleX(0);
           border-radius: 2px;
         }
 
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            FAQ CARDS
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .faq-list {
           display: flex;
           flex-direction: column;
@@ -213,8 +213,8 @@ export default function FAQSection() {
 
         .faq-card {
           border-radius: 18px;
-          background: rgba(255,255,255,0.025);
-          border: 1px solid rgba(255,255,255,0.06);
+          background: #3F6231;
+          border: 1px solid rgba(255,255,255,0.18);
           backdrop-filter: blur(16px);
           -webkit-backdrop-filter: blur(16px);
           transition: border-color 0.4s, background 0.4s, box-shadow 0.4s;
@@ -222,13 +222,13 @@ export default function FAQSection() {
         }
 
         .faq-card:hover {
-          border-color: rgba(200,162,74,0.25);
-          background: rgba(255,255,255,0.035);
+          border-color: rgba(255,255,255,0.35);
+          background: rgba(63,98,49,0.9);
         }
 
         .faq-card.is-open {
-          border-color: rgba(200,162,74,0.4);
-          background: rgba(200,162,74,0.04);
+          border-color: rgba(255,255,255,0.45);
+          background: rgba(63,98,49,0.95);
           box-shadow: 0 20px 50px rgba(0,0,0,0.3);
         }
 
@@ -249,48 +249,48 @@ export default function FAQSection() {
         }
 
         .faq-q-icon {
-          color: rgba(200,162,74,0.5);
+          color: rgba(255,255,255,0.6);
           flex-shrink: 0;
           transition: color 0.3s;
         }
 
         .faq-card.is-open .faq-q-icon,
         .faq-card:hover .faq-q-icon {
-          color: #c8a24a;
+          color: #FBF7F0;
         }
 
         .faq-q-text {
           font-family: 'Space Grotesk', sans-serif;
           font-size: 16.5px;
           font-weight: 600;
-          color: rgba(255,255,255,0.9);
+          color: rgba(255,255,255,0.95);
           line-height: 1.4;
           transition: color 0.3s;
         }
 
         .faq-card.is-open .faq-q-text,
         .faq-card:hover .faq-q-text {
-          color: #fff;
+          color: #ffffff;
         }
 
         .faq-toggle-btn {
           width: 34px;
           height: 34px;
           border-radius: 10px;
-          background: rgba(200,162,74,0.1);
-          border: 1px solid rgba(200,162,74,0.25);
+          background: rgba(255,255,255,0.1);
+          border: 1px solid rgba(255,255,255,0.3);
           display: flex;
           align-items: center;
           justify-content: center;
-          color: #c8a24a;
+          color: #FBF7F0;
           flex-shrink: 0;
           transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .faq-card.is-open .faq-toggle-btn {
-          background: #c8a24a;
-          color: #060e1a;
-          box-shadow: 0 0 16px rgba(200,162,74,0.4);
+          background: #FBF7F0;
+          color: #3F6231;
+          box-shadow: 0 0 16px rgba(255,255,255,0.4);
           transform: rotate(180deg);
         }
 
@@ -303,16 +303,16 @@ export default function FAQSection() {
         .faq-answer-content {
           padding: 0 28px 24px 60px;
           font-size: 14.5px;
-          color: rgba(255,255,255,0.6);
+          color: rgba(255,255,255,0.85);
           line-height: 1.7;
-          border-top: 1px solid rgba(255,255,255,0.04);
+          border-top: 1px solid rgba(255,255,255,0.15);
           margin-top: 4px;
           padding-top: 18px;
         }
 
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            MOBILE
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         @media (max-width: 700px) {
           .faq-section { padding: 80px 16px; }
           .faq-question { padding: 20px 20px; }

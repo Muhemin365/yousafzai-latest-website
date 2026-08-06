@@ -1,10 +1,12 @@
-import React, { useEffect, useRef } from 'react';
+﻿import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useCMSStore } from '../../store/useCMSStore';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function SceneChairman() {
+  const chairman = useCMSStore((s) => s.aboutScenes?.chairman) || {};
   const containerRef = useRef(null);
   const frameRef = useRef(null);
   const sweepRef = useRef(null);
@@ -63,7 +65,7 @@ export default function SceneChairman() {
         alignItems: 'center',
         justifyContent: 'center',
         padding: '100px 20px',
-        color: '#ffffff',
+        color: '#111111',
       }}
     >
       <div
@@ -81,9 +83,9 @@ export default function SceneChairman() {
           ref={frameRef}
           style={{
             position: 'relative',
-            border: '1px solid rgba(200, 162, 74, 0.3)',
+            border: '1px solid rgba(222, 81, 10, 0.4)',
             padding: '16px',
-            backgroundColor: 'rgba(21, 21, 21, 0.4)',
+            backgroundColor: 'rgba(222, 81, 10, 0.25)',
             overflow: 'hidden',
           }}
         >
@@ -94,42 +96,42 @@ export default function SceneChairman() {
               top: 0,
               bottom: 0,
               width: '50%',
-              background: 'linear-gradient(to right, transparent, rgba(200, 162, 74, 0.15), transparent)',
+              background: 'linear-gradient(to right, transparent, rgba(222, 81, 10, 0.15), transparent)',
               transform: 'skewX(-25deg)',
               pointerEvents: 'none',
               zIndex: 2,
             }}
           />
           <img
-            src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=450&h=550&fit=crop"
+            src={chairman.image || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=450&h=550&fit=crop'}
             alt="Chairman"
-            style={{ width: '100%', display: 'block', border: '1px solid rgba(255,255,255,0.05)' }}
+            style={{ width: '100%', display: 'block', border: '1px solid rgba(20,20,20,0.05)' }}
           />
           {/* Gold Seal */}
           <div style={{
             position: 'absolute', bottom: '30px', right: '30px', width: '60px', height: '60px',
-            borderRadius: '50%', border: '2px double rgba(200, 162, 74, 0.8)',
+            borderRadius: '50%', border: '2px double rgba(222, 81, 10, 0.9)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontSize: '8px', color: '#c8a24a', fontFamily: 'monospace', transform: 'rotate(15deg)',
-            backgroundColor: '#151515', zIndex: 3,
+            fontSize: '8px', color: '#B9320D', fontFamily: 'monospace', transform: 'rotate(15deg)',
+            backgroundColor: '#DE510A', zIndex: 3,
           }}>
-            YEG_SEAL
+            {chairman.seal || 'YEG_SEAL'}
           </div>
         </div>
 
         {/* Message */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
-          <div className="quote-line" style={{ fontSize: '12px', letterSpacing: '0.15em', color: '#c8a24a', fontFamily: 'monospace' }}>
-            CHAIRMAN_STATEMENT // FOUNDER_MESSAGE
+          <div className="quote-line" style={{ fontSize: '12px', letterSpacing: '0.15em', color: '#DE510A', fontFamily: 'monospace' }}>
+            {chairman.eyebrow || 'CHAIRMAN_STATEMENT // FOUNDER_MESSAGE'}
           </div>
 
           <h2 className="quote-line" style={{ fontSize: 'clamp(22px, 3vw, 32px)', fontWeight: '400', fontFamily: 'Georgia, serif', lineHeight: '1.4', fontStyle: 'italic', margin: 0 }}>
-            "At Yousafzai Eggs Traders, we believe in quality, trust, and innovation. Our goal is not only to supply eggs but to transform the poultry industry by introducing modern processing solutions."
+            {chairman.quote}
           </h2>
 
-          <div className="quote-line" style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '20px' }}>
-            <p style={{ margin: 0, fontSize: '18px', fontWeight: '600' }}>Chairman</p>
-            <p style={{ margin: '5px 0 0 0', fontSize: '13px', color: 'rgba(255,255,255,0.5)', fontFamily: 'monospace' }}>CHAIRMAN & FOUNDER</p>
+          <div className="quote-line" style={{ borderTop: '1px solid rgba(20,20,20,0.1)', paddingTop: '20px' }}>
+            <p style={{ margin: 0, fontSize: '18px', fontWeight: '600' }}>{chairman.name || 'Chairman'}</p>
+            <p style={{ margin: '5px 0 0 0', fontSize: '13px', color: 'rgba(20,20,20,0.5)', fontFamily: 'monospace' }}>{chairman.role || 'CHAIRMAN & FOUNDER'}</p>
           </div>
         </div>
       </div>

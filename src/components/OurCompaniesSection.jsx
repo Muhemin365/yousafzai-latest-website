@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useCMSStore } from '../store/useCMSStore';
-import { ArrowRight, Globe, Layers } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -99,12 +99,12 @@ export default function OurCompaniesSection() {
       </div>
 
       <style>{`
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            SECTION BASE
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .oc-section {
-          background: #060e1a;
-          color: #fff;
+          background: #FBF7F0;
+          color: #111111;
           padding: 120px 24px 140px;
           position: relative;
           overflow: hidden;
@@ -114,8 +114,8 @@ export default function OurCompaniesSection() {
           position: absolute;
           inset: 0;
           background-image:
-            linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+            linear-gradient(rgba(20,20,20,0.012) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(20,20,20,0.012) 1px, transparent 1px);
           background-size: 50px 50px;
           pointer-events: none;
         }
@@ -135,7 +135,7 @@ export default function OurCompaniesSection() {
 
         .oc-orb-2 {
           width: 450px; height: 450px;
-          background: radial-gradient(circle, rgba(200,162,74,0.08), transparent 70%);
+          background: radial-gradient(circle, rgba(222,81,10,0.08), transparent 70%);
           bottom: 10%; left: -150px;
         }
 
@@ -146,9 +146,9 @@ export default function OurCompaniesSection() {
           z-index: 2;
         }
 
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            HEADER
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .oc-header {
           text-align: center;
           max-width: 750px;
@@ -159,7 +159,7 @@ export default function OurCompaniesSection() {
           font-family: monospace;
           font-size: 12px;
           letter-spacing: 0.2em;
-          color: #c8a24a;
+          color: #DE510A;
           display: block;
           margin-bottom: 16px;
           visibility: hidden;
@@ -170,7 +170,7 @@ export default function OurCompaniesSection() {
           font-size: clamp(32px, 4.5vw, 52px);
           font-weight: 700;
           margin: 0 0 18px;
-          background: linear-gradient(135deg, #ffffff 0%, #c8a24a 100%);
+          background: linear-gradient(135deg, #111111 0%, #B9320D 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
@@ -179,7 +179,7 @@ export default function OurCompaniesSection() {
 
         .oc-sub {
           font-size: 16px;
-          color: rgba(255,255,255,0.5);
+          color: rgba(20,20,20,0.5);
           line-height: 1.7;
           margin: 0 0 28px;
           visibility: hidden;
@@ -188,16 +188,16 @@ export default function OurCompaniesSection() {
         .oc-divider-line {
           width: 70px;
           height: 3px;
-          background: linear-gradient(90deg, #c8a24a, #F2E7C9);
+          background: linear-gradient(90deg, #DE510A, #F2E7C9);
           margin: 0 auto;
           transform-origin: center;
           transform: scaleX(0);
           border-radius: 2px;
         }
 
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            CARDS GRID
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .oc-grid {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
@@ -231,12 +231,12 @@ export default function OurCompaniesSection() {
 
         /* Parent Navy / Gold Card */
         .oc-card.card-parent {
-          background: rgba(255,255,255,0.025);
-          border: 1px solid rgba(200,162,74,0.25);
+          background: #DE510A;
+          border: 1px solid rgba(222,81,10,0.25);
         }
 
         .oc-card.card-parent:hover {
-          border-color: rgba(200,162,74,0.6);
+          border-color: rgba(222,81,10,0.6);
           box-shadow: 0 30px 80px rgba(0,0,0,0.4);
           transform: translateY(-6px);
         }
@@ -266,9 +266,9 @@ export default function OurCompaniesSection() {
         }
 
         .card-parent .oc-icon-box {
-          background: rgba(200,162,74,0.12);
-          border: 1px solid rgba(200,162,74,0.3);
-          color: #c8a24a;
+          background: rgba(222,81,10,0.12);
+          border: 1px solid rgba(222,81,10,0.3);
+          color: #DE510A;
         }
 
         .oc-badge {
@@ -287,9 +287,9 @@ export default function OurCompaniesSection() {
         }
 
         .card-parent .oc-badge {
-          background: rgba(200, 162, 74, 0.15);
-          color: #F2E7C9;
-          border: 1px solid rgba(200, 162, 74, 0.3);
+          background: rgba(222, 81, 10, 0.15);
+          color: #B9320D;
+          border: 1px solid rgba(222, 81, 10, 0.3);
         }
 
         .oc-name {
@@ -297,14 +297,14 @@ export default function OurCompaniesSection() {
           font-size: 26px;
           font-weight: 700;
           margin: 0 0 6px;
-          color: #fff;
+          color: #111111;
         }
 
         .oc-tagline {
           font-family: monospace;
           font-size: 11px;
           letter-spacing: 0.1em;
-          color: rgba(255,255,255,0.45);
+          color: rgba(20,20,20,0.45);
           text-transform: uppercase;
           margin-bottom: 18px;
           display: block;
@@ -312,7 +312,7 @@ export default function OurCompaniesSection() {
 
         .oc-desc {
           font-size: 15px;
-          color: rgba(255,255,255,0.7);
+          color: rgba(20,20,20,0.7);
           line-height: 1.65;
           margin: 0 0 32px;
           flex-grow: 1;
@@ -336,25 +336,25 @@ export default function OurCompaniesSection() {
         .card-egg-traders .oc-visit-btn {
           background: rgba(46, 175, 105, 0.25);
           border: 1px solid rgba(46, 175, 105, 0.5);
-          color: #ffffff;
+          color: #111111;
         }
 
         .card-egg-traders .oc-visit-btn:hover {
           background: #2eaf69;
-          color: #060e1a;
+          color: #FFFFFF;
           box-shadow: 0 10px 25px rgba(46, 175, 105, 0.4);
         }
 
         .card-parent .oc-visit-btn {
-          background: rgba(200, 162, 74, 0.15);
-          border: 1px solid rgba(200, 162, 74, 0.4);
-          color: #F2E7C9;
+          background: rgba(222, 81, 10, 0.15);
+          border: 1px solid rgba(222, 81, 10, 0.4);
+          color: #B9320D;
         }
 
         .card-parent .oc-visit-btn:hover {
-          background: #c8a24a;
-          color: #060e1a;
-          box-shadow: 0 10px 25px rgba(200, 162, 74, 0.4);
+          background: #DE510A;
+          color: #ffffff;
+          box-shadow: 0 10px 25px rgba(222, 81, 10, 0.4);
         }
 
         .btn-arrow {
@@ -365,9 +365,9 @@ export default function OurCompaniesSection() {
           transform: translateX(4px);
         }
 
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            MOBILE
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         @media (max-width: 860px) {
           .oc-section { padding: 80px 16px; }
           .oc-grid { grid-template-columns: 1fr; gap: 24px; }

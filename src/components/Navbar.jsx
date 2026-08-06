@@ -114,18 +114,18 @@ export default function Navbar() {
           right: 0;
           z-index: 500;
           padding: 20px 0;
-          background: rgba(6, 14, 26, 0.72);
+          background: rgba(63, 98, 49, 0.88);
           backdrop-filter: blur(20px);
           -webkit-backdrop-filter: blur(20px);
-          border-bottom: 1px solid rgba(255,255,255,0.06);
+          border-bottom: 1px solid rgba(222, 81, 10, 0.3);
           transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         .nav-glass.is-scrolled {
           padding: 12px 0;
-          background: rgba(6, 14, 26, 0.88);
-          border-bottom-color: rgba(200, 162, 74, 0.22);
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+          background: rgba(44, 71, 36, 0.96);
+          border-bottom-color: rgba(222, 81, 10, 0.5);
+          box-shadow: 0 10px 30px rgba(63, 98, 49, 0.35);
         }
 
         .nav-container {
@@ -167,7 +167,7 @@ export default function Navbar() {
           font-family: 'Space Grotesk', sans-serif;
           font-size: 14px;
           font-weight: 500;
-          color: rgba(255, 255, 255, 0.75);
+          color: rgba(255, 255, 255, 0.78);
           padding: 6px 0;
           text-decoration: none;
           transition: color 0.3s;
@@ -175,11 +175,11 @@ export default function Navbar() {
         }
 
         .nav-link-item:hover {
-          color: #F2E7C9;
+          color: #DE510A;
         }
 
         .nav-link-item.active {
-          color: #F2E7C9;
+          color: #DE510A;
           font-weight: 600;
         }
 
@@ -189,7 +189,7 @@ export default function Navbar() {
           bottom: 0;
           width: 0;
           height: 2px;
-          background: linear-gradient(90deg, #c8a24a, #F2E7C9);
+          background: linear-gradient(90deg, #B9320D, #B9320D);
           border-radius: 2px;
           transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
@@ -215,16 +215,16 @@ export default function Navbar() {
           font-size: 13.5px;
           padding: 10px 22px;
           border-radius: 12px;
-          background: linear-gradient(135deg, #c8a24a 0%, #F2E7C9 100%);
-          color: #060e1a;
+          background: linear-gradient(135deg, #DE510A 0%, #B9320D 100%);
+          color: #ffffff;
           text-decoration: none;
           transition: transform 0.3s, box-shadow 0.3s;
-          box-shadow: 0 8px 24px rgba(200, 162, 74, 0.22);
+          box-shadow: 0 8px 24px rgba(185,50,13,0.3);
         }
 
         .nav-cta-btn:hover {
           transform: translateY(-2px);
-          box-shadow: 0 12px 30px rgba(200, 162, 74, 0.35);
+          box-shadow: 0 12px 30px rgba(185,50,13,0.42);
         }
 
         .cta-arrow {
@@ -240,8 +240,8 @@ export default function Navbar() {
           width: 40px;
           height: 40px;
           border-radius: 12px;
-          background: rgba(255,255,255,0.05);
-          border: 1px solid rgba(255,255,255,0.12);
+          background: rgba(255, 255, 255, 0.08);
+          border: 1px solid rgba(255, 255, 255, 0.2);
           align-items: center;
           justify-content: center;
           cursor: pointer;
@@ -251,7 +251,7 @@ export default function Navbar() {
         .mobile-drawer {
           position: fixed;
           inset: 0;
-          background: rgba(6, 14, 26, 0.97);
+          background: rgba(44, 71, 36, 0.98);
           backdrop-filter: blur(24px);
           -webkit-backdrop-filter: blur(24px);
           z-index: 480;
@@ -280,7 +280,7 @@ export default function Navbar() {
         }
 
         .mobile-link:hover {
-          color: #c8a24a;
+          color: #DE510A;
         }
 
         .mobile-cta {
@@ -294,8 +294,8 @@ export default function Navbar() {
           font-weight: 700;
           padding: 14px 0;
           border-radius: 12px;
-          background: linear-gradient(135deg, #c8a24a 0%, #F2E7C9 100%);
-          color: #060e1a;
+          background: linear-gradient(135deg, #DE510A 0%, #B9320D 100%);
+          color: #ffffff;
           text-decoration: none;
           margin-top: 16px;
         }

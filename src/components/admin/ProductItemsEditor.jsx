@@ -7,7 +7,7 @@ const inputStyle = {
   borderRadius: 8,
   fontSize: 13,
   fontFamily: "'Inter',sans-serif",
-  color: '#1B2230',
+  color: '#111111',
   background: '#FFFFFF',
 };
 
@@ -39,7 +39,7 @@ export default function ProductItemsEditor({ items, onUpdate }) {
       {data.map((item, i) => (
         <div key={i} style={{ marginBottom: 24, padding: 20, background: '#F5F7FA', borderRadius: 12, border: '1px solid #EEF1F5' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-            <span style={{ fontWeight: 700, fontSize: 13, color: '#0B2545', fontFamily: "'Space Grotesk',sans-serif" }}>Product {i + 1}</span>
+            <span style={{ fontWeight: 700, fontSize: 13, color: '#B8860B', fontFamily: "'Space Grotesk',sans-serif" }}>Product {i + 1}</span>
             <button onClick={() => removeItem(i)} style={{ background: '#FEF2F2', border: 'none', borderRadius: 6, padding: '4px 10px', color: '#B91C1C', fontSize: 11, cursor: 'pointer', fontWeight: 600 }}>Remove</button>
           </div>
 
@@ -83,7 +83,7 @@ export default function ProductItemsEditor({ items, onUpdate }) {
         </div>
       ))}
 
-      <button onClick={addItem} style={{ width: '100%', padding: '12px 0', background: '#FFFFFF', border: '1.5px dashed #DBDFE6', borderRadius: 10, color: '#0B2545', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>
+      <button onClick={addItem} style={{ width: '100%', padding: '12px 0', background: '#FFFFFF', border: '1.5px dashed #DBDFE6', borderRadius: 10, color: '#B8860B', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>
         + Add Product
       </button>
     </div>

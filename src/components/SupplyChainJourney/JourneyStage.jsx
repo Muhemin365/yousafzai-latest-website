@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+﻿import React, { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { damp, getLocalProgress } from './animations';
 
@@ -48,7 +48,7 @@ export default function JourneyStage({ scrollProgress }) {
       <group ref={farmRef} position={[2, 0, -4]}>
         <mesh position={[0, 1.5, 0]} castShadow>
           <coneGeometry args={[1, 3, 8]} />
-          <meshStandardMaterial color="#6B8E23" />
+          <meshStandardMaterial color="#3F6231" />
         </mesh>
       </group>
 
@@ -72,7 +72,7 @@ export default function JourneyStage({ scrollProgress }) {
       <group ref={packRef} position={[-2, 0, 2]}>
         <mesh position={[0, 0.5, 0]} castShadow>
           <boxGeometry args={[3, 1, 1]} />
-          <meshStandardMaterial color="#C8A24A" />
+          <meshStandardMaterial color="#DE510A" />
         </mesh>
       </group>
 
@@ -80,7 +80,7 @@ export default function JourneyStage({ scrollProgress }) {
       <group ref={truckRef} position={[0, 0, 6]}>
         <mesh position={[0, 1.5, 0]} castShadow>
           <boxGeometry args={[2.5, 3, 5]} />
-          <meshStandardMaterial color="#0B2545" />
+          <meshStandardMaterial color="#FBF7F0" />
         </mesh>
       </group>
     </group>

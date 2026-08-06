@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+﻿import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import * as LucideIcons from 'lucide-react';
@@ -141,8 +141,8 @@ export default function WhyUsSection() {
       <section className="stats-band" id="stats">
         <div className="container">
           <div className="sec-head center stat-head-animate" style={{ marginLeft: 'auto', marginRight: 'auto' }}>
-            <div className="tag-eyebrow" style={{ justifyContent: 'center', color: '#F2E7C9' }}>Company Statistics</div>
-            <h2 className="sec-title" style={{ color: '#fff' }}>Performance That Speaks for Itself</h2>
+            <div className="tag-eyebrow" style={{ justifyContent: 'center', color: '#B9320D' }}>Company Statistics</div>
+            <h2 className="sec-title" style={{ color: '#111111' }}>Performance That Speaks for Itself</h2>
           </div>
           <div className="stats-band-grid">
             {statsBand.stats.map((stat, i) => (
@@ -185,8 +185,8 @@ export default function WhyUsSection() {
         /* Why Us Grid & Cards */
         .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
         .why-card { 
-          background: linear-gradient(135deg, #071A30, #0B2545); 
-          border: 1px solid rgba(255,255,255,0.06); 
+          background: linear-gradient(135deg, #FBF7F0, #FBF7F0); 
+          border: 1px solid rgba(20,20,20,0.06); 
           border-radius: 24px; 
           padding: 30px; 
           display: flex; 
@@ -196,26 +196,26 @@ export default function WhyUsSection() {
           will-change: transform, box-shadow;
         }
         .why-card-top { display: flex; align-items: center; justify-content: space-between; width: 100%; margin-bottom: 8px; }
-        .why-icon-wrap { color: rgba(255,255,255,0.2); transition: all 0.3s ease; }
+        .why-icon-wrap { color: rgba(20,20,20,0.2); transition: all 0.3s ease; }
         
         .why-card:hover { 
           transform: translateY(-8px) scale(1.02); 
-          box-shadow: 0 14px 36px rgba(11,37,69,0.30); 
-          border-color: rgba(200,162,74,0.4);
+          box-shadow: 0 14px 36px rgba(63,98,49,0.3); 
+          border-color: rgba(222,81,10,0.4);
           background: linear-gradient(135deg, #09203c, #0d2c52);
         }
         .why-card:hover .why-icon-wrap {
-          color: #C8A24A;
+          color: #DE510A;
           transform: scale(1.1) rotate(5deg);
         }
         
-        .why-num { font-family: 'Space Grotesk',sans-serif; font-size: 38px; font-weight: 700; color: #C8A24A; line-height: 1; text-shadow: 0 2px 10px rgba(200,162,74,0.3); }
-        .why-title { font-weight: 700; font-size: 15px; color: #FFFFFF; margin-bottom: 8px; }
-        .why-body { font-size: 13.5px; color: rgba(255,255,255,0.7); line-height: 1.7; }
+        .why-num { font-family: 'Space Grotesk',sans-serif; font-size: 38px; font-weight: 700; color: #DE510A; line-height: 1; text-shadow: 0 2px 10px rgba(222,81,10,0.3); }
+        .why-title { font-weight: 700; font-size: 15px; color: #111111; margin-bottom: 8px; }
+        .why-body { font-size: 13.5px; color: rgba(20,20,20,0.7); line-height: 1.7; }
         
         /* Stats Band */
-        .stats-band { background: linear-gradient(155deg,#071A30,#0B2545 60%,#123A6B); position: relative; overflow: hidden; }
-        .stats-band::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0); background-size: 30px 30px; }
+        .stats-band { background: linear-gradient(155deg,#FBF7F0,#FBF7F0 60%,#FBF7F0); position: relative; overflow: hidden; }
+        .stats-band::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle at 1px 1px, rgba(20,20,20,0.05) 1px, transparent 0); background-size: 30px 30px; }
         .stats-band-grid { position: relative; z-index: 2; display: grid; grid-template-columns: repeat(4,1fr); gap: 30px; }
         
         .sb-card { 
@@ -225,12 +225,12 @@ export default function WhyUsSection() {
           will-change: transform;
         }
         .sb-card:hover { transform: scale(1.03); }
-        .sb-card:hover .sb-num { text-shadow: 0 0 15px rgba(255,255,255,0.3); }
-        .sb-card:hover .sb-divider { background: #FFD700; box-shadow: 0 0 8px rgba(200,162,74,0.6); }
+        .sb-card:hover .sb-num { text-shadow: 0 0 15px rgba(20,20,20,0.3); }
+        .sb-card:hover .sb-divider { background: #FFD700; box-shadow: 0 0 8px rgba(222,81,10,0.6); }
         
-        .sb-num { font-family: 'Space Grotesk',sans-serif; font-size: clamp(2.2rem,3.4vw,3.2rem); font-weight: 700; color: #FFFFFF; transition: text-shadow 0.3s ease; }
-        .sb-lbl { font-size: 13px; color: rgba(255,255,255,0.6); margin-top: 10px; }
-        .sb-divider { width: 0; height: 2px; background: #C8A24A; margin: 14px auto 0; transition: background 0.3s, box-shadow 0.3s; }
+        .sb-num { font-family: 'Space Grotesk',sans-serif; font-size: clamp(2.2rem,3.4vw,3.2rem); font-weight: 700; color: #111111; transition: text-shadow 0.3s ease; }
+        .sb-lbl { font-size: 13px; color: rgba(20,20,20,0.6); margin-top: 10px; }
+        .sb-divider { width: 0; height: 2px; background: #DE510A; margin: 14px auto 0; transition: background 0.3s, box-shadow 0.3s; }
         
         /* Industries */
         .industry-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 18px; }
@@ -240,13 +240,13 @@ export default function WhyUsSection() {
           padding: 28px 18px; 
           text-align: center; 
           transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1); 
-          box-shadow: 0 4px 20px rgba(11,37,69,0.04);
+          box-shadow: 0 4px 20px rgba(63,98,49,0.05);
           will-change: transform, box-shadow;
         }
         .industry-card:hover { 
-          background: #0B2545; 
+          background: #FBF7F0; 
           transform: translateY(-8px); 
-          box-shadow: 0 12px 30px rgba(11,37,69,0.15); 
+          box-shadow: 0 12px 30px rgba(63,98,49,0.18); 
         }
         
         .ind-icon { 
@@ -258,17 +258,17 @@ export default function WhyUsSection() {
           display: flex; 
           align-items: center; 
           justify-content: center; 
-          color: #0B2545; 
+          color: #B9320D; 
           transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1); 
         }
         .industry-card:hover .ind-icon { 
-          background: #C8A24A; 
-          color: #071A30; 
+          background: #DE510A; 
+          color: #ffffff; 
           transform: translateY(-4px);
         }
         
-        .ind-name { font-size: 13px; font-weight: 600; color: #0B2545; transition: color 0.35s ease; }
-        .industry-card:hover .ind-name { color: #C8A24A; }
+        .ind-name { font-size: 13px; font-weight: 600; color: #111111; transition: color 0.35s ease; }
+        .industry-card:hover .ind-name { color: #DE510A; }
         
         @media (max-width: 1080px) { .industry-grid { grid-template-columns: repeat(3,1fr); } }
         @media (max-width: 860px) { .why-grid { grid-template-columns: 1fr; } .stats-band-grid { grid-template-columns: repeat(2,1fr); gap: 34px; } .industry-grid { grid-template-columns: repeat(2,1fr); } }

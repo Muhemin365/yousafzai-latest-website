@@ -112,7 +112,7 @@ export default function PageBanner({ title, subtitle, fullScreen = false, slides
           text-align: center;
           padding: 160px 0 100px;
           overflow: hidden;
-          background-color: #060e1a;
+          background-color: #FBF7F0;
         }
         .page-hero.fullscreen {
           min-height: 100vh;
@@ -121,27 +121,27 @@ export default function PageBanner({ title, subtitle, fullScreen = false, slides
         /* Slideshow */
         .banner-slideshow { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
         .banner-slideshow .slide-img { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 2s, transform 8s; transform: scale(1.05); filter: grayscale(15%); }
-        .banner-slideshow .slide-img.active { opacity: 0.6; transform: scale(1); }
+        .banner-slideshow .slide-img.active { opacity: 0.4; transform: scale(1); }
 
         .page-hero-bg {
           position: absolute;
           inset: 0;
-          background: radial-gradient(120% 100% at 50% 0%, rgba(23,62,114,0.4) 0%, rgba(10,18,34,0.85) 55%, rgba(6,14,26,1) 100%);
+          background: radial-gradient(120% 100% at 50% 0%, rgba(222,81,10,0.35) 0%, rgba(251,247,240,0.8) 55%, rgba(251,247,240,1) 100%);
           z-index: 1;
         }
         .page-hero-bg::before {
           content: '';
           position: absolute;
           inset: 0;
-          background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0);
+          background-image: radial-gradient(circle at 1px 1px, rgba(63,98,49,0.12) 1px, transparent 0);
           background-size: 34px 34px;
         }
         
-        .banner-bottom-fade { position: absolute; bottom: 0; left: 0; width: 100%; height: 120px; background: linear-gradient(to bottom, transparent, #060e1a); z-index: 1; }
+        .banner-bottom-fade { position: absolute; bottom: 0; left: 0; width: 100%; height: 120px; background: linear-gradient(to bottom, transparent, #FBF7F0); z-index: 1; }
 
         /* Particles */
-        .particles-container { position: absolute; inset: 0; pointer-events: none; z-index: 2; overflow: hidden; opacity: 0.15; }
-        .particle { position: absolute; bottom: -10px; background: #C8A24A; border-radius: 50%; box-shadow: 0 0 8px #C8A24A; animation: driftUp linear infinite; }
+        .particles-container { position: absolute; inset: 0; pointer-events: none; z-index: 2; overflow: hidden; opacity: 0.2; }
+        .particle { position: absolute; bottom: -10px; background: #B9320D; border-radius: 50%; box-shadow: 0 0 8px #B9320D; animation: driftUp linear infinite; }
         @keyframes driftUp {
           0% { transform: translateY(0) translateX(0); opacity: 0; }
           10% { opacity: 1; }
@@ -152,12 +152,12 @@ export default function PageBanner({ title, subtitle, fullScreen = false, slides
         /* Glows */
         .banner-glow {
           position: absolute; width: 500px; height: 500px; border-radius: 50%;
-          background: radial-gradient(circle, rgba(200,162,74,0.12), transparent 70%);
+          background: radial-gradient(circle, rgba(185,50,13,0.16), transparent 70%);
           top: -150px; left: -100px; filter: blur(10px); z-index: 1;
           animation: float1 12s ease-in-out infinite;
         }
         .banner-glow.b {
-          width: 400px; height: 400px; background: radial-gradient(circle, rgba(60,120,210,0.15), transparent 70%);
+          width: 400px; height: 400px; background: radial-gradient(circle, rgba(185,50,13,0.12), transparent 70%);
           bottom: -100px; right: -100px; top: auto; left: auto;
           animation: float2 14s ease-in-out infinite;
         }
@@ -174,18 +174,18 @@ export default function PageBanner({ title, subtitle, fullScreen = false, slides
           font-family: 'Space Grotesk',sans-serif;
           font-weight: 700;
           font-size: clamp(3rem, 5vw, 4.5rem);
-          background: linear-gradient(135deg, #ffffff 0%, #c8a24a 100%);
+          background: linear-gradient(135deg, #111111 0%, #B9320D 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
           line-height: 1.1;
           letter-spacing: -0.02em;
           margin-bottom: 24px;
-          filter: drop-shadow(0 10px 30px rgba(0,0,0,0.5));
+          filter: drop-shadow(0 10px 30px rgba(63,98,49,0.25));
         }
         .page-hero-sub {
           font-size: 18px;
-          color: rgba(255,255,255,0.8);
+          color: rgba(20,20,20,0.78);
           max-width: 640px;
           margin: 0 auto;
           line-height: 1.6;
@@ -207,15 +207,15 @@ export default function PageBanner({ title, subtitle, fullScreen = false, slides
           font-weight: 600;
           letter-spacing: 0.1em;
           text-transform: uppercase;
-          color: rgba(255,255,255,0.5);
+          color: rgba(20,20,20,0.55);
           margin-bottom: 32px;
-          background: rgba(255,255,255,0.03);
-          border: 1px solid rgba(255,255,255,0.1);
+          background: rgba(222,81,10,0.35);
+          border: 1px solid rgba(185,50,13,0.35);
           padding: 8px 24px;
           border-radius: 100px;
           backdrop-filter: blur(4px);
         }
-        .breadcrumb span.current { color: #C8A24A; }
+        .breadcrumb span.current { color: #B9320D; }
         .breadcrumb svg { opacity: 0.4; }
 
         .reveal-up {

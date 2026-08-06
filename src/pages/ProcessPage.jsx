@@ -1,10 +1,13 @@
 import PageBanner from '../components/PageBanner';
 import ProcessSection from '../components/ProcessSection';
+import { useCMSStore } from '../store/useCMSStore';
 
 export default function ProcessPage() {
+  const banner = useCMSStore((s) => s.banners?.main?.process);
+
   return (
     <>
-      <PageBanner title="Process" subtitle="A documented, auditable process at every stage — from sourcing and grading to cold-chain delivery." />
+      <PageBanner title={banner?.title || 'Process'} subtitle={banner?.subtitle || ''} slideshowImages={banner?.images || null} />
       <ProcessSection />
     </>
   );

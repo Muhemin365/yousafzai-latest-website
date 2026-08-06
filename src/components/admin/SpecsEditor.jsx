@@ -5,7 +5,7 @@ const inputStyle = {
   borderRadius: 6,
   fontSize: 12,
   fontFamily: "'Inter',sans-serif",
-  color: '#1B2230',
+  color: '#111111',
   background: '#FFFFFF',
 };
 
@@ -27,7 +27,7 @@ export default function SpecsEditor({ specs, onUpdate }) {
 
   return (
     <div style={{ marginTop: 16 }}>
-      <h4 style={{ fontFamily: "'Space Grotesk',sans-serif", fontSize: 14, fontWeight: 600, color: '#0B2545', margin: '0 0 12px' }}>Specifications Table</h4>
+      <h4 style={{ fontFamily: "'Space Grotesk',sans-serif", fontSize: 14, fontWeight: 600, color: '#B8860B', margin: '0 0 12px' }}>Specifications Table</h4>
       {specs.map((spec, i) => (
         <div key={i} style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 8, padding: 8, background: '#F5F7FA', borderRadius: 8 }}>
           <input value={spec.name} onChange={(e) => update(i, 'name', e.target.value)} style={{ ...inputStyle, flex: 1 }} placeholder="Product" />
@@ -42,7 +42,7 @@ export default function SpecsEditor({ specs, onUpdate }) {
           <button onClick={() => remove(i)} style={{ background: '#FEF2F2', border: 'none', borderRadius: 4, padding: '4px 8px', color: '#B91C1C', fontSize: 11, cursor: 'pointer' }}>×</button>
         </div>
       ))}
-      <button onClick={add} style={{ padding: '6px 14px', background: '#FFFFFF', border: '1.5px dashed #DBDFE6', borderRadius: 6, color: '#0B2545', fontSize: 12, cursor: 'pointer', fontWeight: 600 }}>+ Add Row</button>
+      <button onClick={add} style={{ padding: '6px 14px', background: '#FFFFFF', border: '1.5px dashed #DBDFE6', borderRadius: 6, color: '#B8860B', fontSize: 12, cursor: 'pointer', fontWeight: 600 }}>+ Add Row</button>
     </div>
   );
 }

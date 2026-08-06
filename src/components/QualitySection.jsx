@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useCMSStore } from '../store/useCMSStore';
-import { ShieldCheck, CheckCircle2, Award, ClipboardList, Users, Leaf, Star, Sparkles, Activity } from 'lucide-react';
+import { ShieldCheck, CheckCircle2, Star, Activity } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -168,12 +168,12 @@ export default function QualitySection() {
       </section>
 
       <style>{`
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            QUALITY PAGE ROOT
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .q-page-wrapper {
-          background: #060e1a;
-          color: #fff;
+          background: #FBF7F0;
+          color: #111111;
           position: relative;
           overflow: hidden;
         }
@@ -182,8 +182,8 @@ export default function QualitySection() {
           position: absolute;
           inset: 0;
           background-image:
-            linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+            linear-gradient(rgba(20,20,20,0.012) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(20,20,20,0.012) 1px, transparent 1px);
           background-size: 50px 50px;
           pointer-events: none;
         }
@@ -197,7 +197,7 @@ export default function QualitySection() {
 
         .q-orb-1 {
           width: 550px; height: 550px;
-          background: radial-gradient(circle, rgba(200,162,74,0.12), transparent 70%);
+          background: radial-gradient(circle, rgba(222,81,10,0.12), transparent 70%);
           top: 10%; right: -150px;
         }
 
@@ -228,7 +228,7 @@ export default function QualitySection() {
           font-family: monospace;
           font-size: 11px;
           letter-spacing: 0.18em;
-          color: #c8a24a;
+          color: #DE510A;
           display: block;
           margin-bottom: 12px;
         }
@@ -238,7 +238,7 @@ export default function QualitySection() {
           font-size: clamp(32px, 4.2vw, 48px);
           font-weight: 700;
           margin: 0 0 16px;
-          background: linear-gradient(135deg, #ffffff 0%, #c8a24a 100%);
+          background: linear-gradient(135deg, #111111 0%, #B9320D 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
@@ -248,23 +248,23 @@ export default function QualitySection() {
           font-family: 'Space Grotesk', sans-serif;
           font-size: 24px;
           font-weight: 700;
-          color: #fff;
+          color: #111111;
           margin: 0;
         }
 
         .q-sub {
           font-size: 16px;
-          color: rgba(255,255,255,0.6);
+          color: rgba(20,20,20,0.6);
           line-height: 1.7;
           margin: 0;
         }
 
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            TRACEABILITY CONSOLE (GOLDEN THEME)
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .trace-console {
-          background: rgba(255,255,255,0.025);
-          border: 1px solid rgba(200,162,74,0.3);
+          background: #DE510A;
+          border: 1px solid rgba(222,81,10,0.3);
           border-radius: 24px;
           padding: 36px;
           backdrop-filter: blur(20px);
@@ -277,7 +277,7 @@ export default function QualitySection() {
           justify-content: space-between;
           align-items: center;
           padding-bottom: 24px;
-          border-bottom: 1px solid rgba(255,255,255,0.08);
+          border-bottom: 1px solid rgba(20,20,20,0.08);
           margin-bottom: 40px;
         }
 
@@ -287,27 +287,27 @@ export default function QualitySection() {
           gap: 14px;
         }
 
-        .text-gold { color: #c8a24a; }
+        .text-gold { color: #DE510A; }
 
         .trace-main-title {
           font-family: 'Space Grotesk', sans-serif;
           font-size: 18px;
           font-weight: 700;
           margin: 0 0 4px;
-          color: #fff;
+          color: #111111;
         }
 
         .trace-main-sub {
           font-size: 13px;
-          color: rgba(255,255,255,0.5);
+          color: rgba(20,20,20,0.5);
         }
 
         .trace-batch-badge {
           font-family: monospace;
           font-size: 12px;
-          color: #F2E7C9;
-          background: rgba(200,162,74,0.15);
-          border: 1px solid rgba(200,162,74,0.35);
+          color: #B9320D;
+          background: rgba(222,81,10,0.15);
+          border: 1px solid rgba(222,81,10,0.35);
           padding: 8px 16px;
           border-radius: 8px;
         }
@@ -322,7 +322,7 @@ export default function QualitySection() {
           top: 42px;
           left: 8%; right: 8%;
           height: 3px;
-          background: rgba(255,255,255,0.08);
+          background: #DE510A;
           z-index: 1;
         }
 
@@ -331,10 +331,10 @@ export default function QualitySection() {
           top: 42px;
           left: 8%; right: 8%;
           height: 3px;
-          background: linear-gradient(90deg, #c8a24a, #F2E7C9);
+          background: linear-gradient(90deg, #DE510A, #F2E7C9);
           z-index: 1;
           transform-origin: left;
-          box-shadow: 0 0 12px rgba(200,162,74,0.6);
+          box-shadow: 0 0 12px rgba(222,81,10,0.6);
         }
 
         .trace-steps-grid {
@@ -356,36 +356,36 @@ export default function QualitySection() {
           width: 46px;
           height: 46px;
           border-radius: 50%;
-          background: #0a1628;
-          border: 2px solid #c8a24a;
+          background: #111111;
+          border: 2px solid #DE510A;
           display: flex;
           align-items: center;
           justify-content: center;
           margin-bottom: 14px;
-          box-shadow: 0 0 16px rgba(200,162,74,0.4);
+          box-shadow: 0 0 16px rgba(222,81,10,0.4);
         }
 
         .step-check-icon {
-          color: #c8a24a;
+          color: #DE510A;
         }
 
         .step-title {
           font-family: 'Space Grotesk', sans-serif;
           font-size: 13.5px;
           font-weight: 700;
-          color: #fff;
+          color: #111111;
           margin-bottom: 4px;
         }
 
         .step-time {
           font-family: monospace;
           font-size: 11px;
-          color: rgba(255,255,255,0.5);
+          color: rgba(20,20,20,0.5);
         }
 
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            CERTIFICATIONS GRID
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .q-cert-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
@@ -394,8 +394,8 @@ export default function QualitySection() {
 
         .q-cert-card {
           position: relative;
-          background: rgba(255,255,255,0.025);
-          border: 1px solid rgba(255,255,255,0.08);
+          background: #DE510A;
+          border: 1px solid rgba(20,20,20,0.08);
           border-radius: 20px;
           padding: 28px 24px;
           display: flex;
@@ -406,7 +406,7 @@ export default function QualitySection() {
         }
 
         .q-cert-card:hover {
-          border-color: rgba(200,162,74,0.5);
+          border-color: rgba(222,81,10,0.5);
           transform: translateY(-4px);
         }
 
@@ -414,12 +414,12 @@ export default function QualitySection() {
           width: 46px;
           height: 46px;
           border-radius: 12px;
-          background: rgba(200,162,74,0.12);
-          border: 1px solid rgba(200,162,74,0.3);
+          background: rgba(222,81,10,0.12);
+          border: 1px solid rgba(222,81,10,0.3);
           display: flex;
           align-items: center;
           justify-content: center;
-          color: #c8a24a;
+          color: #DE510A;
           flex-shrink: 0;
         }
 
@@ -433,12 +433,12 @@ export default function QualitySection() {
           font-size: 16px;
           font-weight: 700;
           margin: 0 0 6px;
-          color: #fff;
+          color: #111111;
         }
 
         .cert-desc {
           font-size: 13px;
-          color: rgba(255,255,255,0.6);
+          color: rgba(20,20,20,0.6);
           line-height: 1.6;
           margin: 0 0 12px;
         }
@@ -447,21 +447,21 @@ export default function QualitySection() {
           font-family: monospace;
           font-size: 10px;
           font-weight: 700;
-          color: #F2E7C9;
-          background: rgba(200,162,74,0.15);
-          border: 1px solid rgba(200,162,74,0.3);
+          color: #B9320D;
+          background: rgba(222,81,10,0.15);
+          border: 1px solid rgba(222,81,10,0.3);
           padding: 3px 10px;
           border-radius: 6px;
           align-self: flex-start;
         }
 
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            TESTIMONIALS SECTION
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .q-test-section {
           padding: 100px 24px 140px;
-          background: rgba(10,18,34,0.5);
-          border-top: 1px solid rgba(255,255,255,0.06);
+          background: #FBF7F0;
+          border-top: 1px solid rgba(20,20,20,0.06);
           position: relative;
           z-index: 2;
         }
@@ -473,8 +473,8 @@ export default function QualitySection() {
         }
 
         .q-test-card {
-          background: rgba(255,255,255,0.025);
-          border: 1px solid rgba(255,255,255,0.08);
+          background: #DE510A;
+          border: 1px solid rgba(20,20,20,0.08);
           border-radius: 24px;
           padding: 36px 28px;
           display: flex;
@@ -484,7 +484,7 @@ export default function QualitySection() {
         }
 
         .q-test-card:hover {
-          border-color: rgba(200,162,74,0.4);
+          border-color: rgba(222,81,10,0.4);
           transform: translateY(-6px);
         }
 
@@ -501,7 +501,7 @@ export default function QualitySection() {
 
         .test-quote-text {
           font-size: 15px;
-          color: rgba(255,255,255,0.75);
+          color: rgba(20,20,20,0.75);
           line-height: 1.7;
           margin: 0 0 28px;
           flex-grow: 1;
@@ -513,16 +513,16 @@ export default function QualitySection() {
           align-items: center;
           gap: 14px;
           padding-top: 20px;
-          border-top: 1px solid rgba(255,255,255,0.08);
+          border-top: 1px solid rgba(20,20,20,0.08);
         }
 
         .test-avatar {
           width: 44px;
           height: 44px;
           border-radius: 50%;
-          background: rgba(200,162,74,0.15);
-          border: 1px solid rgba(200,162,74,0.3);
-          color: #F2E7C9;
+          background: rgba(222,81,10,0.15);
+          border: 1px solid rgba(222,81,10,0.3);
+          color: #B9320D;
           font-family: 'Space Grotesk', sans-serif;
           font-weight: 700;
           font-size: 14px;
@@ -541,17 +541,17 @@ export default function QualitySection() {
           font-family: 'Space Grotesk', sans-serif;
           font-size: 14.5px;
           font-weight: 700;
-          color: #fff;
+          color: #111111;
         }
 
         .test-role {
           font-size: 12px;
-          color: rgba(255,255,255,0.5);
+          color: rgba(20,20,20,0.5);
         }
 
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            RESPONSIVE
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         @media (max-width: 1080px) {
           .q-cert-grid { grid-template-columns: repeat(2, 1fr); }
           .q-test-grid { grid-template-columns: repeat(2, 1fr); }

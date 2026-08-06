@@ -1,10 +1,15 @@
-import React, { useEffect, useRef } from 'react';
+﻿import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useCMSStore } from '../../store/useCMSStore';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function SceneVisionMission() {
+  const vm = useCMSStore((s) => s.aboutScenes?.visionMission) || {};
+  const vision = vm.vision || {};
+  const mission = vm.mission || {};
+  const missionItems = Array.isArray(mission.items) && mission.items.length ? mission.items : [];
   const containerRef = useRef(null);
   const visionCardRef = useRef(null);
   const missionCardRef = useRef(null);
@@ -127,7 +132,7 @@ export default function SceneVisionMission() {
         flexDirection: 'column',
         justifyContent: 'center',
         padding: '120px 20px',
-        color: '#ffffff',
+        color: '#111111',
         overflow: 'hidden'
       }}
     >
@@ -137,7 +142,7 @@ export default function SceneVisionMission() {
         style={{
           position: 'absolute',
           inset: -50, // Slightly larger to allow scale effect
-          backgroundImage: 'url("https://images.unsplash.com/photo-1508680415307-e160e15777bd?w=1920&q=80")', // Dramatic cinematic sunrise / industry
+          backgroundImage: `url("${vm.bgImage || 'https://images.unsplash.com/photo-1508680415307-e160e15777bd?w=1920&q=80'}")`, // Dramatic cinematic sunrise / industry
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           zIndex: 0
@@ -146,16 +151,16 @@ export default function SceneVisionMission() {
       <div style={{
         position: 'absolute',
         inset: 0,
-        background: 'radial-gradient(circle at center, rgba(7,16,31,0.7) 0%, rgba(7,16,31,0.95) 100%)',
+        background: 'radial-gradient(circle at center, rgba(251,247,240,0.85) 0%, rgba(251,247,240,0.96) 100%)',
         zIndex: 1
       }} />
 
       <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', marginBottom: '80px' }}>
-        <span style={{ fontSize: '12px', letterSpacing: '0.15em', color: '#c8a24a', fontFamily: 'monospace' }}>
-          STRATEGIC_DIRECTION // VALUES
+        <span style={{ fontSize: '12px', letterSpacing: '0.15em', color: '#B9320D', fontFamily: 'monospace' }}>
+          {vm.eyebrow || 'STRATEGIC_DIRECTION // VALUES'}
         </span>
-        <h2 style={{ fontSize: 'clamp(32px, 4vw, 48px)', fontWeight: '700', fontFamily: "'Space Grotesk', sans-serif", margin: '10px 0 0 0' }}>
-          Vision & Mission
+        <h2 style={{ fontSize: 'clamp(32px, 4vw, 48px)', fontWeight: '700', fontFamily: "'Space Grotesk', sans-serif", margin: '10px 0 0 0', color: '#111111' }}>
+          {vm.title || 'Vision & Mission'}
         </h2>
       </div>
 
@@ -171,13 +176,13 @@ export default function SceneVisionMission() {
           <div className="card-glow" />
           <div className="card-content">
             <div className="card-header">
-              <span className="card-eyebrow">OUR_VISION</span>
-              <div className="card-marker">[TARGET_LOCKED]</div>
+              <span className="card-eyebrow">{vision.eyebrow || 'OUR_VISION'}</span>
+              <div className="card-marker">{vision.marker || '[TARGET_LOCKED]'}</div>
             </div>
             
-            <h3 className="card-title">Transforming the Value Chain</h3>
+            <h3 className="card-title">{vision.title || 'Transforming the Value Chain'}</h3>
             <p className="card-desc">
-              To become a leading Eggs-food company in Pakistan and international markets by providing high-quality egg products, including liquid and processed eggs, with global standards.
+              {vision.desc}
             </p>
           </div>
         </div>
@@ -192,37 +197,21 @@ export default function SceneVisionMission() {
           <div className="card-glow" />
           <div className="card-content">
             <div className="card-header">
-              <span className="card-eyebrow">OUR_MISSION</span>
-              <div className="card-marker">[EXECUTION_PLAN]</div>
+              <span className="card-eyebrow">{mission.eyebrow || 'OUR_MISSION'}</span>
+              <div className="card-marker">{mission.marker || '[EXECUTION_PLAN]'}</div>
             </div>
             
-            <h3 className="card-title">Quality & Value Creation</h3>
+            <h3 className="card-title">{mission.title || 'Quality & Value Creation'}</h3>
             
             <ul className="mission-list">
-              <li>
-                <div className="list-icon">
-                  <div className="dot" />
-                </div>
-                <span>Supply fresh & hygienic eggs</span>
-              </li>
-              <li>
-                <div className="list-icon">
-                  <div className="dot" />
-                </div>
-                <span>Maintain strict quality control & food safety</span>
-              </li>
-              <li>
-                <div className="list-icon">
-                  <div className="dot" />
-                </div>
-                <span>Expand into value-added egg products like liquid eggs</span>
-              </li>
-              <li>
-                <div className="list-icon">
-                  <div className="dot" />
-                </div>
-                <span>Build long-term trust with clients & partners</span>
-              </li>
+              {missionItems.map((item, i) => (
+                <li key={i}>
+                  <div className="list-icon">
+                    <div className="dot" />
+                  </div>
+                  <span>{item}</span>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
@@ -231,9 +220,9 @@ export default function SceneVisionMission() {
 
       <style>{`
         .sc-vision-wrapper {
-          --card-bg: rgba(20, 30, 48, 0.4);
-          --card-border: rgba(200, 162, 74, 0.2);
-          --glow-color: rgba(200, 162, 74, 0.15);
+          --card-bg: #DE510A;
+          --card-border: rgba(222, 81, 10, 0.35);
+          --glow-color: rgba(222, 81, 10, 0.25);
         }
 
         .sc-vision-wrapper .vm-layout {
@@ -257,7 +246,7 @@ export default function SceneVisionMission() {
           backdrop-filter: blur(24px);
           -webkit-backdrop-filter: blur(24px);
           overflow: hidden;
-          box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+          box-shadow: 0 30px 60px rgba(63, 98, 49, 0.2);
           transform-style: preserve-3d;
         }
 
@@ -281,7 +270,7 @@ export default function SceneVisionMission() {
         }
         
         .sc-vision-wrapper .vm-card:hover {
-          border-color: rgba(200, 162, 74, 0.4);
+          border-color: rgba(222, 81, 10, 0.4);
         }
 
         .sc-vision-wrapper .card-content {
@@ -299,7 +288,7 @@ export default function SceneVisionMission() {
           flex: 1;
           margin-top: 80px;
           margin-left: -60px; /* Slight overlap */
-          background: rgba(10, 18, 32, 0.6); /* Slightly darker */
+          background: #DCE7D5; /* Slightly darker */
         }
 
         .sc-vision-wrapper .card-header {
@@ -312,15 +301,15 @@ export default function SceneVisionMission() {
         .sc-vision-wrapper .card-eyebrow {
           font-family: monospace;
           font-size: 13px;
-          color: #c8a24a;
+          color: #DE510A;
           letter-spacing: 0.1em;
         }
 
         .sc-vision-wrapper .card-marker {
           font-family: monospace;
           font-size: 10px;
-          color: rgba(255,255,255,0.2);
-          border: 1px solid rgba(255,255,255,0.1);
+          color: rgba(20,20,20,0.5);
+          border: 1px solid rgba(20,20,20,0.2);
           padding: 4px 8px;
           border-radius: 4px;
         }
@@ -331,11 +320,12 @@ export default function SceneVisionMission() {
           font-weight: 700;
           margin: 0 0 20px 0;
           line-height: 1.2;
+          color: #111111;
         }
 
         .sc-vision-wrapper .card-desc {
           font-size: 18px;
-          color: rgba(255,255,255,0.8);
+          color: rgba(20,20,20,0.85);
           line-height: 1.7;
           margin: 0;
         }
@@ -354,7 +344,7 @@ export default function SceneVisionMission() {
           align-items: flex-start;
           gap: 16px;
           font-size: 16px;
-          color: rgba(255,255,255,0.85);
+          color: rgba(20,20,20,0.88);
           line-height: 1.6;
         }
 
@@ -363,8 +353,8 @@ export default function SceneVisionMission() {
           width: 24px;
           height: 24px;
           border-radius: 50%;
-          background: rgba(200, 162, 74, 0.1);
-          border: 1px solid rgba(200, 162, 74, 0.3);
+          background: rgba(222, 81, 10, 0.1);
+          border: 1px solid rgba(222, 81, 10, 0.3);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -375,8 +365,8 @@ export default function SceneVisionMission() {
           width: 6px;
           height: 6px;
           border-radius: 50%;
-          background: #c8a24a;
-          box-shadow: 0 0 10px #c8a24a;
+          background: #DE510A;
+          box-shadow: 0 0 10px #DE510A;
         }
 
         /* Mobile Layout */

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+﻿import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { stages } from './StageData';
@@ -96,8 +96,8 @@ export default function SupplyChainSection() {
 
       <style>{`
         .sc-journey-wrapper {
-          background: #071A30;
-          color: #FFFFFF;
+          background: #FBF7F0;
+          color: #111111;
         }
 
         .journey-layout.desktop {
@@ -115,7 +115,7 @@ export default function SupplyChainSection() {
           top: 0;
           height: 100vh;
           overflow: hidden;
-          background: #051324;
+          background: #FBF7F0;
         }
 
         .sticky-container {
@@ -149,7 +149,7 @@ export default function SupplyChainSection() {
         .visual-overlay {
           position: absolute;
           inset: 0;
-          background: linear-gradient(90deg, rgba(7,26,48,0.1) 0%, rgba(7,26,48,0.8) 100%);
+          background: linear-gradient(90deg, rgba(63,98,49,0.1) 0%, rgba(185,50,13,0.35) 100%);
           mix-blend-mode: multiply;
         }
         
@@ -175,10 +175,10 @@ export default function SupplyChainSection() {
           font-size: 48px;
           line-height: 1.1;
           margin: 16px 0;
-          color: #FFFFFF;
+          color: #111111;
         }
         .story-intro .sec-sub {
-          color: #A3C2F0;
+          color: rgba(20,20,20,0.72);
         }
 
         .stages-list {
@@ -197,14 +197,14 @@ export default function SupplyChainSection() {
         .stage-block.active {
           opacity: 1;
           transform: translateX(0);
-          border-left-color: #C8A24A;
+          border-left-color: #DE510A;
         }
 
         .stage-num {
           font-family: 'Space Grotesk', sans-serif;
           font-size: 20px;
           font-weight: 700;
-          color: #C8A24A;
+          color: #DE510A;
           margin-bottom: 12px;
         }
         .stage-title {
@@ -212,11 +212,11 @@ export default function SupplyChainSection() {
           font-size: 32px;
           font-weight: 700;
           margin-bottom: 16px;
-          color: #FFFFFF;
+          color: #111111;
         }
         .stage-desc {
           font-size: 18px;
-          color: #A3C2F0;
+          color: rgba(20,20,20,0.72);
           line-height: 1.6;
           margin-bottom: 24px;
         }
@@ -226,8 +226,8 @@ export default function SupplyChainSection() {
           font-weight: 600;
           text-transform: uppercase;
           letter-spacing: 0.05em;
-          color: #071A30;
-          background: #C8A24A;
+          color: #ffffff;
+          background: #3F6231;
           padding: 6px 16px;
           border-radius: 20px;
         }
@@ -248,7 +248,7 @@ export default function SupplyChainSection() {
           padding: 60px 24px;
           position: relative;
           z-index: 11;
-          background: #071A30;
+          background: #FBF7F0;
         }
         .journey-layout.mobile .stages-list {
           gap: 60px;
@@ -256,7 +256,7 @@ export default function SupplyChainSection() {
         .journey-layout.mobile .stage-block {
           opacity: 1;
           transform: translateX(0);
-          border-left-color: #173E72;
+          border-left-color: #B9320D;
         }
       `}</style>
     </div>

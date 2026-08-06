@@ -325,12 +325,12 @@ export default function ContactSection() {
       </div>
 
       <style>{`
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            SECTION BASE
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .cnt-section {
-          background: #060e1a;
-          color: #fff;
+          background: #FBF7F0;
+          color: #111111;
           padding: 120px 24px 140px;
           position: relative;
           overflow: hidden;
@@ -340,8 +340,8 @@ export default function ContactSection() {
           position: absolute;
           inset: 0;
           background-image:
-            linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+            linear-gradient(rgba(20,20,20,0.012) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(20,20,20,0.012) 1px, transparent 1px);
           background-size: 50px 50px;
           pointer-events: none;
         }
@@ -355,7 +355,7 @@ export default function ContactSection() {
 
         .cnt-orb-1 {
           width: 550px; height: 550px;
-          background: radial-gradient(circle, rgba(200,162,74,0.08), transparent 70%);
+          background: radial-gradient(circle, rgba(222,81,10,0.08), transparent 70%);
           top: 15%; left: -150px;
           animation: cntFloat1 15s ease-in-out infinite alternate;
         }
@@ -384,9 +384,9 @@ export default function ContactSection() {
           z-index: 2;
         }
 
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            HEADER
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .cnt-header {
           text-align: center;
           max-width: 750px;
@@ -397,7 +397,7 @@ export default function ContactSection() {
           font-family: monospace;
           font-size: 12px;
           letter-spacing: 0.2em;
-          color: #c8a24a;
+          color: #DE510A;
           display: block;
           margin-bottom: 16px;
           visibility: hidden;
@@ -408,7 +408,7 @@ export default function ContactSection() {
           font-size: clamp(32px, 4.5vw, 52px);
           font-weight: 700;
           margin: 0 0 18px;
-          background: linear-gradient(135deg, #ffffff 0%, #c8a24a 100%);
+          background: linear-gradient(135deg, #111111 0%, #B9320D 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
@@ -417,7 +417,7 @@ export default function ContactSection() {
 
         .cnt-sub {
           font-size: 16px;
-          color: rgba(255,255,255,0.5);
+          color: rgba(20,20,20,0.5);
           line-height: 1.7;
           margin: 0 0 28px;
           visibility: hidden;
@@ -426,16 +426,16 @@ export default function ContactSection() {
         .cnt-divider-line {
           width: 70px;
           height: 3px;
-          background: linear-gradient(90deg, #c8a24a, #F2E7C9);
+          background: linear-gradient(90deg, #DE510A, #F2E7C9);
           margin: 0 auto;
           transform-origin: center;
           transform: scaleX(0);
           border-radius: 2px;
         }
 
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            LAYOUT
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .cnt-layout {
           display: grid;
           grid-template-columns: 0.85fr 1.15fr;
@@ -443,9 +443,9 @@ export default function ContactSection() {
           align-items: start;
         }
 
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            LEFT: INFO COLUMN
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .cnt-info-column {
           display: flex;
           flex-direction: column;
@@ -464,8 +464,8 @@ export default function ContactSection() {
           gap: 20px;
           padding: 22px;
           border-radius: 16px;
-          background: rgba(255,255,255,0.025);
-          border: 1px solid rgba(255,255,255,0.06);
+          background: #DE510A;
+          border: 1px solid rgba(20,20,20,0.06);
           backdrop-filter: blur(12px);
           -webkit-backdrop-filter: blur(12px);
           transition: border-color 0.4s, transform 0.4s;
@@ -473,7 +473,7 @@ export default function ContactSection() {
         }
 
         .cnt-info-card:hover {
-          border-color: rgba(200,162,74,0.3);
+          border-color: rgba(222,81,10,0.3);
           transform: translateX(6px);
         }
 
@@ -481,12 +481,12 @@ export default function ContactSection() {
           width: 48px;
           height: 48px;
           border-radius: 12px;
-          background: rgba(200,162,74,0.1);
-          border: 1px solid rgba(200,162,74,0.25);
+          background: rgba(222,81,10,0.1);
+          border: 1px solid rgba(222,81,10,0.25);
           display: flex;
           align-items: center;
           justify-content: center;
-          color: #c8a24a;
+          color: #DE510A;
           flex-shrink: 0;
         }
 
@@ -504,7 +504,7 @@ export default function ContactSection() {
         .cnt-info-label {
           font-family: monospace;
           font-size: 10px;
-          color: rgba(255,255,255,0.35);
+          color: rgba(20,20,20,0.35);
           letter-spacing: 0.1em;
           text-transform: uppercase;
         }
@@ -513,7 +513,7 @@ export default function ContactSection() {
           font-family: 'Space Grotesk', sans-serif;
           font-size: 15px;
           font-weight: 600;
-          color: #fff;
+          color: #111111;
           line-height: 1.4;
         }
 
@@ -521,8 +521,8 @@ export default function ContactSection() {
         .cnt-sla-box {
           border-radius: 20px;
           padding: 30px;
-          background: linear-gradient(135deg, rgba(200,162,74,0.08) 0%, rgba(10,18,34,0.6) 100%);
-          border: 1px solid rgba(200,162,74,0.25);
+          background: linear-gradient(135deg, #DE510A 0%, #DE510A 100%);
+          border: 1px solid rgba(222,81,10,0.25);
           backdrop-filter: blur(16px);
           position: relative;
           overflow: hidden;
@@ -535,9 +535,9 @@ export default function ContactSection() {
           font-family: monospace;
           font-size: 10px;
           font-weight: 700;
-          color: #F2E7C9;
-          background: rgba(200,162,74,0.15);
-          border: 1px solid rgba(200,162,74,0.3);
+          color: #B9320D;
+          background: rgba(222,81,10,0.15);
+          border: 1px solid rgba(222,81,10,0.3);
           padding: 5px 12px;
           border-radius: 6px;
           margin-bottom: 16px;
@@ -548,12 +548,12 @@ export default function ContactSection() {
           font-size: 20px;
           font-weight: 700;
           margin: 0 0 10px;
-          color: #fff;
+          color: #111111;
         }
 
         .sla-desc {
           font-size: 14px;
-          color: rgba(255,255,255,0.6);
+          color: rgba(20,20,20,0.6);
           line-height: 1.65;
           margin: 0 0 20px;
         }
@@ -576,15 +576,15 @@ export default function ContactSection() {
           box-shadow: 0 0 8px rgba(74,222,128,0.6);
         }
 
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            RIGHT: FORM CARD
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .cnt-form-card {
           position: relative;
           border-radius: 24px;
           padding: 44px;
-          background: rgba(255,255,255,0.025);
-          border: 1px solid rgba(255,255,255,0.07);
+          background: #DE510A;
+          border: 1px solid rgba(20,20,20,0.07);
           backdrop-filter: blur(20px);
           -webkit-backdrop-filter: blur(20px);
           box-shadow: 0 30px 80px rgba(0,0,0,0.4);
@@ -595,14 +595,14 @@ export default function ContactSection() {
           justify-content: space-between;
           align-items: flex-start;
           margin-bottom: 32px;
-          border-bottom: 1px solid rgba(255,255,255,0.06);
+          border-bottom: 1px solid rgba(20,20,20,0.06);
           padding-bottom: 20px;
         }
 
         .form-eyebrow {
           font-family: monospace;
           font-size: 10px;
-          color: #c8a24a;
+          color: #DE510A;
           letter-spacing: 0.15em;
           display: block;
           margin-bottom: 6px;
@@ -613,16 +613,16 @@ export default function ContactSection() {
           font-size: 24px;
           font-weight: 700;
           margin: 0;
-          color: #fff;
+          color: #111111;
         }
 
         .form-badge {
           font-family: monospace;
           font-size: 9px;
           font-weight: 700;
-          color: rgba(255,255,255,0.4);
-          background: rgba(255,255,255,0.04);
-          border: 1px solid rgba(255,255,255,0.08);
+          color: rgba(20,20,20,0.4);
+          background: #DE510A;
+          border: 1px solid rgba(20,20,20,0.08);
           padding: 4px 10px;
           border-radius: 4px;
           letter-spacing: 0.1em;
@@ -667,7 +667,7 @@ export default function ContactSection() {
           font-family: 'Space Grotesk', sans-serif;
           font-size: 12.5px;
           font-weight: 600;
-          color: rgba(255,255,255,0.7);
+          color: rgba(20,20,20,0.7);
           margin-bottom: 8px;
         }
 
@@ -677,22 +677,22 @@ export default function ContactSection() {
           border-radius: 10px;
           font-size: 14px;
           font-family: 'Inter', sans-serif;
-          color: #fff;
-          background: rgba(255,255,255,0.03);
-          border: 1px solid rgba(255,255,255,0.08);
+          color: #111111;
+          background: #DE510A;
+          border: 1px solid rgba(20,20,20,0.08);
           transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
           box-sizing: border-box;
         }
 
         .form-input::placeholder {
-          color: rgba(255,255,255,0.25);
+          color: rgba(20,20,20,0.25);
         }
 
         .form-input:focus {
           outline: none;
-          background: rgba(255,255,255,0.05);
-          border-color: rgba(200,162,74,0.5);
-          box-shadow: 0 0 0 3px rgba(200,162,74,0.12);
+          background: #DE510A;
+          border-color: rgba(222,81,10,0.5);
+          box-shadow: 0 0 0 3px rgba(222,81,10,0.12);
         }
 
         select.form-input {
@@ -704,8 +704,8 @@ export default function ContactSection() {
         }
 
         select.form-input option {
-          background: #0a1628;
-          color: #fff;
+          background: #DE510A;
+          color: #ffffff;
         }
 
         .form-textarea {
@@ -727,16 +727,16 @@ export default function ContactSection() {
           border-radius: 12px;
           border: none;
           cursor: pointer;
-          background: linear-gradient(135deg, #c8a24a 0%, #F2E7C9 100%);
-          color: #060e1a;
+          background: linear-gradient(135deg, #DE510A 0%, #B9320D 100%);
+          color: #ffffff;
           transition: transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.3s ease;
-          box-shadow: 0 10px 30px rgba(200,162,74,0.25);
+          box-shadow: 0 10px 30px rgba(222,81,10,0.25);
           margin-top: 10px;
         }
 
         .form-submit-btn:hover:not(:disabled) {
           transform: translateY(-2px);
-          box-shadow: 0 15px 40px rgba(200,162,74,0.4);
+          box-shadow: 0 15px 40px rgba(222,81,10,0.4);
         }
 
         .btn-submitting {
@@ -751,14 +751,14 @@ export default function ContactSection() {
           gap: 8px;
           font-family: monospace;
           font-size: 11px;
-          color: rgba(255,255,255,0.4);
+          color: rgba(20,20,20,0.4);
           margin-top: 20px;
           text-align: center;
         }
 
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            MOBILE
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         @media (max-width: 900px) {
           .cnt-section {
             padding: 80px 16px;

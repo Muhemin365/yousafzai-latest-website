@@ -1,56 +1,20 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+﻿import React, { useEffect, useRef, useState, useCallback } from 'react';
 import gsap from 'gsap';
-
-/* ─────────────────────────────────────────────────────────
-   40 high-quality images covering every aspect of the business:
-   poultry farms, hens, eggs, packaging, logistics, markets,
-   grading, storage, rural farms, industrial processing
-   ───────────────────────────────────────────────────────── */
-const heroSlides = [
-  // Poultry & Hens
-  'https://images.unsplash.com/photo-1548550023-2bf3c49b71d9?w=1920&q=80',   // Flock of chickens
-  'https://images.unsplash.com/photo-1569288052389-dac9b01c9c05?w=1920&q=80', // Hen close-up
-  'https://images.unsplash.com/photo-1612170153139-6f881ff067e0?w=1920&q=80', // Free range hens
-  'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1920&q=80',   // Chickens on grass
-  'https://images.unsplash.com/photo-1623239524387-0b57a0eab64e?w=1920&q=80', // Roosters
-  'https://images.unsplash.com/photo-1605882174146-a464b70cf691?w=1920&q=80', // Hen in barn
-  'https://images.unsplash.com/photo-1574781330855-d0db8cc6a79c?w=1920&q=80', // Poultry flock
-  'https://images.unsplash.com/photo-1591197172062-c718f82aba20?w=1920&q=80', // Chickens in field
-
-  // Eggs (raw, cartons, baskets)
-  'https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?w=1920&q=80', // Eggs in tray
-  'https://images.unsplash.com/photo-1598965675045-45c5e72c7d05?w=1920&q=80', // Eggs carton
-  'https://images.unsplash.com/photo-1506976785307-8732e854ad03?w=1920&q=80', // Brown eggs basket
-  'https://images.unsplash.com/photo-1489726024920-b5ddc1c04b09?w=1920&q=80', // White eggs
-  'https://images.unsplash.com/photo-1498654077810-12c21d4d6dc3?w=1920&q=80', // Eggs on straw
-  'https://images.unsplash.com/photo-1587486913049-53fc88980cfc?w=1920&q=80', // Cracked egg cooking
-  'https://images.unsplash.com/photo-1607690424560-35d967079aac?w=1920&q=80', // Egg carton open
-  'https://images.unsplash.com/photo-1518569656558-1f25e69d93d7?w=1920&q=80', // Eggs in nest
-
-  // Packaging & Processing
-  'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=1920&q=80', // Food preparation
-  'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1920&q=80', // Industrial packaging
-  'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1920&q=80', // Modern tech lab
-  'https://images.unsplash.com/photo-1605000797499-95a51c5269ae?w=1920&q=80', // Food science
-
-  // Logistics & Distribution
-  'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1920&q=80', // Warehouse logistics
-  'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=1920&q=80', // Delivery truck
-  'https://images.unsplash.com/photo-1553413077-190dd305871c?w=1920&q=80', // Warehouse interior
-  'https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=1920&q=80', // Supply chain
-  'https://images.unsplash.com/photo-1494412574643-ff11b0a5eb19?w=1920&q=80', // Truck highway
-
-  // Business & Corporate
-  'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1920&q=80', // Business handshake
-  'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1920&q=80', // Business documents
-
-  // Quality & Certification
-  'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1920&q=80', // Lab quality
-  'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=1920&q=80', // Science lab
-];
-
+import { useCMSStore } from '../../store/useCMSStore';
 
 export default function SceneAboutHero() {
+  const hero = useCMSStore((s) => s.aboutScenes?.hero) || {};
+  const heroSlides = Array.isArray(hero.slides) && hero.slides.length ? hero.slides : [
+    'https://images.unsplash.com/photo-1548550023-2bf3c49b71d9?w=1920&q=80',
+    'https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?w=1920&q=80',
+    'https://images.unsplash.com/photo-1569288052389-dac9b01c9c05?w=1920&q=80',
+  ];
+  const stats = Array.isArray(hero.stats) && hero.stats.length ? hero.stats : [
+    { value: '60+', label: 'Years of Experience' },
+    { value: '500K+', label: 'Eggs Traded Weekly' },
+    { value: '3', label: 'Provinces Covered' },
+    { value: '100%', label: 'Halal Certified' },
+  ];
   const containerRef = useRef(null);
   const contentRef = useRef(null);
   const lineRef = useRef(null);
@@ -62,7 +26,7 @@ export default function SceneAboutHero() {
   const [nextSlide, setNextSlide] = useState(1);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
-  // Continuous slideshow — cycles through all 40 images
+  // Continuous slideshow — cycles through all images
   const advanceSlide = useCallback(() => {
     setIsTransitioning(true);
     const next = (currentSlide + 1) % heroSlides.length;
@@ -74,7 +38,7 @@ export default function SceneAboutHero() {
       setNextSlide((next + 1) % heroSlides.length);
       setIsTransitioning(false);
     }, 1200);
-  }, [currentSlide]);
+  }, [currentSlide, heroSlides.length]);
 
   useEffect(() => {
     const interval = setInterval(advanceSlide, 4000);
@@ -110,7 +74,7 @@ export default function SceneAboutHero() {
         alignItems: 'center',
         justifyContent: 'center',
         overflow: 'hidden',
-        padding: 0,
+        padding: '96px 0 40px',
       }}
     >
       {/* === CONTINUOUS BG SLIDESHOW (2 layers for crossfade) === */}
@@ -135,10 +99,10 @@ export default function SceneAboutHero() {
         }}
       />
 
-      {/* Dark gradient overlay */}
+      {/* Light Dutch White overlay */}
       <div style={{
         position: 'absolute', inset: 0, zIndex: 0,
-        background: 'linear-gradient(to bottom, rgba(7,16,31,0.72) 0%, rgba(7,16,31,0.35) 50%, rgba(7,16,31,0.82) 100%)',
+        background: 'linear-gradient(to bottom, rgba(251,247,240,0.86) 0%, rgba(251,247,240,0.6) 50%, rgba(251,247,240,0.9) 100%)',
         pointerEvents: 'none',
       }} />
 
@@ -148,7 +112,7 @@ export default function SceneAboutHero() {
         style={{
           position: 'absolute', inset: 0,
           backgroundImage:
-            'linear-gradient(to right, rgba(100, 210, 255, 0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(100, 210, 255, 0.04) 1px, transparent 1px)',
+            'linear-gradient(to right, rgba(185, 50, 13, 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(185, 50, 13, 0.05) 1px, transparent 1px)',
           backgroundSize: '40px 40px',
           pointerEvents: 'none', zIndex: 1, opacity: 0,
         }}
@@ -157,15 +121,15 @@ export default function SceneAboutHero() {
       {/* Blueprint Coordinates */}
       <div style={{
         position: 'absolute', top: '12%', left: '8%',
-        fontFamily: 'monospace', fontSize: '11px', color: '#64d2ff', opacity: 0.5, zIndex: 2,
+        fontFamily: 'monospace', fontSize: '11px', color: '#B9320D', opacity: 0.7, zIndex: 2,
       }}>
-        SEC-01 // MARDAN, KPK, PAKISTAN
+        {hero.coordinates || 'SEC-01 // MARDAN, KPK, PAKISTAN'}
       </div>
 
       {/* Slide counter */}
       <div style={{
         position: 'absolute', top: '12%', right: '8%',
-        fontFamily: 'monospace', fontSize: '11px', color: 'rgba(200,162,74,0.6)', zIndex: 2,
+        fontFamily: 'monospace', fontSize: '11px', color: 'rgba(222,81,10,0.6)', zIndex: 2,
       }}>
         {String(currentSlide + 1).padStart(2, '0')} / {heroSlides.length}
       </div>
@@ -176,41 +140,39 @@ export default function SceneAboutHero() {
           {/* Eyebrow */}
           <div style={{
             display: 'inline-flex', alignItems: 'center', gap: '10px',
-            fontSize: '12px', letterSpacing: '0.15em', color: '#c8a24a',
+            fontSize: '12px', letterSpacing: '0.15em', color: '#DE510A',
             fontFamily: 'monospace', marginBottom: '20px', textTransform: 'uppercase',
           }}>
-            <span style={{ width: '24px', height: '1.5px', background: '#c8a24a', display: 'inline-block' }} />
-            About Yousafzai Eggs Traders & Poultry Farms
-            <span style={{ width: '24px', height: '1.5px', background: '#c8a24a', display: 'inline-block' }} />
+            <span style={{ width: '24px', height: '1.5px', background: '#DE510A', display: 'inline-block' }} />
+            {hero.eyebrow || 'About Yousafzai Eggs Traders & Poultry Farms'}
+            <span style={{ width: '24px', height: '1.5px', background: '#DE510A', display: 'inline-block' }} />
           </div>
 
           <h1 style={{
             fontFamily: "'Space Grotesk', sans-serif",
             fontSize: 'clamp(32px, 5.5vw, 68px)',
             fontWeight: 700, letterSpacing: '-0.02em',
-            margin: '0 0 16px 0', textTransform: 'uppercase', color: '#ffffff', lineHeight: 1.1,
+            margin: '0 0 16px 0', textTransform: 'uppercase', color: '#111111', lineHeight: 1.1,
           }}>
-            Engineered for<br />
+            {hero.h1Line1 || 'Engineered for'}<br />
             <span style={{
-              background: 'linear-gradient(135deg, #ffffff 0%, #c8a24a 100%)',
+              background: 'linear-gradient(135deg, #111111 0%, #B9320D 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
-            }}>Quality & Trust</span>
+            }}>{hero.h1Highlight || 'Quality & Trust'}</span>
           </h1>
 
           {/* Gold Drafting Line */}
           <div ref={lineRef} style={{
-            height: '2px', background: 'linear-gradient(to right, transparent, #c8a24a, transparent)',
+            height: '2px', background: 'linear-gradient(to right, transparent, #DE510A, transparent)',
             width: '320px', margin: '0 auto', transformOrigin: 'center',
           }} />
 
           <p style={{
-            marginTop: '24px', fontSize: '17px', color: 'rgba(255,255,255,0.75)',
+            marginTop: '24px', fontSize: '17px', color: 'rgba(20,20,20,0.8)',
             maxWidth: '620px', lineHeight: 1.75, margin: '24px auto 0',
           }}>
-            Since 1960, Yousafzai Eggs Traders has been a trusted name in Pakistan's poultry and egg distribution industry.
-            With over six decades of experience, we connect certified farms to hotels, retailers, manufacturers, and institutions
-            across KPK, Punjab, and Sindh — delivering fresh, Halal-certified eggs with full traceability.
+            {hero.paragraph}
           </p>
         </div>
 
@@ -218,21 +180,16 @@ export default function SceneAboutHero() {
         <div ref={statsRef} style={{
           display: 'flex', justifyContent: 'center', gap: '50px', marginTop: '40px', flexWrap: 'wrap',
         }}>
-          {[
-            { value: '60+', label: 'Years of Experience' },
-            { value: '500K+', label: 'Eggs Traded Weekly' },
-            { value: '3', label: 'Provinces Covered' },
-            { value: '100%', label: 'Halal Certified' },
-          ].map((stat, idx) => (
+          {stats.map((stat, idx) => (
             <div key={idx} style={{ textAlign: 'center' }}>
               <div style={{
-                fontSize: '28px', fontWeight: 700, color: '#c8a24a',
+                fontSize: '28px', fontWeight: 700, color: '#DE510A',
                 fontFamily: "'Space Grotesk', sans-serif",
               }}>
                 {stat.value}
               </div>
               <div style={{
-                fontSize: '11px', color: 'rgba(255,255,255,0.5)',
+                fontSize: '11px', color: 'rgba(20,20,20,0.55)',
                 fontFamily: 'monospace', letterSpacing: '0.08em', marginTop: '4px',
               }}>
                 {stat.label}
@@ -251,13 +208,13 @@ export default function SceneAboutHero() {
             }}
             style={{
               padding: '14px 36px', fontSize: '15px', backgroundColor: 'transparent',
-              color: '#c8a24a', border: '1px solid #c8a24a', fontWeight: 600, cursor: 'pointer',
+              color: '#DE510A', border: '1px solid #DE510A', fontWeight: 600, cursor: 'pointer',
               letterSpacing: '0.08em', fontFamily: 'monospace', transition: 'all 0.3s ease',
             }}
-            onMouseEnter={(e) => { e.target.style.backgroundColor = '#c8a24a'; e.target.style.color = '#07101f'; }}
-            onMouseLeave={(e) => { e.target.style.backgroundColor = 'transparent'; e.target.style.color = '#c8a24a'; }}
+            onMouseEnter={(e) => { e.target.style.backgroundColor = '#DE510A'; e.target.style.color = '#111111'; }}
+            onMouseLeave={(e) => { e.target.style.backgroundColor = 'transparent'; e.target.style.color = '#DE510A'; }}
           >
-            EXPLORE OUR HERITAGE ↓
+            {hero.ctaLabel || 'EXPLORE OUR HERITAGE ↓'}
           </button>
         </div>
       </div>
@@ -265,12 +222,12 @@ export default function SceneAboutHero() {
       {/* Progress bar at bottom */}
       <div style={{
         position: 'absolute', bottom: 0, left: 0, right: 0, height: '3px',
-        background: 'rgba(255,255,255,0.08)', zIndex: 3,
+        background: 'rgba(20,20,20,0.08)', zIndex: 3,
       }}>
         <div
           key={'progress-' + currentSlide}
           style={{
-            height: '100%', background: '#c8a24a',
+            height: '100%', background: '#DE510A',
             animation: 'slideProgress 4s linear',
             width: '100%',
           }}
@@ -282,13 +239,13 @@ export default function SceneAboutHero() {
         ref={stampRef}
         style={{
           position: 'absolute', bottom: '14%', right: '8%',
-          border: '2px solid rgba(200, 162, 74, 0.5)', padding: '10px 20px',
+          border: '2px solid rgba(222, 81, 10, 0.6)', padding: '10px 20px',
           borderRadius: '4px', transform: 'rotate(-12deg)',
-          fontFamily: 'monospace', color: '#c8a24a', fontSize: '13px',
-          letterSpacing: '0.1em', backgroundColor: 'rgba(7, 16, 31, 0.85)', zIndex: 2,
+          fontFamily: 'monospace', color: '#B9320D', fontSize: '13px',
+          letterSpacing: '0.1em', backgroundColor: 'rgba(222, 81, 10, 0.9)', zIndex: 2,
         }}
       >
-        EST. 1960 // REG. C955423
+        {hero.stamp || 'EST. 1960 // REG. C955423'}
       </div>
 
       {/* Keyframe animations */}

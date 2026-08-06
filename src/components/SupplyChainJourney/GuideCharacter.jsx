@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-import * as THREE from 'three';
 import { damp } from './animations';
 
 /**
@@ -34,7 +33,7 @@ export default function GuideCharacter({ scrollProgress }) {
       {/* Body */}
       <mesh position={[0, 0.75, 0]} castShadow>
         <capsuleGeometry args={[0.3, 0.8, 16, 16]} />
-        <meshStandardMaterial color="#0B2545" />
+        <meshStandardMaterial color="#FBF7F0" />
       </mesh>
       
       {/* Head */}
@@ -46,7 +45,7 @@ export default function GuideCharacter({ scrollProgress }) {
       {/* Hat/Cap */}
       <mesh position={[0, 1.8, 0.05]} castShadow>
         <cylinderGeometry args={[0.26, 0.26, 0.1, 16]} />
-        <meshStandardMaterial color="#C8A24A" />
+        <meshStandardMaterial color="#DE510A" />
       </mesh>
     </group>
   );

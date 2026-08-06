@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import PageBanner from '../components/PageBanner';
 import { useCMSStore } from '../store/useCMSStore';
-import { Award, Briefcase, Mail, UserCheck, ShieldCheck, Clock, Globe } from 'lucide-react';
+import { Award, Mail, UserCheck, ShieldCheck, Clock, Globe } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -9,6 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function TeamPage() {
   const about = useCMSStore((s) => s.about);
+  const banner = useCMSStore((s) => s.banners?.main?.team);
   const pageRef = useRef(null);
   const [activeCard, setActiveCard] = useState(null);
 
@@ -89,8 +90,9 @@ export default function TeamPage() {
   return (
     <div ref={pageRef} className="team-page-wrapper">
       <PageBanner
-        title="Leadership & Operations"
-        subtitle="Meet the experienced executives and agricultural specialists driving Yousafzai Eggs Traders."
+        title={banner?.title || 'Leadership & Operations'}
+        subtitle={banner?.subtitle || 'Meet the experienced executives and agricultural specialists driving Yousafzai Eggs Traders.'}
+        slideshowImages={banner?.images || null}
       />
 
       <section className="team-section">
@@ -202,12 +204,12 @@ export default function TeamPage() {
       </section>
 
       <style>{`
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            SECTION BASE
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .team-page-wrapper {
-          background: #060e1a;
-          color: #fff;
+          background: #FBF7F0;
+          color: #111111;
           min-height: 100vh;
         }
 
@@ -221,8 +223,8 @@ export default function TeamPage() {
           position: absolute;
           inset: 0;
           background-image:
-            linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+            linear-gradient(rgba(20,20,20,0.012) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(20,20,20,0.012) 1px, transparent 1px);
           background-size: 50px 50px;
           pointer-events: none;
         }
@@ -236,7 +238,7 @@ export default function TeamPage() {
 
         .team-orb-1 {
           width: 550px; height: 550px;
-          background: radial-gradient(circle, rgba(200,162,74,0.08), transparent 70%);
+          background: radial-gradient(circle, rgba(222,81,10,0.08), transparent 70%);
           top: 15%; left: -150px;
           animation: teamFloat1 15s ease-in-out infinite alternate;
         }
@@ -265,9 +267,9 @@ export default function TeamPage() {
           z-index: 2;
         }
 
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            HEADERS
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .lead-header, .ops-header {
           text-align: center;
           max-width: 700px;
@@ -278,7 +280,7 @@ export default function TeamPage() {
           font-family: monospace;
           font-size: 12px;
           letter-spacing: 0.2em;
-          color: #c8a24a;
+          color: #DE510A;
           display: block;
           margin-bottom: 14px;
         }
@@ -288,7 +290,7 @@ export default function TeamPage() {
           font-size: clamp(32px, 4.5vw, 48px);
           font-weight: 700;
           margin: 0 0 18px;
-          background: linear-gradient(135deg, #ffffff 0%, #c8a24a 100%);
+          background: linear-gradient(135deg, #111111 0%, #B9320D 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
@@ -297,14 +299,14 @@ export default function TeamPage() {
         .team-divider {
           width: 70px;
           height: 3px;
-          background: linear-gradient(90deg, #c8a24a, #F2E7C9);
+          background: linear-gradient(90deg, #B9320D, #B9320D);
           margin: 0 auto;
           border-radius: 2px;
         }
 
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            LEADERSHIP GRID
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .leadership-grid {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
@@ -316,8 +318,8 @@ export default function TeamPage() {
           position: relative;
           border-radius: 24px;
           overflow: hidden;
-          background: rgba(255,255,255,0.025);
-          border: 1px solid rgba(255,255,255,0.07);
+          background: #DE510A;
+          border: 1px solid rgba(20,20,20,0.07);
           backdrop-filter: blur(16px);
           -webkit-backdrop-filter: blur(16px);
           transition: border-color 0.5s, box-shadow 0.5s;
@@ -327,10 +329,10 @@ export default function TeamPage() {
         }
 
         .leader-card.card-hover {
-          border-color: rgba(200,162,74,0.35);
+          border-color: #B9320D;
           box-shadow:
-            0 30px 80px rgba(0,0,0,0.5),
-            0 0 40px rgba(200,162,74,0.05);
+            0 30px 80px rgba(63,98,49,0.35),
+            0 0 40px rgba(185,50,13,0.12);
         }
 
         .card-glow {
@@ -338,7 +340,7 @@ export default function TeamPage() {
           inset: 0;
           background: radial-gradient(
             500px circle at var(--glow-x, 50%) var(--glow-y, 50%),
-            rgba(200,162,74,0.08), transparent 40%
+            rgba(222,81,10,0.08), transparent 40%
           );
           opacity: 0;
           transition: opacity 0.4s;
@@ -372,7 +374,7 @@ export default function TeamPage() {
         .image-overlay {
           position: absolute;
           inset: 0;
-          background: linear-gradient(180deg, transparent 30%, rgba(6,14,26,0.95) 100%);
+          background: linear-gradient(180deg, transparent 30%, rgba(63,98,49,0.85) 100%);
         }
 
         .executive-badge {
@@ -386,9 +388,9 @@ export default function TeamPage() {
           font-size: 10px;
           font-weight: 700;
           letter-spacing: 0.1em;
-          color: #F2E7C9;
-          background: rgba(200,162,74,0.15);
-          border: 1px solid rgba(200,162,74,0.3);
+          color: #111111;
+          background: rgba(222,81,10,0.55);
+          border: 1px solid rgba(185,50,13,0.45);
           padding: 5px 12px;
           border-radius: 8px;
           backdrop-filter: blur(8px);
@@ -413,13 +415,13 @@ export default function TeamPage() {
           font-size: 24px;
           font-weight: 700;
           margin: 0 0 6px;
-          color: #fff;
+          color: #111111;
         }
 
         .leader-role {
           font-family: monospace;
           font-size: 11px;
-          color: #c8a24a;
+          color: #B9320D;
           letter-spacing: 0.12em;
           text-transform: uppercase;
         }
@@ -437,20 +439,20 @@ export default function TeamPage() {
           gap: 6px;
           font-family: monospace;
           font-size: 11px;
-          color: rgba(255,255,255,0.7);
-          background: rgba(255,255,255,0.04);
-          border: 1px solid rgba(255,255,255,0.08);
+          color: rgba(20,20,20,0.7);
+          background: #DE510A;
+          border: 1px solid rgba(20,20,20,0.08);
           padding: 5px 12px;
           border-radius: 6px;
         }
 
         .meta-item svg {
-          color: #c8a24a;
+          color: #B9320D;
         }
 
         .leader-bio {
           font-size: 14.5px;
-          color: rgba(255,255,255,0.6);
+          color: rgba(20,20,20,0.6);
           line-height: 1.65;
           margin: 0 0 28px;
           flex-grow: 1;
@@ -459,7 +461,7 @@ export default function TeamPage() {
         .leader-social {
           display: flex;
           gap: 16px;
-          border-top: 1px solid rgba(255,255,255,0.06);
+          border-top: 1px solid rgba(20,20,20,0.06);
           padding-top: 20px;
           margin-top: auto;
         }
@@ -470,18 +472,18 @@ export default function TeamPage() {
           gap: 6px;
           font-family: monospace;
           font-size: 11px;
-          color: rgba(255,255,255,0.5);
+          color: rgba(20,20,20,0.5);
           text-decoration: none;
           transition: color 0.3s;
         }
 
         .social-link:hover {
-          color: #c8a24a;
+          color: #B9320D;
         }
 
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            OPERATIONS DIVISION GRID
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .ops-section {
           margin-top: 60px;
         }
@@ -496,8 +498,8 @@ export default function TeamPage() {
           position: relative;
           border-radius: 20px;
           padding: 30px;
-          background: rgba(255,255,255,0.025);
-          border: 1px solid rgba(255,255,255,0.06);
+          background: #DE510A;
+          border: 1px solid rgba(20,20,20,0.06);
           backdrop-filter: blur(12px);
           -webkit-backdrop-filter: blur(12px);
           transition: border-color 0.4s, box-shadow 0.4s;
@@ -507,20 +509,20 @@ export default function TeamPage() {
         }
 
         .ops-card.card-hover {
-          border-color: rgba(200,162,74,0.3);
-          box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+          border-color: #B9320D;
+          box-shadow: 0 20px 50px rgba(63,98,49,0.3);
         }
 
         .ops-avatar {
           width: 48px;
           height: 48px;
           border-radius: 12px;
-          background: rgba(200,162,74,0.1);
-          border: 1px solid rgba(200,162,74,0.25);
+          background: rgba(222,81,10,0.6);
+          border: 1px solid rgba(185,50,13,0.35);
           display: flex;
           align-items: center;
           justify-content: center;
-          color: #c8a24a;
+          color: #B9320D;
           flex-shrink: 0;
         }
 
@@ -534,13 +536,13 @@ export default function TeamPage() {
           font-size: 17px;
           font-weight: 700;
           margin: 0 0 4px;
-          color: #fff;
+          color: #111111;
         }
 
         .ops-role {
           font-family: monospace;
           font-size: 10px;
-          color: #c8a24a;
+          color: #B9320D;
           letter-spacing: 0.1em;
           display: block;
           margin-bottom: 10px;
@@ -548,14 +550,14 @@ export default function TeamPage() {
 
         .ops-bio {
           font-size: 13.5px;
-          color: rgba(255,255,255,0.55);
+          color: rgba(20,20,20,0.55);
           line-height: 1.6;
           margin: 0;
         }
 
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            MOBILE
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         @media (max-width: 900px) {
           .team-section { padding: 80px 16px; }
           .leadership-grid { grid-template-columns: 1fr; gap: 28px; }

@@ -1,34 +1,48 @@
-import { useState } from 'react';
+﻿import { useState, useMemo } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuthStore } from '../../store/useAuthStore';
-import { Menu, X, ShieldCheck, LogOut, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
+import {
+  Menu, X, ShieldCheck, LogOut, ExternalLink, LayoutDashboard,
+  Home, FileText, Package, Boxes, Truck, Shield, Star, HelpCircle,
+  Building2, BadgeCheck, Layers, Settings2, Newspaper, ListChecks,
+  Search, PanelLeftClose, PanelLeft, Globe, ChefHat, Image as ImageIcon,
+} from 'lucide-react';
 
 const mainNavItems = [
-  { label: 'Dashboard', key: 'dashboard' },
-  { label: 'Hero Section', key: 'hero' },
-  { label: 'About Section', key: 'about' },
-  { label: 'Products', key: 'products' },
-  { label: 'Solutions', key: 'solutions' },
-  { label: 'Supply Chain', key: 'supplyChain' },
-  { label: 'Why Us', key: 'whyUs' },
-  { label: 'Quality/Certs', key: 'quality' },
-  { label: 'Testimonials', key: 'testimonials' },
-  { label: 'FAQ', key: 'faq' },
-  { label: 'Contact Info', key: 'contact' },
-  { label: 'Company Info', key: 'company' },
-  { label: 'Our Companies', key: 'ourCompanies' },
+  { label: 'Dashboard', key: 'dashboard', icon: LayoutDashboard },
+  { label: 'Hero Section', key: 'hero', icon: Home },
+  { label: 'About Section', key: 'about', icon: FileText },
+  { label: 'Company Overview', key: 'overview', icon: Building2 },
+  { label: 'Products', key: 'products', icon: Package },
+  { label: 'Trading Solutions', key: 'solutions', icon: Layers },
+  { label: 'Supply Chain', key: 'supplyChain', icon: Truck },
+  { label: 'Distribution', key: 'distribution', icon: Globe },
+  { label: 'Why Us / Stages', key: 'whyUs', icon: ListChecks },
+  { label: 'Stats Band', key: 'statsBand', icon: BadgeCheck },
+  { label: 'Industries', key: 'industries', icon: ChefHat },
+  { label: 'Process', key: 'process', icon: Settings2 },
+  { label: 'Quality / Certs', key: 'quality', icon: Shield },
+  { label: 'Testimonials', key: 'testimonials', icon: Star },
+  { label: 'FAQ', key: 'faq', icon: HelpCircle },
+  { label: 'Contact Info', key: 'contact', icon: Boxes },
+  { label: 'Company Info', key: 'company', icon: Building2 },
+  { label: 'Our Companies', key: 'ourCompanies', icon: Boxes },
+  { label: 'Footer', key: 'footer', icon: Newspaper },
+  { label: 'Page Banners', key: 'banners', icon: ImageIcon },
+  { label: 'CTA Band', key: 'cta', icon: BadgeCheck },
+  { label: 'About Story Scenes', key: 'aboutScenes', icon: FileText },
 ];
 
 const eggTradersNavItems = [
-  { label: 'ET Company', key: 'eggTradersCompany' },
-  { label: 'ET Hero', key: 'eggTradersHero' },
-  { label: 'ET About', key: 'eggTradersAbout' },
-  { label: 'ET Services', key: 'eggTradersServices' },
-  { label: 'ET Products', key: 'eggTradersProducts' },
-  { label: 'ET Solutions', key: 'eggTradersSolutions' },
-  { label: 'ET Process', key: 'eggTradersProcess' },
-  { label: 'ET Quality', key: 'eggTradersQuality' },
-  { label: 'ET Contact', key: 'eggTradersContact' },
+  { label: 'ET Company', key: 'eggTradersCompany', icon: Building2 },
+  { label: 'ET Hero', key: 'eggTradersHero', icon: Home },
+  { label: 'ET About', key: 'eggTradersAbout', icon: FileText },
+  { label: 'ET Services', key: 'eggTradersServices', icon: Layers },
+  { label: 'ET Products', key: 'eggTradersProducts', icon: Package },
+  { label: 'ET Solutions', key: 'eggTradersSolutions', icon: Layers },
+  { label: 'ET Process', key: 'eggTradersProcess', icon: Settings2 },
+  { label: 'ET Quality', key: 'eggTradersQuality', icon: Shield },
+  { label: 'ET Contact', key: 'eggTradersContact', icon: Boxes },
 ];
 
 export default function AdminLayout({ activeSection, setActiveSection, children }) {
@@ -36,14 +50,35 @@ export default function AdminLayout({ activeSection, setActiveSection, children 
   const user = useAuthStore((s) => s.user);
   const [collapsed, setCollapsed] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [query, setQuery] = useState('');
   const navigate = useNavigate();
+
+  const allItems = useMemo(
+    () => [
+      ...mainNavItems.map((i) => ({ ...i, group: 'main' })),
+      ...eggTradersNavItems.map((i) => ({ ...i, group: 'et' })),
+    ],
+    []
+  );
+
+  const filteredMain = query
+    ? mainNavItems.filter((i) => i.label.toLowerCase().includes(query.toLowerCase()))
+    : mainNavItems;
+  const filteredEt = query
+    ? eggTradersNavItems.filter((i) => i.label.toLowerCase().includes(query.toLowerCase()))
+    : eggTradersNavItems;
+
+  const select = (key) => {
+    setActiveSection(key);
+    setMobileMenuOpen(false);
+  };
 
   return (
     <div className="admin-root">
       {/* Mobile Topbar */}
       <div className="admin-mobile-bar">
         <div className="mobile-brand">
-          <ShieldCheck size={20} className="text-gold" />
+          <div className="mobile-brand-badge"><ShieldCheck size={18} /></div>
           <span className="mobile-title">Yousafzai CMS</span>
         </div>
         <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="mobile-toggle">
@@ -53,7 +88,6 @@ export default function AdminLayout({ activeSection, setActiveSection, children 
 
       {/* Sidebar */}
       <aside className={`admin-sidebar ${mobileMenuOpen ? 'mobile-open' : ''} ${collapsed ? 'is-collapsed' : ''}`}>
-        {/* Brand Header */}
         <div className="sidebar-header">
           <div className="brand-logo">
             <ShieldCheck size={22} />
@@ -61,57 +95,78 @@ export default function AdminLayout({ activeSection, setActiveSection, children 
           {!collapsed && (
             <div className="brand-text">
               <span className="brand-title">YOUSAFZAI</span>
-              <span className="brand-sub">CMS EXECUTIVE</span>
+              <span className="brand-sub">CONTENT MANAGEMENT</span>
             </div>
           )}
         </div>
 
-        {/* Navigation list */}
-        <div className="sidebar-nav">
+        {!collapsed && (
+          <div className="sidebar-search">
+            <Search size={14} className="search-icon" />
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search sections…"
+              className="search-input"
+            />
+            {query && <button className="search-clear" onClick={() => setQuery('')}>×</button>}
+          </div>
+        )}
+
+        <nav className="sidebar-nav">
           {!collapsed && <span className="nav-group-label">PRIMARY WEBSITE</span>}
-          {mainNavItems.map((item) => (
-            <button
-              key={item.key}
-              onClick={() => {
-                setActiveSection(item.key);
-                setMobileMenuOpen(false);
-              }}
-              className={`nav-item ${activeSection === item.key ? 'is-active' : ''}`}
-            >
-              <span className="nav-indicator" />
-              <span className="nav-text">{collapsed ? item.label[0] : item.label}</span>
-            </button>
-          ))}
+          {filteredMain.map((item) => {
+            const Icon = item.icon;
+            return (
+              <button
+                key={item.key}
+                onClick={() => select(item.key)}
+                className={`nav-item ${activeSection === item.key ? 'is-active' : ''}`}
+                title={item.label}
+              >
+                <Icon size={16} className="nav-item-icon" />
+                <span className="nav-text">{collapsed ? '' : item.label}</span>
+                {activeSection === item.key && <span className="nav-active-dot" />}
+              </button>
+            );
+          })}
 
-          {!collapsed && <span className="nav-group-label" style={{ marginTop: '20px' }}>EGG TRADERS PLATFORM</span>}
-          {eggTradersNavItems.map((item) => (
-            <button
-              key={item.key}
-              onClick={() => {
-                setActiveSection(item.key);
-                setMobileMenuOpen(false);
-              }}
-              className={`nav-item ${activeSection === item.key ? 'is-active' : ''}`}
-            >
-              <span className="nav-indicator" />
-              <span className="nav-text">{collapsed ? item.label[0] : item.label}</span>
-            </button>
-          ))}
-        </div>
+          {filteredMain.length > 0 && filteredEt.length > 0 && !collapsed && (
+            <span className="nav-group-label" style={{ marginTop: 18 }}>EGG TRADERS PLATFORM</span>
+          )}
+          {filteredEt.map((item) => {
+            const Icon = item.icon;
+            return (
+              <button
+                key={item.key}
+                onClick={() => select(item.key)}
+                className={`nav-item ${activeSection === item.key ? 'is-active' : ''}`}
+                title={item.label}
+              >
+                <Icon size={16} className="nav-item-icon" />
+                <span className="nav-text">{collapsed ? '' : item.label}</span>
+                {activeSection === item.key && <span className="nav-active-dot" />}
+              </button>
+            );
+          })}
 
-        {/* User Profile & Logout */}
+          {!collapsed && query && filteredMain.length === 0 && filteredEt.length === 0 && (
+            <div className="no-results">No sections match "{query}"</div>
+          )}
+        </nav>
+
         <div className="sidebar-footer">
           {!collapsed && (
             <div className="user-profile">
-              <span className="user-email">{user?.email || 'admin@yousafzaigroup.com'}</span>
-              <span className="user-role">SUPER_ADMIN</span>
+              <span className="user-avatar">{(user?.email || 'A')[0].toUpperCase()}</span>
+              <div className="user-meta">
+                <span className="user-email">{user?.email || 'admin@yousafzaigroup.com'}</span>
+                <span className="user-role">SUPER ADMIN</span>
+              </div>
             </div>
           )}
           <button
-            onClick={() => {
-              logout();
-              navigate('/admin/login', { replace: true });
-            }}
+            onClick={() => { logout(); navigate('/admin/login', { replace: true }); }}
             className="logout-btn"
           >
             <LogOut size={15} />
@@ -119,93 +174,85 @@ export default function AdminLayout({ activeSection, setActiveSection, children 
           </button>
         </div>
 
-        {/* Collapse toggle button */}
         <button
           onClick={() => setCollapsed(!collapsed)}
           className="collapse-btn"
-          title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+          title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
         >
-          {collapsed ? <ChevronRight size={14} /> : <ChevronLeft size={14} />}
+          {collapsed ? <PanelLeft size={14} /> : <PanelLeftClose size={14} />}
         </button>
       </aside>
 
       {/* Main Content Area */}
       <main className="admin-main">
-        {/* Top Header Bar */}
         <header className="main-header">
           <div className="header-left">
-            <span className="header-eyebrow">CMS_SECTION</span>
-            <h1 className="header-title">{activeSection.toUpperCase()}</h1>
+            <span className="header-eyebrow">
+              {activeSection.startsWith('eggTraders') ? 'EGG TRADERS PLATFORM' : 'PRIMARY WEBSITE'}
+            </span>
+            <h1 className="header-title">
+              {allItems.find((i) => i.key === activeSection)?.label || activeSection.toUpperCase()}
+            </h1>
           </div>
           <div className="header-right">
+            <span className="save-status">✓ Auto-save enabled</span>
             <Link to="/" target="_blank" className="live-site-btn">
               <ExternalLink size={14} />
-              <span>View Live Website</span>
+              <span>View Main Site</span>
+            </Link>
+            <Link to="/egg-traders" target="_blank" className="live-site-btn et-btn">
+              <Globe size={14} />
+              <span>View Egg Traders</span>
             </Link>
           </div>
         </header>
 
-        {/* Section Content */}
-        <div className="main-content-body">
-          {children}
-        </div>
+        <div className="main-content-body">{children}</div>
       </main>
 
       <style>{`
-        /* ═══════════════════════════════════════
+        /* ═══════════════════════════════════════════════
            ADMIN ROOT
-           ═══════════════════════════════════════ */
+           ═══════════════════════════════════════════════ */
         .admin-root {
           display: flex;
           min-height: 100vh;
-          background: #060e1a;
-          color: #fff;
+          background: #F4F6FB;
+          color: #0F172A;
           font-family: 'Inter', sans-serif;
         }
 
-        /* ═══════════════════════════════════════
+        /* ═══════════════════════════════════════════════
            MOBILE BAR
-           ═══════════════════════════════════════ */
+           ═══════════════════════════════════════════════ */
         .admin-mobile-bar {
           display: none;
           align-items: center;
           justify-content: space-between;
-          padding: 16px 20px;
-          background: rgba(10,18,34,0.95);
-          border-bottom: 1px solid rgba(255,255,255,0.08);
+          padding: 14px 18px;
+          background: #0F172A;
+          color: #FFFFFF;
           position: sticky;
           top: 0;
           z-index: 50;
         }
-
-        .mobile-brand {
-          display: flex;
-          align-items: center;
-          gap: 10px;
+        .mobile-brand { display: flex; align-items: center; gap: 10px; }
+        .mobile-brand-badge {
+          width: 32px; height: 32px; border-radius: 9px;
+          background: linear-gradient(135deg, #2563EB, #1E40AF);
+          display: flex; align-items: center; justify-content: center;
         }
+        .mobile-title { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 15px; }
+        .mobile-toggle { background: none; border: none; color: #FFFFFF; cursor: pointer; display: flex; }
 
-        .mobile-title {
-          font-family: 'Space Grotesk', sans-serif;
-          font-weight: 700;
-          font-size: 16px;
-        }
-
-        .mobile-toggle {
-          background: none;
-          border: none;
-          color: #fff;
-          cursor: pointer;
-        }
-
-        /* ═══════════════════════════════════════
+        /* ═══════════════════════════════════════════════
            SIDEBAR
-           ═══════════════════════════════════════ */
+           ═══════════════════════════════════════════════ */
         .admin-sidebar {
-          width: 260px;
+          width: 264px;
           flex-shrink: 0;
-          background: rgba(10,18,34,0.95);
-          border-right: 1px solid rgba(255,255,255,0.08);
-          backdrop-filter: blur(20px);
+          background: linear-gradient(180deg, #0F172A 0%, #111C33 100%);
+          color: #CBD5E1;
           display: flex;
           flex-direction: column;
           position: sticky;
@@ -213,249 +260,333 @@ export default function AdminLayout({ activeSection, setActiveSection, children 
           height: 100vh;
           transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
           z-index: 40;
+          border-right: 1px solid rgba(148, 163, 184, 0.1);
         }
-
-        .admin-sidebar.is-collapsed {
-          width: 70px;
-        }
+        .admin-sidebar.is-collapsed { width: 72px; }
 
         .sidebar-header {
           display: flex;
           align-items: center;
           gap: 12px;
-          padding: 24px 20px;
-          border-bottom: 1px solid rgba(255,255,255,0.08);
+          padding: 22px 20px;
+          border-bottom: 1px solid rgba(148, 163, 184, 0.12);
         }
-
         .brand-logo {
-          width: 40px;
-          height: 40px;
-          border-radius: 10px;
-          background: rgba(200,162,74,0.12);
-          border: 1px solid rgba(200,162,74,0.3);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: #c8a24a;
-          flex-shrink: 0;
+          width: 40px; height: 40px; border-radius: 11px;
+          background: linear-gradient(135deg, #2563EB, #7C3AED);
+          display: flex; align-items: center; justify-content: center;
+          color: #FFFFFF; flex-shrink: 0;
+          box-shadow: 0 6px 18px rgba(37, 99, 235, 0.4);
         }
-
-        .brand-text {
-          display: flex;
-          flex-direction: column;
-        }
-
+        .brand-text { display: flex; flex-direction: column; }
         .brand-title {
           font-family: 'Space Grotesk', sans-serif;
-          font-size: 15px;
-          font-weight: 700;
-          color: #fff;
-          letter-spacing: -0.01em;
+          font-size: 15px; font-weight: 700; color: #FFFFFF; letter-spacing: 0.02em;
+        }
+        .brand-sub {
+          font-size: 9px; color: #7C8DB5; letter-spacing: 0.14em; margin-top: 2px;
         }
 
-        .brand-sub {
-          font-family: monospace;
-          font-size: 9px;
-          color: #c8a24a;
-          letter-spacing: 0.12em;
+        .sidebar-search {
+          position: relative;
+          margin: 16px 16px 6px;
+        }
+        .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #64748B; }
+        .search-input {
+          width: 100%;
+          padding: 9px 30px 9px 34px;
+          border-radius: 10px;
+          border: 1px solid rgba(148, 163, 184, 0.18);
+          background: rgba(148, 163, 184, 0.08);
+          color: #E2E8F0;
+          font-size: 12.5px;
+          outline: none;
+          box-sizing: border-box;
+        }
+        .search-input::placeholder { color: #64748B; }
+        .search-input:focus { border-color: #3B82F6; }
+        .search-clear {
+          position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+          background: none; border: none; color: #64748B; font-size: 15px; cursor: pointer;
         }
 
         .sidebar-nav {
           flex-grow: 1;
-          padding: 20px 12px;
+          padding: 10px 12px 16px;
           overflow-y: auto;
           display: flex;
           flex-direction: column;
-          gap: 4px;
+          gap: 2px;
         }
+        .sidebar-nav::-webkit-scrollbar { width: 6px; }
+        .sidebar-nav::-webkit-scrollbar-thumb { background: rgba(148,163,184,0.3); border-radius: 3px; }
 
         .nav-group-label {
-          font-family: monospace;
-          font-size: 9px;
-          color: rgba(255,255,255,0.35);
-          letter-spacing: 0.15em;
-          padding: 0 12px;
-          margin-bottom: 8px;
+          font-size: 9.5px;
+          color: #64748B;
+          letter-spacing: 0.14em;
+          font-weight: 600;
+          padding: 10px 12px 6px;
+          text-transform: uppercase;
         }
 
         .nav-item {
           display: flex;
           align-items: center;
           gap: 12px;
-          padding: 10px 14px;
-          border-radius: 10px;
+          padding: 9px 12px;
+          border-radius: 9px;
           border: none;
           background: transparent;
-          color: rgba(255,255,255,0.6);
+          color: #94A3B8;
           font-size: 13px;
           font-family: 'Inter', sans-serif;
           cursor: pointer;
-          transition: all 0.25s;
+          transition: all 0.2s;
           text-align: left;
           width: 100%;
           position: relative;
+          white-space: nowrap;
         }
-
-        .nav-indicator {
-          width: 4px;
-          height: 16px;
-          border-radius: 2px;
-          background: transparent;
-          transition: background 0.25s;
-        }
-
-        .nav-item:hover {
-          color: #fff;
-          background: rgba(255,255,255,0.04);
-        }
-
+        .nav-item-icon { flex-shrink: 0; color: #64748B; transition: color 0.2s; }
+        .nav-item:hover { color: #E2E8F0; background: rgba(148, 163, 184, 0.1); }
+        .nav-item:hover .nav-item-icon { color: #93C5FD; }
         .nav-item.is-active {
-          color: #F2E7C9;
-          background: rgba(200,162,74,0.12);
-          border: 1px solid rgba(200,162,74,0.25);
+          color: #FFFFFF;
+          background: linear-gradient(135deg, rgba(37, 99, 235, 0.85), rgba(59, 130, 246, 0.6));
+          box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
           font-weight: 600;
         }
-
-        .nav-item.is-active .nav-indicator {
-          background: #c8a24a;
-          box-shadow: 0 0 8px rgba(200,162,74,0.6);
+        .nav-item.is-active .nav-item-icon { color: #FFFFFF; }
+        .nav-active-dot {
+          position: absolute; right: 12px;
+          width: 6px; height: 6px; border-radius: 50%;
+          background: #FFFFFF;
+          box-shadow: 0 0 8px rgba(255,255,255,0.8);
         }
+        .no-results { padding: 14px 12px; color: #64748B; font-size: 12px; }
 
         .sidebar-footer {
-          padding: 18px 16px;
-          border-top: 1px solid rgba(255,255,255,0.08);
+          padding: 16px;
+          border-top: 1px solid rgba(148, 163, 184, 0.12);
           display: flex;
           flex-direction: column;
           gap: 12px;
         }
-
-        .user-profile {
-          display: flex;
-          flex-direction: column;
-          gap: 2px;
+        .user-profile { display: flex; align-items: center; gap: 10px; }
+        .user-avatar {
+          width: 34px; height: 34px; border-radius: 10px;
+          background: linear-gradient(135deg, #F59E0B, #F97316);
+          color: #FFFFFF; font-weight: 700; font-size: 14px;
+          display: flex; align-items: center; justify-content: center; flex-shrink: 0;
         }
-
+        .user-meta { display: flex; flex-direction: column; min-width: 0; }
         .user-email {
-          font-size: 12px;
-          color: rgba(255,255,255,0.8);
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
+          font-size: 12px; color: #E2E8F0; overflow: hidden;
+          text-overflow: ellipsis; white-space: nowrap;
         }
-
-        .user-role {
-          font-family: monospace;
-          font-size: 9px;
-          color: #4ade80;
-          letter-spacing: 0.1em;
-        }
+        .user-role { font-size: 9px; color: #34D399; letter-spacing: 0.1em; margin-top: 2px; }
 
         .logout-btn {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 8px;
-          padding: 9px;
-          border-radius: 8px;
-          background: rgba(248,113,113,0.1);
-          border: 1px solid rgba(248,113,113,0.25);
-          color: #f87171;
-          font-size: 12px;
-          font-weight: 600;
-          cursor: pointer;
-          transition: all 0.25s;
+          display: flex; align-items: center; justify-content: center; gap: 8px;
+          padding: 9px; border-radius: 9px;
+          background: rgba(248, 113, 113, 0.1);
+          border: 1px solid rgba(248, 113, 113, 0.25);
+          color: #FCA5A5; font-size: 12px; font-weight: 600; cursor: pointer;
+          transition: all 0.2s;
         }
-
-        .logout-btn:hover {
-          background: rgba(248,113,113,0.2);
-        }
+        .logout-btn:hover { background: rgba(248, 113, 113, 0.2); color: #FECACA; }
 
         .collapse-btn {
           position: absolute;
-          top: 24px;
-          right: -12px;
-          width: 24px;
-          height: 24px;
-          border-radius: 50%;
-          background: #0a1628;
-          border: 1px solid rgba(200,162,74,0.4);
-          color: #c8a24a;
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          top: 24px; right: -12px;
+          width: 26px; height: 26px; border-radius: 50%;
+          background: #1E293B;
+          border: 1px solid rgba(148, 163, 184, 0.3);
+          color: #94A3B8;
+          display: flex; align-items: center; justify-content: center;
           cursor: pointer;
-          box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-          transition: transform 0.25s;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+          transition: transform 0.25s, color 0.25s;
         }
+        .collapse-btn:hover { color: #FFFFFF; transform: scale(1.08); }
 
-        /* ═══════════════════════════════════════
+        /* ═══════════════════════════════════════════════
            MAIN CONTENT
-           ═══════════════════════════════════════ */
+           ═══════════════════════════════════════════════ */
         .admin-main {
           flex-grow: 1;
           display: flex;
           flex-direction: column;
           min-width: 0;
-          background: #060e1a;
+          background: #F4F6FB;
         }
 
         .main-header {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          padding: 24px 36px;
-          border-bottom: 1px solid rgba(255,255,255,0.08);
-          background: rgba(10,18,34,0.5);
-          backdrop-filter: blur(12px);
+          padding: 22px 36px;
+          background: #FFFFFF;
+          border-bottom: 1px solid #E5E9F2;
+          box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+          position: sticky;
+          top: 0;
+          z-index: 20;
         }
-
         .header-eyebrow {
-          font-family: monospace;
           font-size: 10px;
-          color: #c8a24a;
-          letter-spacing: 0.15em;
+          color: #2563EB;
+          letter-spacing: 0.14em;
+          font-weight: 700;
           display: block;
           margin-bottom: 4px;
         }
-
         .header-title {
           font-family: 'Space Grotesk', sans-serif;
           font-size: 22px;
           font-weight: 700;
           margin: 0;
-          color: #fff;
+          color: #0F172A;
         }
-
+        .header-right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+        .save-status {
+          font-size: 11px; color: #10B981; font-weight: 600;
+          display: inline-flex; align-items: center; gap: 5px;
+          padding: 6px 12px; border-radius: 20px; background: #ECFDF5;
+        }
         .live-site-btn {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          font-family: monospace;
-          font-size: 12px;
-          color: #c8a24a;
-          background: rgba(200,162,74,0.1);
-          border: 1px solid rgba(200,162,74,0.25);
-          padding: 8px 16px;
-          border-radius: 8px;
-          text-decoration: none;
-          transition: all 0.25s;
+          display: inline-flex; align-items: center; gap: 7px;
+          font-size: 12px; font-weight: 600;
+          color: #1D4ED8;
+          background: #EFF6FF;
+          border: 1px solid #BFDBFE;
+          padding: 8px 14px; border-radius: 9px; text-decoration: none;
+          transition: all 0.2s;
+        }
+        .live-site-btn:hover { background: #DBEAFE; box-shadow: 0 2px 8px rgba(37,99,235,0.15); }
+        .live-site-btn.et-btn { color: #F97316; background: #FFF7ED; border-color: #FED7AA; }
+        .live-site-btn.et-btn:hover { background: #FFEDD5; }
+
+        .main-content-body { flex-grow: 1; padding: 32px 36px; overflow-y: auto; }
+
+        /* ═══════════════════════════════════════════════
+           SCHEMA EDITOR STYLES
+           ═══════════════════════════════════════════════ */
+        .cm-schema-editor {
+          max-width: 960px;
+        }
+        .cm-field { margin-bottom: 18px; }
+        .cm-field-label {
+          display: flex; align-items: center; gap: 6px;
+          font-size: 12px; font-weight: 600; color: #334155; margin-bottom: 6px;
+        }
+        .cm-field-hint {
+          font-weight: 400; font-style: normal; color: #94A3B8; font-size: 11px;
+        }
+        .cm-color-row { display: flex; gap: 10px; }
+        .cm-color-swatch {
+          width: 44px; height: 40px; padding: 0; border: 1.4px solid #DBDFE6;
+          border-radius: 8px; cursor: pointer; background: #FFFFFF;
+        }
+        .cm-array {
+          background: #FFFFFF;
+          border: 1px solid #E5E9F2;
+          border-radius: 14px;
+          padding: 20px;
+          margin-bottom: 24px;
+        }
+        .cm-array-head {
+          display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+          margin-bottom: 14px;
+        }
+        .cm-array-title {
+          font-family: 'Space Grotesk', sans-serif;
+          font-size: 14px; font-weight: 700; color: #0F172A;
+        }
+        .cm-array-head .cm-field-hint { flex: 1; }
+        .cm-btn {
+          border: none; cursor: pointer; font-weight: 600; border-radius: 9px;
+          transition: all 0.2s;
+        }
+        .cm-btn-add {
+          background: linear-gradient(135deg, #2563EB, #1D4ED8);
+          color: #FFFFFF; padding: 9px 16px; font-size: 12.5px;
+          box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+        .cm-btn-add:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(37,99,235,0.4); }
+        .cm-array-empty {
+          padding: 18px; text-align: center; color: #94A3B8; font-size: 13px;
+          border: 1.5px dashed #E5E9F2; border-radius: 10px;
+        }
+        .cm-array-item {
+          background: #F8FAFC;
+          border: 1px solid #E9EDF5;
+          border-radius: 12px;
+          margin-bottom: 12px;
+          overflow: hidden;
+        }
+        .cm-array-item-bar {
+          display: flex; align-items: center; gap: 10px;
+          padding: 12px 14px;
+          background: #F1F5F9;
+          border-bottom: 1px solid #E9EDF5;
+        }
+        .cm-item-toggle {
+          background: none; border: none; color: #64748B; font-size: 12px;
+          cursor: pointer; width: 20px; text-align: center;
+        }
+        .cm-item-label {
+          font-weight: 700; font-size: 12.5px; color: #334155; flex: 1;
+          font-family: 'Space Grotesk', sans-serif;
+        }
+        .cm-item-actions { display: flex; gap: 6px; }
+        .cm-icon-btn {
+          width: 28px; height: 28px; border-radius: 7px;
+          border: 1px solid #E2E8F0; background: #FFFFFF;
+          color: #475569; font-size: 13px; cursor: pointer;
+          display: flex; align-items: center; justify-content: center;
+          transition: all 0.2s;
+        }
+        .cm-icon-btn:hover:not(:disabled) { background: #EFF6FF; color: #1D4ED8; }
+        .cm-icon-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+        .cm-icon-btn-danger:hover { background: #FEF2F2; color: #DC2626; }
+        .cm-array-item-body { padding: 16px 14px; }
+        .cm-array-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 0 20px; }
+        .cm-array-fields > .cm-field,
+        .cm-array-fields > .cm-array { grid-column: 1 / -1; }
+        .cm-raw-json {
+          grid-column: 1 / -1;
+          background: #0F172A; color: #A5B4FC; padding: 14px; border-radius: 10px;
+          font-size: 11.5px; overflow: auto; max-height: 240px;
+        }
+        .cm-object-block {
+          background: #FFFFFF; border: 1px solid #E5E9F2; border-radius: 14px;
+          padding: 20px; margin-bottom: 24px;
+        }
+        .cm-object-title {
+          font-family: 'Space Grotesk', sans-serif;
+          font-size: 14px; font-weight: 700; color: #0F172A; margin-bottom: 16px;
+          display: flex; align-items: center; gap: 8px;
+        }
+        .cm-object-title::before {
+          content: ''; width: 8px; height: 8px; border-radius: 2px;
+          background: linear-gradient(135deg, #2563EB, #7C3AED); display: inline-block;
+        }
+        .cm-dirty-hint {
+          position: sticky; bottom: 16px; text-align: center;
+          font-size: 11px; color: #1D4ED8; font-weight: 600;
+          background: #DBEAFE; border: 1px solid #BFDBFE;
+          padding: 8px; border-radius: 10px; margin-top: 10px;
         }
 
-        .live-site-btn:hover {
-          background: #c8a24a;
-          color: #060e1a;
-          box-shadow: 0 0 16px rgba(200,162,74,0.3);
+        @media (max-width: 640px) {
+          .cm-array-fields { grid-template-columns: 1fr; }
         }
 
-        .main-content-body {
-          flex-grow: 1;
-          padding: 36px;
-          overflow-y: auto;
-        }
-
-        /* ═══════════════════════════════════════
+        /* ═══════════════════════════════════════════════
            RESPONSIVE
-           ═══════════════════════════════════════ */
+           ═══════════════════════════════════════════════ */
         @media (max-width: 900px) {
           .admin-root { flex-direction: column; }
           .admin-mobile-bar { display: flex; }
@@ -464,13 +595,14 @@ export default function AdminLayout({ activeSection, setActiveSection, children 
             width: 100%;
             height: auto;
             position: fixed;
-            inset: 60px 0 0 0;
-            background: #0a1628;
+            inset: 58px 0 0 0;
+            background: #0F172A;
           }
           .admin-sidebar.mobile-open { display: flex; }
           .collapse-btn { display: none; }
-          .main-header { padding: 20px; }
+          .main-header { padding: 18px 20px; }
           .main-content-body { padding: 20px; }
+          .save-status { display: none; }
         }
       `}</style>
     </div>

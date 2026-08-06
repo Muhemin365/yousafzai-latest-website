@@ -4,7 +4,7 @@ import ImageUpload from './ImageUpload';
 const input = {
   width: '100%', padding: '10px 14px', border: '1.4px solid #DBDFE6',
   borderRadius: 8, fontSize: 13, fontFamily: "'Inter',sans-serif",
-  color: '#1B2230', background: '#FFFFFF',
+  color: '#111111', background: '#FFFFFF',
 };
 
 export default function CmsArrayEditor({ items, onUpdate, fields, itemLabel, defaults }) {
@@ -34,7 +34,7 @@ export default function CmsArrayEditor({ items, onUpdate, fields, itemLabel, def
       {data.map((item, i) => (
         <div key={i} style={{ marginBottom: 20, padding: 20, background: '#F5F7FA', borderRadius: 12, border: '1px solid #EEF1F5' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-            <span style={{ fontWeight: 700, fontSize: 13, color: '#0B2545', fontFamily: "'Space Grotesk',sans-serif" }}>
+            <span style={{ fontWeight: 700, fontSize: 13, color: '#B8860B', fontFamily: "'Space Grotesk',sans-serif" }}>
               {itemLabel ? `${itemLabel} ${i + 1}` : `Item ${i + 1}`}
             </span>
             <button onClick={() => remove(i)} style={{ background: '#FEF2F2', border: 'none', borderRadius: 6, padding: '4px 10px', color: '#B91C1C', fontSize: 11, cursor: 'pointer', fontWeight: 600 }}>Remove</button>
@@ -72,7 +72,7 @@ export default function CmsArrayEditor({ items, onUpdate, fields, itemLabel, def
           })}
         </div>
       ))}
-      <button onClick={add} style={{ width: '100%', padding: '12px 0', background: '#FFFFFF', border: '1.5px dashed #DBDFE6', borderRadius: 10, color: '#0B2545', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>
+      <button onClick={add} style={{ width: '100%', padding: '12px 0', background: '#FFFFFF', border: '1.5px dashed #DBDFE6', borderRadius: 10, color: '#B8860B', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>
         + Add {itemLabel || 'Item'}
       </button>
     </div>

@@ -15,6 +15,7 @@ export function StoryProvider({ children }) {
   const masterTimeline = useRef(gsap.timeline());
 
   useEffect(() => {
+    const timeline = masterTimeline.current;
     // Refresh ScrollTrigger periodically to ensure pinning works on resize
     const handleResize = () => {
       ScrollTrigger.refresh();
@@ -23,7 +24,7 @@ export function StoryProvider({ children }) {
     window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('resize', handleResize);
-      masterTimeline.current.kill();
+      timeline.kill();
     };
   }, []);
 

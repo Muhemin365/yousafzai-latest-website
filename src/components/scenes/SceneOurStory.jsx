@@ -1,44 +1,45 @@
-import React, { useEffect, useRef, useState } from 'react';
+﻿import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useCMSStore } from '../../store/useCMSStore';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const milestones = [
-  { 
-    id: '1960', 
-    year: '1960', 
-    title: 'Retail Origins', 
+const fallbackMilestones = [
+  {
+    id: '1960',
+    year: '1960',
+    title: 'Retail Origins',
     desc: 'Established retail shop opposite Mardan Press Club for egg trading.',
     img: 'https://images.unsplash.com/photo-1498654077810-12c21d4d6dc3?w=1920&q=80',
     stats: '1ST RETAIL HUB',
     metric: '60+',
     metricLabel: 'Years of Trust'
   },
-  { 
-    id: '2000', 
-    year: '2000', 
-    title: 'Supply Network', 
+  {
+    id: '2000',
+    year: '2000',
+    title: 'Supply Network',
     desc: 'Built strong supply network connecting farms to markets across KPK.',
     img: 'https://images.unsplash.com/photo-1569288052389-dac9b01c9c05?w=1920&q=80',
     stats: 'B2B LOGISTICS',
     metric: '100+',
     metricLabel: 'Partner Farms'
   },
-  { 
-    id: '2020', 
-    year: '2020', 
-    title: 'Sales Expansion', 
+  {
+    id: '2020',
+    year: '2020',
+    title: 'Sales Expansion',
     desc: 'Opened second sales point at Haji Shah Morh, Attock.',
     img: 'https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=1920&q=80',
     stats: 'PUNJAB EXPANSION',
     metric: '2',
     metricLabel: 'Sales Points'
   },
-  { 
-    id: '2022', 
-    year: '2022', 
-    title: 'Poultry Farm', 
+  {
+    id: '2022',
+    year: '2022',
+    title: 'Poultry Farm',
     desc: 'Established poultry farm at China Chowk, Attock, Punjab.',
     img: 'https://images.unsplash.com/photo-1601444571669-02e5bb5756eb?w=1920&q=80',
     stats: 'VERTICAL INTEGRATION',
@@ -48,6 +49,8 @@ const milestones = [
 ];
 
 export default function SceneOurStory() {
+  const story = useCMSStore((s) => s.aboutScenes?.ourStory) || {};
+  const milestones = Array.isArray(story.milestones) && story.milestones.length ? story.milestones : fallbackMilestones;
   const sectionRef = useRef(null);
   const headerRef = useRef(null);
   const [activeIdx, setActiveIdx] = useState(-1);
@@ -57,7 +60,7 @@ export default function SceneOurStory() {
 
     let ctx = gsap.context(() => {
 
-      // ── Header reveal ──
+      // â”€â”€ Header reveal â”€â”€
       const headerTl = gsap.timeline({
         scrollTrigger: {
           trigger: headerRef.current,
@@ -70,7 +73,7 @@ export default function SceneOurStory() {
         .fromTo('.leg-subtext', { y: 20, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.6, ease: 'power3.out' }, '-=0.4')
         .fromTo('.leg-divider-line', { scaleX: 0 }, { scaleX: 1, duration: 1.2, ease: 'power2.inOut' }, '-=0.3');
 
-      // ── Vertical line draw ──
+      // â”€â”€ Vertical line draw â”€â”€
       gsap.fromTo('.leg-vline-fill',
         { scaleY: 0 },
         {
@@ -85,7 +88,7 @@ export default function SceneOurStory() {
         }
       );
 
-      // ── Each card ──
+      // â”€â”€ Each card â”€â”€
       gsap.utils.toArray('.leg-milestone').forEach((card, i) => {
         const isLeft = i % 2 === 0;
 
@@ -153,7 +156,7 @@ export default function SceneOurStory() {
     return () => ctx.revert();
   }, []);
 
-  // ── 3D tilt on hover ──
+  // â”€â”€ 3D tilt on hover â”€â”€
   const handleMouseMove = (e) => {
     const card = e.currentTarget.querySelector('.leg-card-body');
     if (!card) return;
@@ -181,21 +184,21 @@ export default function SceneOurStory() {
   return (
     <section ref={sectionRef} className="leg-section">
 
-      {/* ── Ambient background particles ── */}
+      {/* â”€â”€ Ambient background particles â”€â”€ */}
       <div className="leg-ambient">
         <div className="leg-orb leg-orb-1" />
         <div className="leg-orb leg-orb-2" />
       </div>
 
-      {/* ── Header ── */}
+      {/* â”€â”€ Header â”€â”€ */}
       <div ref={headerRef} className="leg-header">
-        <span className="leg-eyebrow">ORGANIZATIONAL_EVOLUTION // SINCE_1960</span>
-        <h2 className="leg-heading">Our Legacy</h2>
-        <p className="leg-subtext">Six decades of growth — from a single retail shop to a vertically integrated enterprise.</p>
+        <span className="leg-eyebrow">{story.eyebrow || 'ORGANIZATIONAL_EVOLUTION // SINCE_1960'}</span>
+        <h2 className="leg-heading">{story.title || 'Our Legacy'}</h2>
+        <p className="leg-subtext">{story.subtext || 'Six decades of growth — from a single retail shop to a vertically integrated enterprise.'}</p>
         <div className="leg-divider-line" />
       </div>
 
-      {/* ── Timeline ── */}
+      {/* â”€â”€ Timeline â”€â”€ */}
       <div className="leg-timeline">
 
         {/* Vertical Line */}
@@ -214,19 +217,19 @@ export default function SceneOurStory() {
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
             >
-              {/* ── Node on line ── */}
+              {/* â”€â”€ Node on line â”€â”€ */}
               <div className={`leg-node ${isActive ? 'node-active' : ''}`}>
                 <div className="leg-node-ring" />
                 <div className="leg-node-dot" />
                 {isActive && <div className="leg-node-pulse" />}
               </div>
 
-              {/* ── Year Label ── */}
+              {/* â”€â”€ Year Label â”€â”€ */}
               <div className={`leg-year-label ${isActive ? 'year-active' : ''}`}>
                 {item.year}
               </div>
 
-              {/* ── Card ── */}
+              {/* â”€â”€ Card â”€â”€ */}
               <div className="leg-card-body">
                 {/* Hover Glow */}
                 <div className="leg-card-glow" />
@@ -257,18 +260,18 @@ export default function SceneOurStory() {
       </div>
 
       <style>{`
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            SECTION BASE
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .leg-section {
-          background: #040d1a;
-          color: #fff;
+          background: #FBF7F0;
+          color: #111111;
           padding: 140px 24px 120px;
           position: relative;
           overflow: hidden;
         }
 
-        /* ── Ambient orbs ── */
+        /* â”€â”€ Ambient orbs â”€â”€ */
         .leg-ambient {
           position: absolute;
           inset: 0;
@@ -286,7 +289,7 @@ export default function SceneOurStory() {
         .leg-orb-1 {
           width: 600px;
           height: 600px;
-          background: radial-gradient(circle, #c8a24a 0%, transparent 70%);
+          background: radial-gradient(circle, #DE510A 0%, transparent 70%);
           top: 10%;
           left: -200px;
           animation: orbFloat1 12s ease-in-out infinite alternate;
@@ -295,7 +298,7 @@ export default function SceneOurStory() {
         .leg-orb-2 {
           width: 500px;
           height: 500px;
-          background: radial-gradient(circle, #4a8ec8 0%, transparent 70%);
+          background: radial-gradient(circle, #DE510A 0%, transparent 70%);
           bottom: 5%;
           right: -150px;
           animation: orbFloat2 15s ease-in-out infinite alternate;
@@ -311,9 +314,9 @@ export default function SceneOurStory() {
           100% { transform: translate(-60px, -80px); }
         }
 
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            HEADER
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .leg-header {
           position: relative;
           z-index: 2;
@@ -326,7 +329,7 @@ export default function SceneOurStory() {
           font-family: monospace;
           font-size: 12px;
           letter-spacing: 0.2em;
-          color: #c8a24a;
+          color: #DE510A;
           display: block;
           margin-bottom: 16px;
           visibility: hidden; /* GSAP handles */
@@ -337,7 +340,7 @@ export default function SceneOurStory() {
           font-size: clamp(40px, 6vw, 64px);
           font-weight: 700;
           margin: 0 0 20px;
-          background: linear-gradient(135deg, #ffffff 0%, #c8a24a 100%);
+          background: linear-gradient(135deg, #111111 0%, #B9320D 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
@@ -346,7 +349,7 @@ export default function SceneOurStory() {
 
         .leg-subtext {
           font-size: 17px;
-          color: rgba(255,255,255,0.5);
+          color: rgba(20,20,20,0.5);
           line-height: 1.7;
           margin: 0 0 30px;
           visibility: hidden;
@@ -355,16 +358,16 @@ export default function SceneOurStory() {
         .leg-divider-line {
           width: 80px;
           height: 3px;
-          background: linear-gradient(90deg, #c8a24a, #F2E7C9);
+          background: linear-gradient(90deg, #DE510A, #F2E7C9);
           margin: 0 auto;
           transform-origin: center;
           transform: scaleX(0);
           border-radius: 2px;
         }
 
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            TIMELINE
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .leg-timeline {
           position: relative;
           max-width: 1100px;
@@ -379,7 +382,7 @@ export default function SceneOurStory() {
           top: 0;
           bottom: 0;
           width: 2px;
-          background: rgba(255,255,255,0.04);
+          background: #DE510A;
           transform: translateX(-50%);
           z-index: 1;
         }
@@ -390,15 +393,15 @@ export default function SceneOurStory() {
           left: 0;
           width: 100%;
           height: 100%;
-          background: linear-gradient(180deg, #c8a24a 0%, #F2E7C9 50%, #c8a24a 100%);
+          background: linear-gradient(180deg, #DE510A 0%, #F2E7C9 50%, #DE510A 100%);
           transform-origin: top center;
           transform: scaleY(0);
-          box-shadow: 0 0 16px rgba(200,162,74,0.25);
+          box-shadow: 0 0 16px rgba(222,81,10,0.25);
         }
 
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            MILESTONE CARD
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .leg-milestone {
           position: relative;
           width: 50%;
@@ -415,7 +418,7 @@ export default function SceneOurStory() {
           padding-left: 60px;
         }
 
-        /* ── Node ── */
+        /* â”€â”€ Node â”€â”€ */
         .leg-node {
           position: absolute;
           top: 40px;
@@ -436,34 +439,34 @@ export default function SceneOurStory() {
           position: absolute;
           inset: -4px;
           border-radius: 50%;
-          border: 2px solid rgba(200,162,74,0.15);
+          border: 2px solid rgba(222,81,10,0.15);
           transition: border-color 0.5s;
         }
 
         .node-active .leg-node-ring {
-          border-color: rgba(200,162,74,0.5);
+          border-color: rgba(222,81,10,0.5);
         }
 
         .leg-node-dot {
           position: absolute;
           inset: 3px;
           border-radius: 50%;
-          background: #0a1628;
-          border: 2px solid rgba(200,162,74,0.3);
+          background: #111111;
+          border: 2px solid rgba(222,81,10,0.3);
           transition: all 0.5s;
         }
 
         .node-active .leg-node-dot {
-          background: #c8a24a;
-          border-color: #c8a24a;
-          box-shadow: 0 0 20px rgba(200,162,74,0.6);
+          background: #DE510A;
+          border-color: #DE510A;
+          box-shadow: 0 0 20px rgba(222,81,10,0.6);
         }
 
         .leg-node-pulse {
           position: absolute;
           inset: -8px;
           border-radius: 50%;
-          border: 2px solid rgba(200,162,74,0.3);
+          border: 2px solid rgba(222,81,10,0.3);
           animation: nodePulse 2s ease-out infinite;
         }
 
@@ -472,14 +475,14 @@ export default function SceneOurStory() {
           100% { transform: scale(2.5); opacity: 0; }
         }
 
-        /* ── Year Label ── */
+        /* â”€â”€ Year Label â”€â”€ */
         .leg-year-label {
           position: absolute;
           top: 30px;
           font-family: 'Space Grotesk', sans-serif;
           font-size: 16px;
           font-weight: 700;
-          color: rgba(255,255,255,0.15);
+          color: rgba(20,20,20,0.15);
           transition: all 0.5s;
           z-index: 10;
         }
@@ -493,17 +496,17 @@ export default function SceneOurStory() {
         }
 
         .year-active {
-          color: #c8a24a;
-          text-shadow: 0 0 20px rgba(200,162,74,0.3);
+          color: #DE510A;
+          text-shadow: 0 0 20px rgba(222,81,10,0.3);
         }
 
-        /* ── Card Body ── */
+        /* â”€â”€ Card Body â”€â”€ */
         .leg-card-body {
           position: relative;
           border-radius: 20px;
           overflow: hidden;
-          background: rgba(255,255,255,0.025);
-          border: 1px solid rgba(255,255,255,0.06);
+          background: #DE510A;
+          border: 1px solid rgba(20,20,20,0.06);
           backdrop-filter: blur(16px);
           -webkit-backdrop-filter: blur(16px);
           transition: border-color 0.5s, box-shadow 0.5s;
@@ -512,11 +515,11 @@ export default function SceneOurStory() {
         }
 
         .leg-milestone:hover .leg-card-body {
-          border-color: rgba(200,162,74,0.3);
+          border-color: rgba(222,81,10,0.3);
           box-shadow:
-            0 30px 80px rgba(0,0,0,0.5),
-            0 0 40px rgba(200,162,74,0.05),
-            inset 0 1px 0 rgba(255,255,255,0.05);
+            0 30px 80px rgba(63,98,49,0.28),
+            0 0 40px rgba(222,81,10,0.08),
+            inset 0 1px 0 rgba(20,20,20,0.05);
         }
 
         /* Hover glow */
@@ -525,7 +528,7 @@ export default function SceneOurStory() {
           inset: 0;
           background: radial-gradient(
             600px circle at var(--gx, 50%) var(--gy, 50%),
-            rgba(200,162,74,0.08),
+            rgba(222,81,10,0.08),
             transparent 40%
           );
           opacity: 0;
@@ -538,7 +541,7 @@ export default function SceneOurStory() {
           opacity: 1;
         }
 
-        /* ── Image ── */
+        /* â”€â”€ Image â”€â”€ */
         .leg-card-img {
           position: relative;
           width: 100%;
@@ -563,7 +566,7 @@ export default function SceneOurStory() {
           background: linear-gradient(
             180deg,
             transparent 30%,
-            rgba(4, 13, 26, 0.9) 100%
+            rgba(222, 81, 10, 0.85) 100%
           );
           pointer-events: none;
         }
@@ -575,13 +578,13 @@ export default function SceneOurStory() {
           font-family: 'Space Grotesk', sans-serif;
           font-size: 90px;
           font-weight: 800;
-          color: rgba(255,255,255,0.04);
+          color: rgba(20,20,20,0.04);
           line-height: 1;
           pointer-events: none;
           letter-spacing: -0.03em;
         }
 
-        /* ── Info ── */
+        /* â”€â”€ Info â”€â”€ */
         .leg-card-info {
           padding: 30px;
           position: relative;
@@ -600,9 +603,9 @@ export default function SceneOurStory() {
           font-size: 10px;
           font-weight: 600;
           letter-spacing: 0.12em;
-          color: #c8a24a;
-          background: rgba(200,162,74,0.08);
-          border: 1px solid rgba(200,162,74,0.18);
+          color: #DE510A;
+          background: rgba(222,81,10,0.08);
+          border: 1px solid rgba(222,81,10,0.18);
           padding: 6px 14px;
           border-radius: 6px;
         }
@@ -617,7 +620,7 @@ export default function SceneOurStory() {
           font-family: 'Space Grotesk', sans-serif;
           font-size: 28px;
           font-weight: 700;
-          color: #c8a24a;
+          color: #DE510A;
           line-height: 1;
           visibility: hidden; /* GSAP handles */
         }
@@ -625,7 +628,7 @@ export default function SceneOurStory() {
         .leg-metric-label {
           font-family: monospace;
           font-size: 10px;
-          color: rgba(255,255,255,0.35);
+          color: rgba(20,20,20,0.35);
           letter-spacing: 0.05em;
           margin-top: 4px;
         }
@@ -635,19 +638,19 @@ export default function SceneOurStory() {
           font-size: 26px;
           font-weight: 700;
           margin: 0 0 12px;
-          color: #fff;
+          color: #111111;
         }
 
         .leg-card-desc {
           font-size: 15px;
-          color: rgba(255,255,255,0.55);
+          color: rgba(20,20,20,0.55);
           line-height: 1.7;
           margin: 0;
         }
 
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            MOBILE
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         @media (max-width: 900px) {
           .leg-section {
             padding: 100px 16px 80px;

@@ -93,10 +93,10 @@ export default function ProductsSection() {
   };
 
   const gradientMap = {
-    'from-navy to-navy-2': 'linear-gradient(135deg, #0B2545, #1B3A64)',
+    'from-navy to-navy-2': 'linear-gradient(135deg, #FBF7F0, #B9320D)',
     'from-amber-800 to-amber-600': 'linear-gradient(135deg, #6B4C1E, #A67C3D)',
     'from-green-800 to-green-600': 'linear-gradient(135deg, #1A5E3A, #2C8C54)',
-    'from-indigo-800 to-indigo-600': 'linear-gradient(135deg, #2B2D5E, #4B4DA0)',
+    'from-indigo-800 to-indigo-600': 'linear-gradient(135deg, #B9320D, #DE510A)',
   };
 
   return (
@@ -131,7 +131,7 @@ export default function ProductsSection() {
               <div className="prod-card-glow" />
 
               {/* Image */}
-              <div className="prod-card-img" style={{ background: gradientMap[item.gradient] || 'linear-gradient(135deg, #0B2545, #1B3A64)' }}>
+              <div className="prod-card-img" style={{ background: gradientMap[item.gradient] || 'linear-gradient(135deg, #FBF7F0, #B9320D)' }}>
                 {item.image && !brokenImgs.has(i) ? (
                   <img
                     src={item.image}
@@ -203,12 +203,12 @@ export default function ProductsSection() {
       </div>
 
       <style>{`
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            SECTION
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .prod-section {
-          background: #060e1a;
-          color: #fff;
+          background: #FBF7F0;
+          color: #111111;
           padding: 100px 24px 120px;
           position: relative;
           overflow: hidden;
@@ -218,8 +218,8 @@ export default function ProductsSection() {
           position: absolute;
           inset: 0;
           background-image:
-            linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+            linear-gradient(rgba(20,20,20,0.012) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(20,20,20,0.012) 1px, transparent 1px);
           background-size: 50px 50px;
           pointer-events: none;
         }
@@ -233,7 +233,7 @@ export default function ProductsSection() {
 
         .prod-orb-1 {
           width: 500px; height: 500px;
-          background: radial-gradient(circle, rgba(200,162,74,0.08), transparent 70%);
+          background: radial-gradient(circle, rgba(222,81,10,0.08), transparent 70%);
           top: 20%; right: -200px;
           animation: prodFloat 14s ease-in-out infinite alternate;
         }
@@ -257,9 +257,9 @@ export default function ProductsSection() {
           z-index: 2;
         }
 
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            HEADER
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .prod-header {
           text-align: center;
           max-width: 750px;
@@ -270,7 +270,7 @@ export default function ProductsSection() {
           font-family: monospace;
           font-size: 12px;
           letter-spacing: 0.2em;
-          color: #c8a24a;
+          color: #DE510A;
           display: block;
           margin-bottom: 16px;
           visibility: hidden;
@@ -281,7 +281,7 @@ export default function ProductsSection() {
           font-size: clamp(32px, 4.5vw, 52px);
           font-weight: 700;
           margin: 0 0 18px;
-          background: linear-gradient(135deg, #fff 0%, #c8a24a 100%);
+          background: linear-gradient(135deg, #111111 0%, #B9320D 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
@@ -290,7 +290,7 @@ export default function ProductsSection() {
 
         .prod-sub {
           font-size: 16px;
-          color: rgba(255,255,255,0.5);
+          color: rgba(20,20,20,0.5);
           line-height: 1.7;
           margin: 0 0 28px;
           visibility: hidden;
@@ -299,16 +299,16 @@ export default function ProductsSection() {
         .prod-divider {
           width: 70px;
           height: 3px;
-          background: linear-gradient(90deg, #c8a24a, #F2E7C9);
+          background: linear-gradient(90deg, #DE510A, #F2E7C9);
           margin: 0 auto;
           transform-origin: center;
           transform: scaleX(0);
           border-radius: 2px;
         }
 
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            PRODUCT GRID
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .prod-grid {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
@@ -320,8 +320,8 @@ export default function ProductsSection() {
           position: relative;
           border-radius: 20px;
           overflow: hidden;
-          background: rgba(255,255,255,0.025);
-          border: 1px solid rgba(255,255,255,0.06);
+          background: #DE510A;
+          border: 1px solid rgba(20,20,20,0.06);
           backdrop-filter: blur(12px);
           -webkit-backdrop-filter: blur(12px);
           transition: border-color 0.5s, box-shadow 0.5s;
@@ -330,10 +330,10 @@ export default function ProductsSection() {
         }
 
         .prod-card.card-hover {
-          border-color: rgba(200,162,74,0.3);
+          border-color: rgba(222,81,10,0.3);
           box-shadow:
             0 30px 70px rgba(0,0,0,0.4),
-            0 0 40px rgba(200,162,74,0.04);
+            0 0 40px rgba(222,81,10,0.04);
         }
 
         /* Hover glow */
@@ -342,7 +342,7 @@ export default function ProductsSection() {
           inset: 0;
           background: radial-gradient(
             500px circle at var(--glow-x, 50%) var(--glow-y, 50%),
-            rgba(200,162,74,0.07), transparent 40%
+            rgba(222,81,10,0.07), transparent 40%
           );
           opacity: 0;
           transition: opacity 0.4s;
@@ -375,7 +375,7 @@ export default function ProductsSection() {
         .prod-img-overlay {
           position: absolute;
           inset: 0;
-          background: linear-gradient(180deg, transparent 40%, rgba(6,14,26,0.9) 100%);
+          background: linear-gradient(180deg, transparent 40%, rgba(63,98,49,0.6) 100%);
           pointer-events: none;
         }
 
@@ -396,11 +396,11 @@ export default function ProductsSection() {
           font-weight: 700;
           letter-spacing: 0.08em;
           text-transform: uppercase;
-          background: rgba(200,162,74,0.15);
-          color: #F2E7C9;
+          background: rgba(222,81,10,0.15);
+          color: #B9320D;
           padding: 5px 14px;
           border-radius: 8px;
-          border: 1px solid rgba(200,162,74,0.25);
+          border: 1px solid rgba(222,81,10,0.25);
           backdrop-filter: blur(8px);
           z-index: 2;
         }
@@ -417,12 +417,12 @@ export default function ProductsSection() {
           font-size: 18px;
           font-weight: 700;
           margin: 0 0 10px;
-          color: #fff;
+          color: #111111;
         }
 
         .prod-card-desc {
           font-size: 13.5px;
-          color: rgba(255,255,255,0.55);
+          color: rgba(20,20,20,0.55);
           line-height: 1.65;
           margin: 0 0 18px;
           min-height: 60px;
@@ -440,21 +440,21 @@ export default function ProductsSection() {
           font-weight: 600;
           padding: 5px 12px;
           border-radius: 6px;
-          background: rgba(255,255,255,0.04);
-          border: 1px solid rgba(255,255,255,0.08);
-          color: rgba(255,255,255,0.6);
+          background: #DE510A;
+          border: 1px solid rgba(20,20,20,0.08);
+          color: rgba(20,20,20,0.6);
           letter-spacing: 0.04em;
         }
 
         .prod-tag.tag-gold {
-          background: rgba(200,162,74,0.1);
-          border-color: rgba(200,162,74,0.2);
-          color: #c8a24a;
+          background: rgba(222,81,10,0.1);
+          border-color: rgba(222,81,10,0.2);
+          color: #DE510A;
         }
 
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            SPECS TABLE
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .prod-specs {
           max-width: 1200px;
           margin: 0 auto;
@@ -468,7 +468,7 @@ export default function ProductsSection() {
           font-family: monospace;
           font-size: 11px;
           letter-spacing: 0.15em;
-          color: #c8a24a;
+          color: #DE510A;
           display: block;
           margin-bottom: 10px;
         }
@@ -478,25 +478,25 @@ export default function ProductsSection() {
           font-size: 28px;
           font-weight: 700;
           margin: 0;
-          color: #fff;
+          color: #111111;
         }
 
         .specs-table-wrap {
           border-radius: 16px;
           overflow: hidden;
-          border: 1px solid rgba(255,255,255,0.06);
+          border: 1px solid rgba(20,20,20,0.06);
           backdrop-filter: blur(12px);
         }
 
         .prod-section table {
           width: 100%;
           border-collapse: collapse;
-          background: rgba(255,255,255,0.02);
+          background: rgba(20,20,20,0.02);
         }
 
         .prod-section thead th {
-          background: rgba(200,162,74,0.08);
-          color: #c8a24a;
+          background: rgba(222,81,10,0.08);
+          color: #DE510A;
           font-family: monospace;
           font-size: 10px;
           font-weight: 700;
@@ -504,14 +504,14 @@ export default function ProductsSection() {
           text-transform: uppercase;
           padding: 18px 24px;
           text-align: left;
-          border-bottom: 1px solid rgba(200,162,74,0.15);
+          border-bottom: 1px solid rgba(222,81,10,0.15);
         }
 
         .prod-section tbody td {
           padding: 18px 24px;
           font-size: 14px;
-          color: rgba(255,255,255,0.7);
-          border-bottom: 1px solid rgba(255,255,255,0.04);
+          color: rgba(20,20,20,0.7);
+          border-bottom: 1px solid rgba(20,20,20,0.04);
         }
 
         .prod-section tbody tr:last-child td {
@@ -523,11 +523,11 @@ export default function ProductsSection() {
         }
 
         .prod-section tbody tr:hover td {
-          background: rgba(200,162,74,0.03);
+          background: rgba(222,81,10,0.03);
         }
 
         .prod-section tbody td strong {
-          color: #fff;
+          color: #111111;
           font-weight: 600;
         }
 
@@ -563,19 +563,19 @@ export default function ProductsSection() {
         }
 
         .pill-gold {
-          background: rgba(200,162,74,0.1);
-          color: #c8a24a;
-          border: 1px solid rgba(200,162,74,0.2);
+          background: rgba(222,81,10,0.1);
+          color: #DE510A;
+          border: 1px solid rgba(222,81,10,0.2);
         }
 
         .pill-gold .pill-dot {
-          background: #c8a24a;
-          box-shadow: 0 0 8px rgba(200,162,74,0.5);
+          background: #DE510A;
+          box-shadow: 0 0 8px rgba(222,81,10,0.5);
         }
 
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            MOBILE
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         @media (max-width: 1080px) {
           .prod-grid { grid-template-columns: repeat(2, 1fr); }
         }

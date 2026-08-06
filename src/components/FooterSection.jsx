@@ -36,7 +36,7 @@ export default function FooterSection() {
           <div className="footer-brand footer-animate">
             <Link to="/" className="brand" style={{ textDecoration: 'none' }}>
               <div className="brand-mark">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#F2E7C9" strokeWidth="1.6" width="22" height="22">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#111111" strokeWidth="1.6" width="22" height="22">
                   <path d="M12 2C8 7 5 11.5 5 15a7 7 0 0014 0c0-3.5-3-8-7-13z" />
                 </svg>
               </div>
@@ -71,6 +71,12 @@ export default function FooterSection() {
             ))}
           </div>
           <div className="footer-col footer-animate">
+            <div className="footer-col-title">Solutions</div>
+            {footer.solutionsLinks && footer.solutionsLinks.map((link, i) => (
+              <Link key={i} to={link.href}>{link.label}</Link>
+            ))}
+          </div>
+          <div className="footer-col footer-animate">
             <div className="footer-col-title">Resources</div>
             {footer.resourcesLinks.map((link, i) => (
               <Link key={i} to={link.href}>{link.label}</Link>
@@ -91,44 +97,44 @@ export default function FooterSection() {
       </div>
 
       <style>{`
-        footer { background: linear-gradient(180deg, #060E1A 0%, #071A30 100%); color: rgba(255,255,255,0.7); padding: 80px 0 0; position: relative; border-top: 1px solid rgba(255,255,255,0.06); }
-        .footer-grid { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 50px; padding-bottom: 60px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+        footer { background: linear-gradient(180deg, #FBF7F0 0%, #E3EAD8 100%); color: rgba(20,20,20,0.72); padding: 80px 0 0; position: relative; border-top: 1px solid rgba(63,98,49,0.18); }
+        .footer-grid { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 50px; padding-bottom: 60px; border-bottom: 1px solid rgba(63,98,49,0.2); }
         .footer-brand { display: flex; flex-direction: column; align-items: center; text-align: center; }
-        .footer-brand .brand-name { color: #FFFFFF; }
+        .footer-brand .brand-name { color: #111111; }
         .brand { display: flex; align-items: center; justify-content: center; gap: 12px; }
         
         .brand-mark { 
           width: 42px; height: 42px; border-radius: 12px; 
-          background: linear-gradient(145deg,#0B2545,#123A6B); 
+          background: linear-gradient(145deg,#DE510A,#B9320D); 
           display: flex; align-items: center; justify-content: center; flex-shrink: 0; 
-          box-shadow: 0 6px 16px rgba(0,0,0,0.3); 
+          box-shadow: 0 6px 16px rgba(185,50,13,0.35); 
           transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .brand:hover .brand-mark {
           transform: scale(1.05);
-          box-shadow: 0 8px 24px rgba(200,162,74,0.3);
+          box-shadow: 0 8px 24px rgba(185,50,13,0.45);
         }
         
         .brand-text { display: flex; flex-direction: column; line-height: 1.1; text-align: left; transition: transform 0.3s ease; }
         .brand:hover .brand-text { transform: translateX(2px); }
-        .brand-name { font-family: 'Space Grotesk',sans-serif; font-weight: 700; font-size: 16px; letter-spacing: .02em; color: #FFFFFF; }
-        .brand-sub { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: #C8A24A; font-weight: 600; }
-        .footer-desc { font-size: 13.5px; color: rgba(255,255,255,0.5); margin-top: 18px; line-height: 1.7; max-width: 300px; text-align: center; }
+        .brand-name { font-family: 'Space Grotesk',sans-serif; font-weight: 700; font-size: 16px; letter-spacing: .02em; color: #111111; }
+        .brand-sub { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: #B9320D; font-weight: 600; }
+        .footer-desc { font-size: 13.5px; color: rgba(20,20,20,0.55); margin-top: 18px; line-height: 1.7; max-width: 300px; text-align: center; }
         
         .footer-col { display: flex; flex-direction: column; align-items: center; }
-        .footer-col-title { font-size: 12.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #FFFFFF; margin-bottom: 20px; text-align: center; }
-        .footer-col a { display: block; font-size: 13.5px; color: rgba(255,255,255,0.55); margin-bottom: 12px; transition: color .25s, transform .25s; text-align: center; }
-        .footer-col a:hover { color: #C8A24A; transform: translateX(4px); }
+        .footer-col-title { font-size: 12.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #111111; margin-bottom: 20px; text-align: center; }
+        .footer-col a { display: block; font-size: 13.5px; color: rgba(20,20,20,0.62); margin-bottom: 12px; transition: color .25s, transform .25s; text-align: center; }
+        .footer-col a:hover { color: #B9320D; transform: translateX(4px); }
         
         .social-row { display: flex; justify-content: center; gap: 10px; margin-top: 22px; }
-        .social-row a { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
-        .social-row a:hover { background: #C8A24A; color: #060E1A; transform: translateY(-3px); box-shadow: 0 4px 12px rgba(200,162,74,0.25); }
+        .social-row a { width: 36px; height: 36px; border-radius: 50%; background: rgba(222,81,10,0.4); display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
+        .social-row a:hover { background: #B9320D; color: #ffffff; transform: translateY(-3px); box-shadow: 0 4px 12px rgba(185,50,13,0.35); }
         
-        .footer-bottom { padding: 26px 0; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; font-size: 12.5px; color: rgba(255,255,255,0.45); }
+        .footer-bottom { padding: 26px 0; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; font-size: 12.5px; color: rgba(20,20,20,0.5); }
         .footer-bottom-right { display: flex; align-items: center; gap: 20px; }
         
         .back-to-top {
-          background: rgba(255,255,255,0.06);
+          background: rgba(222,81,10,0.5);
           border: none;
           width: 32px;
           height: 32px;
@@ -136,13 +142,13 @@ export default function FooterSection() {
           display: flex;
           align-items: center;
           justify-content: center;
-          color: rgba(255,255,255,0.7);
+          color: #ffffff;
           cursor: pointer;
           transition: all 0.3s ease;
         }
         .back-to-top:hover {
-          background: #C8A24A;
-          color: #060E1A;
+          background: #B9320D;
+          color: #ffffff;
           transform: translateY(-2px);
         }
         .back-to-top:active {

@@ -44,7 +44,7 @@ export const MotionLibrary = {
   // SCENE 7: CTA Stillness
   finalPulse: (element) => {
     return gsap.to(element, {
-      boxShadow: "0 0 30px 5px rgba(200, 162, 74, 0.4)",
+      boxShadow: "0 0 30px 5px rgba(222, 81, 10, 0.4)",
       duration: 2,
       repeat: -1,
       yoyo: true,

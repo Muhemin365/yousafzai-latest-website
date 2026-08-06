@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+﻿import { useEffect, useRef, useState } from 'react';
 import { useCMSStore } from '../store/useCMSStore';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -123,7 +123,7 @@ export default function ProcessSection() {
           <span className="proc-eyebrow">QUALITY_ASSURANCE // WORKFLOW</span>
           <h2 className="proc-heading">A Documented, Auditable Process at Every Stage</h2>
           <p className="proc-sub">
-            From certified farm collection to refrigerated last-mile deployment — six precision steps ensuring unmatched egg quality and traceability.
+            From certified farm collection to refrigerated last-mile deployment â€” six precision steps ensuring unmatched egg quality and traceability.
           </p>
           <div className="proc-divider-line" />
         </div>
@@ -172,12 +172,12 @@ export default function ProcessSection() {
       </div>
 
       <style>{`
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            SECTION BASE
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .proc-section {
-          background: #060e1a;
-          color: #fff;
+          background: #FBF7F0;
+          color: #111111;
           padding: 120px 24px 140px;
           position: relative;
           overflow: hidden;
@@ -187,8 +187,8 @@ export default function ProcessSection() {
           position: absolute;
           inset: 0;
           background-image:
-            linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+            linear-gradient(rgba(20,20,20,0.012) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(20,20,20,0.012) 1px, transparent 1px);
           background-size: 50px 50px;
           pointer-events: none;
         }
@@ -202,7 +202,7 @@ export default function ProcessSection() {
 
         .proc-orb-1 {
           width: 550px; height: 550px;
-          background: radial-gradient(circle, rgba(200,162,74,0.08), transparent 70%);
+          background: radial-gradient(circle, rgba(222,81,10,0.08), transparent 70%);
           top: 15%; left: -150px;
           animation: procFloat1 15s ease-in-out infinite alternate;
         }
@@ -231,9 +231,9 @@ export default function ProcessSection() {
           z-index: 2;
         }
 
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            HEADER
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .proc-header {
           text-align: center;
           max-width: 750px;
@@ -244,7 +244,7 @@ export default function ProcessSection() {
           font-family: monospace;
           font-size: 12px;
           letter-spacing: 0.2em;
-          color: #c8a24a;
+          color: #DE510A;
           display: block;
           margin-bottom: 16px;
           visibility: hidden;
@@ -255,7 +255,7 @@ export default function ProcessSection() {
           font-size: clamp(32px, 4.5vw, 52px);
           font-weight: 700;
           margin: 0 0 18px;
-          background: linear-gradient(135deg, #ffffff 0%, #c8a24a 100%);
+          background: linear-gradient(135deg, #111111 0%, #B9320D 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
@@ -264,7 +264,7 @@ export default function ProcessSection() {
 
         .proc-sub {
           font-size: 16px;
-          color: rgba(255,255,255,0.5);
+          color: rgba(20,20,20,0.5);
           line-height: 1.7;
           margin: 0 0 28px;
           visibility: hidden;
@@ -273,16 +273,16 @@ export default function ProcessSection() {
         .proc-divider-line {
           width: 70px;
           height: 3px;
-          background: linear-gradient(90deg, #c8a24a, #F2E7C9);
+          background: linear-gradient(90deg, #DE510A, #F2E7C9);
           margin: 0 auto;
           transform-origin: center;
           transform: scaleX(0);
           border-radius: 2px;
         }
 
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            GRID & CARDS
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .proc-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
@@ -293,8 +293,8 @@ export default function ProcessSection() {
           position: relative;
           border-radius: 20px;
           padding: 36px 30px 28px;
-          background: rgba(255,255,255,0.025);
-          border: 1px solid rgba(255,255,255,0.06);
+          background: #DE510A;
+          border: 1px solid rgba(20,20,20,0.06);
           backdrop-filter: blur(16px);
           -webkit-backdrop-filter: blur(16px);
           transition: border-color 0.5s, box-shadow 0.5s;
@@ -305,10 +305,10 @@ export default function ProcessSection() {
         }
 
         .proc-card.card-hover {
-          border-color: rgba(200,162,74,0.35);
+          border-color: rgba(222,81,10,0.35);
           box-shadow:
             0 30px 70px rgba(0,0,0,0.5),
-            0 0 40px rgba(200,162,74,0.05);
+            0 0 40px rgba(222,81,10,0.05);
         }
 
         /* Hover Glow */
@@ -317,7 +317,7 @@ export default function ProcessSection() {
           inset: 0;
           background: radial-gradient(
             500px circle at var(--glow-x, 50%) var(--glow-y, 50%),
-            rgba(200,162,74,0.08), transparent 40%
+            rgba(222,81,10,0.08), transparent 40%
           );
           opacity: 0;
           transition: opacity 0.4s;
@@ -344,12 +344,12 @@ export default function ProcessSection() {
           width: 52px;
           height: 52px;
           border-radius: 14px;
-          background: rgba(200,162,74,0.1);
-          border: 1px solid rgba(200,162,74,0.25);
+          background: rgba(222,81,10,0.1);
+          border: 1px solid rgba(222,81,10,0.25);
           display: flex;
           align-items: center;
           justify-content: center;
-          color: #c8a24a;
+          color: #DE510A;
           transition: all 0.4s ease;
         }
 
@@ -359,16 +359,16 @@ export default function ProcessSection() {
         }
 
         .proc-card.card-hover .proc-icon-box {
-          background: #c8a24a;
-          color: #060e1a;
-          box-shadow: 0 0 20px rgba(200,162,74,0.4);
+          background: #DE510A;
+          color: #ffffff;
+          box-shadow: 0 0 20px rgba(222,81,10,0.4);
         }
 
         .proc-num {
           font-family: 'Space Grotesk', sans-serif;
           font-size: 38px;
           font-weight: 800;
-          background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(200,162,74,0.5) 100%);
+          background: linear-gradient(135deg, rgba(20,20,20,0.2) 0%, rgba(222,81,10,0.5) 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
@@ -385,9 +385,9 @@ export default function ProcessSection() {
           font-size: 10px;
           font-weight: 600;
           letter-spacing: 0.1em;
-          color: #c8a24a;
-          background: rgba(200,162,74,0.06);
-          border: 1px solid rgba(200,162,74,0.15);
+          color: #DE510A;
+          background: rgba(222,81,10,0.06);
+          border: 1px solid rgba(222,81,10,0.15);
           padding: 5px 12px;
           border-radius: 6px;
           margin-bottom: 18px;
@@ -410,14 +410,14 @@ export default function ProcessSection() {
           font-size: 22px;
           font-weight: 700;
           margin: 0 0 12px;
-          color: #fff;
+          color: #111111;
           position: relative;
           z-index: 1;
         }
 
         .proc-card-body {
           font-size: 14.5px;
-          color: rgba(255,255,255,0.55);
+          color: rgba(20,20,20,0.55);
           line-height: 1.65;
           margin: 0 0 24px;
           flex-grow: 1;
@@ -438,32 +438,32 @@ export default function ProcessSection() {
         .footer-label {
           font-family: monospace;
           font-size: 10px;
-          color: rgba(255,255,255,0.3);
+          color: rgba(20,20,20,0.3);
           letter-spacing: 0.1em;
         }
 
         .footer-line {
           width: 100%;
           height: 3px;
-          background: rgba(255,255,255,0.06);
+          background: #DE510A;
           border-radius: 2px;
           overflow: hidden;
         }
 
         .footer-line-fill {
           height: 100%;
-          background: linear-gradient(90deg, #c8a24a, #F2E7C9);
+          background: linear-gradient(90deg, #DE510A, #F2E7C9);
           border-radius: 2px;
           transition: transform 0.4s ease;
         }
 
         .proc-card.card-hover .footer-line-fill {
-          box-shadow: 0 0 10px rgba(200,162,74,0.5);
+          box-shadow: 0 0 10px rgba(222,81,10,0.5);
         }
 
-        /* ═══════════════════════════════════════
+        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            RESPONSIVE
-           ═══════════════════════════════════════ */
+           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         @media (max-width: 1080px) {
           .proc-grid {
             grid-template-columns: repeat(2, 1fr);

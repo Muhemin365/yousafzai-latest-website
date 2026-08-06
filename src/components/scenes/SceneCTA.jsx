@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+﻿import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -28,7 +28,7 @@ export default function SceneCTA() {
 
       // Continuous golden pulse
       gsap.to(btnRef.current, {
-        boxShadow: '0 0 35px 8px rgba(200, 162, 74, 0.5)',
+        boxShadow: '0 0 35px 8px rgba(222, 81, 10, 0.5)',
         duration: 2,
         repeat: -1,
         yoyo: true,
@@ -53,7 +53,7 @@ export default function SceneCTA() {
       }}
     >
       <div style={{ textAlign: 'center', maxWidth: '600px' }}>
-        <p style={{ fontSize: '14px', color: 'rgba(255, 255, 255, 0.5)', marginBottom: '10px', letterSpacing: '0.1em', fontFamily: 'monospace' }}>
+        <p style={{ fontSize: '14px', color: 'rgba(20, 20, 20, 0.5)', marginBottom: '10px', letterSpacing: '0.1em', fontFamily: 'monospace' }}>
           THE JOURNEY IS COMPLETE
         </p>
 
@@ -67,8 +67,8 @@ export default function SceneCTA() {
           style={{
             padding: '16px 40px',
             fontSize: '16px',
-            backgroundColor: '#c8a24a',
-            color: '#07101f',
+            backgroundColor: '#DE510A',
+            color: '#111111',
             border: 'none',
             fontWeight: '600',
             cursor: 'pointer',
