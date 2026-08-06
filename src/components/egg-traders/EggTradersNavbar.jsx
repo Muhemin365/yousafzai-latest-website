@@ -311,6 +311,8 @@ export default function EggTradersNavbar() {
         @media (max-width: 860px) {
           .et-nav-links-desktop { display: none; }
           .et-mobile-toggle { display: flex; }
+          .et-cta-gold { padding: 10px; width: 40px; height: 40px; justify-content: center; flex-shrink: 0; }
+          .et-cta-gold span, .et-cta-gold .cta-arrow { display: none; }
         }
 
         @media (max-width: 480px) {
