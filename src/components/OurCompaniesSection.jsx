@@ -219,25 +219,25 @@ export default function OurCompaniesSection() {
 
         /* Egg Traders Card styling combining Dark Mauve Pink & Emerald Green */
         .oc-card.card-egg-traders {
-          background: linear-gradient(135deg, rgba(94, 39, 80, 0.45) 0%, rgba(13, 107, 61, 0.5) 100%);
-          border: 1px solid rgba(158, 71, 132, 0.4);
+          background: linear-gradient(135deg, #3B1F33 0%, #14402A 100%);
+          border: 1px solid rgba(74, 222, 128, 0.35);
         }
 
         .oc-card.card-egg-traders:hover {
-          border-color: rgba(74, 222, 128, 0.6);
-          box-shadow: 0 30px 80px rgba(158, 71, 132, 0.3);
+          border-color: rgba(74, 222, 128, 0.7);
+          box-shadow: 0 30px 80px rgba(20, 64, 42, 0.45);
           transform: translateY(-6px);
         }
 
-        /* Parent Navy / Gold Card */
+        /* Parent Green / Gold Card */
         .oc-card.card-parent {
-          background: #DE510A;
-          border: 1px solid rgba(222,81,10,0.25);
+          background: linear-gradient(135deg, #2C4724 0%, #3F6231 100%);
+          border: 1px solid rgba(222,81,10,0.4);
         }
 
         .oc-card.card-parent:hover {
-          border-color: rgba(222,81,10,0.6);
-          box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+          border-color: rgba(222,81,10,0.7);
+          box-shadow: 0 30px 80px rgba(44,71,36,0.45);
           transform: translateY(-6px);
         }
 
@@ -260,15 +260,15 @@ export default function OurCompaniesSection() {
         }
 
         .card-egg-traders .oc-icon-box {
-          background: rgba(46, 175, 105, 0.2);
-          border: 1px solid rgba(46, 175, 105, 0.4);
-          color: #4ade80;
+          background: rgba(46, 175, 105, 0.22);
+          border: 1px solid rgba(74, 222, 128, 0.5);
+          color: #6EE7A0;
         }
 
         .card-parent .oc-icon-box {
-          background: rgba(222,81,10,0.12);
-          border: 1px solid rgba(222,81,10,0.3);
-          color: #DE510A;
+          background: rgba(222,81,10,0.22);
+          border: 1px solid rgba(247,163,92,0.5);
+          color: #F7A35C;
         }
 
         .oc-badge {
@@ -281,15 +281,15 @@ export default function OurCompaniesSection() {
         }
 
         .card-egg-traders .oc-badge {
-          background: rgba(74, 222, 128, 0.15);
-          color: #4ade80;
-          border: 1px solid rgba(74, 222, 128, 0.3);
+          background: rgba(74, 222, 128, 0.18);
+          color: #6EE7A0;
+          border: 1px solid rgba(74, 222, 128, 0.4);
         }
 
         .card-parent .oc-badge {
-          background: rgba(222, 81, 10, 0.15);
-          color: #B9320D;
-          border: 1px solid rgba(222, 81, 10, 0.3);
+          background: rgba(222, 81, 10, 0.18);
+          color: #F7A35C;
+          border: 1px solid rgba(222, 81, 10, 0.45);
         }
 
         .oc-name {
@@ -297,14 +297,14 @@ export default function OurCompaniesSection() {
           font-size: 26px;
           font-weight: 700;
           margin: 0 0 6px;
-          color: #111111;
+          color: #FFFFFF;
         }
 
         .oc-tagline {
           font-family: monospace;
           font-size: 11px;
           letter-spacing: 0.1em;
-          color: rgba(20,20,20,0.45);
+          color: rgba(255,255,255,0.72);
           text-transform: uppercase;
           margin-bottom: 18px;
           display: block;
@@ -312,7 +312,7 @@ export default function OurCompaniesSection() {
 
         .oc-desc {
           font-size: 15px;
-          color: rgba(20,20,20,0.7);
+          color: rgba(255,255,255,0.88);
           line-height: 1.65;
           margin: 0 0 32px;
           flex-grow: 1;
@@ -335,8 +335,8 @@ export default function OurCompaniesSection() {
 
         .card-egg-traders .oc-visit-btn {
           background: rgba(46, 175, 105, 0.25);
-          border: 1px solid rgba(46, 175, 105, 0.5);
-          color: #111111;
+          border: 1px solid rgba(74, 222, 128, 0.55);
+          color: #FFFFFF;
         }
 
         .card-egg-traders .oc-visit-btn:hover {
@@ -346,9 +346,9 @@ export default function OurCompaniesSection() {
         }
 
         .card-parent .oc-visit-btn {
-          background: rgba(222, 81, 10, 0.15);
-          border: 1px solid rgba(222, 81, 10, 0.4);
-          color: #B9320D;
+          background: rgba(222, 81, 10, 0.25);
+          border: 1px solid rgba(222, 81, 10, 0.55);
+          color: #FFFFFF;
         }
 
         .card-parent .oc-visit-btn:hover {
