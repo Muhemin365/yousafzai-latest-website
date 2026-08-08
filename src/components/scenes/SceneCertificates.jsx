@@ -82,7 +82,7 @@ export default function SceneCertificates() {
     setActivePages([]);
 
     const url = `${import.meta.env.BASE_URL}certificates/${encodeURIComponent(CERTS[active].file)}`;
-    const dpr = Math.min(2, Math.max(1, window.devicePixelRatio || 1));
+    const dpr = Math.min(1.5, Math.max(1, window.devicePixelRatio || 1));
 
     getDocument(url).promise
       .then(async (pdf) => {
@@ -420,8 +420,10 @@ export default function SceneCertificates() {
         }
 
         .cert-modal-card {
-          width: min(960px, 100%);
-          height: min(88vh, 100%);
+          width: min(960px, calc(100vw - 48px));
+          height: 88vh;
+          max-height: 920px;
+          min-height: 420px;
           background: #ffffff;
           border-radius: 20px;
           overflow: hidden;
