@@ -51,6 +51,7 @@ export default function SceneCertificates() {
   const [active, setActive] = useState(null);
   const [frameLoading, setFrameLoading] = useState(true);
   const certSectionRef = useRef(null);
+  const viewerRef = useRef(null);
 
   const openDoc = (idx) => {
     setFrameLoading(true);
@@ -74,10 +75,12 @@ export default function SceneCertificates() {
 
   useEffect(() => {
     if (active !== null) {
-      document.body.style.overflow = 'hidden';
       const onKey = (e) => { if (e.key === 'Escape') setActive(null); };
       window.addEventListener('keydown', onKey);
-      return () => { document.body.style.overflow = ''; window.removeEventListener('keydown', onKey); };
+      requestAnimationFrame(() => {
+        viewerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+      return () => { window.removeEventListener('keydown', onKey); };
     }
   }, [active]);
 
@@ -118,18 +121,16 @@ export default function SceneCertificates() {
             ))}
           </div>
         </div>
-      </div>
 
-      {active !== null && (
-        <div className="cert-modal" onClick={() => setActive(null)}>
-          <div className="cert-modal-card" onClick={(e) => e.stopPropagation()}>
+        {active !== null && (
+          <div className="cert-viewer" ref={viewerRef}>
             <div className="cert-modal-head">
               <div>
                 <span className="cert-modal-eyebrow">{CERTS[active].sub}</span>
                 <strong>{CERTS[active].title}</strong>
               </div>
               <div className="cert-modal-actions">
-                <a className="cert-dl" href={`${import.meta.env.BASE_URL}certificates/${encodeURIComponent(CERTS[active].file)}`} target="_blank" rel="noreferrer">
+                <a className="cert-dl" href={pdfUrl} target="_blank" rel="noreferrer">
                   <Download size={14} /> Open
                 </a>
                 <button className="cert-close" onClick={() => setActive(null)} aria-label="Close">
@@ -158,8 +159,8 @@ export default function SceneCertificates() {
               </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
 
       <style>{`
         .cert-section {
@@ -361,32 +362,19 @@ export default function SceneCertificates() {
           animation: certIn 0.9s cubic-bezier(.22,1,.36,1) both;
         }
 
-        /* Modal */
-        .cert-modal {
-          position: fixed;
-          inset: 0;
-          z-index: 10000;
-          background: rgba(10, 14, 18, 0.78);
-          backdrop-filter: blur(10px);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 40px;
-          animation: certFade 0.3s ease both;
-        }
-
-        .cert-modal-card {
-          width: min(960px, calc(100vw - 48px));
-          height: 88vh;
-          max-height: 920px;
-          min-height: 420px;
+        /* In-place viewer */
+        .cert-viewer {
+          width: min(960px, 100%);
+          margin: 56px auto 0;
           background: #ffffff;
+          border: 1px solid rgba(63,98,49,0.3);
           border-radius: 20px;
           overflow: hidden;
           display: flex;
           flex-direction: column;
-          box-shadow: 0 40px 120px rgba(0,0,0,0.45);
-          animation: certPop 0.35s cubic-bezier(.22,1,.36,1) both;
+          box-shadow: 0 30px 80px rgba(63,98,49,0.18);
+          animation: certPop 0.4s cubic-bezier(.22,1,.36,1) both;
+          scroll-margin-top: 24px;
         }
 
         .cert-modal-head {
@@ -453,10 +441,11 @@ export default function SceneCertificates() {
         .cert-close:hover { background: #3F6231; color: #ffffff; }
 
         .cert-frame-wrap {
-          flex: 1;
+          height: 76vh;
+          max-height: 860px;
+          min-height: 400px;
           position: relative;
           background: #4a4e53;
-          min-height: 0;
           display: flex;
           flex-direction: column;
         }
@@ -557,8 +546,8 @@ export default function SceneCertificates() {
           .cert-hub strong { font-size: 12px; }
           .cert-hub small { font-size: 8.5px; }
           .tok-name { font-size: 10px; margin-top: 7px; }
-          .cert-modal { padding: 16px; }
-          .cert-modal-card { max-height: 90vh; }
+          .cert-viewer { margin-top: 40px; }
+          .cert-frame-wrap { height: 64vh; min-height: 340px; }
           .cert-modal-head { padding: 14px 16px; }
         }
 
