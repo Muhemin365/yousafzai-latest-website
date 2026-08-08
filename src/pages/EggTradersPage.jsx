@@ -162,110 +162,6 @@ function CalMaineHero({ data }) {
   );
 }
 
-function CalMaineProducts({ data }) {
-  return (
-    <section className="cm-products">
-      <div className="cm-products-inner">
-        <div className="cm-sec-head">
-          <span className="cm-eyebrow cm-eyebrow-dark">{data.eyebrow || 'POULTRY PRODUCTS // GRADES'}</span>
-          <h2 className="cm-sec-title">{data.title || 'Specialized Egg Product Portfolio'}</h2>
-          <p className="cm-sec-sub">{data.subtitle}</p>
-        </div>
-
-        <div className="cm-prod-grid">
-          {data.items.map((cat, i) => (
-            <div key={i} className="cm-prod-card">
-              <div className="cm-prod-badge">{cat.badge}</div>
-              {cat.image && (
-                <div className="cm-prod-img">
-                  <img src={cat.image} alt={cat.name} />
-                </div>
-              )}
-              <span className="cm-prod-grade">{cat.grade}</span>
-              <h3 className="cm-prod-title">{cat.name}</h3>
-              <p className="cm-prod-desc">{cat.description}</p>
-              <div className="cm-prod-specs">
-                {(cat.specs && cat.specs.length ? cat.specs : []).map((spec, j) => (
-                  <div key={j} className="cm-prod-spec">
-                    <CheckCircle2 size={14} />
-                    <span>{spec}</span>
-                  </div>
-                ))}
-              </div>
-              <Link to="/egg-traders/contact" className="cm-prod-btn">
-                Inquire Bulk Supply <ArrowRight size={14} />
-              </Link>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <style>{`
-        .cm-products { background: #ffffff; padding: 20px 32px 110px; }
-        .cm-products-inner { max-width: 1240px; margin: 0 auto; }
-        .cm-sec-head { text-align: center; max-width: 720px; margin: 0 auto 60px; }
-        .cm-eyebrow-dark {
-          color: #F76B0D; background: rgba(247,107,13,0.08);
-          border-color: rgba(247,107,13,0.3);
-        }
-        .cm-sec-title {
-          font-family: 'Space Grotesk', sans-serif;
-          font-size: clamp(30px, 3.8vw, 44px); font-weight: 700; color: #001b4d; margin: 0 0 14px;
-        }
-        .cm-sec-sub { font-size: 16px; color: #5a6470; line-height: 1.7; margin: 0; }
-        .cm-prod-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
-        .cm-prod-card {
-          background: #ffffff; border: 1px solid #e3e9f2; border-top: 5px solid #0047BB;
-          border-radius: 16px; padding: 34px 32px; display: flex; flex-direction: column;
-          transition: box-shadow 0.3s, transform 0.3s;
-        }
-        .cm-prod-card:hover { transform: translateY(-6px); box-shadow: 0 24px 50px rgba(0,71,187,0.14); }
-        .cm-prod-badge {
-          align-self: flex-start; font-family: monospace; font-size: 10px; font-weight: 700;
-          letter-spacing: 0.1em; text-transform: uppercase; color: #ffffff; background: #F76B0D;
-          padding: 5px 12px; border-radius: 6px; margin-bottom: 14px;
-        }
-        .cm-prod-img {
-          height: 190px; border-radius: 12px; overflow: hidden; margin-bottom: 20px;
-          border: 1px solid #e3e9f2; background: #f5f7fb;
-        }
-        .cm-prod-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        .cm-prod-grade {
-          font-family: monospace; font-size: 10.5px; font-weight: 600; letter-spacing: 0.08em;
-          color: #349F93; margin-bottom: 10px;
-        }
-        .cm-prod-title {
-          font-family: 'Space Grotesk', sans-serif; font-size: 23px; font-weight: 700;
-          color: #001b4d; margin: 0 0 10px;
-        }
-        .cm-prod-desc { font-size: 14.5px; color: #5a6470; line-height: 1.65; margin: 0 0 24px; flex-grow: 1; }
-        .cm-prod-specs {
-          display: flex; flex-direction: column; gap: 10px; padding: 16px; border-radius: 10px;
-          background: #f5f7fb; border: 1px solid #e3e9f2; margin-bottom: 26px;
-        }
-        .cm-prod-spec { display: flex; align-items: center; gap: 10px; font-family: monospace; font-size: 12.5px; color: #2c333a; }
-        .cm-prod-spec svg { color: #0047BB; flex-shrink: 0; }
-        .cm-prod-btn {
-          display: inline-flex; align-items: center; justify-content: space-between;
-          padding: 13px 20px; border-radius: 10px; background: #0047BB; color: #ffffff;
-          font-family: monospace; font-size: 12.5px; font-weight: 700; text-decoration: none;
-          transition: background 0.3s, transform 0.3s;
-        }
-        .cm-prod-btn:hover { background: #F76B0D; transform: translateY(-2px); }
-        @media (max-width: 860px) {
-          .cm-prod-grid { grid-template-columns: 1fr; }
-          .cm-products { padding: 20px 20px 80px; }
-        }
-        @media (max-width: 480px) {
-          .cm-prod-card { padding: 26px 20px; }
-          .cm-sec-title { font-size: 26px; }
-          .cm-sec-sub { font-size: 14.5px; }
-        }
-      `}</style>
-    </section>
-  );
-}
-
 function CalMaineAbout({ data }) {
   return (
     <section className="cm-about">
@@ -362,7 +258,6 @@ export default function EggTradersHomePage() {
   return (
     <>
       <CalMaineHero data={eggTraders.hero} />
-      <CalMaineProducts data={eggTraders.products} />
       <CalMaineAbout data={eggTraders.about} />
     </>
   );
