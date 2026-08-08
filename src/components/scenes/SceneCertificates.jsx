@@ -1,9 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { getDocument, GlobalWorkerOptions } from 'pdfjs-dist/legacy/build/pdf.mjs';
-import pdfWorkerUrl from 'pdfjs-dist/legacy/build/pdf.worker.min.mjs?url';
-import { ShieldCheck, Leaf, MoonStar, Building2, X, Download, Award } from 'lucide-react';
-
-GlobalWorkerOptions.workerSrc = pdfWorkerUrl;
+import { ShieldCheck, Leaf, MoonStar, Building2, X, Download, Award, ExternalLink } from 'lucide-react';
 
 const CERTS = [
   {
@@ -53,13 +49,13 @@ function CertSeal({ icon: Ic, seal }) {
 
 export default function SceneCertificates() {
   const [active, setActive] = useState(null);
-  const [activePages, setActivePages] = useState([]);
-  const [pageLoading, setPageLoading] = useState(false);
-  const [pageError, setPageError] = useState(false);
+  const [frameLoading, setFrameLoading] = useState(true);
   const certSectionRef = useRef(null);
-  const renderSeq = useRef(0);
 
-  const openDoc = (idx) => setActive(idx);
+  const openDoc = (idx) => {
+    setFrameLoading(true);
+    setActive(idx);
+  };
 
   useEffect(() => {
     const section = certSectionRef.current;
@@ -72,53 +68,9 @@ export default function SceneCertificates() {
     return () => io.disconnect();
   }, []);
 
-  useEffect(() => {
-    if (active === null) { setActivePages([]); setPageError(false); setPageLoading(false); return; }
-
-    const seq = ++renderSeq.current;
-    let cancelled = false;
-    setPageLoading(true);
-    setPageError(false);
-    setActivePages([]);
-
-    const url = `${import.meta.env.BASE_URL}certificates/${encodeURIComponent(CERTS[active].file)}`;
-    const dpr = Math.min(1.5, Math.max(1, window.devicePixelRatio || 1));
-
-    getDocument(url).promise
-      .then(async (pdf) => {
-        const page = await pdf.getPage(1);
-        return { pdf, page };
-      })
-      .then(async ({ pdf, page }) => {
-        const vp = page.getViewport({ scale: 1 });
-        const scale = Math.min(3, (1100 * dpr) / vp.width);
-        const outViewport = page.getViewport({ scale });
-        const canvas = document.createElement('canvas');
-        canvas.width = outViewport.width;
-        canvas.height = outViewport.height;
-        await page.render({ canvasContext: canvas.getContext('2d'), viewport: outViewport }).promise;
-        if (cancelled || seq !== renderSeq.current) return;
-        setActivePages([canvas.toDataURL('image/jpeg', 0.92)]);
-        setPageLoading(false);
-        const rest = Array.from({ length: pdf.numPages - 1 }, (_, i) => i + 2);
-        for (const n of rest) {
-          if (cancelled || seq !== renderSeq.current) break;
-          try {
-            const pg = await pdf.getPage(n);
-            const pgVp = pg.getViewport({ scale });
-            const c = document.createElement('canvas');
-            c.width = pgVp.width;
-            c.height = pgVp.height;
-            await pg.render({ canvasContext: c.getContext('2d'), viewport: pgVp }).promise;
-            if (cancelled || seq !== renderSeq.current) return;
-            setActivePages((prev) => [...prev, c.toDataURL('image/jpeg', 0.92)]);
-          } catch { /* keep whatever rendered */ }
-        }
-      })
-      .catch(() => { if (!cancelled && seq === renderSeq.current) setPageError(true); });
-
-    return () => { cancelled = true; };
-  }, [active]);
+  const pdfUrl = active !== null
+    ? `${import.meta.env.BASE_URL}certificates/${encodeURIComponent(CERTS[active].file)}`
+    : '';
 
   useEffect(() => {
     if (active !== null) {
@@ -185,21 +137,25 @@ export default function SceneCertificates() {
                 </button>
               </div>
             </div>
-            <div className="cert-scroll">
-              {pageLoading && (
+            <div className="cert-frame-wrap">
+              {frameLoading && (
                 <div className="cert-loading">
                   <span className="tok-loader big" />
                   <p>Loading certificate…</p>
                 </div>
               )}
-              {pageError && (
-                <div className="cert-error">
-                  <p>Certificate content could not be rendered. <a href={`${import.meta.env.BASE_URL}certificates/${encodeURIComponent(CERTS[active].file)}`} target="_blank" rel="noreferrer">Open it in a new tab</a>.</p>
-                </div>
-              )}
-              {!pageLoading && !pageError && activePages.map((src, i) => (
-                <img key={i} className="cert-page" src={src} alt={`${CERTS[active].title} — page ${i + 1}`} />
-              ))}
+              <iframe
+                key={pdfUrl}
+                className="cert-frame"
+                src={pdfUrl}
+                title={CERTS[active].title}
+                onLoad={() => setFrameLoading(false)}
+              />
+              <div className="cert-frame-note">
+                <ExternalLink size={13} />
+                Not displaying?{' '}
+                <a href={pdfUrl} target="_blank" rel="noreferrer">Open it in a new tab</a>
+              </div>
             </div>
           </div>
         </div>
@@ -496,44 +452,63 @@ export default function SceneCertificates() {
 
         .cert-close:hover { background: #3F6231; color: #ffffff; }
 
-        .cert-scroll {
+        .cert-frame-wrap {
           flex: 1;
-          overflow-y: auto;
-          padding: 22px;
-          background: #3c3f43;
+          position: relative;
+          background: #4a4e53;
+          min-height: 0;
           display: flex;
           flex-direction: column;
-          gap: 18px;
         }
 
-        .cert-page {
-          display: block;
+        .cert-frame {
+          position: absolute;
+          inset: 0;
           width: 100%;
-          max-width: 880px;
-          margin: 0 auto;
-          background: #ffffff;
-          border: 1px solid #d8dee8;
-          border-radius: 6px;
-          box-shadow: 0 12px 34px rgba(0,0,0,0.35);
+          height: 100%;
+          border: none;
+          background: #4a4e53;
         }
 
-        .cert-loading,
-        .cert-error {
-          flex: 1;
+        .cert-frame-note {
+          flex-shrink: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 6px;
+          padding: 8px 12px;
+          background: #ffffff;
+          border-top: 1px solid #e3e9f2;
+          font-size: 12px;
+          color: #6b7280;
+        }
+
+        .cert-frame-note a {
+          color: #DE510A;
+          font-weight: 700;
+          text-decoration: none;
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+        }
+
+        .cert-frame-note a:hover { text-decoration: underline; }
+
+        .cert-loading {
+          position: absolute;
+          inset: 0;
+          z-index: 3;
           display: flex;
           flex-direction: column;
           align-items: center;
           justify-content: center;
           gap: 14px;
           color: #e8ecf2;
+          background: #4a4e53;
           text-align: center;
         }
 
         .cert-loading p { font-size: 14px; color: #c7ced9; margin: 0; }
-
-        .cert-error p { font-size: 14px; color: #ffd9c2; max-width: 420px; margin: 0; }
-
-        .cert-error a { color: #f7a15e; text-decoration: underline; }
 
         .tok-loader.big {
           width: 34px;
