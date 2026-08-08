@@ -32,6 +32,9 @@ export default function SceneCertificates() {
   const [active, setActive] = useState(null);
   const [thumbs, setThumbs] = useState({});
   const [errored, setErrored] = useState({});
+  const [activePages, setActivePages] = useState([]);
+  const [pageLoading, setPageLoading] = useState(false);
+  const [pageError, setPageError] = useState(false);
   const certSectionRef = useRef(null);
   const served = useRef(false);
 
@@ -80,6 +83,38 @@ export default function SceneCertificates() {
     io.observe(section);
     return () => io.disconnect();
   }, []);
+
+  useEffect(() => {
+    if (active === null) { setActivePages([]); setPageError(false); setPageLoading(false); return; }
+
+    let cancelled = false;
+    setPageLoading(true);
+    setPageError(false);
+    setActivePages([]);
+
+    const url = `${import.meta.env.BASE_URL}certificates/${encodeURIComponent(CERTS[active].file)}`;
+    getDocument(url).promise
+      .then((pdf) => Promise.all(Array.from({ length: pdf.numPages }, (_, i) => pdf.getPage(i + 1))))
+      .then(async (pages) => {
+        const out = [];
+        for (const page of pages) {
+          const vp = page.getViewport({ scale: 1 });
+          const scale = Math.min(2.5, 980 / vp.width);
+          const outViewport = page.getViewport({ scale });
+          const canvas = document.createElement('canvas');
+          canvas.width = outViewport.width;
+          canvas.height = outViewport.height;
+          await page.render({ canvasContext: canvas.getContext('2d'), viewport: outViewport }).promise;
+          out.push(canvas.toDataURL('image/jpeg', 0.9));
+        }
+        return out;
+      })
+      .then((pages) => { if (!cancelled) setActivePages(pages); })
+      .catch(() => { if (!cancelled) setPageError(true); })
+      .finally(() => { if (!cancelled) setPageLoading(false); });
+
+    return () => { cancelled = true; };
+  }, [active]);
 
   useEffect(() => {
     if (active !== null) {
@@ -155,11 +190,22 @@ export default function SceneCertificates() {
                 </button>
               </div>
             </div>
-            <iframe
-              className="cert-frame"
-              src={`${import.meta.env.BASE_URL}certificates/${encodeURIComponent(CERTS[active].file)}`}
-              title={CERTS[active].title}
-            />
+            <div className="cert-scroll">
+              {pageLoading && (
+                <div className="cert-loading">
+                  <span className="tok-loader big" />
+                  <p>Loading certificate…</p>
+                </div>
+              )}
+              {pageError && (
+                <div className="cert-error">
+                  <p>Certificate content could not be rendered. <a href={`${import.meta.env.BASE_URL}certificates/${encodeURIComponent(CERTS[active].file)}`} target="_blank" rel="noreferrer">Open it in a new tab</a>.</p>
+                </div>
+              )}
+              {!pageLoading && !pageError && activePages.map((src, i) => (
+                <img key={i} className="cert-page" src={src} alt={`${CERTS[active].title} — page ${i + 1}`} />
+              ))}
+            </div>
           </div>
         </div>
       )}
@@ -413,10 +459,50 @@ export default function SceneCertificates() {
 
         .cert-close:hover { background: #3F6231; color: #ffffff; }
 
-        .cert-frame {
+        .cert-scroll {
           flex: 1;
+          overflow-y: auto;
+          padding: 22px;
+          background: #3c3f43;
+          display: flex;
+          flex-direction: column;
+          gap: 18px;
+        }
+
+        .cert-page {
+          display: block;
           width: 100%;
-          border: none;
+          max-width: 880px;
+          margin: 0 auto;
+          background: #ffffff;
+          border: 1px solid #d8dee8;
+          border-radius: 6px;
+          box-shadow: 0 12px 34px rgba(0,0,0,0.35);
+        }
+
+        .cert-loading,
+        .cert-error {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 14px;
+          color: #e8ecf2;
+          text-align: center;
+        }
+
+        .cert-loading p { font-size: 14px; color: #c7ced9; margin: 0; }
+
+        .cert-error p { font-size: 14px; color: #ffd9c2; max-width: 420px; margin: 0; }
+
+        .cert-error a { color: #f7a15e; text-decoration: underline; }
+
+        .tok-loader.big {
+          width: 34px;
+          height: 34px;
+          border: 3px solid rgba(255,255,255,0.2);
+          border-top-color: #F76B0D;
         }
 
         @keyframes certSpin {
