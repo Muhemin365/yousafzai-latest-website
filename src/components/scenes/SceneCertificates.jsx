@@ -33,26 +33,11 @@ export default function SceneCertificates() {
   const [thumbs, setThumbs] = useState({});
   const [errored, setErrored] = useState({});
   const certSectionRef = useRef(null);
-  const hoverTimer = useRef(null);
   const served = useRef(false);
 
   const openDoc = (idx) => {
-    if (hoverTimer.current) { clearTimeout(hoverTimer.current); hoverTimer.current = null; }
     setActive(idx);
   };
-
-  const startHover = (idx) => {
-    clearTimeout(hoverTimer.current);
-    hoverTimer.current = setTimeout(() => {
-      setActive(idx);
-    }, 950);
-  };
-
-  const clearHover = () => {
-    if (hoverTimer.current) { clearTimeout(hoverTimer.current); hoverTimer.current = null; }
-  };
-
-  useEffect(() => () => clearTimeout(hoverTimer.current), []);
 
   useEffect(() => {
     if (served.current) return;
@@ -129,8 +114,7 @@ export default function SceneCertificates() {
                 key={c.file}
                 className={`cert-token tok-${i}`}
                 onClick={() => openDoc(i)}
-                onMouseEnter={() => startHover(i)}
-                onMouseLeave={clearHover}
+                onMouseEnter={() => openDoc(i)}
                 role="button"
                 tabIndex={0}
                 aria-label={`View ${c.title}`}
