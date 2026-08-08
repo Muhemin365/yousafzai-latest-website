@@ -10,7 +10,6 @@ export default function ProductsSection() {
   const [brokenImgs, setBrokenImgs] = useState(new Set());
   const [activeCard, setActiveCard] = useState(null);
   const sectionRef = useRef(null);
-  const specsRef = useRef(null);
 
   useEffect(() => {
     if (!sectionRef.current) return;
@@ -40,29 +39,6 @@ export default function ProductsSection() {
           }
         );
       });
-
-      // Specs table
-      if (specsRef.current) {
-        gsap.fromTo(specsRef.current,
-          { y: 60, autoAlpha: 0 },
-          {
-            y: 0, autoAlpha: 1, duration: 1, ease: 'power3.out',
-            scrollTrigger: { trigger: specsRef.current, start: 'top 85%' }
-          }
-        );
-
-        // Stagger table rows
-        gsap.utils.toArray('.specs-row').forEach((row, i) => {
-          gsap.fromTo(row,
-            { x: -30, autoAlpha: 0 },
-            {
-              x: 0, autoAlpha: 1, duration: 0.5, delay: i * 0.08,
-              ease: 'power2.out',
-              scrollTrigger: { trigger: specsRef.current, start: 'top 75%' }
-            }
-          );
-        });
-      }
 
     }, sectionRef);
 
@@ -158,46 +134,6 @@ export default function ProductsSection() {
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Specs Table */}
-        <div ref={specsRef} className="prod-specs" style={{ visibility: 'hidden' }}>
-          <div className="specs-header-row">
-            <span className="specs-eyebrow">SPECIFICATIONS_TABLE</span>
-            <h3 className="specs-title">Product Specifications</h3>
-          </div>
-
-          <div className="specs-table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Product</th>
-                  <th>Grade</th>
-                  <th>Available Sizes</th>
-                  <th>Min. Order</th>
-                  <th>Lead Time</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {products.specs.map((spec, i) => (
-                  <tr key={i} className="specs-row" style={{ visibility: 'hidden' }}>
-                    <td><strong>{spec.name}</strong></td>
-                    <td>{spec.grade}</td>
-                    <td>{spec.sizes}</td>
-                    <td>{spec.moq}</td>
-                    <td>{spec.lead}</td>
-                    <td>
-                      <span className={`specs-pill ${spec.statusClass === 'stock' ? 'pill-green' : 'pill-gold'}`}>
-                        <span className="pill-dot" />
-                        {spec.status}
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
         </div>
 
       </div>
@@ -452,126 +388,6 @@ export default function ProductsSection() {
           color: #DE510A;
         }
 
-        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-           SPECS TABLE
-           â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-        .prod-specs {
-          max-width: 1200px;
-          margin: 0 auto;
-        }
-
-        .specs-header-row {
-          margin-bottom: 24px;
-        }
-
-        .specs-eyebrow {
-          font-family: monospace;
-          font-size: 11px;
-          letter-spacing: 0.15em;
-          color: #DE510A;
-          display: block;
-          margin-bottom: 10px;
-        }
-
-        .specs-title {
-          font-family: 'Space Grotesk', sans-serif;
-          font-size: 28px;
-          font-weight: 700;
-          margin: 0;
-          color: #111111;
-        }
-
-        .specs-table-wrap {
-          border-radius: 16px;
-          overflow: hidden;
-          border: 1px solid rgba(63,98,49,0.45);
-          backdrop-filter: blur(12px);
-        }
-
-        .prod-section table {
-          width: 100%;
-          border-collapse: collapse;
-          background: rgba(20,20,20,0.02);
-        }
-
-        .prod-section thead th {
-          background: rgba(222,81,10,0.08);
-          color: #DE510A;
-          font-family: monospace;
-          font-size: 10px;
-          font-weight: 700;
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
-          padding: 18px 24px;
-          text-align: left;
-          border-bottom: 1px solid rgba(222,81,10,0.15);
-        }
-
-        .prod-section tbody td {
-          padding: 18px 24px;
-          font-size: 14px;
-          color: rgba(20,20,20,0.7);
-          border-bottom: 1px solid rgba(20,20,20,0.04);
-        }
-
-        .prod-section tbody tr:last-child td {
-          border-bottom: none;
-        }
-
-        .prod-section tbody tr {
-          transition: background 0.3s;
-        }
-
-        .prod-section tbody tr:hover td {
-          background: rgba(222,81,10,0.03);
-        }
-
-        .prod-section tbody td strong {
-          color: #111111;
-          font-weight: 600;
-        }
-
-        /* Status Pill */
-        .specs-pill {
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          font-family: monospace;
-          font-size: 11px;
-          font-weight: 700;
-          padding: 5px 14px;
-          border-radius: 8px;
-          letter-spacing: 0.04em;
-        }
-
-        .pill-dot {
-          width: 6px;
-          height: 6px;
-          border-radius: 50%;
-          flex-shrink: 0;
-        }
-
-        .pill-green {
-          background: rgba(74,222,128,0.1);
-          color: #4ade80;
-          border: 1px solid rgba(74,222,128,0.2);
-        }
-
-        .pill-green .pill-dot {
-          background: #4ade80;
-          box-shadow: 0 0 8px rgba(74,222,128,0.5);
-        }
-
-        .pill-gold {
-          background: rgba(222,81,10,0.1);
-          color: #DE510A;
-          border: 1px solid rgba(222,81,10,0.2);
-        }
-
-        .pill-gold .pill-dot {
-          background: #DE510A;
-          box-shadow: 0 0 8px rgba(222,81,10,0.5);
-        }
 
         /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
            MOBILE
@@ -585,10 +401,6 @@ export default function ProductsSection() {
           .prod-grid { grid-template-columns: 1fr; gap: 20px; }
           .prod-card-img { height: 180px; }
           .prod-card-info { padding: 22px; }
-          .specs-table-wrap { overflow-x: auto; }
-          .prod-section table { min-width: 600px; }
-          .prod-section thead th,
-          .prod-section tbody td { padding: 14px 16px; font-size: 12px; }
         }
       `}</style>
     </section>

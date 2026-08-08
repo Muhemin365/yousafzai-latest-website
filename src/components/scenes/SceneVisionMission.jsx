@@ -220,9 +220,9 @@ export default function SceneVisionMission() {
 
       <style>{`
         .sc-vision-wrapper {
-          --card-bg: #DE510A;
-          --card-border: rgba(222, 81, 10, 0.35);
-          --glow-color: rgba(222, 81, 10, 0.25);
+          --card-bg: #FFFFFF;
+          --card-border: rgba(63, 98, 49, 0.45);
+          --glow-color: rgba(63, 98, 49, 0.14);
         }
 
         .sc-vision-wrapper .vm-layout {
@@ -270,7 +270,7 @@ export default function SceneVisionMission() {
         }
         
         .sc-vision-wrapper .vm-card:hover {
-          border-color: rgba(222, 81, 10, 0.4);
+          border-color: rgba(63, 98, 49, 0.7);
         }
 
         .sc-vision-wrapper .card-content {
@@ -308,8 +308,8 @@ export default function SceneVisionMission() {
         .sc-vision-wrapper .card-marker {
           font-family: monospace;
           font-size: 10px;
-          color: rgba(20,20,20,0.5);
-          border: 1px solid rgba(20,20,20,0.2);
+          color: rgba(20,20,20,0.6);
+          border: 1px solid rgba(63,98,49,0.35);
           padding: 4px 8px;
           border-radius: 4px;
         }

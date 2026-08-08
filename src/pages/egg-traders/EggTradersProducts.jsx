@@ -59,33 +59,6 @@ export default function EggTradersProducts() {
                 </div>
               ))}
             </div>
-
-            <div className="et-spec-wrap reveal">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Product</th>
-                    <th>Grade</th>
-                    <th>Sizes</th>
-                    <th>Min. Order</th>
-                    <th>Lead Time</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {products.specs.map((spec, i) => (
-                    <tr key={i}>
-                      <td><strong>{spec.name}</strong></td>
-                      <td>{spec.grade}</td>
-                      <td>{spec.sizes}</td>
-                      <td>{spec.moq}</td>
-                      <td>{spec.lead}</td>
-                      <td><span className={`et-status-pill et-status-${spec.statusClass}`}>{spec.status}</span></td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
           </div>
         </section>
 
@@ -101,20 +74,9 @@ export default function EggTradersProducts() {
           .et-p-desc { font-size: 12.5px; color: rgba(0,27,77,0.68); line-height: 1.6; margin-bottom: 14px; min-height: 62px; }
           .et-p-tags { display: flex; gap: 6px; flex-wrap: wrap; }
           .et-p-tag { font-size: 10.5px; font-weight: 600; padding: 4px 10px; border-radius: 20px; background: rgba(247,107,13,0.1); border: 1px solid rgba(247,107,13,0.25); color: #E2580A; }
-          .et-spec-wrap { margin-top: 56px; border-radius: 24px; overflow: hidden; border: 1px solid rgba(0,71,187,0.14); box-shadow: 0 2px 10px rgba(0,0,0,0.06); }
-          table { width: 100%; border-collapse: collapse; background: #FFFFFF; }
-          thead th { background: #0047BB; color: #FFFFFF; font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; padding: 16px 20px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.2); }
-          tbody td { padding: 16px 20px; font-size: 13.5px; color: rgba(0,27,77,0.78); border-bottom: 1px solid rgba(0,71,187,0.08); }
-          tbody tr:last-child td { border-bottom: none; }
-          tbody tr:hover td { background: #F0F5FF; }
-          .et-status-pill { font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; display: inline-block; }
-          .et-status-stock { background: rgba(52,159,147,0.15); color: #1F6F66; }
-          .et-status-limited { background: rgba(247,107,13,0.15); color: #C44E0A; }
           @media (max-width: 1080px) { .et-product-grid { grid-template-columns: repeat(2,1fr); } }
           @media (max-width: 640px) {
             .et-product-grid { grid-template-columns: 1fr; }
-            .et-spec-wrap { overflow-x: auto; }
-            table { min-width: 600px; }
             .et-product-body { padding: 18px 16px; }
             .et-p-name { font-size: 13.5px; }
             .et-p-desc { font-size: 12px; min-height: auto; }
