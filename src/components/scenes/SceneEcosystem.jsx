@@ -329,7 +329,7 @@ export default function SceneEcosystem() {
           position: relative;
           z-index: 10;
           padding: 24px 36px;
-          border: 1px solid #eef1f6;
+          border: 1px solid rgba(63,98,49,0.45);
           border-radius: 16px;
           background: #FFFFFF;
           backdrop-filter: blur(12px);
@@ -341,8 +341,8 @@ export default function SceneEcosystem() {
 
         .eco-hub:hover,
         .eco-hub.hub-active {
-          border-color: #B9320D;
-          box-shadow: 0 0 40px rgba(185,50,13,0.25), 0 0 80px rgba(185,50,13,0.1);
+          border-color: #3F6231;
+          box-shadow: 0 0 40px rgba(63,98,49,0.25), 0 0 80px rgba(63,98,49,0.1);
         }
 
         .hub-glow {
@@ -379,7 +379,7 @@ export default function SceneEcosystem() {
         .eco-child-node {
           z-index: 10;
           padding: 14px 22px;
-          border: 1px solid #eef1f6;
+          border: 1px solid rgba(63,98,49,0.45);
           border-radius: 12px;
           background: #FFFFFF;
           backdrop-filter: blur(8px);
@@ -394,9 +394,9 @@ export default function SceneEcosystem() {
 
         .eco-child-node:hover,
         .eco-child-node.child-active {
-          border-color: #B9320D;
+          border-color: #3F6231;
           background: #FFFFFF;
-          box-shadow: 0 0 30px rgba(185,50,13,0.12);
+          box-shadow: 0 0 30px rgba(63,98,49,0.18);
           transform: translate(var(--tx, 0), var(--ty, 0)) scale(1.08) !important;
         }
 
@@ -425,7 +425,7 @@ export default function SceneEcosystem() {
            INFO PANEL (RIGHT)
            â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .eco-panel {
-          border: 1px solid #eef1f6;
+          border: 1px solid rgba(63,98,49,0.45);
           border-radius: 20px;
           padding: 44px;
           background: #FFFFFF;

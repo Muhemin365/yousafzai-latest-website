@@ -506,7 +506,7 @@ export default function SceneOurStory() {
           border-radius: 20px;
           overflow: hidden;
           background: #FFFFFF;
-          border: 1px solid #eef1f6;
+          border: 1px solid rgba(63,98,49,0.45);
           backdrop-filter: blur(16px);
           -webkit-backdrop-filter: blur(16px);
           transition: border-color 0.5s, box-shadow 0.5s;

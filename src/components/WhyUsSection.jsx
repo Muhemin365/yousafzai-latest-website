@@ -186,7 +186,7 @@ export default function WhyUsSection() {
         .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
         .why-card { 
           background: linear-gradient(135deg, #FBF7F0, #FBF7F0); 
-          border: 1px solid rgba(20,20,20,0.06); 
+          border: 1px solid rgba(63,98,49,0.45); 
           border-radius: 24px; 
           padding: 30px; 
           display: flex; 

@@ -226,8 +226,9 @@ export default function SupplyChainSection() {
           font-weight: 600;
           text-transform: uppercase;
           letter-spacing: 0.05em;
-          color: #ffffff;
-          background: #3F6231;
+          color: #111111;
+          background: #FFFFFF;
+          border: 1px solid #3F6231;
           padding: 6px 16px;
           border-radius: 20px;
         }

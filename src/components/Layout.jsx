@@ -86,7 +86,7 @@ export default function Layout() {
         .back-top:hover { background: #B9320D; color: #ffffff; }
         .tag-eyebrow { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-size: 11.5px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #B9320D; margin-bottom: 16px; }
         .tag-eyebrow::before { content: ''; width: 22px; height: 1.6px; background: #B9320D; }
-        .sec-head { text-align: center; margin-left: auto; margin-right: auto; margin-bottom: 56px; background: #ffffff; border: 1px solid rgba(63,98,49,0.18); border-top: 4px solid #3F6231; border-radius: 24px; padding: 36px 40px; box-shadow: 0 20px 50px rgba(63,98,49,0.12); }
+        .sec-head { text-align: center; margin-left: auto; margin-right: auto; margin-bottom: 56px; background: #ffffff; border: 1px solid rgba(63,98,49,0.45); border-top: 4px solid #3F6231; border-radius: 24px; padding: 36px 40px; box-shadow: 0 20px 50px rgba(63,98,49,0.12); }
         .sec-head.center { margin-left: auto; margin-right: auto; text-align: center; }
         .sec-title { font-family: 'Space Grotesk',sans-serif; font-weight: 600; font-size: clamp(1.9rem,3vw,2.7rem); color: #3F6231; line-height: 1.18; letter-spacing: -0.01em; }
         .sec-sub { font-size: 15.5px; color: rgba(20,20,20,0.68); margin-top: 16px; line-height: 1.75; max-width: 720px; margin-left: auto; margin-right: auto; }

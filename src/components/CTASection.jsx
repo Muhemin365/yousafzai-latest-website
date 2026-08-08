@@ -58,8 +58,8 @@ export default function CTASection() {
         }
 
         .cta-band {
-          background: #3F6231;
-          border: 1px solid rgba(255,255,255,0.2);
+          background: #FFFFFF;
+          border: 1px solid #3F6231;
           backdrop-filter: blur(20px);
           -webkit-backdrop-filter: blur(20px);
           border-radius: 28px;
@@ -72,15 +72,15 @@ export default function CTASection() {
           gap: 32px;
           position: relative;
           overflow: hidden;
-          box-shadow: 0 30px 80px rgba(63,98,49,0.4);
+          box-shadow: 0 30px 80px rgba(63,98,49,0.25);
         }
 
         .cta-bg-grid {
           position: absolute;
           inset: 0;
           background-image:
-            linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+            linear-gradient(rgba(63,98,49,0.06) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(63,98,49,0.06) 1px, transparent 1px);
           background-size: 40px 40px;
           pointer-events: none;
         }
@@ -114,7 +114,7 @@ export default function CTASection() {
           font-family: monospace;
           font-size: 11px;
           letter-spacing: 0.2em;
-          color: #FBF7F0;
+          color: #3F6231;
           margin-bottom: 14px;
         }
 
@@ -122,7 +122,7 @@ export default function CTASection() {
           font-family: 'Space Grotesk', sans-serif;
           font-size: clamp(2rem, 3.5vw, 3rem);
           font-weight: 700;
-          background: linear-gradient(135deg, #ffffff 0%, #FBF7F0 100%);
+          background: linear-gradient(135deg, #111111 0%, #3F6231 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
@@ -134,7 +134,7 @@ export default function CTASection() {
 
         .cta-sub {
           font-size: 16px;
-          color: rgba(255,255,255,0.88);
+          color: rgba(20,20,20,0.7);
           max-width: 560px;
           margin: 0 auto;
           text-align: center;
@@ -178,16 +178,16 @@ export default function CTASection() {
           font-size: 15px;
           padding: 16px 30px;
           border-radius: 12px;
-          background: rgba(255,255,255,0.12);
-          border: 1.5px solid rgba(255,255,255,0.45);
-          color: #ffffff;
+          background: #FFFFFF;
+          border: 1.5px solid #3F6231;
+          color: #3F6231;
           text-decoration: none;
           transition: background 0.3s, border-color 0.3s, transform 0.3s;
         }
 
         .btn-cta-secondary:hover {
-          background: rgba(255,255,255,0.2);
-          border-color: #FBF7F0;
+          background: rgba(63,98,49,0.08);
+          border-color: #3F6231;
           transform: translateY(-3px);
         }
 

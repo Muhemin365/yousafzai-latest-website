@@ -397,15 +397,15 @@ export default function AboutSection() {
           position: relative;
           padding: 28px;
           border-radius: 16px;
-          background: rgba(255,255,255,0.65);
-          border: 1px solid rgba(20,20,20,0.08);
+          background: rgba(255,255,255,0.85);
+          border: 1px solid rgba(63,98,49,0.5);
           backdrop-filter: blur(8px);
           transition: all 0.4s ease;
         }
         .infra-paragraph.active {
-          background: rgba(255,255,255,0.95);
-          border-color: rgba(222,81,10,0.4);
-          box-shadow: 0 12px 36px rgba(222,81,10,0.15);
+          background: rgba(255,255,255,0.98);
+          border-color: #3F6231;
+          box-shadow: 0 12px 36px rgba(63,98,49,0.18);
           transform: translateX(8px);
         }
         .para-index {
@@ -426,7 +426,7 @@ export default function AboutSection() {
         /* Live Operations Statistics */
         .about-activation { padding-top: 120px; }
         .live-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 40px; }
-        .live-stat-box { position: relative; background: rgba(20,20,20,0.02); border: 1px solid rgba(20,20,20,0.05); padding: 40px; }
+        .live-stat-box { position: relative; background: rgba(255,255,255,0.8); border: 1px solid rgba(63,98,49,0.45); padding: 40px; }
         .stat-status-led { position: absolute; top: 20px; right: 20px; width: 6px; height: 6px; border-radius: 50%; background: #DE510A; animation: pulse 2s infinite; }
         @keyframes pulse { 0% { opacity: 0.4; } 50% { opacity: 1; box-shadow: 0 0 8px #DE510A; } 100% { opacity: 0.4; } }
         .stat-label-sequence { font-family: monospace; font-size: 13px; color: rgba(20,20,20,0.6); margin-bottom: 16px; min-height: 20px; }

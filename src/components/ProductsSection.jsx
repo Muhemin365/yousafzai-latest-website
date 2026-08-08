@@ -321,7 +321,7 @@ export default function ProductsSection() {
           border-radius: 20px;
           overflow: hidden;
           background: #FFFFFF;
-          border: 1px solid #eef1f6;
+          border: 1px solid rgba(63,98,49,0.45);
           backdrop-filter: blur(12px);
           -webkit-backdrop-filter: blur(12px);
           transition: border-color 0.5s, box-shadow 0.5s;
@@ -441,7 +441,7 @@ export default function ProductsSection() {
           padding: 5px 12px;
           border-radius: 6px;
           background: #FFFFFF;
-          border: 1px solid #eef1f6;
+          border: 1px solid rgba(63,98,49,0.45);
           color: rgba(20,20,20,0.6);
           letter-spacing: 0.04em;
         }
@@ -484,7 +484,7 @@ export default function ProductsSection() {
         .specs-table-wrap {
           border-radius: 16px;
           overflow: hidden;
-          border: 1px solid rgba(20,20,20,0.06);
+          border: 1px solid rgba(63,98,49,0.45);
           backdrop-filter: blur(12px);
         }
 

@@ -264,7 +264,7 @@ export default function QualitySection() {
            â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .trace-console {
           background: #FFFFFF;
-          border: 1px solid #eef1f6;
+          border: 1px solid rgba(63,98,49,0.45);
           border-radius: 24px;
           padding: 36px;
           backdrop-filter: blur(20px);
@@ -395,7 +395,7 @@ export default function QualitySection() {
         .q-cert-card {
           position: relative;
           background: #FFFFFF;
-          border: 1px solid #eef1f6;
+          border: 1px solid rgba(63,98,49,0.45);
           border-radius: 20px;
           padding: 28px 24px;
           display: flex;
@@ -474,7 +474,7 @@ export default function QualitySection() {
 
         .q-test-card {
           background: #FFFFFF;
-          border: 1px solid #eef1f6;
+          border: 1px solid rgba(63,98,49,0.45);
           border-radius: 24px;
           padding: 36px 28px;
           display: flex;

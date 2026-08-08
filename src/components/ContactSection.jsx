@@ -465,7 +465,7 @@ export default function ContactSection() {
           padding: 22px;
           border-radius: 16px;
           background: #FFFFFF;
-          border: 1px solid #eef1f6;
+          border: 1px solid rgba(63,98,49,0.45);
           backdrop-filter: blur(12px);
           -webkit-backdrop-filter: blur(12px);
           transition: border-color 0.4s, transform 0.4s, box-shadow 0.4s;
@@ -524,7 +524,7 @@ export default function ContactSection() {
           border-radius: 20px;
           padding: 30px;
           background: #FFFFFF;
-          border: 1px solid #eef1f6;
+          border: 1px solid rgba(63,98,49,0.45);
           backdrop-filter: blur(16px);
           box-shadow: 0 16px 40px rgba(63,98,49,0.1);
           position: relative;
@@ -587,7 +587,7 @@ export default function ContactSection() {
           border-radius: 24px;
           padding: 44px;
           background: #FFFFFF;
-          border: 1px solid #eef1f6;
+          border: 1px solid rgba(63,98,49,0.45);
           backdrop-filter: blur(20px);
           -webkit-backdrop-filter: blur(20px);
           box-shadow: 0 30px 60px rgba(63,98,49,0.14);

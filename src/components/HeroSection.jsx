@@ -387,16 +387,16 @@ export default function HeroSection() {
 
         /* Floating Cards */
         .hv-card {
-          position: absolute; background: rgba(63,98,49,0.92);
-          border: 1px solid rgba(63,98,49,0.6); backdrop-filter: blur(14px);
+          position: absolute; background: #FFFFFF;
+          border: 1px solid #3F6231; backdrop-filter: blur(14px);
           -webkit-backdrop-filter: blur(14px);
-          border-radius: 18px; padding: 18px 20px; box-shadow: 0 20px 50px rgba(63,98,49,0.35);
+          border-radius: 18px; padding: 18px 20px; box-shadow: 0 20px 50px rgba(63,98,49,0.18);
           transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .hv-card:hover { transform: translateY(-8px) scale(1.02) !important; box-shadow: 0 24px 60px rgba(63,98,49,0.5); border-color: rgba(63,98,49,0.9); }
-        .hv-card:hover .hv-num { text-shadow: 0 0 10px rgba(255,255,255,0.3); }
-        .hv-card .hv-num { font-family: 'Space Grotesk',sans-serif; font-size: 26px; font-weight: 700; color: #ffffff; line-height: 1; transition: text-shadow 0.3s ease; }
-        .hv-card .hv-lbl { font-size: 11px; color: rgba(255,255,255,0.9); margin-top: 4px; letter-spacing: .02em; }
+        .hv-card:hover { transform: translateY(-8px) scale(1.02) !important; box-shadow: 0 24px 60px rgba(63,98,49,0.25); border-color: #3F6231; }
+        .hv-card:hover .hv-num { text-shadow: 0 0 10px rgba(63,98,49,0.25); }
+        .hv-card .hv-num { font-family: 'Space Grotesk',sans-serif; font-size: 26px; font-weight: 700; color: #3F6231; line-height: 1; transition: text-shadow 0.3s ease; }
+        .hv-card .hv-lbl { font-size: 11px; color: rgba(20,20,20,0.7); margin-top: 4px; letter-spacing: .02em; }
         
         .hv-card.c1 { top: 6%; left: 2%; animation: bobCard 6s ease-in-out infinite 0s; }
         .hv-card.c2 { top: 40%; right: 0%; animation: bobCard 6s ease-in-out infinite 1.4s; }
@@ -409,12 +409,12 @@ export default function HeroSection() {
           .hv-card, .hv-icon-grid, .hero-glow, .particle, .shine-element, .eyebrow .dot { animation: none !important; }
         }
 
-        .stat-strip { background: linear-gradient(135deg,#3F6231,#55813F); border-top: 1px solid rgba(63,98,49,0.2); position: relative; z-index: 3; margin-top: -1px; }
+        .stat-strip { background: #FFFFFF; border-top: 1px solid #3F6231; border-bottom: 1px solid #3F6231; position: relative; z-index: 3; margin-top: -1px; }
         .stat-strip .container { display: grid; grid-template-columns: repeat(4,1fr); padding: 46px 32px; }
-        .stat-strip .stat { text-align: center; border-right: 1px solid rgba(255,255,255,0.25); padding: 0 18px; }
+        .stat-strip .stat { text-align: center; border-right: 1px solid rgba(63,98,49,0.25); padding: 0 18px; }
         .stat-strip .stat:last-child { border-right: none; }
-        .stat-num { font-family: 'Space Grotesk',sans-serif; font-size: clamp(1.8rem,2.6vw,2.6rem); font-weight: 700; color: #ffffff; display: flex; justify-content: center; align-items: baseline; gap: 3px; }
-        .stat-cap { font-size: 12.5px; color: rgba(255,255,255,0.9); margin-top: 6px; }
+        .stat-num { font-family: 'Space Grotesk',sans-serif; font-size: clamp(1.8rem,2.6vw,2.6rem); font-weight: 700; color: #3F6231; display: flex; justify-content: center; align-items: baseline; gap: 3px; }
+        .stat-cap { font-size: 12.5px; color: rgba(20,20,20,0.7); margin-top: 6px; }
 
         .hero-enter { animation: heroIn 1s cubic-bezier(.22,1,.36,1) both; }
         @keyframes heroIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }

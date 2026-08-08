@@ -294,7 +294,7 @@ export default function ProcessSection() {
           border-radius: 20px;
           padding: 36px 30px 28px;
           background: #FFFFFF;
-          border: 1px solid #eef1f6;
+          border: 1px solid rgba(63,98,49,0.45);
           backdrop-filter: blur(16px);
           -webkit-backdrop-filter: blur(16px);
           transition: border-color 0.5s, box-shadow 0.5s;
@@ -305,7 +305,7 @@ export default function ProcessSection() {
         }
 
         .proc-card.card-hover {
-          border-color: rgba(222,81,10,0.35);
+          border-color: rgba(63,98,49,0.6);
           box-shadow:
             0 30px 70px rgba(0,0,0,0.12),
             0 0 40px rgba(222,81,10,0.08);

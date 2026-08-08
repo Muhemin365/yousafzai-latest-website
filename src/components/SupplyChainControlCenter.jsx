@@ -475,8 +475,8 @@ export default function SupplyChainControlCenter() {
 
         .sccc-card {
           position: relative;
-          background: #3F6231;
-          border: 1px solid rgba(255,255,255,0.18);
+          background: #FFFFFF;
+          border: 1px solid #3F6231;
           border-radius: 20px;
           padding: 28px 18px;
           display: flex;
@@ -513,10 +513,10 @@ export default function SupplyChainControlCenter() {
           font-family: monospace;
           font-size: 9px;
           font-weight: 700;
-          color: #FBF7F0;
+          color: #3F6231;
           letter-spacing: 0.12em;
-          background: rgba(255,255,255,0.1);
-          border: 1px solid rgba(255,255,255,0.25);
+          background: rgba(63,98,49,0.08);
+          border: 1px solid rgba(63,98,49,0.35);
           padding: 4px 10px;
           border-radius: 6px;
           display: flex;
@@ -545,22 +545,22 @@ export default function SupplyChainControlCenter() {
         .sccc-card-icon {
           width: 56px;
           height: 56px;
-          background: rgba(255,255,255,0.12);
-          border: 1px solid rgba(255,255,255,0.3);
+          background: rgba(63,98,49,0.08);
+          border: 1px solid rgba(63,98,49,0.3);
           border-radius: 14px;
           display: flex;
           align-items: center;
           justify-content: center;
-          color: #FBF7F0;
+          color: #3F6231;
           margin-bottom: 20px;
           z-index: 2;
           transition: all 0.4s;
         }
 
         .sccc-card:hover .sccc-card-icon {
-          background: #FBF7F0;
-          color: #3F6231;
-          box-shadow: 0 0 20px rgba(255,255,255,0.4);
+          background: #3F6231;
+          color: #FBF7F0;
+          box-shadow: 0 0 20px rgba(63,98,49,0.35);
         }
 
         .sccc-kpi {
@@ -568,7 +568,7 @@ export default function SupplyChainControlCenter() {
           font-family: 'Space Grotesk', sans-serif;
           font-size: 15px;
           font-weight: 700;
-          color: #FBF7F0;
+          color: #3F6231;
           margin-bottom: 12px;
           min-height: 24px;
           display: flex;
@@ -583,7 +583,7 @@ export default function SupplyChainControlCenter() {
           font-family: 'Space Grotesk', sans-serif;
           font-size: 15px;
           font-weight: 700;
-          color: #ffffff;
+          color: #111111;
           margin: 0 0 8px;
           position: relative;
           z-index: 1;
@@ -591,7 +591,7 @@ export default function SupplyChainControlCenter() {
 
         .sccc-body {
           font-size: 12.5px;
-          color: rgba(255,255,255,0.85);
+          color: rgba(20,20,20,0.68);
           line-height: 1.6;
           margin: 0;
           position: relative;
@@ -648,14 +648,14 @@ export default function SupplyChainControlCenter() {
           padding: 32px 20px;
           border-radius: 20px;
           background: rgba(20,20,20,0.02);
-          border: 1px solid rgba(20,20,20,0.06);
+          border: 1px solid rgba(63,98,49,0.45);
           backdrop-filter: blur(12px);
           transition: transform 0.4s, border-color 0.4s;
         }
 
         .sb-card:hover {
           transform: translateY(-6px);
-          border-color: rgba(222,81,10,0.3);
+          border-color: #3F6231;
         }
 
         .sb-num {
@@ -699,8 +699,8 @@ export default function SupplyChainControlCenter() {
 
         .industry-card {
           position: relative;
-          background: #3F6231;
-          border: 1px solid rgba(255,255,255,0.18);
+          background: #FFFFFF;
+          border: 1px solid #3F6231;
           border-radius: 20px;
           padding: 36px 20px;
           text-align: center;
@@ -710,9 +710,9 @@ export default function SupplyChainControlCenter() {
         }
 
         .industry-card:hover {
-          border-color: rgba(255,255,255,0.4);
+          border-color: #3F6231;
           transform: translateY(-8px);
-          box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+          box-shadow: 0 20px 50px rgba(63,98,49,0.18);
         }
 
         .ind-icon {
@@ -720,19 +720,19 @@ export default function SupplyChainControlCenter() {
           height: 56px;
           margin: 0 auto 20px;
           border-radius: 14px;
-          background: rgba(255,255,255,0.12);
-          border: 1px solid rgba(255,255,255,0.3);
+          background: rgba(63,98,49,0.08);
+          border: 1px solid rgba(63,98,49,0.3);
           display: flex;
           align-items: center;
           justify-content: center;
-          color: #FBF7F0;
+          color: #3F6231;
           transition: all 0.4s;
         }
 
         .industry-card:hover .ind-icon {
-          background: #FBF7F0;
-          color: #3F6231;
-          box-shadow: 0 0 20px rgba(255,255,255,0.4);
+          background: #3F6231;
+          color: #FBF7F0;
+          box-shadow: 0 0 20px rgba(63,98,49,0.35);
           transform: translateY(-4px);
         }
 
@@ -740,12 +740,12 @@ export default function SupplyChainControlCenter() {
           font-family: 'Space Grotesk', sans-serif;
           font-size: 14.5px;
           font-weight: 600;
-          color: rgba(255,255,255,0.95);
+          color: #111111;
           transition: color 0.3s;
         }
 
         .industry-card:hover .ind-name {
-          color: #ffffff;
+          color: #3F6231;
         }
 
         /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•

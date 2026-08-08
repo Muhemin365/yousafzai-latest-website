@@ -213,8 +213,8 @@ export default function FAQSection() {
 
         .faq-card {
           border-radius: 18px;
-          background: #3F6231;
-          border: 1px solid rgba(255,255,255,0.18);
+          background: #FFFFFF;
+          border: 1px solid #3F6231;
           backdrop-filter: blur(16px);
           -webkit-backdrop-filter: blur(16px);
           transition: border-color 0.4s, background 0.4s, box-shadow 0.4s;
@@ -222,14 +222,14 @@ export default function FAQSection() {
         }
 
         .faq-card:hover {
-          border-color: rgba(255,255,255,0.35);
-          background: rgba(63,98,49,0.9);
+          border-color: #3F6231;
+          background: #FFFFFF;
         }
 
         .faq-card.is-open {
-          border-color: rgba(255,255,255,0.45);
-          background: rgba(63,98,49,0.95);
-          box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+          border-color: #3F6231;
+          background: #FFFFFF;
+          box-shadow: 0 20px 50px rgba(63,98,49,0.15);
         }
 
         .faq-question {
@@ -249,48 +249,48 @@ export default function FAQSection() {
         }
 
         .faq-q-icon {
-          color: rgba(255,255,255,0.6);
+          color: #3F6231;
           flex-shrink: 0;
           transition: color 0.3s;
         }
 
         .faq-card.is-open .faq-q-icon,
         .faq-card:hover .faq-q-icon {
-          color: #FBF7F0;
+          color: #3F6231;
         }
 
         .faq-q-text {
           font-family: 'Space Grotesk', sans-serif;
           font-size: 16.5px;
           font-weight: 600;
-          color: rgba(255,255,255,0.95);
+          color: #111111;
           line-height: 1.4;
           transition: color 0.3s;
         }
 
         .faq-card.is-open .faq-q-text,
         .faq-card:hover .faq-q-text {
-          color: #ffffff;
+          color: #111111;
         }
 
         .faq-toggle-btn {
           width: 34px;
           height: 34px;
           border-radius: 10px;
-          background: rgba(255,255,255,0.1);
-          border: 1px solid rgba(255,255,255,0.3);
+          background: rgba(63,98,49,0.08);
+          border: 1px solid rgba(63,98,49,0.3);
           display: flex;
           align-items: center;
           justify-content: center;
-          color: #FBF7F0;
+          color: #3F6231;
           flex-shrink: 0;
           transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .faq-card.is-open .faq-toggle-btn {
-          background: #FBF7F0;
-          color: #3F6231;
-          box-shadow: 0 0 16px rgba(255,255,255,0.4);
+          background: #3F6231;
+          color: #ffffff;
+          box-shadow: 0 0 16px rgba(63,98,49,0.35);
           transform: rotate(180deg);
         }
 
@@ -303,9 +303,9 @@ export default function FAQSection() {
         .faq-answer-content {
           padding: 0 28px 24px 60px;
           font-size: 14.5px;
-          color: rgba(255,255,255,0.85);
+          color: rgba(20,20,20,0.7);
           line-height: 1.7;
-          border-top: 1px solid rgba(255,255,255,0.15);
+          border-top: 1px solid rgba(63,98,49,0.2);
           margin-top: 4px;
           padding-top: 18px;
         }
