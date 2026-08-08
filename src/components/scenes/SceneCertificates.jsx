@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { getDocument, GlobalWorkerOptions } from 'pdfjs-dist/legacy/build/pdf.mjs';
 import pdfWorkerUrl from 'pdfjs-dist/legacy/build/pdf.worker.min.mjs?url';
-import { Award, X, Download } from 'lucide-react';
+import { ShieldCheck, Leaf, MoonStar, Building2, X, Download, Award } from 'lucide-react';
 
 GlobalWorkerOptions.workerSrc = pdfWorkerUrl;
 
@@ -10,68 +10,56 @@ const CERTS = [
     file: 'ACI HACCP Certificate -YOUSAFZAI AGRI FOODS PVT LTD-2026-2029.pdf',
     title: 'HACCP Certification',
     sub: 'ACI HACCP – Food Safety Management · 2026–2029',
+    icon: ShieldCheck,
+    seal: '#3F6231',
   },
   {
     file: 'CamScanner 04-30-2026 14.34.pdf',
     title: 'Food Safety Quality System',
     sub: 'Quality Management System Certification · 2026',
+    icon: Leaf,
+    seal: '#DE510A',
   },
   {
     file: 'IHC Halal Certificate-YOUSAFZAI AGRI FOODS PVT LTD-2026-2029.pdf',
     title: 'Halal Certification',
     sub: 'IHC Halal Certified · 2026–2029',
+    icon: MoonStar,
+    seal: '#3F6231',
   },
   {
     file: 'Yousafzai Eggs Traders Profile.pdf',
     title: 'Company Profile',
     sub: 'Yousafzai Eggs Traders – Institutional Profile',
+    icon: Building2,
+    seal: '#3F6231',
   },
 ];
 
+function CertSeal({ icon: Ic, seal }) {
+  return (
+    <div className="cert-seal-wrap">
+      <svg className="cert-seal" viewBox="0 0 120 120" aria-hidden="true">
+        <circle className="seal-ring" cx="60" cy="60" r="55" fill="#ffffff" />
+        <circle className="seal-dash" cx="60" cy="60" r="49" fill="none" />
+        <circle className="seal-core" cx="60" cy="60" r="33" fill={seal} />
+        <circle className="seal-spark" cx="60" cy="60" r="33" fill="none" />
+        <path className="seal-notch" d="M 60 0.5 L 60 7" />
+      </svg>
+      <Ic size={28} strokeWidth={2.4} className="cert-seal-ic" />
+    </div>
+  );
+}
+
 export default function SceneCertificates() {
   const [active, setActive] = useState(null);
-  const [thumbs, setThumbs] = useState({});
-  const [errored, setErrored] = useState({});
   const [activePages, setActivePages] = useState([]);
   const [pageLoading, setPageLoading] = useState(false);
   const [pageError, setPageError] = useState(false);
   const certSectionRef = useRef(null);
-  const served = useRef(false);
+  const renderSeq = useRef(0);
 
-  const openDoc = (idx) => {
-    setActive(idx);
-  };
-
-  useEffect(() => {
-    if (served.current) return;
-    served.current = true;
-
-    let cancelled = false;
-    CERTS.forEach((c, idx) => {
-      const url = `${import.meta.env.BASE_URL}certificates/${encodeURIComponent(c.file)}`;
-      getDocument(url).promise
-        .then((pdf) => pdf.getPage(1))
-        .then((page) => {
-          const vp = page.getViewport({ scale: 1 });
-          const scale = Math.min(2, 320 / vp.width);
-          const outViewport = page.getViewport({ scale });
-          const canvas = document.createElement('canvas');
-          canvas.width = outViewport.width;
-          canvas.height = outViewport.height;
-          return page.render({ canvasContext: canvas.getContext('2d'), viewport: outViewport }).promise.then(() => canvas.toDataURL('image/jpeg', 0.82));
-        })
-        .then((dataUrl) => {
-          if (cancelled) return;
-          setThumbs((prev) => ({ ...prev, [idx]: dataUrl }));
-        })
-        .catch(() => {
-          if (cancelled) return;
-          setErrored((prev) => ({ ...prev, [idx]: true }));
-        });
-    });
-
-    return () => { cancelled = true; };
-  }, []);
+  const openDoc = (idx) => setActive(idx);
 
   useEffect(() => {
     const section = certSectionRef.current;
@@ -87,31 +75,47 @@ export default function SceneCertificates() {
   useEffect(() => {
     if (active === null) { setActivePages([]); setPageError(false); setPageLoading(false); return; }
 
+    const seq = ++renderSeq.current;
     let cancelled = false;
     setPageLoading(true);
     setPageError(false);
     setActivePages([]);
 
     const url = `${import.meta.env.BASE_URL}certificates/${encodeURIComponent(CERTS[active].file)}`;
+    const dpr = Math.min(2, Math.max(1, window.devicePixelRatio || 1));
+
     getDocument(url).promise
-      .then((pdf) => Promise.all(Array.from({ length: pdf.numPages }, (_, i) => pdf.getPage(i + 1))))
-      .then(async (pages) => {
-        const out = [];
-        for (const page of pages) {
-          const vp = page.getViewport({ scale: 1 });
-          const scale = Math.min(2.5, 980 / vp.width);
-          const outViewport = page.getViewport({ scale });
-          const canvas = document.createElement('canvas');
-          canvas.width = outViewport.width;
-          canvas.height = outViewport.height;
-          await page.render({ canvasContext: canvas.getContext('2d'), viewport: outViewport }).promise;
-          out.push(canvas.toDataURL('image/jpeg', 0.9));
-        }
-        return out;
+      .then(async (pdf) => {
+        const page = await pdf.getPage(1);
+        return { pdf, page };
       })
-      .then((pages) => { if (!cancelled) setActivePages(pages); })
-      .catch(() => { if (!cancelled) setPageError(true); })
-      .finally(() => { if (!cancelled) setPageLoading(false); });
+      .then(async ({ pdf, page }) => {
+        const vp = page.getViewport({ scale: 1 });
+        const scale = Math.min(3, (1100 * dpr) / vp.width);
+        const outViewport = page.getViewport({ scale });
+        const canvas = document.createElement('canvas');
+        canvas.width = outViewport.width;
+        canvas.height = outViewport.height;
+        await page.render({ canvasContext: canvas.getContext('2d'), viewport: outViewport }).promise;
+        if (cancelled || seq !== renderSeq.current) return;
+        setActivePages([canvas.toDataURL('image/jpeg', 0.92)]);
+        setPageLoading(false);
+        const rest = Array.from({ length: pdf.numPages - 1 }, (_, i) => i + 2);
+        for (const n of rest) {
+          if (cancelled || seq !== renderSeq.current) break;
+          try {
+            const pg = await pdf.getPage(n);
+            const pgVp = pg.getViewport({ scale });
+            const c = document.createElement('canvas');
+            c.width = pgVp.width;
+            c.height = pgVp.height;
+            await pg.render({ canvasContext: c.getContext('2d'), viewport: pgVp }).promise;
+            if (cancelled || seq !== renderSeq.current) return;
+            setActivePages((prev) => [...prev, c.toDataURL('image/jpeg', 0.92)]);
+          } catch { /* keep whatever rendered */ }
+        }
+      })
+      .catch(() => { if (!cancelled && seq === renderSeq.current) setPageError(true); });
 
     return () => { cancelled = true; };
   }, [active]);
@@ -132,7 +136,7 @@ export default function SceneCertificates() {
           <span className="tag-eyebrow">CERTIFICATIONS // ACCREDITATIONS</span>
           <h2 className="sec-title">Our Certificates &amp; Accreditations</h2>
           <p className="sec-sub">
-            Verified documents that back our quality promise — hover or click any badge below to view the full certificate.
+            Verified documents that back our quality promise — click any badge below to view the full certificate.
           </p>
         </div>
 
@@ -140,7 +144,7 @@ export default function SceneCertificates() {
           <div className="cert-hub">
             <span className="cert-hub-icon"><Award size={30} /></span>
             <strong>Certified</strong>
-            <small>hover / click a badge</small>
+            <small>click a badge</small>
           </div>
 
           <div className="cert-orbit">
@@ -149,22 +153,13 @@ export default function SceneCertificates() {
                 key={c.file}
                 className={`cert-token tok-${i}`}
                 onClick={() => openDoc(i)}
-                onMouseEnter={() => openDoc(i)}
                 role="button"
                 tabIndex={0}
                 aria-label={`View ${c.title}`}
                 onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openDoc(i); } }}
               >
                 <div className="tok-inner">
-                  <div className="tok-thumb">
-                    {thumbs[i] ? (
-                      <img src={thumbs[i]} alt={c.title} />
-                    ) : errored[i] ? (
-                      <Award size={26} />
-                    ) : (
-                      <span className="tok-loader" />
-                    )}
-                  </div>
+                  <CertSeal icon={c.icon} seal={c.seal} />
                   <span className="tok-name">{c.title}</span>
                 </div>
               </div>
@@ -235,15 +230,16 @@ export default function SceneCertificates() {
           height: 168px;
           transform: translate(-50%, -50%);
           z-index: 3;
-          background: #3F6231;
-          color: #ffffff;
+          background: #ffffff;
+          color: #111111;
+          border: 3px solid #3F6231;
           border-radius: 50%;
           display: flex;
           flex-direction: column;
           align-items: center;
           justify-content: center;
           gap: 4px;
-          box-shadow: 0 24px 60px rgba(63,98,49,0.4);
+          box-shadow: 0 24px 60px rgba(63,98,49,0.22);
           text-align: center;
           padding: 20px;
         }
@@ -252,23 +248,25 @@ export default function SceneCertificates() {
           width: 56px;
           height: 56px;
           border-radius: 50%;
-          background: rgba(255,255,255,0.14);
-          border: 1.5px solid rgba(255,255,255,0.4);
+          background: #3F6231;
+          color: #ffffff;
           display: flex;
           align-items: center;
           justify-content: center;
           margin-bottom: 6px;
+          box-shadow: 0 8px 20px rgba(63,98,49,0.35);
         }
 
         .cert-hub strong {
           font-family: 'Space Grotesk', sans-serif;
           font-size: 15px;
           letter-spacing: 0.02em;
+          color: #111111;
         }
 
         .cert-hub small {
           font-size: 10px;
-          opacity: 0.85;
+          color: #6b7280;
           font-weight: 600;
           letter-spacing: 0.04em;
         }
@@ -278,6 +276,19 @@ export default function SceneCertificates() {
           position: absolute;
           inset: 0;
           animation: certSpin 26s linear infinite;
+        }
+
+        .cert-orbit::before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: var(--ring);
+          height: var(--ring);
+          transform: translate(-50%, -50%);
+          border: 2px dashed rgba(63,98,49,0.4);
+          border-radius: 50%;
+          box-sizing: border-box;
         }
 
         .cert-token {
@@ -311,32 +322,56 @@ export default function SceneCertificates() {
         .cert-token.tok-2 .tok-inner { animation-delay: -13s; }
         .cert-token.tok-3 .tok-inner { animation-delay: -19.5s; }
 
-        .tok-thumb {
+        .cert-seal-wrap {
           width: var(--cert-size);
           height: var(--cert-size);
+          position: relative;
           border-radius: 50%;
-          overflow: hidden;
-          border: 3px solid #3F6231;
-          box-shadow: 0 12px 30px rgba(63,98,49,0.3);
-          background: #fff;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: #DE510A;
-          transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+          box-shadow: 0 12px 30px rgba(63,98,49,0.25);
+          transition: transform 0.3s, box-shadow 0.3s;
+          background: #ffffff;
         }
 
-        .cert-token:hover .tok-thumb {
-          border-color: #DE510A;
-          transform: scale(1.06);
-          box-shadow: 0 18px 46px rgba(222,81,10,0.35);
-        }
-
-        .tok-thumb img {
+        .cert-seal {
           width: 100%;
           height: 100%;
-          object-fit: cover;
           display: block;
+        }
+
+        .seal-ring {
+          stroke: #3F6231;
+          stroke-width: 2.5;
+        }
+
+        .seal-dash {
+          stroke: rgba(63,98,49,0.4);
+          stroke-width: 1.2;
+          stroke-dasharray: 4 7;
+        }
+
+        .seal-spark {
+          stroke: #F8B44A;
+          stroke-width: 2;
+          stroke-dasharray: 12 7;
+        }
+
+        .seal-notch {
+          stroke: rgba(63,98,49,0.6);
+          stroke-width: 2;
+        }
+
+        .cert-seal-ic {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          color: #ffffff;
+          filter: drop-shadow(0 2px 6px rgba(0,0,0,0.28));
+        }
+
+        .cert-token:hover .cert-seal-wrap {
+          transform: scale(1.07) rotate(-4deg);
+          box-shadow: 0 20px 48px rgba(222,81,10,0.35);
         }
 
         .tok-loader {
