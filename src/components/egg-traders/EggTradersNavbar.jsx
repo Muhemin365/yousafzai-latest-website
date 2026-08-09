@@ -30,9 +30,6 @@ export default function EggTradersNavbar() {
           {/* Logo */}
           <Link to="/egg-traders" className="et-nav-brand" onClick={() => setMobileOpen(false)}>
             <img src={logo} alt="Egg Traders" className="et-nav-logo" />
-            <div className="et-brand-tag">
-              <span className="et-tag-title">Egg Traders</span>
-            </div>
           </Link>
 
           {/* Nav Links */}
