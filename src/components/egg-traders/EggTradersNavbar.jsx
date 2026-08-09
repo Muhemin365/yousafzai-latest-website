@@ -32,7 +32,6 @@ export default function EggTradersNavbar() {
             <img src={logo} alt="Egg Traders" className="et-nav-logo" />
             <div className="et-brand-tag">
               <span className="et-tag-title">Egg Traders</span>
-              <span className="et-tag-sub">POULTRY MARKETPLACE</span>
             </div>
           </Link>
 
