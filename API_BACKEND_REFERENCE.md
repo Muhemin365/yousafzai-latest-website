@@ -394,10 +394,10 @@ Save a B2B quote / lead. **No auth required.**
   "productType": "Commercial Grade A White",
   "weeklyVolume": "Under 50",
   "deliveryLocation": "String",
-  "notes": "String",
-  "source": "YOURSITE_DOT" // NOT sent by main site form
+  "notes": "String"
 }
 ```
+*No `source` field is sent by the main site form.*
 
 **Egg Traders form** (from `EggTradersContact.jsx`) — sent with `source: 'egg-traders'`
 ```json
