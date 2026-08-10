@@ -39,40 +39,6 @@ export default function Layout() {
     return () => document.removeEventListener('click', handleClick);
   }, []);
 
-  if (loading) {
-    return (
-      <div id="loader">
-        <div className="loader-mark">
-          <div className="loader-ring" />
-          YOUSAFZAI
-        </div>
-        <style>{`
-          #loader { position: fixed; inset: 0; background: #FBF7F0; z-index: 9999; display: flex; align-items: center; justify-content: center; }
-          .loader-mark { font-family: 'Space Grotesk',sans-serif; color: #111111; font-size: 15px; letter-spacing: .18em; display: flex; flex-direction: column; align-items: center; gap: 18px; }
-          .loader-ring { width: 46px; height: 46px; border-radius: 50%; border: 2px solid rgba(20,20,20,.18); border-top-color: #B9320D; animation: loaderSpin 0.9s linear infinite; }
-          @keyframes loaderSpin { to { transform: rotate(360deg); } }
-        `}</style>
-      </div>
-    );
-  }
-
-  if (loading) {
-    return (
-      <div id="loader">
-        <div className="loader-mark">
-          <div className="loader-ring" />
-          YOUSAFZAI
-        </div>
-        <style>{`
-          #loader { position: fixed; inset: 0; background: #FBF7F0; z-index: 9999; display: flex; align-items: center; justify-content: center; }
-          .loader-mark { font-family: 'Space Grotesk',sans-serif; color: #111111; font-size: 15px; letter-spacing: .18em; display: flex; flex-direction: column; align-items: center; gap: 18px; }
-          .loader-ring { width: 46px; height: 46px; border-radius: 50%; border: 2px solid rgba(20,20,20,.18); border-top-color: #B9320D; animation: loaderSpin 0.9s linear infinite; }
-          @keyframes loaderSpin { to { transform: rotate(360deg); } }
-        `}</style>
-      </div>
-    );
-  }
-
   return (
     <>
       <Navbar />
