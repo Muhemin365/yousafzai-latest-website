@@ -463,6 +463,10 @@ store publicly reachable (e.g. Vercel Blob, S3 + CDN, or a static `/uploads` dir
 
 ## 7. CORS
 
+The backend MUST handle the `OPTIONS` preflight correctly. Any `OPTIONS /api/*` request
+must return `204` with the headers below (the live backend currently returns `500` on
+`OPTIONS`, which breaks the admin login in the browser).
+
 The deployed frontend origins (all may be needed):
 
 ```
@@ -471,7 +475,19 @@ https://www.yousafzai-latest-website.vercel.app   (if set)
 http://localhost:5173                              (dev)
 ```
 
+Respond to `OPTIONS` with:
+```
+Access-Control-Allow-Origin: *        (or the specific origin)
+Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+Access-Control-Allow-Headers: Content-Type, Authorization
+Access-Control-Max-Age: 86400
+```
+
 Accept methods: `GET, POST, PUT, DELETE, OPTIONS`. Allow header `Authorization`.
+
+> Note: the frontend now proxies `/api/*` through its own Vercel domain via
+> `vercel.json` rewrites, so same-origin requests bypass CORS. Keep the backend's
+> CORS config correct anyway for any direct calls.
 
 ---
 

@@ -1,10 +1,10 @@
 import { useAuthStore } from '../store/useAuthStore';
 
 /* Backend API client
-   Change API_BASE to your deployed backend URL.
-   Override via VITE_API_BASE env variable. */
+   Empty default = same-origin requests proxied via vercel.json rewrites.
+   Put your real backend URL in VITE_API_BASE to call it directly. */
 
-const API_BASE = import.meta.env.VITE_API_BASE || 'https://shayan-ali832-yafbackend.vercel.app';
+const API_BASE = import.meta.env.VITE_API_BASE || '';
 
 function getToken() {
   try {
