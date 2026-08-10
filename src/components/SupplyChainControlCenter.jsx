@@ -1,11 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
 import * as LucideIcons from 'lucide-react';
 import { useCMSStore } from '../store/useCMSStore';
-
-gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 
 function getIcon(iconName, props = {}) {
   const IconComponent = LucideIcons[iconName];
@@ -47,7 +43,6 @@ export default function SupplyChainControlCenter() {
   const industries = useCMSStore((s) => s.industries);
   const containerRef = useRef(null);
   const [pathData, setPathData] = useState("");
-  const [pathLength, setPathLength] = useState(0);
   const pathRef = useRef(null);
   const [activeCard, setActiveCard] = useState(null);
 
@@ -92,80 +87,8 @@ export default function SupplyChainControlCenter() {
     };
   }, [whyUs.reasons]);
 
-  useEffect(() => {
-    if (pathRef.current && pathData) {
-      setPathLength(pathRef.current.getTotalLength());
-    }
-  }, [pathData]);
-
-  useEffect(() => {
-    if (!pathLength) return;
-    
-    let ctx = gsap.context(() => {
-      // Header Animation
-      gsap.fromTo('.sccc-head-animate', 
-        { y: 30, autoAlpha: 0 },
-        { y: 0, autoAlpha: 1, duration: 0.8, ease: "power3.out", scrollTrigger: { trigger: '.sccc-section', start: 'top 80%', once: true } }
-      );
-      
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: '.sccc-track',
-          start: 'top 70%',
-          end: 'bottom 40%',
-          scrub: 0.8,
-        }
-      });
-
-      tl.fromTo(pathRef.current, 
-        { strokeDashoffset: pathLength },
-        { strokeDashoffset: 0, ease: "none", duration: 10 },
-        0
-      );
-      
-      whyUs.reasons.forEach((reason, i) => {
-        const cardStartTime = i * (10 / (whyUs.reasons.length - 1));
-        
-        tl.to(`#sccc-card-${i}`, {
-          borderColor: 'rgba(255,255,255,0.3)',
-          boxShadow: '0 20px 50px rgba(0,0,0,0.4), 0 0 30px rgba(63,98,49,0.2)',
-          background: 'rgba(63,98,49,0.75)',
-          duration: 0.5,
-          ease: "power2.out"
-        }, cardStartTime);
-        
-        tl.to(`#sccc-card-${i} .sccc-status-badge`, { autoAlpha: 1, duration: 0.3 }, cardStartTime);
-        tl.to(`#sccc-card-${i} .sccc-kpi`, { autoAlpha: 1, duration: 0.3 }, cardStartTime);
-        tl.to(`#scc-ind-${i}`, { color: '#DE510A', scale: 1.2, duration: 0.3 }, cardStartTime);
-      });
-      
-      tl.to('.sccc-truck-overlay', {
-        autoAlpha: 1,
-        motionPath: {
-          path: pathRef.current,
-          align: pathRef.current,
-          alignOrigin: [0.5, 0.5],
-          autoRotate: true
-        },
-        duration: 2,
-        ease: "power1.inOut"
-      }, 9);
-      
-      tl.to('.sccc-celebration', { autoAlpha: 1, y: 0, duration: 1 }, 11);
-      tl.to('.sccc-path-main', { stroke: '#FFD700', filter: 'drop-shadow(0 0 8px rgba(255,215,0,0.8))', duration: 1 }, 11);
-
-      // Stats section
-      gsap.fromTo('.stat-head-animate', { y: 30, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.8, ease: "power3.out", scrollTrigger: { trigger: '#stats', start: 'top 80%', once: true } });
-      gsap.fromTo('.sb-card', { y: 40, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.7, stagger: 0.12, ease: "power3.out", scrollTrigger: { trigger: '.stats-band-grid', start: 'top 85%', once: true } });
-
-      // Industries section
-      gsap.fromTo('.ind-head-animate', { y: 30, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.8, ease: "power3.out", scrollTrigger: { trigger: '#industries', start: 'top 80%', once: true } });
-      gsap.fromTo('.ind-card-animate', { y: 40, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.7, stagger: 0.1, ease: "power3.out", scrollTrigger: { trigger: '.industry-grid', start: 'top 85%', once: true } });
-
-    }, containerRef);
-    
-    return () => ctx.revert();
-  }, [pathLength, whyUs.reasons]);
+  // Note: all scroll-driven animations removed for a quiet, static experience.
+  // The control-center path and cards render statically via CSS/attributes below.
 
   const handleCardMouseMove = (e, idx) => {
     const card = e.currentTarget;
@@ -222,8 +145,7 @@ export default function SupplyChainControlCenter() {
                 stroke="rgba(20,20,20,0.06)" 
                 strokeWidth="3" 
                 fill="none" 
-                strokeDasharray={pathLength} 
-                strokeDashoffset={pathLength}
+                strokeDashoffset={0}
                 className="sccc-path-main"
               />
               <path 
@@ -412,8 +334,7 @@ export default function SupplyChainControlCenter() {
         }
 
         .sccc-ind-icon {
-          color: rgba(20,20,20,0.25);
-          transition: color 0.3s, transform 0.3s;
+          color: #DE510A;
         }
 
         .sccc-ind-line {
@@ -504,7 +425,6 @@ export default function SupplyChainControlCenter() {
         }
 
         .sccc-status-badge {
-          opacity: 0;
           font-family: monospace;
           font-size: 9px;
           font-weight: 700;
@@ -518,7 +438,6 @@ export default function SupplyChainControlCenter() {
           align-items: center;
           gap: 6px;
           margin-bottom: 20px;
-          visibility: hidden;
           position: relative;
           z-index: 1;
         }
@@ -553,7 +472,6 @@ export default function SupplyChainControlCenter() {
         }
 
         .sccc-kpi {
-          opacity: 0;
           font-family: 'Space Grotesk', sans-serif;
           font-size: 15px;
           font-weight: 700;
@@ -563,7 +481,6 @@ export default function SupplyChainControlCenter() {
           display: flex;
           align-items: center;
           justify-content: center;
-          visibility: hidden;
           position: relative;
           z-index: 1;
         }
@@ -588,13 +505,10 @@ export default function SupplyChainControlCenter() {
         }
 
         .sccc-celebration {
-          opacity: 0;
           text-align: center;
           margin-top: 60px;
-          transform: translateY(20px);
           position: relative;
           z-index: 2;
-          visibility: hidden;
         }
 
         .celeb-title {

@@ -455,12 +455,6 @@ export default function SceneOurStory() {
           inset: -8px;
           border-radius: 50%;
           border: 2px solid rgba(222,81,10,0.3);
-          animation: nodePulse 2s ease-out infinite;
-        }
-
-        @keyframes nodePulse {
-          0% { transform: scale(1); opacity: 1; }
-          100% { transform: scale(2.5); opacity: 0; }
         }
 
         /* â”€â”€ Year Label â”€â”€ */
