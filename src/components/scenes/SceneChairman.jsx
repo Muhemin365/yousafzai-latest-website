@@ -2,6 +2,7 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useCMSStore } from '../../store/useCMSStore';
+import brandLogo from '../../assets/logo.svg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -102,11 +103,20 @@ export default function SceneChairman() {
               zIndex: 2,
             }}
           />
-          <img
-            src={chairman.image || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=450&h=550&fit=crop'}
-            alt="Chairman"
-            style={{ width: '100%', display: 'block', border: '1px solid rgba(20,20,20,0.05)' }}
-          />
+          <div style={{
+            background: 'linear-gradient(160deg, #3F6231 0%, #2C4724 100%)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '44px 18px',
+            minHeight: '360px',
+          }}>
+            <img
+              src={brandLogo}
+              alt="Yousafzai Agri Foods brand logo"
+              style={{ width: '100%', height: 'auto', display: 'block' }}
+            />
+          </div>
           {/* Gold Seal */}
           <div style={{
             position: 'absolute', bottom: '30px', right: '30px', width: '60px', height: '60px',
