@@ -61,20 +61,6 @@ export default function EggTradersAbout() {
                 {data.paragraphs.map((p, i) => (
                   <p key={i}>{p}</p>
                 ))}
-                <div className="et-team-grid reveal-stagger">
-                  {data.team.map((m, i) => (
-                    <div key={i} className="et-team-card">
-                      <div className="et-team-avatar">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" width="24" height="24">
-                          <circle cx="12" cy="8" r="4" /><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7" />
-                        </svg>
-                      </div>
-                      <div className="et-team-name">{m.name}</div>
-                      <div className="et-team-role">{m.role}</div>
-                      <div className="et-team-bio">{m.bio}</div>
-                    </div>
-                  ))}
-                </div>
               </div>
             </div>
           </div>
@@ -94,17 +80,8 @@ export default function EggTradersAbout() {
           .et-value-title { font-weight: 700; font-size: 15px; color: #001B4D; margin-bottom: 5px; }
           .et-value-body { font-size: 13.5px; color: rgba(0,27,77,0.7); line-height: 1.65; }
           .et-about-text p { font-size: 15.5px; color: rgba(0,27,77,0.72); margin-bottom: 18px; }
-          .et-team-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-top: 56px; }
-          .et-team-card { background: #FFFFFF; border: 1px solid #001B4D; border-radius: 24px; padding: 32px 28px; backdrop-filter: blur(12px); transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s, border-color .35s; }
-          .et-team-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,27,77,0.12); border-color: #F76B0D; background: #FFFFFF; }
-          .et-team-avatar { width: 56px; height: 56px; border-radius: 14px; background: linear-gradient(145deg,#F76B0D,#E2580A); border: 1px solid rgba(247,107,13,0.35); display: flex; align-items: center; justify-content: center; color: #F76B0D; margin-bottom: 18px; }
-          .et-team-name { font-weight: 700; font-size: 15px; color: #001B4D; }
-          .et-team-role { font-size: 12px; color: #001B4D; font-weight: 600; margin: 4px 0 12px; text-transform: uppercase; letter-spacing: .04em; }
-          .et-team-bio { font-size: 13px; color: rgba(0,27,77,0.6); line-height: 1.6; }
-          @media (max-width: 1080px) { .et-team-grid { grid-template-columns: repeat(2,1fr); } }
-          @media (max-width: 860px) { .et-about-grid { grid-template-columns: 1fr; gap: 40px; } .et-team-grid { grid-template-columns: repeat(2,1fr); } .et-quote-block { padding: 36px 28px; } .et-quote-text { font-size: 19px; } }
-          @media (max-width: 640px) { .et-team-grid { grid-template-columns: 1fr; } }
-          @media (max-width: 420px) { .et-quote-block { padding: 28px 20px; border-radius: 20px; } .et-quote-text { font-size: 17px; } .et-team-card { padding: 24px 20px; } .et-about-text p { font-size: 14px; } }
+          @media (max-width: 860px) { .et-about-grid { grid-template-columns: 1fr; gap: 40px; } .et-quote-block { padding: 36px 28px; } .et-quote-text { font-size: 19px; } }
+          @media (max-width: 420px) { .et-quote-block { padding: 28px 20px; border-radius: 20px; } .et-quote-text { font-size: 17px; } .et-about-text p { font-size: 14px; } }
         `}</style>
       </div>
     </>

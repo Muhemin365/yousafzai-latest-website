@@ -232,6 +232,7 @@ export default function SceneCertificates() {
         .cert-orbit {
           position: absolute;
           inset: 0;
+          animation: certSpin 26s linear infinite;
         }
 
         .cert-orbit::before {
@@ -270,7 +271,13 @@ export default function SceneCertificates() {
         .tok-inner {
           width: 100%;
           height: 100%;
+          animation: certSpinRev 26s linear infinite;
         }
+
+        .cert-token.tok-0 .tok-inner { animation-delay: 0s; }
+        .cert-token.tok-1 .tok-inner { animation-delay: -6.5s; }
+        .cert-token.tok-2 .tok-inner { animation-delay: -13s; }
+        .cert-token.tok-3 .tok-inner { animation-delay: -19.5s; }
 
         .cert-seal-wrap {
           width: var(--cert-size);
@@ -497,6 +504,16 @@ export default function SceneCertificates() {
           height: 34px;
           border: 3px solid rgba(255,255,255,0.2);
           border-top-color: #F76B0D;
+        }
+
+        @keyframes certSpin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+
+        @keyframes certSpinRev {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(-360deg); }
         }
 
         @keyframes tokSpin { to { transform: rotate(360deg); } }

@@ -4,9 +4,9 @@ import { useCMSStore } from '../../store/useCMSStore';
 export default function SceneAboutHero() {
   const hero = useCMSStore((s) => s.aboutScenes?.hero) || {};
   const heroSlides = Array.isArray(hero.slides) && hero.slides.length ? hero.slides : [
-    'https://images.unsplash.com/photo-1548550023-2bf3c49b71d9?auto=format&fit=crop&w=1200&q=60',
+    'https://images.unsplash.com/photo-1598965675045-45c5e72c7d05?auto=format&fit=crop&w=1200&q=60',
     'https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?auto=format&fit=crop&w=1200&q=60',
-    'https://images.unsplash.com/photo-1569288052389-dac9b01c9c05?auto=format&fit=crop&w=1200&q=60',
+    'https://images.unsplash.com/photo-1587486913049-53fc88980cfc?auto=format&fit=crop&w=1200&q=60',
   ];
   const stats = Array.isArray(hero.stats) && hero.stats.length ? hero.stats : [
     { value: '60+', label: 'Years of Experience' },

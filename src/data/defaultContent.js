@@ -520,7 +520,7 @@ export const defaultContent = {
           year: '2022',
           title: 'Poultry Farm',
           desc: 'Established poultry farm at China Chowk, Attock, Punjab.',
-          img: 'https://images.unsplash.com/photo-1601444571669-02e5bb5756eb?w=1920&q=80',
+          img: 'https://images.unsplash.com/photo-1598965675045-45c5e72c7d05?w=1920&q=80',
           stats: 'VERTICAL INTEGRATION',
           metric: '10K+',
           metricLabel: 'Daily Capacity',
