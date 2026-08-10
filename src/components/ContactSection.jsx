@@ -357,24 +357,12 @@ export default function ContactSection() {
           width: 550px; height: 550px;
           background: radial-gradient(circle, rgba(222,81,10,0.08), transparent 70%);
           top: 15%; left: -150px;
-          animation: cntFloat1 15s ease-in-out infinite alternate;
         }
 
         .cnt-orb-2 {
           width: 450px; height: 450px;
           background: radial-gradient(circle, rgba(74,140,220,0.06), transparent 70%);
           bottom: 10%; right: -150px;
-          animation: cntFloat2 18s ease-in-out infinite alternate;
-        }
-
-        @keyframes cntFloat1 {
-          0% { transform: translate(0, 0); }
-          100% { transform: translate(60px, 40px); }
-        }
-
-        @keyframes cntFloat2 {
-          0% { transform: translate(0, 0); }
-          100% { transform: translate(-50px, -60px); }
         }
 
         .cnt-container {

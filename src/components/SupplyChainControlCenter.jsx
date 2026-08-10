@@ -442,12 +442,7 @@ export default function SupplyChainControlCenter() {
 
         .logistics-packets {
           stroke-dashoffset: 0;
-          animation: packetFlow 2s linear infinite;
           opacity: 0.5;
-        }
-
-        @keyframes packetFlow {
-          to { stroke-dashoffset: -28; }
         }
 
         .sccc-truck-overlay {
@@ -534,12 +529,6 @@ export default function SupplyChainControlCenter() {
           background: #4ade80;
           border-radius: 50%;
           box-shadow: 0 0 6px rgba(74,222,128,0.6);
-          animation: blink 1.5s infinite;
-        }
-
-        @keyframes blink {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.3; }
         }
 
         .sccc-card-icon {

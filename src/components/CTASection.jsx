@@ -94,12 +94,6 @@ export default function CTASection() {
           top: -220px;
           right: -150px;
           pointer-events: none;
-          animation: pulseGlow 8s infinite alternate ease-in-out;
-        }
-        
-        @keyframes pulseGlow {
-          0% { transform: scale(1); opacity: 0.7; }
-          100% { transform: scale(1.2); opacity: 1; }
         }
 
         .cta-left {

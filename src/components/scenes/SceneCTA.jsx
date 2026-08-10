@@ -26,14 +26,8 @@ export default function SceneCTA() {
         }
       );
 
-      // Continuous golden pulse
-      gsap.to(btnRef.current, {
-        boxShadow: '0 0 35px 8px rgba(222, 81, 10, 0.5)',
-        duration: 2,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut',
-      });
+      // Static warm edge on the button
+      gsap.set(btnRef.current, { boxShadow: '0 0 35px 8px rgba(222, 81, 10, 0.35)' });
     }, containerRef);
 
     return () => ctx.revert();

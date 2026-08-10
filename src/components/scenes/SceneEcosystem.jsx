@@ -467,13 +467,7 @@ export default function SceneEcosystem() {
           border-radius: 50%;
           background: #4ade80;
           box-shadow: 0 0 8px rgba(74,222,128,0.5);
-          animation: statusPulse 2s ease-in-out infinite;
           margin-left: auto;
-        }
-
-        @keyframes statusPulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.4; }
         }
 
         .panel-status-text {

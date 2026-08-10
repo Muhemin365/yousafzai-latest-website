@@ -10,7 +10,6 @@ export default function SceneChairman() {
   const chairman = useCMSStore((s) => s.aboutScenes?.chairman) || {};
   const containerRef = useRef(null);
   const frameRef = useRef(null);
-  const sweepRef = useRef(null);
 
   useEffect(() => {
     let ctx = gsap.context(() => {
@@ -45,12 +44,6 @@ export default function SceneChairman() {
             toggleActions: 'play none none reverse',
           }
         }
-      );
-
-      // Slow warm light sweep across portrait
-      gsap.fromTo(sweepRef.current,
-        { left: '-150%' },
-        { left: '150%', duration: 4, repeat: -1, repeatDelay: 8, ease: 'power2.inOut' }
       );
     }, containerRef);
 
@@ -90,19 +83,6 @@ export default function SceneChairman() {
             overflow: 'hidden',
           }}
         >
-          <div
-            ref={sweepRef}
-            style={{
-              position: 'absolute',
-              top: 0,
-              bottom: 0,
-              width: '50%',
-              background: 'linear-gradient(to right, transparent, rgba(222, 81, 10, 0.15), transparent)',
-              transform: 'skewX(-25deg)',
-              pointerEvents: 'none',
-              zIndex: 2,
-            }}
-          />
           <div style={{
             background: 'linear-gradient(160deg, #3F6231 0%, #2C4724 100%)',
             display: 'flex',

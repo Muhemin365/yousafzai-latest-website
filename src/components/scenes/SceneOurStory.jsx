@@ -292,7 +292,6 @@ export default function SceneOurStory() {
           background: radial-gradient(circle, #DE510A 0%, transparent 70%);
           top: 10%;
           left: -200px;
-          animation: orbFloat1 12s ease-in-out infinite alternate;
         }
 
         .leg-orb-2 {
@@ -301,17 +300,6 @@ export default function SceneOurStory() {
           background: radial-gradient(circle, #DE510A 0%, transparent 70%);
           bottom: 5%;
           right: -150px;
-          animation: orbFloat2 15s ease-in-out infinite alternate;
-        }
-
-        @keyframes orbFloat1 {
-          0% { transform: translate(0, 0); }
-          100% { transform: translate(80px, 60px); }
-        }
-
-        @keyframes orbFloat2 {
-          0% { transform: translate(0, 0); }
-          100% { transform: translate(-60px, -80px); }
         }
 
         /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•

@@ -171,19 +171,12 @@ export default function ProductsSection() {
           width: 500px; height: 500px;
           background: radial-gradient(circle, rgba(222,81,10,0.08), transparent 70%);
           top: 20%; right: -200px;
-          animation: prodFloat 14s ease-in-out infinite alternate;
         }
 
         .prod-orb-2 {
           width: 400px; height: 400px;
           background: radial-gradient(circle, rgba(74,120,200,0.06), transparent 70%);
           bottom: 10%; left: -150px;
-          animation: prodFloat 18s ease-in-out infinite alternate-reverse;
-        }
-
-        @keyframes prodFloat {
-          0% { transform: translate(0, 0); }
-          100% { transform: translate(50px, 40px); }
         }
 
         .prod-container {

@@ -1,5 +1,4 @@
-import React, { useEffect, useRef } from 'react';
-import gsap from 'gsap';
+import React, { useRef } from 'react';
 
 /**
  * SYSTEM 02: Visual Environment
@@ -8,30 +7,6 @@ import gsap from 'gsap';
  */
 export default function GlobalEnvironment({ children }) {
   const envRef = useRef(null);
-
-  useEffect(() => {
-    // Subtle ambient light breathing effect
-    const ctx = gsap.context(() => {
-      gsap.to('.ambient-glow', {
-        opacity: 0.8,
-        scale: 1.05,
-        duration: 8,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut',
-      });
-      
-      // Extremely slow blueprint drift
-      gsap.to('.blueprint-grid', {
-        backgroundPosition: '100px 100px',
-        duration: 40,
-        repeat: -1,
-        ease: 'none',
-      });
-    }, envRef);
-
-    return () => ctx.revert();
-  }, []);
 
   return (
     <div ref={envRef} className="global-environment">

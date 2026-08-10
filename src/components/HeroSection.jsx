@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useMemo } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCMSStore } from '../store/useCMSStore';
 import { Store, Factory, ChefHat, Truck } from 'lucide-react';
@@ -39,33 +39,6 @@ function Counter({ end, suffix }) {
     <span ref={ref}>
       {count >= 1000 ? (count / 1000).toFixed(count % 1000 !== 0 ? 1 : 0) + 'K' : count}{suffix}
     </span>
-  );
-}
-
-function Particles() {
-  const particles = useMemo(() => Array.from({ length: 40 }), []);
-  return (
-    <div className="particles-container">
-      {particles.map((_, i) => {
-        const left = Math.random() * 100;
-        const delay = Math.random() * 10;
-        const duration = 15 + Math.random() * 15;
-        const size = 2 + Math.random() * 3;
-        return (
-          <div
-            key={i}
-            className="particle"
-            style={{
-              left: `${left}%`,
-              animationDelay: `${delay}s`,
-              animationDuration: `${duration}s`,
-              width: `${size}px`,
-              height: `${size}px`,
-            }}
-          />
-        );
-      })}
-    </div>
   );
 }
 
@@ -126,7 +99,6 @@ export default function HeroSection() {
     <>
       <header className="hero hero-enter" id="home" ref={heroRef}>
         <HeroSlideshow images={hero.backgroundImage ? [hero.backgroundImage] : slideImages} />
-        <Particles />
         <div className="hero-glow" />
         <div className="hero-glow b" />
         
@@ -262,29 +234,16 @@ export default function HeroSection() {
           background: linear-gradient(to bottom, transparent 60%, #FBF7F0 100%);
         }
 
-        /* Particle Background */
-        .particles-container { position: absolute; inset: 0; pointer-events: none; z-index: 1; overflow: hidden; opacity: 0.18; }
-        .particle { position: absolute; bottom: -10px; background: #B9320D; border-radius: 50%; box-shadow: 0 0 6px #B9320D; animation: driftUp linear infinite; }
-        @keyframes driftUp {
-          0% { transform: translateY(0) translateX(0); opacity: 0; }
-          10% { opacity: 1; }
-          90% { opacity: 1; }
-          100% { transform: translateY(-120vh) translateX(30px); opacity: 0; }
-        }
-
+        /* Floating Glows (static) */
         .hero-glow {
           position: absolute; width: 680px; height: 680px; border-radius: 50%;
           background: radial-gradient(circle, rgba(185,50,13,0.18), transparent 70%);
           top: -220px; right: -180px; filter: blur(10px); z-index: 1;
-          animation: float1 12s ease-in-out infinite;
         }
         .hero-glow.b {
           width: 420px; height: 420px; background: radial-gradient(circle, rgba(185,50,13,0.12), transparent 70%);
           bottom: -160px; left: -120px; top: auto; right: auto;
-          animation: float2 14s ease-in-out infinite;
         }
-        @keyframes float1 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(-30px,30px); } }
-        @keyframes float2 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(25px,-22px); } }
 
         .hero-grid { position: relative; z-index: 2; display: grid; grid-template-columns: 1.05fr .95fr; gap: 60px; align-items: center; }
         
@@ -297,12 +256,7 @@ export default function HeroSection() {
         }
         .eyebrow .dot {
           width: 6px; height: 6px; border-radius: 50%; background: #B9320D;
-          box-shadow: 0 0 0 0 rgba(185,50,13,0.6); animation: pulseGold 2s infinite;
-        }
-        @keyframes pulseGold {
-          0% { box-shadow: 0 0 0 0 rgba(185,50,13,0.55); }
-          70% { box-shadow: 0 0 0 8px rgba(185,50,13,0); }
-          100% { box-shadow: 0 0 0 0 rgba(185,50,13,0); }
+          box-shadow: 0 0 0 0 rgba(185,50,13,0.6);
         }
 
         .hero h1 {
@@ -344,11 +298,7 @@ export default function HeroSection() {
         .shine-element {
           position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
           background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
-          transform: skewX(-20deg); animation: shinePass 8s infinite; z-index: 1;
-        }
-        @keyframes shinePass {
-          0%, 80% { left: -100%; }
-          100% { left: 200%; }
+          transform: skewX(-20deg); z-index: 1;
         }
 
         .btn-outline { background: transparent; border: 1.4px solid rgba(20,20,20,0.45); color: #111111; }
@@ -369,7 +319,6 @@ export default function HeroSection() {
         }
         .hv-icon-grid {
           display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
-          animation: breatheEgg 6s ease-in-out infinite 1s;
         }
         .hv-icon-box {
           width: 64px; height: 64px; border-radius: 18px;
@@ -380,10 +329,6 @@ export default function HeroSection() {
           transition: transform 0.3s, box-shadow 0.3s;
         }
         .hv-icon-box:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(222,81,10,0.28); color: #DE510A; }
-        @keyframes breatheEgg {
-          0%, 100% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(222,81,10,0)); }
-          50% { transform: scale(1.03); filter: drop-shadow(0 0 15px rgba(222,81,10,0.5)); }
-        }
 
         /* Floating Cards */
         .hv-card {
@@ -398,16 +343,9 @@ export default function HeroSection() {
         .hv-card .hv-num { font-family: 'Space Grotesk',sans-serif; font-size: 26px; font-weight: 700; color: #3F6231; line-height: 1; transition: text-shadow 0.3s ease; }
         .hv-card .hv-lbl { font-size: 11px; color: rgba(20,20,20,0.7); margin-top: 4px; letter-spacing: .02em; }
         
-        .hv-card.c1 { top: 6%; left: 2%; animation: bobCard 6s ease-in-out infinite 0s; }
-        .hv-card.c2 { top: 40%; right: 0%; animation: bobCard 6s ease-in-out infinite 1.4s; }
-        .hv-card.c3 { bottom: 6%; left: 10%; animation: bobCard 6s ease-in-out infinite 2.6s; }
-        
-        @keyframes bobCard { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
-
-        /* Disable motion */
-        @media (prefers-reduced-motion: reduce) {
-          .hv-card, .hv-icon-grid, .hero-glow, .particle, .shine-element, .eyebrow .dot { animation: none !important; }
-        }
+        .hv-card.c1 { top: 6%; left: 2%; }
+        .hv-card.c2 { top: 40%; right: 0%; }
+        .hv-card.c3 { bottom: 6%; left: 10%; }
 
         .stat-strip { background: #FFFFFF; border-top: 1px solid #3F6231; border-bottom: 1px solid #3F6231; position: relative; z-index: 3; margin-top: -1px; }
         .stat-strip .container { display: grid; grid-template-columns: repeat(4,1fr); padding: 46px 32px; }

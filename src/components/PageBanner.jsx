@@ -1,31 +1,4 @@
-import { useEffect, useRef, useMemo, useState } from 'react';
-
-function Particles() {
-  const particles = useMemo(() => Array.from({ length: 30 }), []);
-  return (
-    <div className="particles-container">
-      {particles.map((_, i) => {
-        const left = Math.random() * 100;
-        const delay = Math.random() * 8;
-        const duration = 12 + Math.random() * 10;
-        const size = 2 + Math.random() * 3;
-        return (
-          <div
-            key={i}
-            className="particle"
-            style={{
-              left: `${left}%`,
-              animationDelay: `${delay}s`,
-              animationDuration: `${duration}s`,
-              width: `${size}px`,
-              height: `${size}px`,
-            }}
-          />
-        );
-      })}
-    </div>
-  );
-}
+import { useEffect, useRef, useState } from 'react';
 
 function BannerSlideshow({ images }) {
   const [current, setCurrent] = useState(0);
@@ -80,7 +53,6 @@ export default function PageBanner({ title, subtitle, fullScreen = false, slides
         <BannerSlideshow images={slideshowImages} />
         <div className="page-hero-bg" />
         
-        <Particles />
         <div className="banner-glow" />
         <div className="banner-glow b" />
         
@@ -139,30 +111,16 @@ export default function PageBanner({ title, subtitle, fullScreen = false, slides
         
         .banner-bottom-fade { position: absolute; bottom: 0; left: 0; width: 100%; height: 120px; background: linear-gradient(to bottom, transparent, #FBF7F0); z-index: 1; }
 
-        /* Particles */
-        .particles-container { position: absolute; inset: 0; pointer-events: none; z-index: 2; overflow: hidden; opacity: 0.2; }
-        .particle { position: absolute; bottom: -10px; background: #B9320D; border-radius: 50%; box-shadow: 0 0 8px #B9320D; animation: driftUp linear infinite; }
-        @keyframes driftUp {
-          0% { transform: translateY(0) translateX(0); opacity: 0; }
-          10% { opacity: 1; }
-          90% { opacity: 1; }
-          100% { transform: translateY(-380px) translateX(20px); opacity: 0; }
-        }
-
-        /* Glows */
+        /* Glows (static) */
         .banner-glow {
           position: absolute; width: 500px; height: 500px; border-radius: 50%;
           background: radial-gradient(circle, rgba(185,50,13,0.16), transparent 70%);
           top: -150px; left: -100px; filter: blur(10px); z-index: 1;
-          animation: float1 12s ease-in-out infinite;
         }
         .banner-glow.b {
           width: 400px; height: 400px; background: radial-gradient(circle, rgba(185,50,13,0.12), transparent 70%);
           bottom: -100px; right: -100px; top: auto; left: auto;
-          animation: float2 14s ease-in-out infinite;
         }
-        @keyframes float1 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(-20px,20px); } }
-        @keyframes float2 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(20px,-15px); } }
 
         .page-hero-content {
           display: flex;
@@ -228,10 +186,6 @@ export default function PageBanner({ title, subtitle, fullScreen = false, slides
           transform: translateY(0);
         }
         
-        @media (prefers-reduced-motion: reduce) {
-          .banner-glow, .particle { animation: none !important; }
-        }
-
         @media (max-width: 860px) {
           .page-hero { min-height: 280px; padding: 120px 0 60px; }
           .page-hero-title { font-size: 3rem; }

@@ -115,9 +115,8 @@ function CalMaineHero({ data }) {
         }
         .cm-rate-dot {
           width: 8px; height: 8px; border-radius: 50%; background: #F76B0D;
-          box-shadow: 0 0 8px #F76B0D; animation: cmPulse 1.5s infinite;
+          box-shadow: 0 0 8px #F76B0D;
         }
-        @keyframes cmPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
         .cm-cta-row { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 32px; }
         .cm-btn {
           display: inline-flex; align-items: center; gap: 10px;

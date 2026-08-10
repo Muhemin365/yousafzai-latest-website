@@ -294,7 +294,7 @@ export default function AboutSection() {
 
         .hero-meta { display: flex; gap: 32px; justify-content: center; margin-bottom: 24px; font-family: monospace; font-size: 11px; letter-spacing: 0.1em; color: rgba(222,81,10,0.8); border: 1px solid rgba(222,81,10,0.2); padding: 8px 24px; border-radius: 100px; background: rgba(222,81,10,0.05); }
         .meta-item { display: flex; align-items: center; gap: 8px; }
-        .meta-dot { width: 6px; height: 6px; background: #DE510A; border-radius: 50%; box-shadow: 0 0 8px #DE510A; animation: pulse 2s infinite; }
+        .meta-dot { width: 6px; height: 6px; background: #DE510A; border-radius: 50%; box-shadow: 0 0 8px #DE510A; }
         
         .hero-massive-title { font-family: 'Space Grotesk',sans-serif; font-size: 72px; font-weight: 700; color: #111111; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 40px; }
         
@@ -314,8 +314,7 @@ export default function AboutSection() {
         
         .eng-img { width: 100%; height: 300px; object-fit: cover; filter: grayscale(100%) contrast(1.2) brightness(0.8); opacity: 0.8; }
         .eng-overlay { position: absolute; inset: 16px; background: linear-gradient(rgba(222,81,10,0.25), rgba(185,50,13,0.45)); mix-blend-mode: multiply; }
-        .eng-scan-line { position: absolute; left: 16px; right: 16px; top: 16px; height: 2px; background: #DE510A; box-shadow: 0 0 10px #DE510A; opacity: 0.5; animation: scan 4s linear infinite; }
-        @keyframes scan { 0% { top: 16px; } 100% { top: calc(100% - 16px); } }
+.eng-scan-line { position: absolute; left: 16px; right: 16px; top: 16px; height: 2px; background: #DE510A; box-shadow: 0 0 10px #DE510A; opacity: 0.5; }
 
         /* Infrastructure Sticky Layout */
         .infrastructure-sticky-layout {
@@ -427,8 +426,7 @@ export default function AboutSection() {
         .about-activation { padding-top: 120px; }
         .live-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 40px; }
         .live-stat-box { position: relative; background: rgba(255,255,255,0.8); border: 1px solid rgba(63,98,49,0.45); padding: 40px; }
-        .stat-status-led { position: absolute; top: 20px; right: 20px; width: 6px; height: 6px; border-radius: 50%; background: #DE510A; animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { opacity: 0.4; } 50% { opacity: 1; box-shadow: 0 0 8px #DE510A; } 100% { opacity: 0.4; } }
+.stat-status-led { position: absolute; top: 20px; right: 20px; width: 6px; height: 6px; border-radius: 50%; background: #DE510A; }
         .stat-label-sequence { font-family: monospace; font-size: 13px; color: rgba(20,20,20,0.6); margin-bottom: 16px; min-height: 20px; }
         .stat-number { font-family: 'Space Grotesk',sans-serif; font-size: 64px; font-weight: 700; color: #111111; line-height: 1; }
         .stat-crosshair { position: absolute; width: 10px; height: 10px; border: 1px solid rgba(20,20,20,0.2); }

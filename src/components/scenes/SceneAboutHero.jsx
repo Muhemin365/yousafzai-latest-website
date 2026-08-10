@@ -85,7 +85,6 @@ export default function SceneAboutHero() {
           backgroundImage: `url("${heroSlides[currentSlide]}")`,
           backgroundSize: 'cover', backgroundPosition: 'center',
           opacity: 0.35, zIndex: 0,
-          animation: 'heroKenBurns 12s ease-in-out infinite alternate',
         }}
       />
       <div
@@ -250,10 +249,6 @@ export default function SceneAboutHero() {
 
       {/* Keyframe animations */}
       <style>{`
-        @keyframes heroKenBurns {
-          0% { transform: scale(1); }
-          100% { transform: scale(1.08); }
-        }
         @keyframes slideProgress {
           0% { width: 0%; }
           100% { width: 100%; }
