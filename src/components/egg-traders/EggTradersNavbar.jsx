@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ArrowRight, ExternalLink } from 'lucide-react';
 import logo from '../../assets/logo.svg';
+import { useCMSStore } from '../../store/useCMSStore';
 
 const navLinks = [
   { path: '/egg-traders/about', label: 'About Us' },
@@ -11,6 +12,7 @@ const navLinks = [
 ];
 
 export default function EggTradersNavbar() {
+  const company = useCMSStore((s) => s.company) || {};
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const { pathname } = useLocation();
@@ -29,7 +31,11 @@ export default function EggTradersNavbar() {
         <div className="et-nav-container">
           {/* Logo */}
           <Link to="/egg-traders" className="et-nav-brand" onClick={() => setMobileOpen(false)}>
-            <img src={logo} alt="Egg Traders" className="et-nav-logo" />
+            <img src={logo} alt={company.name || 'Egg Traders'} className="et-nav-logo" />
+            <span className="et-brand-tag">
+              <span className="et-tag-title">{company.name || 'Egg Traders'}</span>
+              {(company.sub || company.tagline) && <span className="et-tag-sub">{company.sub || company.tagline}</span>}
+            </span>
           </Link>
 
           {/* Nav Links */}

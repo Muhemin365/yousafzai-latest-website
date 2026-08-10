@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ArrowRight } from 'lucide-react';
 import logo from '../assets/logo.svg';
+import { useCMSStore } from '../store/useCMSStore';
 
 export default function Navbar() {
+  const company = useCMSStore((s) => s.company) || {};
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const { pathname } = useLocation();
@@ -34,9 +36,13 @@ export default function Navbar() {
           <Link to="/" className="nav-brand" onClick={() => setMobileOpen(false)}>
             <img
               src={logo}
-              alt="Yousafzai Eggs Traders"
+              alt={company.name || 'Yousafzai Eggs Traders'}
               className="nav-logo"
             />
+            <span className="nav-brand-text">
+              <span className="nav-brand-name">{company.name}</span>
+              {company.sub && <span className="nav-brand-sub">{company.sub}</span>}
+            </span>
           </Link>
 
           {/* Nav Links */}
@@ -140,6 +146,7 @@ export default function Navbar() {
         .nav-brand {
           display: flex;
           align-items: center;
+          gap: 12px;
           text-decoration: none;
         }
 
@@ -149,6 +156,29 @@ export default function Navbar() {
           display: block;
           transition: transform 0.3s;
         }
+
+        .nav-brand-text {
+          display: flex;
+          flex-direction: column;
+          line-height: 1.2;
+        }
+
+        .nav-brand-name {
+          font-family: 'Space Grotesk', sans-serif;
+          font-weight: 700;
+          font-size: 15px;
+          color: #0F172A;
+        }
+
+        .nav-brand-sub {
+          font-family: monospace;
+          font-size: 9px;
+          color: #F59E0B;
+          letter-spacing: 0.12em;
+        }
+
+        .nav-glass.is-scrolled .nav-brand-name { color: #FFFFFF; }
+        .nav-glass.is-scrolled .nav-brand-sub { color: #F76B0D; }
 
         .nav-brand:hover .nav-logo {
           transform: scale(1.03);
@@ -309,6 +339,8 @@ export default function Navbar() {
         @media (max-width: 480px) {
           .nav-container { padding: 0 16px; }
           .nav-logo { height: 42px; }
+          .nav-brand-name { font-size: 12px; }
+          .nav-brand-sub { display: none; }
           .nav-cta-btn { padding: 8px 16px; font-size: 12px; }
         }
       `}</style>
