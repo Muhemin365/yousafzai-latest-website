@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import * as LucideIcons from 'lucide-react';
 import { useCMSStore } from '../store/useCMSStore';
+
+gsap.registerPlugin(ScrollTrigger);
 
 function getIcon(iconName, props = {}) {
   const IconComponent = LucideIcons[iconName];
