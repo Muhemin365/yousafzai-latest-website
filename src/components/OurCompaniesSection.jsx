@@ -57,8 +57,10 @@ export default function OurCompaniesSection() {
 
         {/* Company Cards Grid */}
         <div className="oc-grid">
-          {data.companies.map((company) => {
-            const isEggTraders = company.id === 'egg-traders';
+          {data.companies
+            .filter((company) => company.id === 'egg-traders')
+            .map((company) => {
+              const isEggTraders = company.id === 'egg-traders';
 
             return (
               <div
@@ -200,7 +202,8 @@ export default function OurCompaniesSection() {
            â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
         .oc-grid {
           display: grid;
-          grid-template-columns: repeat(2, 1fr);
+          grid-template-columns: minmax(0, 620px);
+          justify-content: center;
           gap: 36px;
         }
 

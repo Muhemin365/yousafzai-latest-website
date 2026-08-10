@@ -5,6 +5,7 @@ import SceneChairman from '../components/scenes/SceneChairman';
 import SceneOurStory from '../components/scenes/SceneOurStory';
 import SceneVisionMission from '../components/scenes/SceneVisionMission';
 import SceneCertificates from '../components/scenes/SceneCertificates';
+import OurCompaniesSection from '../components/OurCompaniesSection';
 
 export default function AboutPage() {
   return (
@@ -23,6 +24,9 @@ export default function AboutPage() {
 
       {/* SCENE 5: Certificates & Accreditations */}
       <SceneCertificates />
+
+      {/* SCENE 6: Second Website Link (Egg Traders Marketplace) */}
+      <OurCompaniesSection />
     </StoryEngine>
   );
 }
